@@ -3,13 +3,13 @@
 
 # # Introduction
 # 
-# In this course, you will learn the basics of programming. Our language of choice will be **Python**, a *high-level, dynamically-typed* programming language. You will learn what that means later on. No prior knowledge in programming is required. At the end of this course, you should have acquired the general-purpose knowledge relevant for *any* higher-level programming language, you should have learned how to write and interpret basic programs in Python, and you should be able to break down complex (data analysis) problems into algorithms aimed to solve the task at hand.  
+# In this course, you will learn the basics of programming. Our language of choice will be **Python**, a *high-level, dynamically-typed* programming language. You will learn what that means later on. No prior knowledge in programming is required. At the end of this course, you should have acquired general-purpose knowledge relevant for *any* higher-level programming language, you should have learned how to write and interpret basic programs in Python, and you should be able to break down complex (data analysis) problems into algorithms aimed to solve the task at hand.  
 # 
 # ## Why programming?
 # Some of you may be wondering why you should have to learn about *computer science* if you are studying *linguistics*. Answers to this question are manifold, but typically fall into two broad categories: 
 # 
 # 1. It's a necessary, or at least highly useful, practical skill: programming is essential to study implementation + data analysis, corpus data processing + analysis, natural language processing (NLP), computational modeling of language   
-# 2. It trains your logical, mathematical thinking about structure and meaning in (natural and artificial) languages: programming languages have a strictly defined syntax and lexicon (while lacking pragmatics(?)), metaphorically allowing you to "talk to" the computer. Your computer is acting as naive, but highly logical machine, requiring you to do the same when writing code: syntax errors, leaps in logical thinking, and ambiguity in the program will be punshed by errors or otherwise faulty output.
+# 2. It trains your logical, mathematical thinking about structure and meaning in (natural and formal) languages: programming languages are formal languages with a strictly defined syntax and lexicon, but no pragmatics. They metaphorically allow you to "talk to" the computer. Computers act as naive, logical machines, requiring you to do the same when writing code: syntax errors, spelling mistakes, leaps in logical thinking, and ambiguity in the program will be punshed by errors or otherwise faulty output.
 # 
 # ## Higher- and lower-level programming languages
 # Computers (more precisely, CPUs) work off binary code (also called machine code), a string of 1's and 0's that form machine commands such as "load", "store". These are used to operate on units of data in the computer's register or memory.  
@@ -23,7 +23,7 @@
 # | op | target address|
 # | ------ | ------ |
 # | jump | (to) address 1024 |
-# | 000020 | 00000 00000 00000 10000 000000 |
+# | 000010 | 00000 00000 00000 10000 000000 |
 # 
 # Low-level programs are fast and memory-efficient, but writing programs directly in binary would be cumbersome. **High-level programming languages** are more user-friendly because they allow us to write instructions in a language that is easier (for us) to understand and because they are hardware-independent. Behind the surface, translators transform programs written in high-level languages into machine code that is readable for the computer. This is done by "compilers" or "interpreters".  
 # 
@@ -57,14 +57,7 @@
 # In[1]:
 
 
-"""
-IF you are using dark chocolate,
-    THEN add 100g of sugar,
-    ELSE IF you are using milk chocolate,
-    THEN add 50g of sugar.
-WHILE your dough is chunky,
-    keep whisking.
-"""   
+get_ipython().run_cell_magic('capture', '', '"""\nIF you are using dark chocolate,\n    THEN add 100g of sugar,\nELSE IF you are using milk chocolate,\n    THEN add 50g of sugar.\nWHILE your dough is chunky,\n    keep whisking.\n"""   ')
 
 
 # The above are examples of algorithms written in *pseudo-code*. These are not executable pieces of code, but a natural-language representation approximating the structure of a computer algorithm. 
@@ -74,27 +67,18 @@ WHILE your dough is chunky,
 # In[2]:
 
 
-"""
-DEFINE a function that takes a finite list of numbers L:
-    set x to 0;
-    set y to 0;
-    for each element i in L:
-        if that element is BIGGER THAN x:
-            x = i
-        if that element is SMALLER THAN y:
-            y = i
-return x and y
-"""
+get_ipython().run_cell_magic('capture', '', '"""\nDEFINE a function that takes a finite list of numbers L:\n    set x to the first number in L;\n    set y to the first number in L;\n    \n    for each element i in L:\n        if that element is BIGGER THAN x:\n            x = i\n        if that element is SMALLER THAN y:\n            y = i\n    return x and y\n"""')
 
 
 # ## Python
 # *Python* is a high-level programming language, just like *Java, Javascript, or C++*. It is also a *dynamically typed* programming language, meaning that some of its behaviours are evaluated at runtime, not during compilation (as for *statically typed* programming languages like *Java*). Statically typed programming languages require you to fully specify the relevant data types the code is operating on:  
 # 
-# **Example of static typing systems**: 
-# int x = 2  
-# int y = 1  
+# **Example of static typing systems**:  
 # 
-# int z = x + y
+# *int x = 2*  
+# *int y = 1*  
+# 
+# *int z = x + y*
 #   
 #   
 # By contrast, in dynamic typing systems the interpreter resolves the data type at run time. This can be advantageous because you have to expend less time on fixing all data types beforehand, particularly in cases where you might deal with a diverse set of data. On the other hand, it can be error-prone because type incompatibilites can sneak by until very late in development.
@@ -156,7 +140,7 @@ b = x + a
 # 
 # But what happens if we want to add an integer and a float variable?
 
-# In[8]:
+# In[10]:
 
 
 c = x + b
@@ -164,14 +148,43 @@ c = x + b
 print(c)
 
 
-# In[9]:
+# In[11]:
 
 
 type(c)
 
 
 # The resulting variable *c* is of type float! In a statically typed language, we would have had to know beforehand whether we want *c* to be the sum of integers or float variables. In Python, we can let the interpreter work its magic for us.
-#   
+
+# ### Setting up your Python environment
+# To write your own code in Python, you first need to install Python. For this course, I am asking you to install *miniconda*, which includes *Python*, conda (a package management and installation system), and some additional useful packages we will need.  
+# 
+# * go to https://docs.conda.io/en/latest/miniconda.html
+# * download the installer for Python 3.9 and your operating system 
+# * execute the installer and follow the instructions
 # 
 # 
-# (To resolve the question above: The pseudo-code algorithm found and returned the smallest and the biggest natural number in the list L.)
+# Additionally, you will want to install *Spyder*, a scientific environment built to simplify code editing, debugging, and analysis. Only do the next steps *after* you have installed miniconda. 
+# 
+# * open a conda shell (Windows: Start menu > Anaconda > Anaconda PowerShell Prompt; Linux: Open shell > type "conda activate")
+# * type: conda install spyder=5.2.2
+# 
+# Alternatively, if you already have older versions of the software installed, you can update to the latest versions of conda and Spyder by typing the following from your conda shell:
+# 
+# * conda update conda
+# * conda update spyder
+
+# ### Familiarization with the programming environment
+# To open Spyder, first open a conda shell (see above). Then type "spyder". Spyder will open. The window will look something like this:
+# 
+# ![spyder_layout.png](attachment:spyder_layout.png)
+# 
+# On the bottom right, you can see the **interactive console**. Here, your entered commands are evaluated immediately. We input (In \[1\]) *2+2* and immediately get *4* as output.  This is useful to execute or test small pieces of code.
+# 
+# On the left-hand side, you can see the **script window**. Here you can write code as Python *scripts*. Python script files are text files ending in ".py". Scripts have the advantage that they can be saved to disk, shared, printed, and so on. 
+# 
+# Python scripts can be **executed via the "Run" command** in Spyder. It is often useful during debugging to run scripts line by line or to only run selected lines. These options are available in Spyder too.  
+# 
+# Any variables created during the execution of scripts will appear in the **Variable Explorer** on the top right. For debuggigng purposes, it if often useful to check whether the variables appearing there behave as expected (correct data type?, correct data value?).
+
+# (Finally, to answer the question about out piece of pseudo-code above: The pseudo-code algorithm found and returned the smallest and the biggest natural number in the list L.)
