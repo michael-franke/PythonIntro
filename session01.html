@@ -338,6 +338,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#algorithms">
    Algorithms
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definitions">
+     Definitions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-of-instructions">
+     Types of instructions
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#python">
@@ -377,6 +389,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#algorithms">
    Algorithms
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definitions">
+     Definitions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#types-of-instructions">
+     Types of instructions
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#python">
@@ -395,7 +419,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
-<p>In this course, you will learn the basics of programming. Our language of choice will be <strong>Python</strong>, a <em>high-level, dynamically-typed</em> programming language. You will learn what that means later on. No prior knowledge in programming is required. At the end of this course, you should have acquired the general-purpose knowledge relevant for <em>any</em> higher-level programming language, you should have learned how to write and interpret basic programs in Python, and you should be able to break down complex (data analysis) problems into a series of algorithms aimed to solve the task at hand.</p>
+<p>In this course, you will learn the basics of programming. Our language of choice will be <strong>Python</strong>, a <em>high-level, dynamically-typed</em> programming language. You will learn what that means later on. No prior knowledge in programming is required. At the end of this course, you should have acquired the general-purpose knowledge relevant for <em>any</em> higher-level programming language, you should have learned how to write and interpret basic programs in Python, and you should be able to break down complex (data analysis) problems into algorithms aimed to solve the task at hand.</p>
 <section id="why-programming">
 <h2>Why programming?<a class="headerlink" href="#why-programming" title="Permalink to this headline">#</a></h2>
 <p>Some of you may be wondering why you should have to learn about <em>computer science</em> if you are studying <em>linguistics</em>. Answers to this question are manifold, but typically fall into two broad categories:</p>
@@ -430,21 +454,73 @@ title="Print to PDF"
 </section>
 <section id="algorithms">
 <h2>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline">#</a></h2>
+<section id="definitions">
+<h3>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">#</a></h3>
+<p>In computer science, an algorithm refers to any finitely long instruction, consisting of a sequence of sub-commands. Algorithms are performed deterministically, not at random. Algorithms are usually employed to solve specific problems or perform tasks. In contrasts to heuristics, algorithms are fully specified task instructions.</p>
+<p>Some commonplace situations can be thought of algorithmically:</p>
+<p><strong>Baking recipes</strong>: Take 200g of flour, add 1 tsp of baking powder, mix. Add 1 egg…</p>
+<p><strong>Navigation</strong>: Go left in 200ms, then go straight ahead for 1km…</p>
+<p>Algorithms start from an <strong>input</strong> state (e.g., the set of raw ingredients in the recipe example, or your start position in the navigation example) and perform a set of operations to produce desired <strong>output</strong> (e.g., a chocolate cake, arriving at your goal position).</p>
+</section>
+<section id="types-of-instructions">
+<h3>Types of instructions<a class="headerlink" href="#types-of-instructions" title="Permalink to this headline">#</a></h3>
+<p>Some instructions operate directly on the element at hand:</p>
+<p><strong>Examples:</strong> <em>divide x by 2</em>, <em>add 1 to y</em></p>
+<p>Others are <em>conditional</em>:</p>
+<p><strong>Example:</strong><br />
+IF you are using dark chocolate,
+THEN add 100g of sugar,
+ELSE IF you are using milk chocolate,
+THEN add 50g of sugar.
+WHILE your dough is chunky,
+keep whisking.</p>
+<p>The above are examples of algorithms written in <em>pseudo-code</em>. These are not executable pieces of code, but a natural-language representation approximating the structure of a computer algorithm.</p>
+<p>Here is another example of an algorithm in pseudo-code. <strong>Can you figure out what problem it solves?</strong> (see the solution at the end of this page).</p>
+<p>DEFINE a function that takes a finite list of numbers L:
+set x to 0;
+set y to 0;
+for each element i in L:
+if that element is BIGGER THAN x:
+x = i
+if that element is SMALLER THAN y:
+y = i
+return x and y</p>
+</section>
 </section>
 <section id="python">
 <h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">#</a></h2>
+<p><em>Python</em> is a high-level programming language, just like <em>Java, Javascript, or C++</em>. It is also a <em>dynamically typed</em> programming language, meaning that some of its behaviours are evaluated at runtime, not during compilation (as for <em>statically typed</em> programming languages like <em>Java</em>). Statically typed programming languages require you to fully specify the relevant data types the code is operating on:</p>
+<p><strong>Example of static typing systems</strong>:
+int x = 2<br />
+int y = 1</p>
+<p>int z = x + y</p>
+<p>By contrast, in dynamic typing systems the interpreter resolves the data type at run time. This can be advantageous because you have to expend less time on fixing all data types beforehand, particularly in cases where you might deal with a diverse set of data. On the other hand, it can be error-prone because type incompatibilites can sneak by until very late in development.</p>
+<p><strong>Example of dynamic typing systems (our first piece of Python code)</strong>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;duck&quot;</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.1</span>
 
-<span class="n">a</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>int
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>int
 </pre></div>
 </div>
 </div>
@@ -456,11 +532,97 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>str
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>float
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>int
 </pre></div>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_9136</span>\<span class="mf">4050974931.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">b</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">a</span>
+
+<span class="ne">TypeError</span>: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you see above, the data types are of <em>x</em> and <em>y</em> are interpreted as integers (=whole numbers), whereas <em>a</em> is interpreted as string variable (=series of letters). <em>b</em> is a float variable, that is, a number that contains a floating decimal point. We will learn more about different variable types in next week’s session.</p>
+<p>For now, note that this assignment (correctly) results in a type error when we try to add “duck” to the integer 2. After all “duck” is not a number.</p>
+<p>But what happens if we want to add an integer and a float variable?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>float
+</pre></div>
+</div>
+</div>
+</div>
+<p>The resulting variable <em>c</em> is of type float! In a statically typed language, we would have had to know beforehand whether we want <em>c</em> to be the sum of integers or float variables. In Python, we can let the interpreter work its magic for us.</p>
+<p>(To resolve the question above: The pseudo-code algorithm found and returned the smallest and the biggest natural number in the list L.)</p>
 </section>
 </section>
 
