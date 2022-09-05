@@ -1,11 +1,9 @@
-# Welcome to your Jupyter Book
+# Welcome to the course page for the seminar "Scientific Programming in Python"
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+This course page will contain a condensed version of our course contents, including code blocks and other trinkets.
+It does not go in-depth into any particular topic - check out the course slides for more information.
 
-Check out the content pages bundled with this sample book to see more.
+The contents are under development. I will add them as we go along throughout the semester:
 
 ```{tableofcontents}
 ```
