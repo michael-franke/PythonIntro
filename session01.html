@@ -472,7 +472,8 @@ title="Print to PDF"
 <p><strong>Example:</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">IF you are using dark chocolate,</span>
 <span class="sd">    THEN add 100g of sugar,</span>
 <span class="sd">    ELSE IF you are using milk chocolate,</span>
@@ -483,17 +484,13 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\nIF you are using dark chocolate,\n    THEN add 100g of sugar,\n    ELSE IF you are using milk chocolate,\n    THEN add 50g of sugar.\nWHILE your dough is chunky,\n    keep whisking.\n&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <p>The above are examples of algorithms written in <em>pseudo-code</em>. These are not executable pieces of code, but a natural-language representation approximating the structure of a computer algorithm.</p>
 <p>Here is another example of an algorithm in pseudo-code. <strong>Can you figure out what problem it solves?</strong> (see the solution at the end of this page).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">DEFINE a function that takes a finite list of numbers L:</span>
 <span class="sd">    set x to 0;</span>
 <span class="sd">    set y to 0;</span>
@@ -504,11 +501,6 @@ title="Print to PDF"
 <span class="sd">            y = i</span>
 <span class="sd">return x and y</span>
 <span class="sd">&quot;&quot;&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\nDEFINE a function that takes a finite list of numbers L:\n    set x to 0;\n    set y to 0;\n    for each element i in L:\n        if that element is BIGGER THAN x:\n            x = i\n        if that element is SMALLER THAN y:\n            y = i\nreturn x and y\n&#39;
 </pre></div>
 </div>
 </div>
@@ -612,7 +604,7 @@ int y = 1</p>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_1676</span>\<span class="mf">4050974931.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_9196</span>\<span class="mf">4050974931.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">b</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">a</span>
 
 <span class="ne">TypeError</span>: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;
