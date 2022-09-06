@@ -1,9 +1,10 @@
-# Welcome to the course page for the seminar "Scientific Programming in Python"
+# "Scientific Programming in Python"
 
-This course page will contain a condensed version of our course contents, including code blocks and other trinkets.
-It does not go in-depth into any particular topic - check out the course slides for more information.
+## Welcome
+This course page contains a condensed summary of our course contents for your reference.
+It does not go in-depth on any particular topic - please refer to our other course materials for more information.
 
-The contents are under development. I will add them as we go along throughout the semester:
+The contents of this page are under development. New pages will be added throughout the semester:
 
 ```{tableofcontents}
 ```
