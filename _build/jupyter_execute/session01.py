@@ -177,7 +177,7 @@ type(c)
 # ### Familiarization with the programming environment
 # To open Spyder, first open a conda shell (see above). Then type "spyder". Spyder will open. The window will look something like this:
 # 
-# ![spyder_layout.png](attachment:spyder_layout.png)
+# ![](https://www.dropbox.com/s/e30o864f4cnv6ws/spyder_layout.png?raw=1)
 # 
 # On the bottom right, you can see the **interactive console**. Here, your entered commands are evaluated immediately. We input (In \[1\]) *2+2* and immediately get *4* as output.  This is useful to execute or test small pieces of code.
 # 
