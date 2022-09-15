@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Introduction" href="session01.html" />
@@ -177,7 +179,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/session02.ipynb"
+        <a href="https://mybinder.org/v2/gh/julianeschwab/ScientificProgramming/master?urlpath=tree/docs/session02.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -191,6 +193,24 @@ title="Launch on Binder"
   </span>
 <span class="headerbtn__text-container">Binder</span>
 </a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
 
       </li>
       
@@ -220,7 +240,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book"
+        <a href="https://github.com/julianeschwab/ScientificProgramming"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -237,7 +257,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fsession02.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/julianeschwab/ScientificProgramming/issues/new?title=Issue%20on%20page%20%2Fsession02.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -357,9 +377,21 @@ title="Print to PDF"
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#maths-operators">
+     Maths operators
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#strings">
      Strings
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#simple-string-operations">
+       Simple string operations
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#sequences">
@@ -408,8 +440,8 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#operations">
-     Operations
+    <a class="reference internal nav-link" href="#comparisons-and-logical-operators">
+     Comparisons and logical operators
     </a>
    </li>
   </ul>
@@ -476,9 +508,21 @@ title="Print to PDF"
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#maths-operators">
+     Maths operators
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#strings">
      Strings
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#simple-string-operations">
+       Simple string operations
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#sequences">
@@ -527,8 +571,8 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#operations">
-     Operations
+    <a class="reference internal nav-link" href="#comparisons-and-logical-operators">
+     Comparisons and logical operators
     </a>
    </li>
   </ul>
@@ -561,7 +605,7 @@ title="Print to PDF"
 <p>When speaking of data types, we are refering to different <strong>categories</strong> that a value can belong to. Values always belong to exactly one data type, that is, an if a value is of the <em>integer</em> type, for instance, it cannot simultaneously be of the <em>float</em> type. Integer values can be transformed into float values, however, as we will see below.</p>
 <section id="boolean">
 <h3>Boolean<a class="headerlink" href="#boolean" title="Permalink to this headline">#</a></h3>
-<p>The Boolean data type only encodes the logical values <em>True</em> and <em>False</em>, encodable in bytes as 1 and 0, respectively. The Boolean data type is highly useful in programming. Many operators and functions return Boolean values to indicate whether a statement fulfills a certain condition (e.g., is x bigger than y?)</p>
+<p>The Boolean data type only encodes the logical values <em>True</em> and <em>False</em>, encodable in bytes as 1 and 0, respectively. The Boolean data type is highly useful in programming. Many operators and functions return Boolean values to indicate whether a statement fulfills a certain condition (e.g., <em>is x bigger than y?</em>)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="kc">False</span>
@@ -595,7 +639,7 @@ title="Print to PDF"
 <h4>Integer<a class="headerlink" href="#integer" title="Permalink to this headline">#</a></h4>
 <p>Integer values are <strong>whole numbers</strong>, e.g. -300, 0, 300.</p>
 <p>Integer values can be stored in bits. In a 32-bit encoding, integers up to the size of 2.147.483.648 can be respresented.</p>
-<p>Let’s take a look at binary encodings of integers in a 16-bit system:</p>
+<p>Binary encoding uses 2’s complement. Let’s take a look at binary encodings of integers in a 16-bit system:</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>decimal</p></th>
@@ -631,10 +675,10 @@ title="Print to PDF"
 <td><p>64</p></td>
 <td><p>32</p></td>
 <td><p>16</p></td>
-<td><p>8</p></td>
-<td><p>4</p></td>
-<td><p>2</p></td>
-<td><p>1</p></td>
+<td><p><span class="math notranslate nohighlight">\(2^3\)</span> = 8</p></td>
+<td><p><span class="math notranslate nohighlight">\(2^2\)</span> = 4</p></td>
+<td><p><span class="math notranslate nohighlight">\(2^1\)</span> = 2</p></td>
+<td><p><span class="math notranslate nohighlight">\(2^0\)</span> = 1</p></td>
 </tr>
 <tr class="row-odd"><td><p>0</p></td>
 <td><p>0</p></td>
@@ -724,18 +768,569 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p><strong>Question</strong>: Can we represent negative numbers in this system? It will be part of your homework to figure this out.</p>
 </section>
 <section id="float">
 <h4>Float<a class="headerlink" href="#float" title="Permalink to this headline">#</a></h4>
-<p>Floating-point numbers</p>
+<p>Positive and negative numbers with a decimal point are called <em>floating-point numbers</em>. Floating-point numbers are expressed by their <strong>sign</strong> (positive/negative), their <strong>mantissa</strong>, and their <strong>exponent to the power of two</strong>.</p>
+<p>15.5 = +1.9375 <span class="math notranslate nohighlight">\(\times\)</span> <span class="math notranslate nohighlight">\(2^3\)</span></p>
+<p>This type of representation allows for efficient encoding and representations of very large numbers in binary form. Let’s see how this is achieved:</p>
+<p>In a 16-bit encoding, 1 bit is allocated to the sign (0 = positive, 1 = negative), 6 are allocated to the exponent (in binary encoding using 2’s complement), and 9 are allocated to the mantissa (in binary encoding using 2’s complement with negative exponent).</p>
+<p>Since there may be multiple matching mantissa and exponents for representing a number like 15.5, we assume a <strong>normalized mantissa</strong> that always carries a 1 before its decimal point, i.e. <em>1 <span class="math notranslate nohighlight">\(\leq\)</span> mantissa &lt; 2</em>. Since it is redundant to encode the 1 and decimal point, they are left out of the encoded form, but can always be understood to be present at the left of the mantissa (see below).</p>
+<p>Given <em>x</em> = 15.5</p>
+<ol class="simple">
+<li><p>Determine the sign: positive sign = 0</p></li>
+<li><p>Determine the exponent: find the largest 2<sup>e</sup> <span class="math notranslate nohighlight">\(\leq\)</span> x</p></li>
+<li><p>Determine the mantissa: <em>m</em> = x / 2<sup>e</sup> with <em>e</em> according to step 2.</p></li>
+<li><p>Transform to binary encoding:</p></li>
+</ol>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>sign</p></th>
+<th class="head"><p>(pre-decimal)</p></th>
+<th class="head"><p>reduced mantissa</p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p>exponent</p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>pos.</p></td>
+<td><p>(1.)</p></td>
+<td><p>2<sup>-1</sup> =  <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span></p></td>
+<td><p>2<sup>-2</sup> = <span class="math notranslate nohighlight">\(\frac{1}{4}\)</span></p></td>
+<td><p>2<sup>-3</sup></p></td>
+<td><p>2<sup>-4</sup></p></td>
+<td><p>2<sup>-5</sup></p></td>
+<td><p>2<sup>-6</sup></p></td>
+<td><p>2<sup>-7</sup></p></td>
+<td><p>2<sup>-8</sup></p></td>
+<td><p>2<sup>-9</sup></p></td>
+<td><p>32</p></td>
+<td><p>16</p></td>
+<td><p>8</p></td>
+<td><p>4</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="mf">15.5</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;c is of type&quot;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c is of type &lt;class &#39;float&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Note that we can transform integer numbers into float numbers and the other way around.</span>
+
+<span class="c1">#1. We can transform our int variable b into type float as follows:</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;d equals&quot;</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;d is of type&quot;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d equals 300.0
+d is of type &lt;class &#39;float&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#2. We can transform our float variable c into an integer as follows:</span>
+<span class="n">e</span> <span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;e equals&quot;</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CAREFUL! Note that tranforming floats into integers may change the value of your variable due to the loss of decimals. You will not receive a warning when this happens!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>e equals 15
+CAREFUL! Note that tranforming floats into integers may change the value of your variable due to the loss of decimals. You will not receive a warning when this happens!
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="complex">
 <h4>Complex<a class="headerlink" href="#complex" title="Permalink to this headline">#</a></h4>
-<p>Summary table</p>
+<p>As you may remember from maths classes, complex numbers employ the specific element <em>i</em>, called the imaginary unit, where i<sup>2</sup> = −1; every complex number can be expressed in the form <em>a + bi</em>, where a and b are real numbers.</p>
+<p>For some reason (feel free to go down the rabbithole on that one…), Python uses <em>j</em> instead of <em>i</em> to represent the imaginary unit. Complex numbers can thus be written as <em>x = a + bj</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="n">j</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f is of type&quot;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f is of type &lt;class &#39;complex&#39;&gt;
+(1+2j)
+</pre></div>
+</div>
+</div>
+</div>
+<p>What happens if we leave out either the real or imaginary part of the numbers? Let’s try it out:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="mi">2</span><span class="n">j</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;g is of type&quot;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g is of type &lt;class &#39;complex&#39;&gt;
+2j
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">0</span><span class="n">j</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;h is of type&quot;</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>h is of type &lt;class &#39;complex&#39;&gt;
+(1+0j)
+</pre></div>
+</div>
+</div>
+</div>
 </section>
+</section>
+<section id="maths-operators">
+<h3>Maths operators<a class="headerlink" href="#maths-operators" title="Permalink to this headline">#</a></h3>
+<p>We can perform a range of simple mathematical operations on numerical data types, such as subtraction, addition, multiplication, and so on…</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Operation</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Evaluates to</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>-</p></td>
+<td><p>Subtraction</p></td>
+<td><p>5 - 2</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>+</p></td>
+<td><p>Addition</p></td>
+<td><p>2 + 2</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-even"><td><p>*</p></td>
+<td><p>Multiplication</p></td>
+<td><p>2 * 2</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p>/</p></td>
+<td><p>Division</p></td>
+<td><p>5 / 2</p></td>
+<td><p>2.5</p></td>
+</tr>
+<tr class="row-even"><td><p>**</p></td>
+<td><p>Exponent</p></td>
+<td><p>2 ** 3</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-odd"><td><p>%</p></td>
+<td><p>Modulus/remainder</p></td>
+<td><p>22 % 8</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-even"><td><p>//</p></td>
+<td><p>Integer division/floored quotient</p></td>
+<td><p>22 // 8</p></td>
+<td><p>2</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="strings">
 <h3>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">#</a></h3>
+<p>String values are a sequence of characters. The have to obey a number of rules:</p>
+<ul class="simple">
+<li><p>must be surrounded by single ( ‘string’ ) or double quotes ( “string” )</p></li>
+<li><p>only the other type of quotes is allowed inside a string:</p>
+<ul>
+<li><p>‘I am a “string”’ is a string</p></li>
+<li><p>“I am a ’string’” is also a string</p></li>
+<li><p>“I am a “string”” is not a valid string</p></li>
+</ul>
+</li>
+<li><p>the backslash has special significance as an escape character, “some\time\ago” will look different from what you think</p></li>
+<li><p>to produce an actual backslash, you need to have it twice: “some\time\ago”</p></li>
+<li><p>Other common escape characters are:</p>
+<ul>
+<li><p><em>\b</em> - Backspace</p></li>
+<li><p><em>\r</em> - Carriage Return</p></li>
+<li><p><em>\n</em> - New Line</p></li>
+<li><p><em>\’</em> - Single Quote</p></li>
+<li><p><em>\t</em> - Tab</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="s2">&quot;Hello world!&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello world!
+&lt;class &#39;str&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="simple-string-operations">
+<h4>Simple string operations<a class="headerlink" href="#simple-string-operations" title="Permalink to this headline">#</a></h4>
+<p>You cannot perform mathematical operations on strings, with two exceptions:</p>
+<ol class="simple">
+<li><p>The <em>+</em> operator represents concatenation of strings, not addition. Concatenation means joining two strings by their ends.</p></li>
+<li><p>Strings can be replicated by mutiplication with an integer number.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">j</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Where</span><span class="se">\n</span><span class="s2">are</span><span class="se">\n</span><span class="s2">you?&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello world!
+Where
+are
+you?
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Where
+are
+you?
+Where
+are
+you?
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are, however, a number of functions with specific functionalities for string operations.</p>
+<ol class="simple">
+<li><p><em>len()</em> : returns the length of a string in number of characters. <em>len()</em> is an example of a <strong>built-in function</strong> which can also be applied to other objects representing sequences</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="simple">
+<li><p><em>startswith()</em> and <em>endswith()</em>: tests whether a string starts/ends with a specific string.</p>
+<ul class="simple">
+<li><p>Note that these are <strong>methods</strong> specific to string objects. They are therefore called on the object itself, typed as <em>str.startswith(“x”)</em>.</p></li>
+<li><p>They are sensitive to capitalization.</p></li>
+<li><p>You can feed a string of arbitrary length into startswith()/endswith(), even the full string whose contents you are testing.</p></li>
+</ul>
+</li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;He&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;he&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;!&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="simple">
+<li><p><em>in</em> and <em>index</em>: <em>in</em> is an operator that asks whether an object is contained in a sequence, whereas <em>index()</em> is a method that returns the position of that object in a sequence</p>
+<ul class="simple">
+<li><p><em>in</em> will only return True or False, but will not tell you how many times an object is contained within the sequence</p></li>
+<li><p><em>index()</em> starts counting at 0</p></li>
+</ul>
+</li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mäh&quot;</span> <span class="ow">in</span> <span class="s2">&quot;Rasenmäher&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rasenmäher&quot;</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;mäh&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="simple">
+<li><p><em>lower()</em> and <em>upper()</em>: methods than return lower- or uppercase copies of the strings they operate on</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>hello world!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WHERE
+ARE
+YOU?
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="simple">
+<li><p><em>replace()</em>: method that replaces all instances of the first type with instances of the second</p>
+<ul class="simple">
+<li><p>an optional third argument can limit how many instances of the first type should be replaced</p></li>
+</ul>
+</li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="s2">&quot;Far out in the uncharted backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun.&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Far out in the uncharted backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Far_out_in_the_uncharted_backwaters_of_the_unfashionable_end_of_the_western_spiral_arm_of_the_Galaxy_lies_a_small_unregarded_yellow_sun.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="s2">&quot;AAA&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FAAAr out in the unchAAArted backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun.
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="simple">
+<li><p>Slicing: To return just part of a string, you can indicate <em>which</em> part by way of its numerical indices</p>
+<ul class="simple">
+<li><p><em>str[start : end]</em> will return a copy of the string starting with the character at <em>start</em> and ending with the character at <em>end</em>, where <em>start</em> and <em>end</em> are integer indices, respectively</p></li>
+<li><p><em>str[start : ]</em> will return a copy of the string starting with the character at <em>start</em></p></li>
+<li><p><em>str[ : end]</em> will return a copy of the string ending with the character at <em>end</em></p></li>
+<li><p>a position <em>-x</em> will be interpreted as <em>len(string)-s</em></p></li>
+<li><p>providing a third number <em>k</em> will return every <em>k</em>th letter: <em>str[start : end : k]</em></p></li>
+</ul>
+</li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">7</span><span class="p">])</span> <span class="c1">#returns letters 0-7</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Far out
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">[:</span><span class="mi">7</span><span class="p">])</span> <span class="c1">#returns letters 0-7</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Far out
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">[</span><span class="mi">45</span><span class="p">:])</span> <span class="c1">#returns all letters from the 45th letter to the end of the string</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">[::</span><span class="mi">5</span><span class="p">])</span> <span class="c1">#returns every 5th letter</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fu urba hfoe hs amta  anryw.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">[</span><span class="o">+</span><span class="mi">20</span><span class="p">:</span><span class="o">-</span><span class="mi">20</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span> <span class="c1">#returns every 5th letter, starting 20 letters after the start of the string and ending 20 letters before its end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rba hfoe hs amta  an
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="sequences">
 <h3>Sequences<a class="headerlink" href="#sequences" title="Permalink to this headline">#</a></h3>
@@ -770,7 +1365,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_9724</span>\<span class="mf">81428746.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_2140</span>\<span class="mf">81428746.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#Why does the following not work?</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">a</span> <span class="o">=</span> <span class="n">false</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> 
@@ -787,8 +1382,8 @@ title="Print to PDF"
 </section>
 <section id="variables-and-assignments">
 <h2>Variables and assignments<a class="headerlink" href="#variables-and-assignments" title="Permalink to this headline">#</a></h2>
-<section id="operations">
-<h3>Operations<a class="headerlink" href="#operations" title="Permalink to this headline">#</a></h3>
+<section id="comparisons-and-logical-operators">
+<h3>Comparisons and logical operators<a class="headerlink" href="#comparisons-and-logical-operators" title="Permalink to this headline">#</a></h3>
 <p>Homework: find out which operations work on which data types and to what results (e.g. using modulo on a boolean and so on….)</p>
 </section>
 </section>
@@ -804,7 +1399,7 @@ title="Print to PDF"
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
+            repo: "julianeschwab/ScientificProgramming",
             ref: "master",
         },
         codeMirrorConfig: {
