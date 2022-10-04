@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Code structure &#8212; Scientific programming in Python</title>
+    <title>Functions and conditional execution &#8212; Scientific programming in Python</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -120,7 +120,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Code structure
+   Functions and conditional execution
   </a>
  </li>
 </ul>
@@ -347,90 +347,90 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#code-structure">
    Code structure
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#indentation">
      Indentation
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#commenting">
      Commenting
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#naming-variables-and-functions">
      Naming variables and functions
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#functions">
    Functions
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#code-optimisation-through-functions">
      Code optimisation through functions
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#example-of-suboptimal-code">
        Example of suboptimal code:
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#example-of-optimized-code">
        Example of optimized code
       </a>
      </li>
     </ul>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#nested-function-calls">
      Nested function calls
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#return-statements">
      Return statements
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#conditional-execution">
    Conditional execution
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#for-loop">
      for-loop
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#while-loop">
      while-loop
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#if-loop">
      if-loop
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#functions-session-4-only">
    Functions(session 4 only???)
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#modules">
    Modules(?)
   </a>
@@ -444,7 +444,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Code structure</h1>
+                <h1>Functions and conditional execution</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -454,90 +454,90 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#code-structure">
    Code structure
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#indentation">
      Indentation
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#commenting">
      Commenting
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#naming-variables-and-functions">
      Naming variables and functions
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#functions">
    Functions
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#code-optimisation-through-functions">
      Code optimisation through functions
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#example-of-suboptimal-code">
        Example of suboptimal code:
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#example-of-optimized-code">
        Example of optimized code
       </a>
      </li>
     </ul>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#nested-function-calls">
      Nested function calls
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#return-statements">
      Return statements
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#conditional-execution">
    Conditional execution
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#for-loop">
      for-loop
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#while-loop">
      while-loop
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#if-loop">
      if-loop
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#functions-session-4-only">
    Functions(session 4 only???)
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#modules">
    Modules(?)
   </a>
@@ -552,11 +552,13 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="code-structure">
-<h1>Code structure<a class="headerlink" href="#code-structure" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="functions-and-conditional-execution">
+<h1>Functions and conditional execution<a class="headerlink" href="#functions-and-conditional-execution" title="Permalink to this headline">#</a></h1>
+<section id="code-structure">
+<h2>Code structure<a class="headerlink" href="#code-structure" title="Permalink to this headline">#</a></h2>
 <p>Proper <strong>formatting</strong> of your code is essential to ensure that it runs in the intended order and is understandable to others (as well as your future self). Code readability is also improved by documentation in the form of <strong>comments/annotations</strong>, which, in addition, are a useful tool in debugging (cf. <strong>rubber duck debugging</strong>: <a class="reference external" href="https://en.wikipedia.org/wiki/Rubber_duck_debugging">https://en.wikipedia.org/wiki/Rubber_duck_debugging</a>).</p>
 <section id="indentation">
-<h2>Indentation<a class="headerlink" href="#indentation" title="Permalink to this headline">#</a></h2>
+<h3>Indentation<a class="headerlink" href="#indentation" title="Permalink to this headline">#</a></h3>
 <p>For advanced constructs, <strong>lines of code are organised in blocks</strong>. Blocks specify sequences of statements that are always executed together in the same order. Blocks are organised through levels of code indentation. There are three rules for blocks.</p>
 <ul class="simple">
 <li><p>Blocks begin when the indentation increases.</p></li>
@@ -585,7 +587,7 @@ title="Print to PDF"
 <p>Note that the period is only added once we have exited the inner block (or <em>loop</em>). We will lean more about loops later.</p>
 </section>
 <section id="commenting">
-<h2>Commenting<a class="headerlink" href="#commenting" title="Permalink to this headline">#</a></h2>
+<h3>Commenting<a class="headerlink" href="#commenting" title="Permalink to this headline">#</a></h3>
 <p>Comments are parts of the code that are ignored by the interpreter. Typical uses for comments include:</p>
 <ul class="simple">
 <li><p>explaining in natural language what a segment of code does</p></li>
@@ -628,7 +630,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="naming-variables-and-functions">
-<h2>Naming variables and functions<a class="headerlink" href="#naming-variables-and-functions" title="Permalink to this headline">#</a></h2>
+<h3>Naming variables and functions<a class="headerlink" href="#naming-variables-and-functions" title="Permalink to this headline">#</a></h3>
 <p>Lastly, using meaningful labels for important variables and functions makes it easier for others to understand their purpuse. To reiterate from session 2:</p>
 <ul class="simple">
 <li><p>Important variables should get meaningful names (e.g., city = “Tübingen”).</p></li>
@@ -637,7 +639,7 @@ title="Print to PDF"
 </section>
 </section>
 <section id="functions">
-<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">#</a></h1>
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">#</a></h2>
 <p>Functions are <strong>reusable blocks of code that perform an action, like computing a value, on the basis of potentially changing parameters</strong>. We have seen examples of (in-built) functions before: <em>print()</em> prints its argument to the standard output device, <em>float()</em> transforms its argument to a floating-point number.</p>
 <p>Functions are invaluable to programming for several reasons:</p>
 <ul class="simple">
@@ -672,10 +674,10 @@ Stop
 </div>
 </div>
 <section id="code-optimisation-through-functions">
-<h2>Code optimisation through functions<a class="headerlink" href="#code-optimisation-through-functions" title="Permalink to this headline">#</a></h2>
+<h3>Code optimisation through functions<a class="headerlink" href="#code-optimisation-through-functions" title="Permalink to this headline">#</a></h3>
 <p>Suboptimal code contains unnecessary duplications that could be avoided by specifying a function to do the job. In general, this type of code if difficult to read and to de-bug because you’ll have to remember to change the code everywhere you copied it.</p>
 <section id="example-of-suboptimal-code">
-<h3>Example of suboptimal code:<a class="headerlink" href="#example-of-suboptimal-code" title="Permalink to this headline">#</a></h3>
+<h4>Example of suboptimal code:<a class="headerlink" href="#example-of-suboptimal-code" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">word1</span> <span class="o">=</span> <span class="s2">&quot;we&quot;</span>
@@ -704,7 +706,7 @@ Stop
 </div>
 </section>
 <section id="example-of-optimized-code">
-<h3>Example of optimized code<a class="headerlink" href="#example-of-optimized-code" title="Permalink to this headline">#</a></h3>
+<h4>Example of optimized code<a class="headerlink" href="#example-of-optimized-code" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">string_percentage</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="n">length</span><span class="p">):</span>
@@ -728,7 +730,7 @@ Stop
 </section>
 </section>
 <section id="nested-function-calls">
-<h2>Nested function calls<a class="headerlink" href="#nested-function-calls" title="Permalink to this headline">#</a></h2>
+<h3>Nested function calls<a class="headerlink" href="#nested-function-calls" title="Permalink to this headline">#</a></h3>
 <p>Functions can be called within functions. Be wary of the order in which code blocks are executed, particularly for more complex programs with many nested function calls.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -778,7 +780,7 @@ You can create <strong>global variables</strong> inside a function by using the 
 </div>
 </section>
 <section id="return-statements">
-<h2>Return statements<a class="headerlink" href="#return-statements" title="Permalink to this headline">#</a></h2>
+<h3>Return statements<a class="headerlink" href="#return-statements" title="Permalink to this headline">#</a></h3>
 <p>A <strong>return statement immediately terminates the function call</strong>, causing program flow to revert to the
 place where function was called.</p>
 <p>Return statements can have arguments which define the object that the function call will evaluate to. These arguments can be assigned to a variable like any other object. Return statements thus often serve to get information back from the inside of the function (without use of global variables).</p>
@@ -839,15 +841,15 @@ place where function was called.</p>
 </section>
 </section>
 <section id="conditional-execution">
-<h1>Conditional execution<a class="headerlink" href="#conditional-execution" title="Permalink to this headline">#</a></h1>
+<h2>Conditional execution<a class="headerlink" href="#conditional-execution" title="Permalink to this headline">#</a></h2>
 <section id="for-loop">
-<h2>for-loop<a class="headerlink" href="#for-loop" title="Permalink to this headline">#</a></h2>
+<h3>for-loop<a class="headerlink" href="#for-loop" title="Permalink to this headline">#</a></h3>
 </section>
 <section id="while-loop">
-<h2>while-loop<a class="headerlink" href="#while-loop" title="Permalink to this headline">#</a></h2>
+<h3>while-loop<a class="headerlink" href="#while-loop" title="Permalink to this headline">#</a></h3>
 </section>
 <section id="if-loop">
-<h2>if-loop<a class="headerlink" href="#if-loop" title="Permalink to this headline">#</a></h2>
+<h3>if-loop<a class="headerlink" href="#if-loop" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>if else
 ….</p></li>
@@ -855,7 +857,7 @@ place where function was called.</p>
 </section>
 </section>
 <section id="functions-session-4-only">
-<h1>Functions(session 4 only???)<a class="headerlink" href="#functions-session-4-only" title="Permalink to this headline">#</a></h1>
+<h2>Functions(session 4 only???)<a class="headerlink" href="#functions-session-4-only" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>defining functions</p></li>
 <li><p>return values</p></li>
@@ -863,11 +865,12 @@ place where function was called.</p>
 </ul>
 </section>
 <section id="modules">
-<h1>Modules(?)<a class="headerlink" href="#modules" title="Permalink to this headline">#</a></h1>
+<h2>Modules(?)<a class="headerlink" href="#modules" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>importing modules</p></li>
 <li><p>….</p></li>
 </ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
