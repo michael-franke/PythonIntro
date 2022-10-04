@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# # Functions and conditional execution
+# 
 # ## Code structure
 # 
 # Proper **formatting** of your code is essential to ensure that it runs in the intended order and is understandable to others (as well as your future self). Code readability is also improved by documentation in the form of **comments/annotations**, which, in addition, are a useful tool in debugging (cf. **rubber duck debugging**: https://en.wikipedia.org/wiki/Rubber_duck_debugging). 
