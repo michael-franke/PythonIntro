@@ -7,7 +7,7 @@
 # 
 # ## Data types
 # 
-# When speaking of data types, we are refering to different **categories** that a value can belong to. Values always belong to exactly one data type, that is, an if a value is of the *integer* type, for instance, it cannot simultaneously be of the *float* type. Integer values can be transformed into float values, however, as we will see below. 
+# When speaking of data types, we are refering to different **classes** that a value can belong to. Values always belong to exactly one data type, that is, an if a value is of the *integer* type, for instance, it cannot simultaneously be of the *float* type. Integer values can be transformed into float values, however, as we will see below. 
 # 
 # ### Boolean
 # 
@@ -25,6 +25,18 @@ print(type(a))
 
 3 > 2 #the 'bigger than' operator is an example for an operator return a Boolean value
 
+
+# **Question**: Why does the following not work? 
+
+# In[3]:
+
+
+a = false
+
+
+# **Capitalization matters!** Just as natural languages have rules on capitalization (e.g. requiring capitalization of nouns in German), Python will only recognize *True* and *False*, with capital T/F as boolean values.   
+# 
+# Here, *false* is assumed to refer to a variable named *false*. However, as we haven't defined any such variable, Python returns a name error.
 
 # ### Numbers 
 # 
@@ -143,7 +155,7 @@ print("h is of type",type(h))
 print(h)
 
 
-# ### Maths operators
+# #### Maths operators
 # 
 # We can perform a range of simple mathematical operations on numerical data types, such as subtraction, addition, multiplication, and so on...
 # 
@@ -159,7 +171,7 @@ print(h)
 
 # ### Strings
 # 
-# String values are a sequence of characters. The have to obey a number of rules:
+# String values are sequences of characters (length $\geq$ 0). Internally, they are stored as a ssequence of letters, each of which has specific bit-encodings. Strings have to obey a number of rules:
 # 
 #  - must be surrounded by single ( 'string' ) or double quotes ( "string" )
 # - only the other type of quotes is allowed inside a string:
@@ -175,7 +187,7 @@ print(h)
 #     - *\’* - Single Quote    
 #     - *\t* - Tab   
 
-# In[10]:
+# In[7]:
 
 
 i = "Hello world!"
@@ -335,37 +347,146 @@ print(k[::5]) #returns every 5th letter
 print(k[+20:-20:5]) #returns every 5th letter, starting 20 letters after the start of the string and ending 20 letters before its end
 
 
+# #### Summary table
+# 
+# |Operator |Operation |Example |
+# |---|---|---|
+# |+| Append|"a "+ "ball" = "a ball"|
+# |\*|Replication|"a" * 3 = "aaa" |
+# | len(str) | Length |len("ball") = 4 | 
+# |str.startswith(str)/str.endswith(str)|Checking start and end of string|"ball".startswith("b") = True |
+# | str in str|Checking containment in string|"a" in "ball" = True |
+# |str.index(str)|Checking position of string in string|"ball".index("a") = 1 |
+# |str.upper()/str.lower|Return lower- or uppercase copy of string|"ball".upper() = "BALL"|
+# |str.replace(str,str,int)|Replace number of instances of the first string with instances of the second| "ball".replace("l","i",1) = "bail"|
+
+# ## Data types that we will cover in later sessions
+# 
 # ### Sequences
-# 
-# #### List
-# 
-# #### Tuple
-# 
-# #### Range
+# List, Tuple, Range
 # 
 # ### Mappings
+# Dictionary, Set
+
+# ## Variables and assignment
+# Creating and modifying variables is one of the essential aspects to programming. **Variables** are names that **refer to values**. Variables are created upon their first assignment through an **assignment operator** (*=*). Attempting to evaluate a variable that has not yet been assigned will result in an error.  
 # 
-# #### Dictionary
-# 
-# #### Set
-# 
-# There are other data types...
+# Rules and conventions:
+# - Important variables should get meaningful names (e.g., city = "Tübingen").
+# - Throwaway/Temporary variables get single-letter names (e.g., a, b, i, j, ...). 
+# - Variable names must start with a letter and can contain only letters, numbers, and underscores. Although they can start with an uppercase letter, it is convention to use lowercase variable names.
 
-# In[30]:
-
-
-#Why does the following not work? 
-a = false
-
-#What will be the type of this variable?
-a = "false"
+# In[2]:
 
 
-# ## Variables and assignments
+l = "a"
+m = 2
+n = False
+
+print(o)
+
+
+# #### Variable assignment
 # 
-# ### Comparisons and logical operators
-#  Homework: find out which operations work on which data types and to what results (e.g. using modulo on a boolean and so on....)
+# Note that the assignment operator (*=*) is not the same as the equality operator known from maths! The **assignment statement binds a name**, on the left-hand side of the operator, **to a value**, on the right-hand side. To evaluate whether two sides of an equation, or alternatively two variables, are identical in their expressed value, use the *==* operator.  
 # 
-# ## Comments
+# The following example illustrates:
+
+# In[15]:
+
+
+o = 17
+
+
+# In[10]:
+
+
+17 = o
+
+
+# In[11]:
+
+
+17 == o
+
+
+# Once you assign a new value to a variable, you lose (access to) its previous value. It is **often wise to create temporary copies of important variables**, which you can modify without losing knowledge of the original variable's value.
+
+# In[16]:
+
+
+o = o + 1
+
+print(o)
+
+
+# **Shorthand notation** for changing variable values:
 # 
-# ## Simple functions
+# - *a += b* increases the value of a by the value of b
+# - analogously, *a -= b*, *a *= b*,*a /= b*
+# - remember that + and * also have functionality for strings!
+
+# In[22]:
+
+
+o += 1
+
+print(o)
+
+
+# In[21]:
+
+
+study_program = "Linguistics"
+city = "Tübingen"
+study_program += " in " + city
+
+print(study_program)
+
+
+# Some variable names are **illegal**. This is because Python uses a set of **keywords** with special functionality (you have already seen some of them earlier:*True*, *False*, *in*). These keywords define that language's syntax and structure; therefore they can't be used as variable names.
+# 
+# |Examples |of | keywords | |||
+# |---|---|---|---|---|---|
+# |and |	as |	assert |	break| 	class| 	continue|
+# |def |	del |	elif |	else |	except |	exec|
+# |finally | 	for| 	from  |	global |	if | 	import|
+# |in |	is 	|lambda |	nonlocal | 	not |	or|
+# |pass |	raise |	return |	try 	| while | 	with|
+# |yield |	True |	False |	None|||
+
+# ### Expressions vs. statements
+# 
+# A basic distinction to be aware of when programming is whether you are working on an **(evaluating) expression** or a **statement**.  
+# 
+# **Expressions** are pieces of code that **evaluate to an object** and do nothing else but to perform this evaluation. They can be (any combination of) values, variables, operators, and calls to functions. Typing expressions into the command prompt will cause Python to evaluate it and return its result.
+
+# In[27]:
+
+
+(20 + o) * 3
+
+
+# While expressions ARE something, statements DO something. **Statements are instructions** for Python to execute. Examples that we have already encountered include variable assignments and the *print()* function. We will see other examples in later sessions. Typing statements into the command prompt will cause Python to execute that statement. This will not result in the display of results.
+
+# In[29]:
+
+
+p = "I am a statement" #no output from executing this line
+
+
+# ### Comparison operators
+# As we've seen, equality can be checked with the built-in *==* operator. This is not the only **comparison operator**:
+# 
+# |Operator |Operation |Example |
+# |---|---|---|
+# |==| equality| 3 == 2 + 1 (**True**)|
+# |!=|inequality|3 != 1 (**True**)|
+# | < / > | strictly smaller/bigger than | 1 < 2 (**True**) | 
+# | <= / >= | smaller/bigger than or equal to |1 <= 1 (**True**) | 
+# | is | identity (in terms of memory location)| a = 3; b = 3; a **is** b (**True**) | 
+# 
+# 
+# **Question for practice**: How do you think these operators will behave if we use them to compare string or boolean variables? What if we compare two variables of different data types? Try it out!
+# 
+# 

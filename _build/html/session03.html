@@ -1,0 +1,919 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Code structure &#8212; Scientific programming in Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Scientific programming in Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    “Scientific Programming in Python”
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="session01.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session02.html">
+   Data types and statements
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/julianeschwab/ScientificProgramming/master?urlpath=tree/docs/session03.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/julianeschwab/ScientificProgramming"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/julianeschwab/ScientificProgramming/issues/new?title=Issue%20on%20page%20%2Fsession03.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/session03.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Code structure
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#indentation">
+     Indentation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#commenting">
+     Commenting
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naming-variables-and-functions">
+     Naming variables and functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code-optimisation-through-functions">
+     Code optimisation through functions
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-of-suboptimal-code">
+       Example of suboptimal code:
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-of-optimized-code">
+       Example of optimized code
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nested-function-calls">
+     Nested function calls
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#return-statements">
+     Return statements
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conditional-execution">
+   Conditional execution
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#for-loop">
+     for-loop
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#while-loop">
+     while-loop
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#if-loop">
+     if-loop
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions-session-4-only">
+   Functions(session 4 only???)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modules">
+   Modules(?)
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Code structure</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Code structure
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#indentation">
+     Indentation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#commenting">
+     Commenting
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naming-variables-and-functions">
+     Naming variables and functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code-optimisation-through-functions">
+     Code optimisation through functions
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-of-suboptimal-code">
+       Example of suboptimal code:
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-of-optimized-code">
+       Example of optimized code
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nested-function-calls">
+     Nested function calls
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#return-statements">
+     Return statements
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conditional-execution">
+   Conditional execution
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#for-loop">
+     for-loop
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#while-loop">
+     while-loop
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#if-loop">
+     if-loop
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions-session-4-only">
+   Functions(session 4 only???)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modules">
+   Modules(?)
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="code-structure">
+<h1>Code structure<a class="headerlink" href="#code-structure" title="Permalink to this headline">#</a></h1>
+<p>Proper <strong>formatting</strong> of your code is essential to ensure that it runs in the intended order and is understandable to others (as well as your future self). Code readability is also improved by documentation in the form of <strong>comments/annotations</strong>, which, in addition, are a useful tool in debugging (cf. <strong>rubber duck debugging</strong>: <a class="reference external" href="https://en.wikipedia.org/wiki/Rubber_duck_debugging">https://en.wikipedia.org/wiki/Rubber_duck_debugging</a>).</p>
+<section id="indentation">
+<h2>Indentation<a class="headerlink" href="#indentation" title="Permalink to this headline">#</a></h2>
+<p>For advanced constructs, <strong>lines of code are organised in blocks</strong>. Blocks specify sequences of statements that are always executed together in the same order. Blocks are organised through levels of code indentation. There are three rules for blocks.</p>
+<ul class="simple">
+<li><p>Blocks begin when the indentation increases.</p></li>
+<li><p>Blocks can contain other blocks.</p></li>
+<li><p>Blocks end when the indentation decreases to zero or to a containing block’s indentation.</p></li>
+</ul>
+<p>This will be easier to understand by way of example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;Forest runs&#39;</span>
+
+<span class="k">while</span> <span class="p">(</span><span class="s1">&#39;and runs and runs&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">+=</span> <span class="s1">&#39; and runs&#39;</span>
+<span class="n">x</span><span class="o">+=</span><span class="s1">&#39;.&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Forest runs and runs and runs.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the period is only added once we have exited the inner block (or <em>loop</em>). We will lean more about loops later.</p>
+</section>
+<section id="commenting">
+<h2>Commenting<a class="headerlink" href="#commenting" title="Permalink to this headline">#</a></h2>
+<p>Comments are parts of the code that are ignored by the interpreter. Typical uses for comments include:</p>
+<ul class="simple">
+<li><p>explaining in natural language what a segment of code does</p></li>
+<li><p>describing what can be done with a user-defined function</p></li>
+<li><p>adding authorship and version information to the beginning of a file</p></li>
+<li><p>temporarily “de-activating” lines to test other parts of the code</p></li>
+</ul>
+<p>Single-line comments are preceded by a hash character (#). Multi-line comments start and end with three (single or double) quotation marks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;runs&#39;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span> <span class="c1">#if variable x contains the string &#39;runs&#39;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;runs&#39;</span><span class="p">,</span><span class="s1">&#39;walks&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#replace its first instance with the string &#39;walks&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="c1">#then print the new variable    </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Forest walks and runs and runs.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">You will often find multi-line comments like this providing authorship information at the beginning of code files.</span>
+<span class="sd">You may also place them before a new block of code in order to explain its functionality.</span>
+
+<span class="sd">Author: Juliane Schwab, 2022</span>
+<span class="sd">version: Python 3</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\nYou will often find multi-line comments like this providing authorship information at the beginning of code files.\nYou may also place them before a new block of code in order to explain its functionality.\n\nAuthor: Juliane Schwab, 2022\nversion: Python 3\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="naming-variables-and-functions">
+<h2>Naming variables and functions<a class="headerlink" href="#naming-variables-and-functions" title="Permalink to this headline">#</a></h2>
+<p>Lastly, using meaningful labels for important variables and functions makes it easier for others to understand their purpuse. To reiterate from session 2:</p>
+<ul class="simple">
+<li><p>Important variables should get meaningful names (e.g., city = “Tübingen”).</p></li>
+<li><p>Throwaway/Temporary variables get single-letter names (e.g., a, b, i, j, …).</p></li>
+</ul>
+</section>
+</section>
+<section id="functions">
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">#</a></h1>
+<p>Functions are <strong>reusable blocks of code that perform an action, like computing a value, on the basis of potentially changing parameters</strong>. We have seen examples of (in-built) functions before: <em>print()</em> prints its argument to the standard output device, <em>float()</em> transforms its argument to a floating-point number.</p>
+<p>Functions are invaluable to programming for several reasons:</p>
+<ul class="simple">
+<li><p><strong>generalization</strong>: functions avoid code duplication due to controlled execution through parameters</p></li>
+<li><p><strong>reusability</strong>: functions can be transfered between programs without loss of functionality</p></li>
+<li><p><strong>manageability</strong>: functions split code into easy-to-read chunks/blocks</p></li>
+<li><p><strong>encapsulation</strong>: functions can be used by other programmers without requiring knowledge of the implementation</p></li>
+</ul>
+<p>Functions are defined by a <strong>def statement</strong>, which specifies the name and arguments of the function. The indented code inside of the function block is the <strong>body of the function</strong>. Functions are executed by calling them; <strong>function calls</strong> use the function’s name followed by parentheses, possibly containing a number of arguments within the parentheses. Note that functions can only be called <em>after</em> they have been defined.</p>
+<p>Upon calling a function, executing of the code jumps into the function and returns to the line from which the function was called only after the execution of the function has ended.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Start&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">course_information</span><span class="p">(</span><span class="n">year</span><span class="p">):</span> <span class="c1">#def(inition) statement</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Programming in Python. University of Tübingen. Winter term&quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span><span class="c1">#function body</span>
+    <span class="c1">#the function ends here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nothing has printed yet! Only now we&#39;re calling the function:&quot;</span><span class="p">)</span>
+<span class="n">course_information</span><span class="p">(</span><span class="mi">2022</span><span class="p">)</span> <span class="c1">#function call with parameter &quot;2022&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stop&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start
+Nothing has printed yet! Only now we&#39;re calling the function:
+Programming in Python. University of Tübingen. Winter term 2022
+Stop
+</pre></div>
+</div>
+</div>
+</div>
+<section id="code-optimisation-through-functions">
+<h2>Code optimisation through functions<a class="headerlink" href="#code-optimisation-through-functions" title="Permalink to this headline">#</a></h2>
+<p>Suboptimal code contains unnecessary duplications that could be avoided by specifying a function to do the job. In general, this type of code if difficult to read and to de-bug because you’ll have to remember to change the code everywhere you copied it.</p>
+<section id="example-of-suboptimal-code">
+<h3>Example of suboptimal code:<a class="headerlink" href="#example-of-suboptimal-code" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">word1</span> <span class="o">=</span> <span class="s2">&quot;we&quot;</span>
+<span class="n">word2</span> <span class="o">=</span> <span class="s2">&quot;are&quot;</span>
+<span class="n">word3</span> <span class="o">=</span> <span class="s2">&quot;programming&quot;</span>
+
+<span class="n">combined_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word1</span><span class="p">)</span> <span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">word2</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">word3</span><span class="p">)</span>
+
+<span class="n">w1_percentage</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word1</span><span class="p">)</span> <span class="o">/</span> <span class="n">combined_length</span>
+<span class="n">w2_percentage</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word2</span><span class="p">)</span> <span class="o">/</span> <span class="n">combined_length</span>
+<span class="n">w3_percentage</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word3</span><span class="p">)</span> <span class="o">/</span> <span class="n">combined_length</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">w1_percentage</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">w2_percentage</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">w3_percentage</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.125
+0.1875
+0.6875
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-of-optimized-code">
+<h3>Example of optimized code<a class="headerlink" href="#example-of-optimized-code" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">string_percentage</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="n">length</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="o">/</span><span class="n">length</span><span class="p">)</span>
+
+<span class="c1">#flexible use of function with varying input:    </span>
+<span class="n">string_percentage</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span><span class="n">combined_length</span><span class="p">)</span>
+<span class="n">string_percentage</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">string_percentage</span><span class="p">(</span><span class="s2">&quot;love&quot;</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.125
+0.1
+0.2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="nested-function-calls">
+<h2>Nested function calls<a class="headerlink" href="#nested-function-calls" title="Permalink to this headline">#</a></h2>
+<p>Functions can be called within functions. Be wary of the order in which code blocks are executed, particularly for more complex programs with many nested function calls.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">outer_function</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="k">global</span> <span class="n">y</span> 
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">string_percentage</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">string_percentage</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">outer_function</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3333333333333333
+0.25
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that variables that are only defined inside of a function body are <strong>local variables</strong> of that function. They do not exist once you exit the function.<br />
+You can create <strong>global variables</strong> inside a function by using the global keyword (see code block above).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Forest runs and runs and runs.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="return-statements">
+<h2>Return statements<a class="headerlink" href="#return-statements" title="Permalink to this headline">#</a></h2>
+<p>A <strong>return statement immediately terminates the function call</strong>, causing program flow to revert to the
+place where function was called.</p>
+<p>Return statements can have arguments which define the object that the function call will evaluate to. These arguments can be assigned to a variable like any other object. Return statements thus often serve to get information back from the inside of the function (without use of global variables).</p>
+<p>Python also supports the use of multiple return values, separated by commas. The result of the function call needs to be assigned to the same number of variables, also separated by commas</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">string_percentage</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="n">length</span><span class="p">):</span>
+    <span class="k">return</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="o">/</span><span class="n">length</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">string_percentage</span><span class="p">(</span><span class="s2">&quot;return&quot;</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_word_statistics</span><span class="p">(</span><span class="n">word</span> <span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+    <span class="n">word_percentage</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="o">/</span><span class="n">length</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">word</span> <span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">),</span> <span class="n">word_percentage</span>
+
+<span class="n">w</span><span class="p">,</span> <span class="n">wlen</span> <span class="p">,</span> <span class="n">wperc</span> <span class="o">=</span> <span class="n">get_word_statistics</span><span class="p">(</span><span class="s2">&quot;return&quot;</span> <span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">w</span> <span class="o">+</span> <span class="s2">&quot; (length:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">wlen</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, percentage: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">wperc</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>return (length:6, percentage: 0.3)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>What happens if nothing is returned?</strong></p>
+<p>Python has a <em>None</em> value, which represents the absence of a value. None must be typed with a capital N.</p>
+<p>Internally, Python adds <em>return None</em> to the end of any function body with no return statement. If you assign the result of a function call without return value to a variable, that variable will also have the <em>None</em> value (see code block below).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">string_percentage</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="n">length</span><span class="p">):</span>
+    <span class="k">return</span> <span class="c1">#function execution ends here!</span>
+    <span class="k">return</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="o">/</span><span class="n">length</span><span class="p">)</span> <span class="c1">#never reached</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">string_percentage</span><span class="p">(</span><span class="s2">&quot;return&quot;</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="conditional-execution">
+<h1>Conditional execution<a class="headerlink" href="#conditional-execution" title="Permalink to this headline">#</a></h1>
+<section id="for-loop">
+<h2>for-loop<a class="headerlink" href="#for-loop" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="while-loop">
+<h2>while-loop<a class="headerlink" href="#while-loop" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="if-loop">
+<h2>if-loop<a class="headerlink" href="#if-loop" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>if else
+….</p></li>
+</ul>
+</section>
+</section>
+<section id="functions-session-4-only">
+<h1>Functions(session 4 only???)<a class="headerlink" href="#functions-session-4-only" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>defining functions</p></li>
+<li><p>return values</p></li>
+<li><p>calling functions</p></li>
+</ul>
+</section>
+<section id="modules">
+<h1>Modules(?)<a class="headerlink" href="#modules" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>importing modules</p></li>
+<li><p>….</p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "julianeschwab/ScientificProgramming",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Juliane Schwab<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
