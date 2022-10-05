@@ -3,7 +3,9 @@
 
 # # Functions and conditional execution
 # 
-# ## Code structure
+# In this session, you will learn about **functions** and **flow control statements**. These are essential concepts to any programming language and will allow you to write more complex programs that execute blocks of statements based on variables types of input and output values. 
+# 
+# ## Preliminaries: Code structure
 # 
 # Proper **formatting** of your code is essential to ensure that it runs in the intended order and is understandable to others (as well as your future self). Code readability is also improved by documentation in the form of **comments/annotations**, which, in addition, are a useful tool in debugging (cf. **rubber duck debugging**: https://en.wikipedia.org/wiki/Rubber_duck_debugging). 
 # 
@@ -172,9 +174,9 @@ print(y)
 # A **return statement immediately terminates the function call**, causing program flow to revert to the
 # place where function was called.
 # 
-# Return statements can have arguments which define the object that the function call will evaluate to. These arguments can be assigned to a variable like any other object. Return statements thus often serve to get information back from the inside of the function (without use of global variables).  
+# Return statements can have arguments which define the object that the function call will evaluate to. These arguments can be assigned to a variable like any other object. Return statements thus often serve to get information back from the inside of the function (without use of global variables). You can return expressions (see code block [10]) or variables (see code block [11]).  
 # 
-# Python also supports the use of multiple return values, separated by commas. The result of the function call needs to be assigned to the same number of variables, also separated by commas
+# **Python also supports the use of multiple return values**, separated by commas. The result of the function call needs to be assigned to the same number of variables, also separated by commas
 
 # In[10]:
 
@@ -236,7 +238,7 @@ print(y) #then print the new variable
 # #### if...else
 # *If* statements can be optionally followed by *else* statements, which are executed *iff* the statement's condition is *False*.
 
-# In[19]:
+# In[4]:
 
 
 if 'runs' in y: #if variable x contains the string 'runs'
@@ -249,11 +251,11 @@ print(z) #then print the new variable
 # #### elif
 # *If...else* statements will only execute one of two possible clauses. In cases with (many) more possible options, however, we can use the *elif* ("else if") statement instead. This statement has to follow another *if* or *elif* statement and provides a condition that is checked *iff* the conditions of the previous statements were *False*.  
 # 
-# *If* + *elif* statements can be (almost) arbitrarily long. Note, though, that if multiple *elif* statements are provided, only the first one that evaluates to *True* will be executed.  
+# *If* + *elif* statements can be (almost) arbitrarily long. Note, though, that **if multiple *elif* statements are provided, only the first one that evaluates to *True* will be executed.**  
 # 
 # Thus, given that z = *Natasha walks*, what will be the output of the following statement?
 
-# In[20]:
+# In[5]:
 
 
 if 'runs' in z: #if variable x contains the string 'runs'
@@ -270,9 +272,11 @@ else:
 print(z) #then print the variable
 
 
-# Finally, flow control statements can be nested:
+# With an *else* statement at the end of an *if...elif* expression you can make sure that something is returned if all conditions evaluate to *False* (see code block [20]). 
+# 
+# Finally, **flow control statements can be nested**:
 
-# In[21]:
+# In[6]:
 
 
 if 'runs' in z: #if variable z contains the string 'runs'
@@ -299,22 +303,113 @@ print(z) #then print the variable
 # - *A or B* is true *iff* A is true or B is true or both A and B are true
 # - *not A* is true *iff* A is false
 
-# In[23]:
+# In[9]:
 
 
 if 'walks' in z and len(z) < 20:
     z = z + ' for a long time'
-elif 'walks' in z or z.startswith('Natasha'):
-    z = z + '. What does Natasha do now?'
+elif 'walks' in z and (z.startswith('Forest') or z.startswith('Natasha')):
+    z = z + '. What is Ming doing now?'
 print(z)
 
 
-# ### for
-# ### while
+# ### <span style="color:red">End of lecture 3 (November 15, 2022).</span>
 # 
+# ### *while* loops
+# Loops introduce a central feature of programming language, iterating over the same sequence of statements multiple times. While an *if* statement just executes once if its condition is met, loops keep executing for as long as their condition holds. Loops **reduce the need for code duplication** and are **quite flexible at runtime** (e.g., when the number of times we'll have to run a sequence of statements depends on varying parameter values such as the length of a string).  
 # 
+# Note, however, that **loops may continue forever** unless a terminating criterion is reached.  
 # 
+# We have already seen one example for a loop, the **while** loop. This loop repeats executing the code in its body as long as its condition is met.
+
+# In[10]:
+
+
+x = 'Forest runs'
+
+while ('and runs and runs' not in x): #while this is the case
+    x += ' and runs' #do this
+#terminates as soon as the string includes 'and runs and runs'    
+x+='.'
+print(x)
+
+
+# Non-terminating loops often happen out of carelessness. To avoid them:
 # 
-# ## Modules
-# - importing modules
-# - ....
+# - be very careful to cover boundary cases
+# - define additional exit points using *break* statements (see below)
+# - ensure that the test condition changes in each iteration (as in code block [10], but not always possible)
+
+# In[14]:
+
+
+#Example of a non-terminating loop
+reply = ""
+while (reply != "Who's there?"):
+    print("Knock knock")
+    reply = "Yes?"
+    print(reply)
+    #reply = input() #allowing user input would enable changing the value of reply on every iteration
+print("Stop asking questions and let me in.")
+
+
+# #### Exiting the loop with 'break' or 'continue'
+# *Break* causes the loop to stop at the point at which it appears, without completing the current iteration. This is useful to ensure termination for certain cases.  
+# 
+# *Continue* statements end the current iteration of the loop and cause it to repeat from the top. This is useful if there are cases you'd like to skip or ignore.
+
+# In[34]:
+
+
+reply = ""
+while (reply != "Who's there?"):
+    print("Knock knock")
+    reply = input() #user can input their reply
+    if reply == "Yes?":
+        break #exits loop immediately
+    elif reply == "Who's there?":
+        continue #causes the loop to end and starts again from the top by evaluation whether reply != "Who's there".
+    else:
+        print("Try again:") 
+        reply = input() #otherwise, allow user to enter new reply
+print("Stop asking questions and let me in.")
+
+
+# ### *for* loops
+# *While* loops execute a statement for as long as their condition is true, but often we only want to **execute the code block in the loop's body a certain number of times or for a certain range of variable values**. The *for* loop does just that: it executes the code in its body **for all x in y**, where **x is a variable** and **y is an iterable**. The variable x need not have a value assigned to it before entering the loop. It will automatically iterate over all elements of y.
+# 
+# **Iterables** can have various types:
+# 
+# - *strings*: variable is assigned each character of the string in turn
+# - *ranges*: variable is assigned to iterable sequence of numbers, see details below
+# - *lists*,*tuples*,*sets*,*dictionairies*: next week
+
+# In[49]:
+
+
+#for loop on strings
+char_num = 1
+example_string = "Far out in the uncharted backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun."
+for i in example_string: #for each character in the example string
+    print("The letter at position",char_num,"is",i) #print this
+    char_num += 1 #then iterate the character number by 1
+#terminates at the end of the string
+
+
+# #### Ranges
+# 
+# The *range* function generates iterable sequences of numbers based on upto 3 input parameters:
+# 
+# - *range(n)* generates a sequence of integers from 0 to n-1. For instance, *range(10)* generates 0,1,2,3,4,5,6,7,8,9
+# - *range(i,n)* generates a sequence of integers from i to n-1. For instance *range(10,20)* generates 10,11,12,13,14,15,16,17,18,19
+# - *range(i,n,k)* generates sequences of integers from i to n-1, but only generates every *k*th integer in that sequence. For instance *range(1,20,5)* generates 1,6,11,16
+
+# In[48]:
+
+
+#for loop on numbers
+example_string = "Far out in the uncharted backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun."
+for i in range(1,20,5): #for each character in the example string
+    print("The letter at position",i,"is",example_string[i-1]) #print this
+#terminates at the end of the string
+

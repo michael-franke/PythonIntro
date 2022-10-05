@@ -66,8 +66,6 @@ b = 300
 print(type(b))
 
 
-# **Question**: Can we represent negative numbers in this system? It will be part of your homework to figure this out.
-
 # #### Float
 # 
 # Positive and negative numbers with a decimal point are called *floating-point numbers*. Floating-point numbers are expressed by their **sign** (positive/negative), their **mantissa**, and their **exponent to the power of two**.  
@@ -357,7 +355,7 @@ print(k[+20:-20:5]) #returns every 5th letter, starting 20 letters after the sta
 # |str.startswith(str)/str.endswith(str)|Checking start and end of string|"ball".startswith("b") = True |
 # | str in str|Checking containment in string|"a" in "ball" = True |
 # |str.index(str)|Checking position of string in string|"ball".index("a") = 1 |
-# |str.upper()/str.lower|Return lower- or uppercase copy of string|"ball".upper() = "BALL"|
+# |str.upper()/str.lower()|Return lower- or uppercase copy of string|"ball".upper() = "BALL"|
 # |str.replace(str,str,int)|Replace number of instances of the first string with instances of the second| "ball".replace("l","i",1) = "bail"|
 
 # ## Data types that we will cover in later sessions
