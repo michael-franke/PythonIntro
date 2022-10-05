@@ -143,10 +143,10 @@ string_percentage("love",20)
 
 
 def outer_function():
-    x = 3
+    z = 3
     global y 
     y = 4
-    string_percentage("a",x)
+    string_percentage("a",z)
     string_percentage("a",y)
 
 outer_function()
@@ -158,7 +158,7 @@ outer_function()
 # In[8]:
 
 
-print(x)
+print(z)
 
 
 # In[9]:
@@ -215,21 +215,83 @@ print(x)
 
 
 # ## Conditional execution
+# Conditional execution is an extremely important concept in any programming language. So far, most of our little programs were just lists of instructions that are executed in serial order. One of the strengths of programming, however, is that we can specify the conditions under which certain statements are to be executed, repeated, skipped, and so on.  
 # 
-# ### for-loop
-# ### while-loop
-# ### if-loop
-# - if else
-# ....
+# Like most programming languages, Python offers a range of such **flow control statements**.
 # 
 # 
-# ## Functions(session 4 only???)
+# ### if
+# The most basic flow control statement is the *if*-clause. It will execute the code block in its body *iff* (if and only if) the statement's condition is *True*. Its execution is skipped whenever the condition is *False*. We have seen an *if* statement before:
+
+# In[25]:
+
+
+x = 'Forest runs'
+
+if 'runs' in x: #if variable x contains the string 'runs'
+    y = x.replace('runs','walks',1) #replace its first instance with the string 'walks'
+print(y) #then print the new variable
+
+
+# #### if...else
+# *If* statements can be optionally followed by *else* statements, which are executed *iff* the statement's condition is *False*.
+
+# In[26]:
+
+
+if 'runs' in y: #if variable x contains the string 'runs'
+    z = y.replace('runs','walks',1) #replace its first instance with the string 'walks'
+else:
+    z = y.replace('Forest','Natasha')
+print(z) #then print the new variable
+
+
+# #### elif
+# *If...else* statements will only execute one of two possible clauses. In cases with (many) more possible options, however, we can use the *elif* ("else if") statement instead. This statement has to follow another *if* or *elif* statement and provides a condition that is checked *iff* the conditions of the previous statements were *False*.  
 # 
-# - defining functions
-# - return values
-# - calling functions
+# *If* + *elif* statements can be (almost) arbitrarily long. Note, though, that if multiple *elif* statements are provided, only the first one that evaluates to *True* will be executed.  
+# 
+# Thus, given that z = *Natasha walks*, what will be the output of the following statement?
+
+# In[27]:
+
+
+if 'runs' in z: #if variable x contains the string 'runs'
+    z = z.replace('runs','walks',1) #replace its first instance with the string 'walks'
+elif 'walks' in z: #otherwise, if z contains 'walks'...
+    z = z.replace('walks','runs') #...and so on
+elif 'Forest' in z:
+    z = z.replace('Forest','Natasha')
+elif 'Natasha' in z:
+    z = z.replace('Natasha', 'Forest')
+else:
+    print("String does not contain any of these words.")
+    
+print(z) #then print the variable
+
+
+# Finally, flow control statements can be nested:
+
+# In[29]:
+
+
+if 'runs' in z: #if variable z contains the string 'runs'
+    if 'Natasha' in z: #and contains the string 'Natasha'
+        z = z.replace('Natasha runs', 'Forest walks')
+    elif 'Forest' in z: 
+        z = z.replace('Forest runs', 'Natasha walks')
+else:
+    print("String does not contain 'runs'.")
+    
+print(z) #then print the variable
+
+
+# ### for
+# ### while
 # 
 # 
-# ## Modules(?)
+# 
+# 
+# ## Modules
 # - importing modules
 # - ....
