@@ -223,7 +223,7 @@ print(x)
 # ### if
 # The most basic flow control statement is the *if*-clause. It will execute the code block in its body *iff* (if and only if) the statement's condition is *True*. Its execution is skipped whenever the condition is *False*. We have seen an *if* statement before:
 
-# In[25]:
+# In[3]:
 
 
 x = 'Forest runs'
@@ -236,7 +236,7 @@ print(y) #then print the new variable
 # #### if...else
 # *If* statements can be optionally followed by *else* statements, which are executed *iff* the statement's condition is *False*.
 
-# In[26]:
+# In[19]:
 
 
 if 'runs' in y: #if variable x contains the string 'runs'
@@ -253,7 +253,7 @@ print(z) #then print the new variable
 # 
 # Thus, given that z = *Natasha walks*, what will be the output of the following statement?
 
-# In[27]:
+# In[20]:
 
 
 if 'runs' in z: #if variable x contains the string 'runs'
@@ -272,7 +272,7 @@ print(z) #then print the variable
 
 # Finally, flow control statements can be nested:
 
-# In[29]:
+# In[21]:
 
 
 if 'runs' in z: #if variable z contains the string 'runs'
@@ -284,6 +284,29 @@ else:
     print("String does not contain 'runs'.")
     
 print(z) #then print the variable
+
+
+# ### Intermezzo: Complex Boolean Expressions
+# 
+# All of the conditions for *if* statements specified so far used a single Boolean operator: **in**. We can also specify more complex conditions for conditional execution by:
+# 
+# - using the **comparison operators** introduced in Session 02 (*==*, *!=*, *</>*, *<=/>=*, *is*)
+# - and combining them with **Boolean operators** (*and*, *or*, *not*)
+# 
+# Boolean operators follow the rules known from logic:
+# 
+# - *A and B* is true *iff* A is true and B is true
+# - *A or B* is true *iff* A is true or B is true or both A and B are true
+# - *not A* is true *iff* A is false
+
+# In[23]:
+
+
+if 'walks' in z and len(z) < 20:
+    z = z + ' for a long time'
+elif 'walks' in z or z.startswith('Natasha'):
+    z = z + '. What does Natasha do now?'
+print(z)
 
 
 # ### for

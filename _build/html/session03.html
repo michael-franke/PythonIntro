@@ -426,6 +426,11 @@ title="Print to PDF"
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intermezzo-complex-boolean-expressions">
+     Intermezzo: Complex Boolean Expressions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#for">
      for
     </a>
@@ -538,6 +543,11 @@ title="Print to PDF"
       </a>
      </li>
     </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intermezzo-complex-boolean-expressions">
+     Intermezzo: Complex Boolean Expressions
+    </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#for">
@@ -777,7 +787,7 @@ You can create <strong>global variables</strong> inside a function by using the 
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_3768</span>\<span class="mf">557461111.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_11548</span>\<span class="mf">557461111.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;z&#39; is not defined
@@ -952,6 +962,36 @@ place where function was called.</p>
 </div>
 </div>
 </section>
+</section>
+<section id="intermezzo-complex-boolean-expressions">
+<h3>Intermezzo: Complex Boolean Expressions<a class="headerlink" href="#intermezzo-complex-boolean-expressions" title="Permalink to this headline">#</a></h3>
+<p>All of the conditions for <em>if</em> statements specified so far used a single Boolean operator: <strong>in</strong>. We can also specify more complex conditions for conditional execution by:</p>
+<ul class="simple">
+<li><p>using the <strong>comparison operators</strong> introduced in Session 02 (<em>==</em>, <em>!=</em>, <em>&lt;/&gt;</em>, <em>&lt;=/&gt;=</em>, <em>is</em>)</p></li>
+<li><p>and combining them with <strong>Boolean operators</strong> (<em>and</em>, <em>or</em>, <em>not</em>)</p></li>
+</ul>
+<p>Boolean operators follow the rules known from logic:</p>
+<ul class="simple">
+<li><p><em>A and B</em> is true <em>iff</em> A is true and B is true</p></li>
+<li><p><em>A or B</em> is true <em>iff</em> A is true or B is true or both A and B are true</p></li>
+<li><p><em>not A</em> is true <em>iff</em> A is false</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;walks&#39;</span> <span class="ow">in</span> <span class="n">z</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">z</span> <span class="o">+</span> <span class="s1">&#39; for a long time&#39;</span>
+<span class="k">elif</span> <span class="s1">&#39;walks&#39;</span> <span class="ow">in</span> <span class="n">z</span> <span class="ow">or</span> <span class="n">z</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Natasha&#39;</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">z</span> <span class="o">+</span> <span class="s1">&#39;. What does Natasha do now?&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Forest walks for a long time. What does Natasha do now?
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="for">
 <h3>for<a class="headerlink" href="#for" title="Permalink to this headline">#</a></h3>
