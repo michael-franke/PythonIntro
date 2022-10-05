@@ -409,30 +409,37 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#for-loop">
-     for-loop
+    <a class="reference internal nav-link" href="#if">
+     if
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#if-else">
+       if…else
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#elif">
+       elif
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#for">
+     for
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#while-loop">
-     while-loop
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#if-loop">
-     if-loop
+    <a class="reference internal nav-link" href="#while">
+     while
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#functions-session-4-only">
-   Functions(session 4 only???)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#modules">
-   Modules(?)
+   Modules
   </a>
  </li>
 </ul>
@@ -516,30 +523,37 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#for-loop">
-     for-loop
+    <a class="reference internal nav-link" href="#if">
+     if
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#if-else">
+       if…else
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#elif">
+       elif
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#for">
+     for
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#while-loop">
-     while-loop
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#if-loop">
-     if-loop
+    <a class="reference internal nav-link" href="#while">
+     while
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#functions-session-4-only">
-   Functions(session 4 only???)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#modules">
-   Modules(?)
+   Modules
   </a>
  </li>
 </ul>
@@ -735,10 +749,10 @@ Stop
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">outer_function</span><span class="p">():</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="mi">3</span>
     <span class="k">global</span> <span class="n">y</span> 
     <span class="n">y</span> <span class="o">=</span> <span class="mi">4</span>
-    <span class="n">string_percentage</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">string_percentage</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
     <span class="n">string_percentage</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 
 <span class="n">outer_function</span><span class="p">()</span>
@@ -756,12 +770,17 @@ Stop
 You can create <strong>global variables</strong> inside a function by using the global keyword (see code block above).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Forest runs and runs and runs.
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_3768</span>\<span class="mf">557461111.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;z&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -842,30 +861,107 @@ place where function was called.</p>
 </section>
 <section id="conditional-execution">
 <h2>Conditional execution<a class="headerlink" href="#conditional-execution" title="Permalink to this headline">#</a></h2>
-<section id="for-loop">
-<h3>for-loop<a class="headerlink" href="#for-loop" title="Permalink to this headline">#</a></h3>
+<p>Conditional execution is an extremely important concept in any programming language. So far, most of our little programs were just lists of instructions that are executed in serial order. One of the strengths of programming, however, is that we can specify the conditions under which certain statements are to be executed, repeated, skipped, and so on.</p>
+<p>Like most programming languages, Python offers a range of such <strong>flow control statements</strong>.</p>
+<section id="if">
+<h3>if<a class="headerlink" href="#if" title="Permalink to this headline">#</a></h3>
+<p>The most basic flow control statement is the <em>if</em>-clause. It will execute the code block in its body <em>iff</em> (if and only if) the statement’s condition is <em>True</em>. Its execution is skipped whenever the condition is <em>False</em>. We have seen an <em>if</em> statement before:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;Forest runs&#39;</span>
+
+<span class="k">if</span> <span class="s1">&#39;runs&#39;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span> <span class="c1">#if variable x contains the string &#39;runs&#39;</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;runs&#39;</span><span class="p">,</span><span class="s1">&#39;walks&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#replace its first instance with the string &#39;walks&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="c1">#then print the new variable</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Forest walks
+</pre></div>
+</div>
+</div>
+</div>
+<section id="if-else">
+<h4>if…else<a class="headerlink" href="#if-else" title="Permalink to this headline">#</a></h4>
+<p><em>If</em> statements can be optionally followed by <em>else</em> statements, which are executed <em>iff</em> the statement’s condition is <em>False</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;runs&#39;</span> <span class="ow">in</span> <span class="n">y</span><span class="p">:</span> <span class="c1">#if variable x contains the string &#39;runs&#39;</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;runs&#39;</span><span class="p">,</span><span class="s1">&#39;walks&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#replace its first instance with the string &#39;walks&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Forest&#39;</span><span class="p">,</span><span class="s1">&#39;Natasha&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="c1">#then print the new variable</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Natasha walks
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="while-loop">
-<h3>while-loop<a class="headerlink" href="#while-loop" title="Permalink to this headline">#</a></h3>
+<section id="elif">
+<h4>elif<a class="headerlink" href="#elif" title="Permalink to this headline">#</a></h4>
+<p><em>If…else</em> statements will only execute one of two possible clauses. In cases with (many) more possible options, however, we can use the <em>elif</em> (“else if”) statement instead. This statement has to follow another <em>if</em> or <em>elif</em> statement and provides a condition that is checked <em>iff</em> the conditions of the previous statements were <em>False</em>.</p>
+<p><em>If</em> + <em>elif</em> statements can be (almost) arbitrarily long. Note, though, that if multiple <em>elif</em> statements are provided, only the first one that evaluates to <em>True</em> will be executed.</p>
+<p>Thus, given that z = <em>Natasha walks</em>, what will be the output of the following statement?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;runs&#39;</span> <span class="ow">in</span> <span class="n">z</span><span class="p">:</span> <span class="c1">#if variable x contains the string &#39;runs&#39;</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;runs&#39;</span><span class="p">,</span><span class="s1">&#39;walks&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#replace its first instance with the string &#39;walks&#39;</span>
+<span class="k">elif</span> <span class="s1">&#39;walks&#39;</span> <span class="ow">in</span> <span class="n">z</span><span class="p">:</span> <span class="c1">#otherwise, if z contains &#39;walks&#39;...</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;walks&#39;</span><span class="p">,</span><span class="s1">&#39;runs&#39;</span><span class="p">)</span> <span class="c1">#...and so on</span>
+<span class="k">elif</span> <span class="s1">&#39;Forest&#39;</span> <span class="ow">in</span> <span class="n">z</span><span class="p">:</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Forest&#39;</span><span class="p">,</span><span class="s1">&#39;Natasha&#39;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="s1">&#39;Natasha&#39;</span> <span class="ow">in</span> <span class="n">z</span><span class="p">:</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Natasha&#39;</span><span class="p">,</span> <span class="s1">&#39;Forest&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;String does not contain any of these words.&quot;</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="c1">#then print the variable</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Natasha runs
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, flow control statements can be nested:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;runs&#39;</span> <span class="ow">in</span> <span class="n">z</span><span class="p">:</span> <span class="c1">#if variable z contains the string &#39;runs&#39;</span>
+    <span class="k">if</span> <span class="s1">&#39;Natasha&#39;</span> <span class="ow">in</span> <span class="n">z</span><span class="p">:</span> <span class="c1">#and contains the string &#39;Natasha&#39;</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Natasha runs&#39;</span><span class="p">,</span> <span class="s1">&#39;Forest walks&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="s1">&#39;Forest&#39;</span> <span class="ow">in</span> <span class="n">z</span><span class="p">:</span> 
+        <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Forest runs&#39;</span><span class="p">,</span> <span class="s1">&#39;Natasha walks&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;String does not contain &#39;runs&#39;.&quot;</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="c1">#then print the variable</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Forest walks
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="if-loop">
-<h3>if-loop<a class="headerlink" href="#if-loop" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>if else
-….</p></li>
-</ul>
 </section>
+<section id="for">
+<h3>for<a class="headerlink" href="#for" title="Permalink to this headline">#</a></h3>
 </section>
-<section id="functions-session-4-only">
-<h2>Functions(session 4 only???)<a class="headerlink" href="#functions-session-4-only" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>defining functions</p></li>
-<li><p>return values</p></li>
-<li><p>calling functions</p></li>
-</ul>
+<section id="while">
+<h3>while<a class="headerlink" href="#while" title="Permalink to this headline">#</a></h3>
+</section>
 </section>
 <section id="modules">
-<h2>Modules(?)<a class="headerlink" href="#modules" title="Permalink to this headline">#</a></h2>
+<h2>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>importing modules</p></li>
 <li><p>….</p></li>
