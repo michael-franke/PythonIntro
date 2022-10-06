@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Advanced data types: lists, tuples, dictionaries, sets &#8212; Scientific programming in Python</title>
+    <title>Advanced data types: lists, tuples, sets, dictionaries &#8212; Scientific programming in Python</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,6 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Functions and conditional execution" href="session03.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -106,7 +107,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="session01.html">
    Introduction
@@ -120,6 +121,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="session03.html">
    Functions and conditional execution
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Advanced data types: lists, tuples, sets, dictionaries
   </a>
  </li>
 </ul>
@@ -379,15 +385,49 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#tuples">
    Tuples
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#itertools">
+     Itertools
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sets">
+   Sets
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dictionaries">
    Dictionaries
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-features-of-dictionaries">
+     Basic features of dictionaries
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dictionary-construction">
+     Dictionary construction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modifying-a-dictionary">
+     Modifying a dictionary
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#processing-a-dictionary">
+     Processing a dictionary
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sets">
-   Sets
+  <a class="reference internal nav-link" href="#hierarchical-structure">
+   Hierarchical structure
   </a>
  </li>
 </ul>
@@ -399,7 +439,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Advanced data types: lists, tuples, dictionaries, sets</h1>
+                <h1>Advanced data types: lists, tuples, sets, dictionaries</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -442,15 +482,49 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#tuples">
    Tuples
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#itertools">
+     Itertools
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sets">
+   Sets
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dictionaries">
    Dictionaries
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-features-of-dictionaries">
+     Basic features of dictionaries
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dictionary-construction">
+     Dictionary construction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modifying-a-dictionary">
+     Modifying a dictionary
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#processing-a-dictionary">
+     Processing a dictionary
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sets">
-   Sets
+  <a class="reference internal nav-link" href="#hierarchical-structure">
+   Hierarchical structure
   </a>
  </li>
 </ul>
@@ -463,8 +537,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="advanced-data-types-lists-tuples-dictionaries-sets">
-<h1>Advanced data types: lists, tuples, dictionaries, sets<a class="headerlink" href="#advanced-data-types-lists-tuples-dictionaries-sets" title="Permalink to this headline">#</a></h1>
+  <section id="advanced-data-types-lists-tuples-sets-dictionaries">
+<h1>Advanced data types: lists, tuples, sets, dictionaries<a class="headerlink" href="#advanced-data-types-lists-tuples-sets-dictionaries" title="Permalink to this headline">#</a></h1>
 <p>So far, we have dealt with data types that encode a single value – a number, a string, or a Boolean value. In this session, we will learn about <strong>data types that can contain multiple values</strong>, which is essential when you are handling large amounts of data. At the end of this session, you should know the distinctions between four such data types, namely <em>lists</em>, <em>tuples</em>, <em>dictionaries</em>, and <em>sets</em>, and you should be able to write simple programs in which you create and modify these data types.</p>
 <section id="lists">
 <h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">#</a></h2>
@@ -725,9 +799,9 @@ title="Print to PDF"
 <li><p>on a list of strings, <em>min()</em> and <em>max()</em> return the string that is first and last in alphabetical order, respectively.</p></li>
 </ul>
 <p><strong>(3) Advanced functions</strong></p>
-<p>Two extremely useful function for processing lists are <em>enumerate(list)</em> and <em>zip(list1,…, listn)</em>.</p>
+<p>Three extremely useful functions for processing lists are <em>enumerate(list)</em>, <em>zip(list1,…, listn)</em>, and <em>map(function, list)</em>.</p>
 <ul class="simple">
-<li><p><em><strong>Enumerate(list)</strong></em> allows us to loop over the elements in the list and and have an automatic counter. The result of that function is an <em>enumerate</em> object, which can be transformed back to a list of numbered tuples (see below for more on the tuple data type) or whose elements (both the list element and the counter) can be employed in <em>for</em> loops (see below)</p></li>
+<li><p><em><strong>enumerate(list)</strong></em> allows us to loop over the elements in the list and and have an automatic counter. The result of that function is an <em>enumerate</em> object, which can be transformed back to a list of numbered tuples (see below for more on the tuple data type) or whose elements (both the list element and the counter) can be employed in <em>for</em> loops (see below)</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -760,7 +834,7 @@ The animal at list index  3  is  platypus
 </div>
 </div>
 <ul class="simple">
-<li><p><em><strong>Zip(list1,…listn)</strong></em> allows us to iterate over multiple lists at once. Just as for <em>enumerate</em>, the result of that function is a <em>zip</em> object, which can be transformed back to a list of paired tuples or whose elements can be iterated over in <em>for</em> loops (see below).</p></li>
+<li><p><em><strong>zip(list1,…listn)</strong></em> allows us to iterate over multiple lists at once. Just as for <em>enumerate</em>, the result of that function is a <em>zip</em> object, which can be transformed back to a list of paired tuples or whose elements can be iterated over in <em>for</em> loops (see below).</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -793,6 +867,22 @@ a platypus is a mammal, a pidgeon is a bird
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p><em><strong>map(function, list)</strong></em> applies a function (in its first argument) to all elements of a sequence (in its second argument). The function returns a <em>map</em> object, which can be assigned back to a list or tuple.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">word_lengths</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span> <span class="p">,</span> <span class="n">list_of_mammals</span><span class="p">))</span> <span class="c1">#applies the function len to each element on the list and returns the length of the animal names in a new list</span>
+<span class="n">word_lengths</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3, 10, 5, 8]
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="span-style-color-red-end-of-lecture-4-november-22-2022-span">
@@ -800,12 +890,359 @@ a platypus is a mammal, a pidgeon is a bird
 </section>
 <section id="tuples">
 <h2>Tuples<a class="headerlink" href="#tuples" title="Permalink to this headline">#</a></h2>
+<p>Tuples are the little cousins of lists. They are best explained by how the two differ:</p>
+<ul class="simple">
+<li><p>tuples are typed with parentheses () instead of square brackets []</p></li>
+<li><p>tuples are immutable, that is, their values cannot be modified, appended, or removed without creating a new variable. For that reason, you can <strong>use them for sequences of values that are meant to stay fixed</strong>.</p></li>
+</ul>
+<p>Tuples have many uses, such as returning multiple values from a function or assigning objects to multiple variables (see session03). We have also already seen that <strong>tuples and lists sometimes interact</strong>, e.g., when using the <em>zip()</em> or <em>enumerate()</em> functions. Just as for integer and floating-point numbers, <strong>lists can be converted to tuples and the other way around</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reptiles</span> <span class="o">=</span> <span class="s2">&quot;crocodile&quot;</span><span class="p">,</span> <span class="s2">&quot;lizard&quot;</span><span class="p">,</span> <span class="s2">&quot;iguana&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reptiles</span><span class="p">)</span>
+
+<span class="n">list_of_reptiles</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">reptiles</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_of_reptiles</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;crocodile&#39;, &#39;lizard&#39;, &#39;iguana&#39;)
+[&#39;crocodile&#39;, &#39;lizard&#39;, &#39;iguana&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="itertools">
+<h3>Itertools<a class="headerlink" href="#itertools" title="Permalink to this headline">#</a></h3>
+<p>So far, we’ve used <em>for</em> loops to iterate over all elements of an iterable or over multiple iterables (as with <em>zip</em>). Some more complex iterators are predefined in the <em>itertools</em> module, which you can use after importing it to Python (more on modules in the next session).</p>
+<p><strong>Itertools provides a range of predefined iterators to make your life easier</strong>, see here: <a class="reference external" href="https://docs.python.org/3/library/itertools.html">https://docs.python.org/3/library/itertools.html</a> .</p>
+<p>For instance, <em>product(iterable1,….iterable n)</em> returns the Cartesian product of its arguments, which is equivalent to building a nested <em>for</em> loop.</p>
+<p>Have a look at the documentation linked above for further helpful functions (<strong>this may or may not be relevant to homeworks in the future…</strong>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+
+<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">list_of_mammals</span><span class="p">,</span><span class="n">list_of_birds</span><span class="p">):</span> <span class="c1">#for each of the cartesian products</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="c1">#print the tuple</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">This is equivalent to:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">entry1</span> <span class="ow">in</span> <span class="n">list_of_mammals</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">entry2</span> <span class="ow">in</span> <span class="n">list_of_birds</span><span class="p">:</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="n">entry1</span><span class="p">,</span> <span class="n">entry2</span> <span class="c1">#create tuple of animals</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="c1">#print</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;dog&#39;, &#39;robin&#39;)
+(&#39;dog&#39;, &#39;duck&#39;)
+(&#39;dog&#39;, &#39;penguin&#39;)
+(&#39;dog&#39;, &#39;pidgeon&#39;)
+(&#39;chimpanzee&#39;, &#39;robin&#39;)
+(&#39;chimpanzee&#39;, &#39;duck&#39;)
+(&#39;chimpanzee&#39;, &#39;penguin&#39;)
+(&#39;chimpanzee&#39;, &#39;pidgeon&#39;)
+(&#39;whale&#39;, &#39;robin&#39;)
+(&#39;whale&#39;, &#39;duck&#39;)
+(&#39;whale&#39;, &#39;penguin&#39;)
+(&#39;whale&#39;, &#39;pidgeon&#39;)
+(&#39;platypus&#39;, &#39;robin&#39;)
+(&#39;platypus&#39;, &#39;duck&#39;)
+(&#39;platypus&#39;, &#39;penguin&#39;)
+(&#39;platypus&#39;, &#39;pidgeon&#39;)
+
+This is equivalent to:
+
+(&#39;dog&#39;, &#39;robin&#39;)
+(&#39;dog&#39;, &#39;duck&#39;)
+(&#39;dog&#39;, &#39;penguin&#39;)
+(&#39;dog&#39;, &#39;pidgeon&#39;)
+(&#39;chimpanzee&#39;, &#39;robin&#39;)
+(&#39;chimpanzee&#39;, &#39;duck&#39;)
+(&#39;chimpanzee&#39;, &#39;penguin&#39;)
+(&#39;chimpanzee&#39;, &#39;pidgeon&#39;)
+(&#39;whale&#39;, &#39;robin&#39;)
+(&#39;whale&#39;, &#39;duck&#39;)
+(&#39;whale&#39;, &#39;penguin&#39;)
+(&#39;whale&#39;, &#39;pidgeon&#39;)
+(&#39;platypus&#39;, &#39;robin&#39;)
+(&#39;platypus&#39;, &#39;duck&#39;)
+(&#39;platypus&#39;, &#39;penguin&#39;)
+(&#39;platypus&#39;, &#39;pidgeon&#39;)
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="dictionaries">
-<h2>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="sets">
 <h2>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">#</a></h2>
+<p>A final basic data type for collections of elements is the <em>set</em>. Unlike list and tuples, sets are <strong>unordered</strong> and <strong>every element can only occur once</strong>. Sets begin and end with curly brackets {}.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lays_eggs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;platypus&quot;</span><span class="p">,</span><span class="s2">&quot;crocodile&quot;</span><span class="p">,</span><span class="s2">&quot;iguana&quot;</span><span class="p">,</span><span class="s2">&quot;lizard&quot;</span><span class="p">}</span>
+<span class="n">produces_milk</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;dog&quot;</span><span class="p">,</span><span class="s2">&quot;platypus&quot;</span><span class="p">,</span><span class="s2">&quot;horse&quot;</span><span class="p">,</span><span class="s2">&quot;chimpanzee&quot;</span><span class="p">,</span><span class="s2">&quot;whale&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Set methods</strong>:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Operation</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Evaluates to</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><em>in</em> / <em>not in</em></p></td>
+<td><p>tests for set membership</p></td>
+<td><p>“platypus” in lays_eggs</p></td>
+<td><p>True</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>add(obj)</em></p></td>
+<td><p>adds a single element to the set</p></td>
+<td><p>produces_milk.add(“goat”)</p></td>
+<td><p>produces_milk == {“dog”,”platypus”,”horse”,”chimpanzee”,”whale”,”goat”}</p></td>
+</tr>
+<tr class="row-even"><td><p><em>update(obj)</em></p></td>
+<td><p>adds multiple elements to the set</p></td>
+<td><p>lays_eggs.update((“robin”,”penguin”))</p></td>
+<td><p>lays_eggs == {“platypus”,”crocodile”,”iguana”,”lizard”,”robin”,”penguin”}</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>remove(obj)</em></p></td>
+<td><p>deletes an element from the set</p></td>
+<td><p>lays_eggs.remove(“penguin”)</p></td>
+<td><p>lays_eggs == {“platypus”,”crocodile”,”iguana”,”lizard”,”robin”}</p></td>
+</tr>
+<tr class="row-even"><td><p><em>discard(obj)</em></p></td>
+<td><p>works like <em>remove()</em>, but does not throw exception if the object wasn’t part of the set in the first place</p></td>
+<td><p>lays_eggs.remove(“dodo”)</p></td>
+<td><p>lays_eggs == {“platypus”,”crocodile”,”iguana”,”lizard”,”robin”}</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>len(set)</em></p></td>
+<td><p>returns the number of elements in the set</p></td>
+<td><p>len(produces_milk)</p></td>
+<td><p>6</p></td>
+</tr>
+</tbody>
+</table>
+<p>You can perform also perform a variety of <strong>set operations</strong> known from logics:</p>
+<ul class="simple">
+<li><p>The <strong>intersection</strong> of two sets is written as <em>A &amp; B</em></p></li>
+<li><p>The <strong>union</strong> of two sets if written as <em>A | B</em></p></li>
+<li><p>The <strong>difference</strong> between two sets if written as <em>A - B</em></p></li>
+</ul>
+<p>See your logics classes for further set operations…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lays_eggs</span> <span class="o">&amp;</span> <span class="n">produces_milk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;platypus&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dictionaries">
+<h2>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">#</a></h2>
+<p>Dictionaries in Python function much like dictionaries in real life: they are used to organize data by key terms (capitals of countries, regions of Germany, English-German translations, …) . Like lists, <strong>dictionaries are mutable collections of many values</strong>. Unlike lists, which are organized by their numerical index, however, <strong>dictionaries can be organized (or indexed) by many different data types</strong>. We call these indices <em>keys</em> and the association between a key and its values a <em>key-value pair</em>.</p>
+<p>Dictionaries are…</p>
+<ul class="simple">
+<li><p><strong>used for storing objects under keys and looking them up again</strong> (hence the name)</p></li>
+<li><p>a <strong>universal data structure that can be used to represent any mapping</strong>. Any immutable type can be a key (strings, numbers, tuples, but not lists or sets) and any object can be a value (even lists or sets)</p></li>
+</ul>
+<section id="basic-features-of-dictionaries">
+<h3>Basic features of dictionaries<a class="headerlink" href="#basic-features-of-dictionaries" title="Permalink to this headline">#</a></h3>
+<p>Like sets, dictionaries begin and end with curly brackets. Inside, they contain mappings between key and value, indicated as objects on the left-hand and ride-hand side of a colon, respectively.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">some_capital_cities_of_africa</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Algeria&quot;</span> <span class="p">:</span> <span class="s2">&quot;Algiers&quot;</span><span class="p">,</span><span class="s2">&quot;Botswana&quot;</span><span class="p">:</span> <span class="s2">&quot;Gaborone&quot;</span><span class="p">,</span><span class="s2">&quot;Chad&quot;</span> <span class="p">:</span> <span class="s2">&quot;N&#39;Djamena&quot;</span><span class="p">,</span><span class="s2">&quot;Egypt&quot;</span> <span class="p">:</span> <span class="s2">&quot;Cairo&quot;</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The capital of Egypt is &quot;</span><span class="p">,</span><span class="n">some_capital_cities_of_africa</span><span class="p">[</span><span class="s2">&quot;Egypt&quot;</span><span class="p">])</span> <span class="c1">#retrieve dictionary entries by their key</span>
+
+<span class="c1">#adding new dictionary entries is easy....</span>
+<span class="n">some_capital_cities_of_africa</span><span class="p">[</span><span class="s2">&quot;Kenya&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Nairobi&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The capital of Egypt is  Cairo
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dictionary-construction">
+<h3>Dictionary construction<a class="headerlink" href="#dictionary-construction" title="Permalink to this headline">#</a></h3>
+<p>There are many more elegant ways of dictionary construction than hand-typing out all key-value pairs as in the example above.</p>
+<ul class="simple">
+<li><p>Using <strong>list comprehension</strong> to create a list of pairs:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">to_upper_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">l</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s2">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ &quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">to_upper_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: &#39;A&#39;, &#39;b&#39;: &#39;B&#39;, &#39;c&#39;: &#39;C&#39;, &#39;d&#39;: &#39;D&#39;, &#39;e&#39;: &#39;E&#39;, &#39;f&#39;: &#39;F&#39;, &#39;g&#39;: &#39;G&#39;, &#39;h&#39;: &#39;H&#39;, &#39;i&#39;: &#39;I&#39;, &#39;j&#39;: &#39;J&#39;, &#39;k&#39;: &#39;K&#39;, &#39;l&#39;: &#39;L&#39;, &#39;m&#39;: &#39;M&#39;, &#39;n&#39;: &#39;N&#39;, &#39;o&#39;: &#39;O&#39;, &#39;p&#39;: &#39;P&#39;, &#39;q&#39;: &#39;Q&#39;, &#39;r&#39;: &#39;R&#39;, &#39;s&#39;: &#39;S&#39;, &#39;t&#39;: &#39;T&#39;, &#39;u&#39;: &#39;U&#39;, &#39;v&#39;: &#39;V&#39;, &#39;w&#39;: &#39;W&#39;, &#39;x&#39;: &#39;X&#39;, &#39;y&#39;: &#39;Y&#39;, &#39;z&#39;: &#39;Z&#39;, &#39; &#39;: &#39; &#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Using two zipped sequences:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lower</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">,</span><span class="s2">&quot;c&quot;</span><span class="p">,</span><span class="s2">&quot;d&quot;</span><span class="p">,</span><span class="s2">&quot;e&quot;</span><span class="p">,</span><span class="s2">&quot;f&quot;</span><span class="p">,</span><span class="s2">&quot;g&quot;</span><span class="p">,</span><span class="s2">&quot;h&quot;</span><span class="p">]</span>
+<span class="n">upper</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="s2">&quot;C&quot;</span><span class="p">,</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;E&quot;</span><span class="p">,</span><span class="s2">&quot;F&quot;</span><span class="p">,</span><span class="s2">&quot;G&quot;</span><span class="p">,</span><span class="s2">&quot;H&quot;</span><span class="p">]</span>
+
+<span class="n">to_lower_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">upper</span><span class="p">,</span><span class="n">lower</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">to_lower_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;A&#39;: &#39;a&#39;, &#39;B&#39;: &#39;b&#39;, &#39;C&#39;: &#39;c&#39;, &#39;D&#39;: &#39;d&#39;, &#39;E&#39;: &#39;e&#39;, &#39;F&#39;: &#39;f&#39;, &#39;G&#39;: &#39;g&#39;, &#39;H&#39;: &#39;h&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Remember that dictionaries can contain <em>any</em> object as values, even lists. Thus, they can be used to store large amounts of data at once.</p>
+<p>Let’s imagine you want to keep score of important information about your friends. A dictionary easily allows you to represent the relevant information:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Mohamed&quot;</span><span class="p">,</span> <span class="s2">&quot;Alina&quot;</span><span class="p">,</span> <span class="s2">&quot;Tracy&quot;</span><span class="p">,</span> <span class="s2">&quot;Sophia&quot;</span><span class="p">]</span>
+<span class="n">last_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;bin Hamad&quot;</span><span class="p">,</span> <span class="s2">&quot;Schultz&quot;</span><span class="p">,</span> <span class="s2">&quot;Sanchez&quot;</span><span class="p">,</span> <span class="s2">&quot;Loren&quot;</span><span class="p">]</span>
+<span class="n">ages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">33</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">38</span><span class="p">]</span>
+<span class="n">phone_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;0176123456&quot;</span><span class="p">,</span> <span class="s2">&quot;0176123456&quot;</span><span class="p">,</span> <span class="s2">&quot;0176123456&quot;</span><span class="p">,</span> <span class="s2">&quot;0176123456&quot;</span><span class="p">]</span>
+
+<span class="n">notebook</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;First name&quot;</span> <span class="p">:</span> <span class="n">first_names</span><span class="p">,</span> <span class="s2">&quot;Last name&quot;</span> <span class="p">:</span> <span class="n">last_names</span><span class="p">,</span> <span class="s2">&quot;Age&quot;</span> <span class="p">:</span> <span class="n">ages</span><span class="p">,</span> <span class="s2">&quot;Phone number&quot;</span> <span class="p">:</span> <span class="n">phone_numbers</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">notebook</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I have the following information: &quot;</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">notebook</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="c1">#for each key, returns the list element with index 0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>I have the following information:  First name : Mohamed
+I have the following information:  Last name : bin Hamad
+I have the following information:  Age : 33
+I have the following information:  Phone number : 0176123456
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="modifying-a-dictionary">
+<h3>Modifying a dictionary<a class="headerlink" href="#modifying-a-dictionary" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><em>len()</em> on a dictionary evaluates to the number of key-value pairs</p></li>
+<li><p><em>in</em> checks for the presence of a key</p></li>
+<li><p><em>dict.keys()</em> returns a list of all keys in the dictionary</p></li>
+<li><p><em>dict.values()</em> returns a list of all values in the dictionary</p></li>
+<li><p><em>dict.items()</em> returns a list of all key-value pairs</p></li>
+<li><p><em>del</em> deletes a key-value pair, e.g., <em>del notebook[“Phone_number”]</em></p></li>
+<li><p><em>dict.clear()</em> empties the dictionary</p></li>
+</ul>
+</section>
+<section id="processing-a-dictionary">
+<h3>Processing a dictionary<a class="headerlink" href="#processing-a-dictionary" title="Permalink to this headline">#</a></h3>
+<p>Since dictionaries have both keys and values, we can use loops to iterate over either. Using the <em>values()</em> and <em>keys()</em> methods is essential here:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Adding a new friend to our notebook:</span>
+<span class="n">key_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">notebook</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">notebook</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please add a new&quot;</span><span class="p">,</span> <span class="n">key_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">new_entry</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+    <span class="n">entry</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_entry</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">notebook</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Please add a new First name
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_5212</span>\<span class="mf">3349261285.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">notebook</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please add a new&quot;</span><span class="p">,</span> <span class="n">key_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="n">new_entry</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">entry</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_entry</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nn">~\miniconda3\lib\site-packages\ipykernel\kernelbase.py</span> in <span class="ni">raw_input</span><span class="nt">(self, prompt)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1070</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1071</span><span class="s2">         if not self._allow_stdin:</span>
+<span class="ne">-&gt; </span><span class="mi">1072</span><span class="s2">             raise StdinNotImplementedError(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1073</span><span class="s2">                 &quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1074</span><span class="s2">             )</span>
+
+<span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="hierarchical-structure">
+<h2>Hierarchical structure<a class="headerlink" href="#hierarchical-structure" title="Permalink to this headline">#</a></h2>
+<p>Remember that all data types that encode collections of elements (lists, tuples, sets, dictionaries) can be nested! A more elegant way of representing our little notebook of friends uses <strong>nested dictionaries</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">revised_notebook</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<span class="c1">#len(first_names)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">first_names</span><span class="p">)):</span>
+    <span class="n">revised_notebook</span><span class="p">[</span><span class="s2">&quot;Friend &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;First name&quot;</span> <span class="p">:</span> <span class="n">first_names</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s2">&quot;Last name&quot;</span> <span class="p">:</span> <span class="n">last_names</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s2">&quot;Age&quot;</span> <span class="p">:</span> <span class="n">ages</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s2">&quot;Phone number&quot;</span> <span class="p">:</span> <span class="n">phone_numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">revised_notebook</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">revised_notebook</span><span class="p">[</span><span class="s2">&quot;Friend 1&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Friend 1&#39;: {&#39;First name&#39;: &#39;Alina&#39;, &#39;Last name&#39;: &#39;Schultz&#39;, &#39;Age&#39;: 28, &#39;Phone number&#39;: &#39;0176123456&#39;}, &#39;Friend 2&#39;: {&#39;First name&#39;: &#39;Tracy&#39;, &#39;Last name&#39;: &#39;Sanchez&#39;, &#39;Age&#39;: 41, &#39;Phone number&#39;: &#39;0176123456&#39;}, &#39;Friend 3&#39;: {&#39;First name&#39;: &#39;Sophia&#39;, &#39;Last name&#39;: &#39;Loren&#39;, &#39;Age&#39;: 38, &#39;Phone number&#39;: &#39;0176123456&#39;}, &#39;Friend 4&#39;: {&#39;First name&#39;: &#39;&quot;Tom&quot;&#39;, &#39;Last name&#39;: &#39;&quot;Thomas&quot;&#39;, &#39;Age&#39;: &#39;40&#39;, &#39;Phone number&#39;: &#39;000&#39;}, &#39;Friend 5&#39;: {&#39;First name&#39;: &#39;Sandy&#39;, &#39;Last name&#39;: &#39;Holmes&#39;, &#39;Age&#39;: &#39;21&#39;, &#39;Phone number&#39;: &#39;111&#39;}, &#39;Friend 6&#39;: {&#39;First name&#39;: &#39;11&#39;, &#39;Last name&#39;: &#39;11&#39;, &#39;Age&#39;: &#39;11&#39;, &#39;Phone number&#39;: &#39;11&#39;}, &#39;Friend 7&#39;: {&#39;First name&#39;: &#39;Fayakh&#39;, &#39;Last name&#39;: &#39;Abdul&#39;, &#39;Age&#39;: &#39;29&#39;, &#39;Phone number&#39;: &#39;01701111111&#39;}}
+
+ {&#39;First name&#39;: &#39;Alina&#39;, &#39;Last name&#39;: &#39;Schultz&#39;, &#39;Age&#39;: 28, &#39;Phone number&#39;: &#39;0176123456&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Similarly, lists can be nested into arbitrarily complex hierarchical list structures. <strong>It is very common to represent matrices as nested lists</strong>, for instance:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#initializing a matrix with m rows and n columns:</span>
+<span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]]</span>
+
+<span class="c1">#modifying the values in row 1 and 2, columns 3 and 4 respectively:</span>
+<span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">;</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+
+<span class="c1">#summing up the rows</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The sum of the rows is:&quot;</span><span class="p">,</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">sum</span> <span class="p">,</span> <span class="n">matrix</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1, 2, 0.3, 4], [5, 6, 7, 0.1]]
+The sum of the rows is: [7.3, 18.1]
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -836,6 +1273,13 @@ a platypus is a mammal, a pidgeon is a bird
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="session03.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Functions and conditional execution</p>
+        </div>
+    </a>
 </div>
             </footer>
         </div>
