@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Modules, input/output &#8212; Scientific programming in Python</title>
+    <title>Modules, file I/O (input/output) &#8212; Scientific programming in Python</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -120,6 +120,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="session03.html">
    Functions and conditional execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session04.html">
+   Advanced data types: lists, tuples, sets, dictionaries
   </a>
  </li>
 </ul>
@@ -324,23 +329,128 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modules">
+   Modules
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-modules">
+     Import modules
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-your-homework-as-module">
+     Example: Your homework as module
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#file-i-o">
+   File I/O
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reading-and-writing-to-text-files">
+     Reading and writing to text files
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#file-formats">
+     File formats
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#file-encodings">
+     FIle encodings
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Modules, input/output</h1>
+                <h1>Modules, file I/O (input/output)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modules">
+   Modules
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-modules">
+     Import modules
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-your-homework-as-module">
+     Example: Your homework as module
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#file-i-o">
+   File I/O
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reading-and-writing-to-text-files">
+     Reading and writing to text files
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#file-formats">
+     File formats
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#file-encodings">
+     FIle encodings
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -348,8 +458,67 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="modules-input-output">
-<h1>Modules, input/output<a class="headerlink" href="#modules-input-output" title="Permalink to this headline">#</a></h1>
+  <section id="modules-file-i-o-input-output">
+<h1>Modules, file I/O (input/output)<a class="headerlink" href="#modules-file-i-o-input-output" title="Permalink to this headline">#</a></h1>
+<p><strong>So far, all of our Python programs were self-contained</strong>, that is, they did not rely on external data files or pieces of code (except for in-built Python functions and methods). In most real-life situations, however, you will work off of existing files (e.g., for data analysis) or from pre-existing code (e.g., when adding new functionalities to an app or program). In this session, you will learn how to <strong>import and use</strong> external Python code as <strong>modules</strong> and how to <strong>create, read from, and write to files</strong>.</p>
+<section id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">#</a></h2>
+<p><strong>Modules are python files intended for use in other Python programs</strong>. Any <em>.py</em> file can be loaded as a module. As such, modules allow us <strong>(a)</strong> to <strong>distribute code across multiple files</strong> (which is convenient for bigger coding projects), and <strong>(b)</strong> to make use of <strong>collections of useful functions</strong> provided by other programmers. Many modules come with Python as part of the default installation. One such example is the <em>Itertools</em> module we saw in the previous session. Others include the <em>math</em> module and the <em>random</em> module, which contain helpful functions for mathematical operations and for probabilistic data.</p>
+<p>Modules are <strong>loaded with an <em>import</em> statement</strong> (more below). Upon importing them, <strong>all statements in the imported module are executed</strong>.</p>
+<p>In the following, we will focus on the <em>math</em> module:</p>
+<section id="import-modules">
+<h3>Import modules<a class="headerlink" href="#import-modules" title="Permalink to this headline">#</a></h3>
+<p>Modules can be imported in three ways:</p>
+<ul class="simple">
+<li><p><em>import math</em>: makes all objects available as math.object</p></li>
+<li><p><em>from math import func</em>: makes math.func available as func</p></li>
+<li><p><em>from example import long_function_name as func</em>: makes math.function_name_in_module available as func_name_in_my_code</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span> <span class="k">as</span> <span class="n">fc</span> <span class="c1">#imports the function factorial(x) from the math module, assigns it the name fc</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">fc</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span> <span class="c1">#prints 4!</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24
+</pre></div>
+</div>
+</div>
+</div>
+<p>The names and functionalities of available modules can be looked up in Python’s documentation: <a class="reference external" href="https://docs.python.org/3/py-modindex.html">https://docs.python.org/3/py-modindex.html</a></p>
+</section>
+<section id="example-your-homework-as-module">
+<h3>Example: Your homework as module<a class="headerlink" href="#example-your-homework-as-module" title="Permalink to this headline">#</a></h3>
+<p>Our testing skripts import your homework as module. Your code gets loaded by <em>import ex_01</em>, which causes your function definitions to be assigned to the function names, and the unit tests will be executed on your definitions.</p>
+<p>The most basic element of our test code is the <em>assert</em> statement. Each such statement represents a basic fact which should hold if the program. For instance, <em>assertEquals(value, expression)</em> checks whether an expression correctly evaluates to a given value.</p>
+<p>The code below also uses an object constructor (a <em>class</em>) and the <em>self</em> attribute. You’ll learn more about those in later sessions.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import unittest  
+from ex_01 import *
+
+class TestTask1(unittest.TestCase):
+
+    def test_br_to_am_1(self):
+        self.assertEqual(&quot;color&quot;, br_to_am(&quot;colour&quot;)) #checks whether the expression br_to_am(&quot;colour&quot;) 
+        self.assertEqual(&quot;honor&quot;, br_to_am(&quot;honour&quot;)) #evaluates to &quot;color&quot;. If so, you get points!
+</pre></div>
+</div>
+</section>
+</section>
+<section id="file-i-o">
+<h2>File I/O<a class="headerlink" href="#file-i-o" title="Permalink to this headline">#</a></h2>
+<section id="reading-and-writing-to-text-files">
+<h3>Reading and writing to text files<a class="headerlink" href="#reading-and-writing-to-text-files" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="file-formats">
+<h3>File formats<a class="headerlink" href="#file-formats" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="file-encodings">
+<h3>FIle encodings<a class="headerlink" href="#file-encodings" title="Permalink to this headline">#</a></h3>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
