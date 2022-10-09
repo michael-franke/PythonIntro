@@ -52,6 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Advanced data types: lists, tuples, sets, dictionaries" href="session04.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -102,11 +103,11 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    “Scientific Programming in Python”
+                    Scientific Programming in Python
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="session01.html">
    Introduction
@@ -125,6 +126,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="session04.html">
    Advanced data types: lists, tuples, sets, dictionaries
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Modules, file I/O (input/output)
   </a>
  </li>
 </ul>
@@ -377,15 +383,61 @@ title="Print to PDF"
     <a class="reference internal nav-link" href="#reading-and-writing-to-text-files">
      Reading and writing to text files
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#basic-elements-of-file-input">
+       Basic elements of file input:
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#basic-elements-of-file-output">
+       Basic elements of file output:
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#file-encodings">
+     FIle encodings
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#more-on-different-encodings">
+       More on different encodings
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#reading-and-writing-to-different-encodings">
+       Reading and writing to different encodings
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#file-formats">
      File formats
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#csv-and-tsv">
+       CSV and TSV
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#extensible-markup-language-xml">
+       Extensible Markup Language (XML)
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#file-encodings">
-     FIle encodings
+    <a class="reference internal nav-link" href="#javascript-object-notation-json">
+     JavaScript Object Notation (JSON):
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#wrapping-up-lose-ends-exception-handling">
+     Wrapping up lose ends: exception handling
     </a>
    </li>
   </ul>
@@ -435,15 +487,61 @@ title="Print to PDF"
     <a class="reference internal nav-link" href="#reading-and-writing-to-text-files">
      Reading and writing to text files
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#basic-elements-of-file-input">
+       Basic elements of file input:
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#basic-elements-of-file-output">
+       Basic elements of file output:
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#file-encodings">
+     FIle encodings
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#more-on-different-encodings">
+       More on different encodings
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#reading-and-writing-to-different-encodings">
+       Reading and writing to different encodings
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#file-formats">
      File formats
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#csv-and-tsv">
+       CSV and TSV
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#extensible-markup-language-xml">
+       Extensible Markup Language (XML)
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#file-encodings">
-     FIle encodings
+    <a class="reference internal nav-link" href="#javascript-object-notation-json">
+     JavaScript Object Notation (JSON):
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#wrapping-up-lose-ends-exception-handling">
+     Wrapping up lose ends: exception handling
     </a>
    </li>
   </ul>
@@ -463,16 +561,16 @@ title="Print to PDF"
 <p><strong>So far, all of our Python programs were self-contained</strong>, that is, they did not rely on external data files or pieces of code (except for in-built Python functions and methods). In most real-life situations, however, you will work off of existing files (e.g., for data analysis) or from pre-existing code (e.g., when adding new functionalities to an app or program). In this session, you will learn how to <strong>import and use</strong> external Python code as <strong>modules</strong> and how to <strong>create, read from, and write to files</strong>.</p>
 <section id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">#</a></h2>
-<p><strong>Modules are python files intended for use in other Python programs</strong>. Any <em>.py</em> file can be loaded as a module. As such, modules allow us <strong>(a)</strong> to <strong>distribute code across multiple files</strong> (which is convenient for bigger coding projects), and <strong>(b)</strong> to make use of <strong>collections of useful functions</strong> provided by other programmers. Many modules come with Python as part of the default installation. One such example is the <em>Itertools</em> module we saw in the previous session. Others include the <em>math</em> module and the <em>random</em> module, which contain helpful functions for mathematical operations and for probabilistic data.</p>
+<p><strong>Modules are Python files intended for use in other Python programs</strong>. Any <em>.py</em> file can be loaded as a module. As such, modules allow us <strong>(a)</strong> to <strong>distribute code across multiple files</strong> (which is convenient for bigger coding projects) and <strong>(b)</strong> to make use of <strong>collections of useful functions</strong> provided by other programmers. Many modules come with Python as part of the default installation. One such example is the <em>Itertools</em> module we saw in the previous session. Others include the <em>math</em> module and the <em>random</em> module, which contain helpful functions for mathematical operations and for dealing with distributional data.</p>
 <p>Modules are <strong>loaded with an <em>import</em> statement</strong> (more below). Upon importing them, <strong>all statements in the imported module are executed</strong>.</p>
 <p>In the following, we will focus on the <em>math</em> module:</p>
 <section id="import-modules">
 <h3>Import modules<a class="headerlink" href="#import-modules" title="Permalink to this headline">#</a></h3>
 <p>Modules can be imported in three ways:</p>
 <ul class="simple">
-<li><p><em>import math</em>: makes all objects available as math.object</p></li>
-<li><p><em>from math import func</em>: makes math.func available as func</p></li>
-<li><p><em>from example import long_function_name as func</em>: makes math.function_name_in_module available as func_name_in_my_code</p></li>
+<li><p><em>import math</em>: makes all objects available as <em>math.object</em></p></li>
+<li><p><em>from math import func</em>: makes <em>math.func</em> available as <em>func</em></p></li>
+<li><p><em>from example import long_function_name as func</em>: makes <em>math.function_name_in_module</em> available as <em>func_name_in_my_code</em></p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -492,8 +590,8 @@ title="Print to PDF"
 </section>
 <section id="example-your-homework-as-module">
 <h3>Example: Your homework as module<a class="headerlink" href="#example-your-homework-as-module" title="Permalink to this headline">#</a></h3>
-<p>Our testing skripts import your homework as module. Your code gets loaded by <em>import ex_01</em>, which causes your function definitions to be assigned to the function names, and the unit tests will be executed on your definitions.</p>
-<p>The most basic element of our test code is the <em>assert</em> statement. Each such statement represents a basic fact which should hold if the program. For instance, <em>assertEquals(value, expression)</em> checks whether an expression correctly evaluates to a given value.</p>
+<p>Our testing skripts import your homework as module. Your code gets loaded by <em>from ex_01 import *</em>, which causes your function definitions to be assigned to the function names, and the unit tests will be executed on your definitions.</p>
+<p>The most basic element of our test code is the <em>assert</em> statement. Each such statement represents a basic fact which should hold of the program. For instance, <em>assertEquals(value, expression)</em> checks whether an expression correctly evaluates to a given value.</p>
 <p>The code below also uses an object constructor (a <em>class</em>) and the <em>self</em> attribute. You’ll learn more about those in later sessions.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import unittest  
 from ex_01 import *
@@ -509,14 +607,319 @@ class TestTask1(unittest.TestCase):
 </section>
 <section id="file-i-o">
 <h2>File I/O<a class="headerlink" href="#file-i-o" title="Permalink to this headline">#</a></h2>
+<p>Now that you know how to use <strong>modules</strong>, we’d also like to know how to use <strong>files</strong>. Creating data by assigning values to variables worked fine so far, but more commonly data already exists and we want to work with it. Python allows you to <strong>read in data</strong> from external files such that you can <strong>extract, analyse or modify</strong> its contents and <strong>save the results</strong> to (another) file.</p>
+<p>Files have two key properties: a filename (including name + file type, e.g. <em>example.txt</em>) and a path, which specifies its location on the computer (e.g. *C:\Users\jschwab\Documents\Teaching\Methods I*)</p>
 <section id="reading-and-writing-to-text-files">
 <h3>Reading and writing to text files<a class="headerlink" href="#reading-and-writing-to-text-files" title="Permalink to this headline">#</a></h3>
+<p>Plaintext files (<em>.txt</em>) contain only basic text characters and do not include font, size, or color information. They consist of lines of text with a newline symbol at the end of each line (in Python strings, a newline is represented by “\n”). Text files are one of the most elementary file types that we will deal with. Python can easily read their contents, treating their contents as string values.</p>
+<section id="basic-elements-of-file-input">
+<h4>Basic elements of file input:<a class="headerlink" href="#basic-elements-of-file-input" title="Permalink to this headline">#</a></h4>
+<ul class="simple">
+<li><p>The function <em>open()</em> creates and returns a file handle</p>
+<ul>
+<li><p>obligatory argument: a file name (or a complete path)</p></li>
+<li><p>optional: a string representing the <strong>mode</strong> in which the file is opened</p></li>
+<li><p>optional: a string representing the <strong>encoding</strong> of the file (see below)</p></li>
+</ul>
+</li>
+<li><p>The default mode if no other is specified: <strong>“r” (“reading”</strong> – opens a file for reading only).<br />
+Other options:<br />
+<strong>“w” (“writing”</strong> – opens a file for writing only. If the file does not exist, creates a new file for writing.),<br />
+<strong>“a” (“appending”</strong> – opens a file for appending. New content is appended to the end of the file. If the file does not exist, creates a new file for writing.)<br />
+<strong>“x” (“creating”</strong> – creates a file and opens it. Fails if a file by that name already exists.)</p></li>
+<li><p>Additional specifiers to the mode: <strong>“+”</strong> (<em>r+ = read and write, w+ = write and read, a+ = append and read</em>), <strong>“b”</strong> (<em>rb/wb/ab = read/write/append in binary format</em>)</p></li>
+</ul>
+<p><strong>A file handle in reading mode has a few core functionalities:</strong></p>
+<ul class="simple">
+<li><p><em>file.read()</em> returns the whole document in a single string</p></li>
+<li><p><em>file.readline()</em> returns the next unprocessed line of the file</p></li>
+<li><p><em>file.readlines()</em> returns a list of strings, containing each line of the file as a string in the original order</p></li>
+<li><p><em>file.close()</em> cancels or finishes the processing of the file, ensuring that the file is closed correctly</p></li>
+</ul>
+<p>Let’s presume we have a text file (<em>guide.txt</em>) that contains the following content:</p>
+<blockquote>
+<div><p>DOUGLAS ADAMS: The Hitchhiker’s Guide to the Galaxy<br />
+Preface</p>
+<p>Far out in the uncharted backwaters of the unfashionable end of
+the western spiral arm of the Galaxy lies a small unregarded yellow
+sun.</p>
+<p>Orbiting this at a distance of roughly ninety-two million miles is an
+utterly insignificant little blue green planet whose ape-descended life
+forms are so amazingly primitive that they still think digital watches
+are a pretty neat idea.</p>
+<p>This planet has - or rather had - a problem, which was this: most
+of the people on it were unhappy for pretty much of the time. Many
+solutions were suggested for this problem, but most of these were
+largely concerned with the movements of small green pieces of paper,
+which is odd because on the whole it wasn’t the small green pieces of
+paper that were unhappy.</p>
+</div></blockquote>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fr = open(&quot;guide.txt&quot;, &quot;r&quot;)
+title = fr.readline () #assigns the contents of the first line to a variable called title
+chapter = fr.readline() #assigns the contents of the next line to a variable called chapter
+contents = fr.read() #stores the full file contents in a variable calles contents
+fr.close () #closes the file
+</pre></div>
+</div>
 </section>
-<section id="file-formats">
-<h3>File formats<a class="headerlink" href="#file-formats" title="Permalink to this headline">#</a></h3>
+<section id="basic-elements-of-file-output">
+<h4>Basic elements of file output:<a class="headerlink" href="#basic-elements-of-file-output" title="Permalink to this headline">#</a></h4>
+<ul class="simple">
+<li><p>To create or overwrite a file and write new contents into it, use <em>open(file_name,”w”)</em>.</p></li>
+<li><p><em>file.write()</em> writes a string to the file, and returns the number of characters written</p></li>
+<li><p><em>file.writelines()</em> takes a list of strings, and writes each of them into a new line of the file</p></li>
+<li><p><em>file.flush()</em> forces the buffer to be flushed</p>
+<ul>
+<li><p>file contents are not changed immediately. The operating system buffers changes in order to make file operations more efficient</p></li>
+<li><p>to force that the buffer is cleared, use <em>flush()</em>. The buffer is also cleared upon using <em>close()</em> or when closing a Python session.</p></li>
+<li><p>this can be useful if you want to ensure that file contents are securely saved in case the program might crash</p></li>
+</ul>
+</li>
+<li><p><em>file.close()</em> finishes the creation of the file, and ensures that the file is closed correctly</p></li>
+</ul>
+<p>Note that the <em>write</em> (<strong>“w”</strong>) and <em>append</em> (<strong>“a”</strong>) modes functions very similarly, except that the latter allows you to add new contents to the end of an existing file, whereas the former will overwrite all previous file contents.</p>
+<p>Let’s presume we want to write a new file called <em>“example.txt”</em>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fp = open(&quot;example.txt&quot;, &quot;w&quot;)
+while True:
+    text = input(&quot;Enter a line to write to the file , or press ENTER to quit!&quot;)
+    if text == &quot;&quot;:
+         break
+    fp.write(text)
+fp.close ()
+</pre></div>
+</div>
+</section>
 </section>
 <section id="file-encodings">
 <h3>FIle encodings<a class="headerlink" href="#file-encodings" title="Permalink to this headline">#</a></h3>
+<p>As mentioned above, you can read and write files in various encodings. Technically, an encoding specifies the <strong>mapping between characters and the bit sequences that they are encoded as</strong>. Every text files encodes characters according to some encoding, the most relevant ones (for now) being <strong>ASCII</strong> (7-bit, English alphabet only), <strong>ISO 8859</strong> (8-bit, variable encodings depending on region/language, Latin alphabetial writing systems only), and <strong>UTF-8</strong> unicode (variable length of 1-4 bytes (fyi, 1 byte = 1 8-bit sequence), all writing systems). The default encoding in Python is <strong>UTF-8</strong>.</p>
+<p><strong>Examples:</strong></p>
+<p>There’s no difference in the encoding of characters compatible with the English alphabet:</p>
+<ul class="simple">
+<li><p>UTF-8 binary encoding of “A” = 01000001</p></li>
+<li><p>ASCII binary encoding of “A” = 01000001</p></li>
+<li><p>ISO 8859-1 binary encoding of “A” = 01000001</p></li>
+</ul>
+<p>But it matters for other languages (most obviously all languages with writing systems that do not use the Latin alphabet). Even for languages using the Latin alphabet, subtle differences mean that some encodings cannot capture their full character set. The following German sentence can only be encoded in UTF-8: <em>Frank sagt: „Es könnte dieses Jahr weiße Weihnachten geben.“</em> (Frank says: “We might get a white Christmas this year”). The probl</p>
+<ul class="simple">
+<li><p>ASCII: No umlauts (<em>ä,ö,ü</em>), no <em>ß</em>, no German quotation marks (<em>„…“</em>)</p></li>
+<li><p>ISO 8859-1: No German quotation marks (<em>„…“</em>)</p></li>
+</ul>
+<section id="more-on-different-encodings">
+<h4>More on different encodings<a class="headerlink" href="#more-on-different-encodings" title="Permalink to this headline">#</a></h4>
+<p><strong>ASCII</strong> (American Standard Code for Information Interchange)</p>
+<ul class="simple">
+<li><p>first introduced in the <strong>1960s</strong></p></li>
+<li><p>wide range of control characters</p></li>
+<li><p>limited to lower- and uppercase English alphabet</p></li>
+<li><p>7-bit encoding with a leading 0 = 128 characters, all encoded in a single byte (0 0000 000 to 0 1111 111)</p></li>
+<li><p>limited for non-US usage: no umlauts, accents or other diacritics, no currency symbols other than dollar</p></li>
+<li><p>modifications were introduced in various countries, replacing ASCII characters with those of higher local significance, e.g., <em>ISCII</em> (Indian scripts), <em>VSCII</em> (Vietnamese)</p></li>
+</ul>
+<p><strong>ISO 8859</strong></p>
+<ul class="simple">
+<li><p>introduced by ISO (International Organization for Standardization) in <strong>1987</strong> to extend ASCII</p></li>
+<li><p>same encoding as ASCII for all ASCII characters</p></li>
+<li><p>upper range of 128 additional characters for localized symbols</p></li>
+<li><p>different ISO 8859 standards for different regions (e.g. <em>ISO 8859-1</em> for Western Europeean languages, <em>ISO 8859-6</em> for Arabic, and so on…)</p></li>
+</ul>
+<p><strong>Unicode</strong> (using Unicode Transformation Format (UTF) for binary encoding)</p>
+<ul class="simple">
+<li><p>first released in <strong>1991</strong> as attempt to provide a <strong>universal encoding for all languages</strong>, contemporary and historic, including relevant non-linguistic symbols (currencies, …)</p></li>
+<li><p>virtually universal coverage (139 scripts) with a single standard</p></li>
+<li><p>multi-byte encoding with enough room for all current and many future symbols (1 114 111, of which 136 690 are currently used)</p></li>
+<li><p>unicode can be encoded as <strong>UTF-8, UTF-16, or UTF-32</strong>, where each character will be represented as a sequence of one to four 8-bit bytes, one or two 16-bit code units, or a single 32-bit code unit, respectively.</p></li>
+<li><p>UTF-8 is most common on the web. UTF-16 is used by Java and Windows. Both UTF-8 and UTF-32 are used by Linux and various Unix systems. <strong>Conversions between all of them are algorithmically based, fast and lossless.</strong></p></li>
+</ul>
+</section>
+<section id="reading-and-writing-to-different-encodings">
+<h4>Reading and writing to different encodings<a class="headerlink" href="#reading-and-writing-to-different-encodings" title="Permalink to this headline">#</a></h4>
+<p>You can specify the file encoding when reading or writing files in Python. Python internally represents strings in UTF-8, so non-unicode encodings will be converted by Python:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ascii_file = open(file_name , encoding=&quot;ascii&quot;, &quot;r&quot;) #reads file in ASCII format
+latin1_file = open(file_name , encoding=&quot;latin-1&quot;, &quot;w&quot;) #writes file in ISO 8859-1 format
+</pre></div>
+</div>
+</section>
+</section>
+<section id="file-formats">
+<h3>File formats<a class="headerlink" href="#file-formats" title="Permalink to this headline">#</a></h3>
+<p>Above, we dealt with text files organised as sequences in the form of lines of text (<em>.txt</em> files). However, text-based data can be formatted in various ways for information exchange:</p>
+<ul class="simple">
+<li><p>Tab-Separated Values (TSV) or Comma-Separated Values (CSV) for tabular data (i.e. for datapoints consisting of values for predefined fields – think of <em>Excel</em> spreadsheets, but without colour, size , or font information)</p></li>
+<li><p>Extensible Markup Language (XML) for hierarchically structured data where format checking is necessary</p></li>
+<li><p>JavaScript Object Notation (JSON) for uncomplicated data exchange between programs</p></li>
+<li><p>various binary formats (database files, matrices)</p></li>
+</ul>
+<section id="csv-and-tsv">
+<h4>CSV and TSV<a class="headerlink" href="#csv-and-tsv" title="Permalink to this headline">#</a></h4>
+<ul class="simple">
+<li><p>standard table format</p></li>
+<li><p>first line (“header”): field names</p></li>
+<li><p>one entry per line</p></li>
+<li><p>field values are separated by one designated delimiter, common choices:</p>
+<ul>
+<li><p>the tab character (TSV format, ending .tsv)</p></li>
+<li><p>the comma (CSV format, ending .csv)</p></li>
+</ul>
+</li>
+<li><p>if the delimiter occurs inside a field value, the value needs to be surrounded by double quotes; tools automatically handle this</p></li>
+<li><p>parsing can be done via <em>split()</em>, but more safely via the <em>csv</em> module</p></li>
+</ul>
+<p><strong>Example table:</strong></p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Age</p></th>
+<th class="head"><p>Gender</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Saurabh</p></td>
+<td><p>25</p></td>
+<td><p>male</p></td>
+</tr>
+<tr class="row-odd"><td><p>Taylor</p></td>
+<td><p>41</p></td>
+<td><p>non-binary</p></td>
+</tr>
+<tr class="row-even"><td><p>Stephanie</p></td>
+<td><p>30</p></td>
+<td><p>female</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>in CSV file format:</strong></p>
+<center>
+Name,Age,Gender<br>  
+Saurabh,25,male  <br>
+Taylor,41,non-binary <br> 
+Stephanie,30,female 
+    </center>
+<p><strong>Example usage of csv module:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import csv
+csvfile = open(&#39;eggs.csv&#39;, newline=&#39;&#39;)
+spamreader = csv.reader(csvfile, delimiter=&#39;,&#39;, quotechar=&#39;&quot;&#39;)
+</pre></div>
+</div>
+</section>
+<section id="extensible-markup-language-xml">
+<h4>Extensible Markup Language (XML)<a class="headerlink" href="#extensible-markup-language-xml" title="Permalink to this headline">#</a></h4>
+<ul class="simple">
+<li><p>data is structured by user-defined tags like &lt;country&gt;</p></li>
+<li><p>textual data is stored in elements: &lt;tag&gt;text&lt;/tag&gt;</p></li>
+<li><p>elements can have attributes: &lt;country id=”AF”&gt;</p></li>
+<li><p>elements can contain other elements (nested structure)</p></li>
+<li><p>XML processing is very complex, do not try this on your own! Use <em>xml.dom</em> and <em>xml.sax</em> modules for representing and processing XML documents</p></li>
+</ul>
+<p><strong>Example of XML document:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>\&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
+\&lt;countryDatabase&gt;
+    \&lt;country id=&quot;AF&quot;&gt;
+        \&lt;name&gt;Afghanistan&lt;/name&gt;
+        \&lt;province id=&quot;BDS&quot;&gt;
+            \&lt;name&gt;Badakhshan&lt;/name&gt;
+            \&lt;capital&gt;Fayzabad&lt;/capital&gt;
+        \&lt;/province&gt;
+        \&lt;province id=&quot;BDG&quot;&gt;
+            \&lt;name&gt;Badghis&lt;/name&gt;
+            \&lt;capital&gt;Qala i Naw&lt;/capital&gt;
+        \&lt;/province&gt;
+        ...
+    \&lt;/country&gt;
+...
+\&lt;/countryDatabase&gt;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="javascript-object-notation-json">
+<h3>JavaScript Object Notation (JSON):<a class="headerlink" href="#javascript-object-notation-json" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>structured data represented using arrays and key-value pairs</p></li>
+<li><p>syntax is virtually identical to Python literals!</p></li>
+<li><p>When processing JSON files, some subtle differences between Python and JSON notation mean that not every Python literal can directly be interpreted as JSON, and vice versa (e.g. tuples dont’ exist in JSON, lists and tupley both correspond to arrays)</p></li>
+<li><p><em>json</em> module can dump any nested data structure to a JSON file, and load any JSON structure from a file</p></li>
+</ul>
+<p><strong>Example of a JSON document:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[{&quot;ID&quot;: &quot;AF&quot;,  
+  &quot;Name&quot;: &quot;Afghanistan&quot;,
+  &quot;Provinces&quot;:
+   [{&quot;ID&quot;: &quot;BDS&quot;, &quot;Name&quot;: &quot;Badakshan&quot;, &quot;Capital&quot;: &quot;Fayzabad&quot;}, 
+   {&quot;ID&quot;: &quot;BDG&quot;, &quot;Name&quot;: &quot;Badghis&quot;, &quot;Capital&quot;: &quot;Qala i Naw&quot;},...
+   ]
+ },
+ {&quot;ID&quot;: &quot;AL&quot;,
+   &quot;Name&quot;: &quot;Albania&quot;,
+    ...
+ },
+...
+]
+</pre></div>
+</div>
+<p><strong>Example usage of <em>json</em> module:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import json
+
+jsonfile = open(&#39;filename.json&#39;)
+data = json.load(jsonfile) #read JSON file
+ 
+dictionary = {
+    &quot;ID&quot;: &quot;AF&quot;,
+    &quot;Name&quot;: &quot;Afghanistan&quot;,
+    &quot;Provinces&quot;: [{&quot;ID&quot;: &quot;BDS&quot;, &quot;Name&quot;: &quot;Badakshan&quot;, &quot;Capital&quot;: &quot;Fayzabad&quot;}, 
+                 {&quot;ID&quot;: &quot;BDG&quot;, &quot;Name&quot;: &quot;Badghis&quot;, &quot;Capital&quot;: &quot;Qala i Naw&quot;},...
+                 ]
+    }
+
+outfile = open(&quot;countries.json&quot;, &quot;w&quot;)
+json.dump(dictionary, outfile) #save dictionary to countries.json
+</pre></div>
+</div>
+</section>
+<section id="wrapping-up-lose-ends-exception-handling">
+<h3>Wrapping up lose ends: exception handling<a class="headerlink" href="#wrapping-up-lose-ends-exception-handling" title="Permalink to this headline">#</a></h3>
+<p>Python will throw errors and end code execution if you try to read or write to files that:</p>
+<ul class="simple">
+<li><p>do not exist (FileNotFoundError)</p></li>
+<li><p>you do not have the correct permissions for (PermissionError)</p></li>
+<li><p>the storage device does not have enough space for (IOError)</p></li>
+</ul>
+<p>A more elegant solution for <strong>handling exceptions</strong> is to <strong>pre-define how potential errors should be handled at runtime</strong>:</p>
+<ul class="simple">
+<li><p>The <em>try</em> construct comprises a <strong>try</strong> block, an <strong>except</strong> block, and a <strong>finally</strong> block, which specify the statements that could raise exceptions, what should happen if exceptions occur, and what statements should be executed in any case, regardless of whether the try block was successfully executed or not.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;test.txt&quot;</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR: file not found!&quot;</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>The <strong><em>with</em> construct opens files and performs common cleanup tasks</strong>, such as closing the file, regardless of whether exceptions are raised within the code block</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># without with</span>
+<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;hello world&#39;</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># using with</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;text.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;hello world !&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that there is <strong>no need to call <em>file.close()</em></strong>. The <em>with</em> statement itself ensures proper acquisition and release of resources, regardless of whether the <em>file.write</em> method throws exceptions.</p>
 </section>
 </section>
 </section>
@@ -548,6 +951,13 @@ class TestTask1(unittest.TestCase):
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="session04.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Advanced data types: lists, tuples, sets, dictionaries</p>
+        </div>
+    </a>
 </div>
             </footer>
         </div>
