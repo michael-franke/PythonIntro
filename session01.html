@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Data types and statements" href="session02.html" />
-    <link rel="prev" title="“Scientific Programming in Python”" href="intro.html" />
+    <link rel="prev" title="Scientific Programming in Python" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -104,7 +104,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    “Scientific Programming in Python”
+                    Scientific Programming in Python
                 </a>
             </li>
         </ul>
@@ -122,6 +122,21 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="session03.html">
    Functions and conditional execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session04.html">
+   Advanced data types: lists, tuples, sets, dictionaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session05.html">
+   Modules, file I/O (input/output)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session06.html">
+   Finishing the basics: more on functions, loops, dictionaries, and files
   </a>
  </li>
 </ul>
@@ -472,13 +487,13 @@ title="Print to PDF"
 <h2>Why programming?<a class="headerlink" href="#why-programming" title="Permalink to this headline">#</a></h2>
 <p>Some of you may be wondering why you should have to learn about <em>computer science</em> if you are studying <em>linguistics</em>. Answers to this question are manifold, but typically fall into two broad categories:</p>
 <ol class="simple">
-<li><p>It’s a necessary, or at least highly useful, practical skill: programming is essential to study implementation + data analysis, corpus data processing + analysis, natural language processing (NLP), computational modeling of language</p></li>
-<li><p>It trains your logical, mathematical thinking about structure and meaning in (natural and formal) languages: programming languages are formal languages with a strictly defined syntax and lexicon, but no pragmatics. They metaphorically allow you to “talk to” the computer. Computers act as naive, logical machines, requiring you to do the same when writing code: syntax errors, spelling mistakes, leaps in logical thinking, and ambiguity in the program will be punshed by errors or otherwise faulty output.</p></li>
+<li><p>It’s a necessary, or at least highly useful, <strong>practical skill</strong>: programming is essential to study implementation + data analysis, corpus data processing + analysis, natural language processing (NLP), computational modeling of language</p></li>
+<li><p>It trains your <strong>logical, mathematical thinking</strong> about structure and meaning in (natural and formal) languages: programming languages are formal languages with a strictly defined syntax and lexicon, but no pragmatics. They metaphorically allow you to “talk to” the computer. Computers act as naive, logical machines, requiring you to do the same when writing code: syntax errors, spelling mistakes, leaps in logical thinking, and ambiguity in the program will be punshed by errors or otherwise faulty output.</p></li>
 </ol>
 </section>
 <section id="higher-and-lower-level-programming-languages">
 <h2>Higher- and lower-level programming languages<a class="headerlink" href="#higher-and-lower-level-programming-languages" title="Permalink to this headline">#</a></h2>
-<p>Computers (more precisely, CPUs) work off binary code (also called machine code), a string of 1’s and 0’s that form machine commands such as “load”, “store”. These are used to operate on units of data in the computer’s register or memory.</p>
+<p>Computers (more precisely, CPUs) work off binary code (also called machine code), a string of 1’s and 0’s that form machine commands such as “load”, “store”, … . These are used to operate on units of data in the computer’s register or memory.</p>
 <p>Binary code is a <strong>low-level programming language</strong>. It works directly on the machine’s hardware components. Since each CPU or family of CPUs has its own specific machine language, binary code is hardware-specific. This is because each processor (or family of processors) has its own set of instructions, telling it to perform simple tasks, encoded as series of bits.</p>
 <p>For example, some CPUs may only use 32-bit instructions, in which the first 6 bits represent the operation to be performed, while the second 26 bits represent the operand (= the data to perform the operation on). That means that each instruction will be a series of 32 1’s and 0’s.</p>
 <p><strong>An example of a type of binary machine code</strong></p>
@@ -497,7 +512,7 @@ title="Print to PDF"
 </tr>
 </tbody>
 </table>
-<p>Low-level programs are fast and memory-efficient, but writing programs directly in binary would be cumbersome. <strong>High-level programming languages</strong> are more user-friendly because they allow us to write instructions in a language that is easier (for us) to understand and because they are hardware-independent. Behind the surface, translators transform programs written in high-level languages into machine code that is readable for the computer. This is done by “compilers” or “interpreters”.</p>
+<p>Low-level programs are fast and memory-efficient, but writing programs directly in binary would be cumbersome. <strong>High-level programming languages</strong> are more user-friendly because they allow us to write instructions in a language that is easier (for us) to understand and because they are hardware-independent. Behind the surface, translators transform programs written in high-level languages into machine code that is readable for the computer. This is done by <strong>“compilers”</strong> or <strong>“interpreters”</strong>.</p>
 <p>For the rest of the course, we will be concerned with high-level programming languages only.</p>
 </section>
 <section id="algorithms">
@@ -505,7 +520,7 @@ title="Print to PDF"
 <section id="definitions">
 <h3>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">#</a></h3>
 <p>In computer science, an algorithm refers to any finitely long instruction, consisting of a sequence of sub-commands. Algorithms are performed deterministically, not at random. Algorithms are usually employed to solve specific problems or perform tasks. In contrasts to heuristics, algorithms are fully specified task instructions.</p>
-<p>Some commonplace situations can be thought of algorithmically:</p>
+<p>Some commonplace tasks can be thought of algorithmically:</p>
 <p><strong>Baking recipes</strong>: Take 200g of flour, add 1 tsp of baking powder, mix. Add 1 egg…</p>
 <p><strong>Navigation</strong>: Go left in 200ms, then go straight ahead for 1km…</p>
 <p>Algorithms start from an <strong>input</strong> state (e.g., the set of raw ingredients in the recipe example, or your start position in the navigation example) and perform a set of operations to produce desired <strong>output</strong> (e.g., a chocolate cake, arriving at your goal position).</p>
@@ -558,7 +573,7 @@ title="Print to PDF"
 </section>
 <section id="python">
 <h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">#</a></h2>
-<p><em>Python</em> is a high-level programming language, just like <em>Java, Javascript, or C++</em>. It is also a <em>dynamically typed</em> programming language, meaning that some of its behaviours are evaluated at runtime, not during compilation (as for <em>statically typed</em> programming languages like <em>Java</em>). Statically typed programming languages require you to fully specify the relevant data types the code is operating on:</p>
+<p><em>Python</em> is a high-level programming language, just like <em>Java, Javascript, or C++</em>. It is also a <em>dynamically typed</em> programming language, meaning that some of its behaviours are evaluated at runtime, not during compilation (contrary to <em>statically typed</em> programming languages like <em>Java</em>). Statically typed programming languages require you to fully specify the relevant data types the code is operating on:</p>
 <p><strong>Example of static typing systems</strong>:</p>
 <p><em>int x = 2</em><br />
 <em>int y = 1</em></p>
@@ -572,48 +587,48 @@ title="Print to PDF"
 <span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;duck&quot;</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mf">0.1</span>
 
-<span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>int
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;int&#39;&gt;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>int
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;int&#39;&gt;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>str
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;str&#39;&gt;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>float
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;float&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -634,12 +649,12 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>int
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;int&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -653,7 +668,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_9320</span>\<span class="mf">4050974931.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_25096</span>\<span class="mf">4050974931.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">b</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">a</span>
 
 <span class="ne">TypeError</span>: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;
@@ -680,12 +695,12 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>float
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;float&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -754,7 +769,7 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">“Scientific Programming in Python”</p>
+            <p class="prev-next-title">Scientific Programming in Python</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="session02.html" title="next page">
