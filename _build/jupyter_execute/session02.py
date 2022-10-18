@@ -7,7 +7,7 @@
 # 
 # ## Data types
 # 
-# When speaking of data types, we are refering to different **classes** that a value can belong to. Values always belong to exactly one data type, that is, an if a value is of the *integer* type, for instance, it cannot simultaneously be of the *float* type. Integer values can be transformed into float values, however, as we will see below. 
+# When speaking of data types, we are refering to different **classes** that a value can belong to. Values always belong to exactly one data type, that is, if a value is of the *integer* type, for instance, it cannot simultaneously be of the *float* type. Integer values can be transformed into float values, however, as we will see below. 
 # 
 # ### Boolean
 # 

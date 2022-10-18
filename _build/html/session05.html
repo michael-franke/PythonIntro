@@ -52,6 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Finishing the basics: more on functions, loops, dictionaries, and files" href="session06.html" />
     <link rel="prev" title="Advanced data types: lists, tuples, sets, dictionaries" href="session04.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -131,6 +132,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Modules, file I/O (input/output)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session06.html">
+   Finishing the basics: more on functions, loops, dictionaries, and files
   </a>
  </li>
 </ul>
@@ -607,11 +613,11 @@ class TestTask1(unittest.TestCase):
 </section>
 <section id="file-i-o">
 <h2>File I/O<a class="headerlink" href="#file-i-o" title="Permalink to this headline">#</a></h2>
-<p>Now that you know how to use <strong>modules</strong>, we’d also like to know how to use <strong>files</strong>. Creating data by assigning values to variables worked fine so far, but more commonly data already exists and we want to work with it. Python allows you to <strong>read in data</strong> from external files such that you can <strong>extract, analyse or modify</strong> its contents and <strong>save the results</strong> to (another) file.</p>
+<p>Now that you know how to use <strong>modules</strong>, we’d also like to know how to use <strong>files</strong>. Creating data by assigning values to variables worked fine so far, but more often than not data already exists and we want to work with it. Python allows you to <strong>read in data</strong> from external files such that you can <strong>extract, analyse or modify</strong> its contents and <strong>save the results</strong> to (another) file.</p>
 <p>Files have two key properties: a filename (including name + file type, e.g. <em>example.txt</em>) and a path, which specifies its location on the computer (e.g. *C:\Users\jschwab\Documents\Teaching\Methods I*)</p>
 <section id="reading-and-writing-to-text-files">
 <h3>Reading and writing to text files<a class="headerlink" href="#reading-and-writing-to-text-files" title="Permalink to this headline">#</a></h3>
-<p>Plaintext files (<em>.txt</em>) contain only basic text characters and do not include font, size, or color information. They consist of lines of text with a newline symbol at the end of each line (in Python strings, a newline is represented by “\n”). Text files are one of the most elementary file types that we will deal with. Python can easily read their contents, treating their contents as string values.</p>
+<p>Plaintext files (<em>.txt</em>) contain only basic text characters and do not include font, size, or color information. They consist of lines of text with a newline symbol at the end of each line (in Python strings, a newline is represented by “\n”). Text files are one of the most elementary file types that we will deal with. Python can easily read them, treating their contents as string values.</p>
 <section id="basic-elements-of-file-input">
 <h4>Basic elements of file input:<a class="headerlink" href="#basic-elements-of-file-input" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
@@ -624,9 +630,9 @@ class TestTask1(unittest.TestCase):
 </li>
 <li><p>The default mode if no other is specified: <strong>“r” (“reading”</strong> – opens a file for reading only).<br />
 Other options:<br />
-<strong>“w” (“writing”</strong> – opens a file for writing only. If the file does not exist, creates a new file for writing.),<br />
-<strong>“a” (“appending”</strong> – opens a file for appending. New content is appended to the end of the file. If the file does not exist, creates a new file for writing.)<br />
-<strong>“x” (“creating”</strong> – creates a file and opens it. Fails if a file by that name already exists.)</p></li>
+<strong>“w” (“writing”</strong> – opens a file for writing only. If the file does not exist, creates a new file for writing).<br />
+<strong>“a” (“appending”</strong> – opens a file for appending. New content is appended to the end of the file. If the file does not exist, creates a new file for writing).<br />
+<strong>“x” (“creating”</strong> – creates a file and opens it. Fails if a file by that name already exists).</p></li>
 <li><p>Additional specifiers to the mode: <strong>“+”</strong> (<em>r+ = read and write, w+ = write and read, a+ = append and read</em>), <strong>“b”</strong> (<em>rb/wb/ab = read/write/append in binary format</em>)</p></li>
 </ul>
 <p><strong>A file handle in reading mode has a few core functionalities:</strong></p>
@@ -657,7 +663,7 @@ paper that were unhappy.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fr = open(&quot;guide.txt&quot;, &quot;r&quot;)
 title = fr.readline () #assigns the contents of the first line to a variable called title
 chapter = fr.readline() #assigns the contents of the next line to a variable called chapter
-contents = fr.read() #stores the full file contents in a variable calles contents
+contents = fr.read() #stores the full file contents in a variable called contents
 fr.close () #closes the file
 </pre></div>
 </div>
@@ -670,9 +676,9 @@ fr.close () #closes the file
 <li><p><em>file.writelines()</em> takes a list of strings, and writes each of them into a new line of the file</p></li>
 <li><p><em>file.flush()</em> forces the buffer to be flushed</p>
 <ul>
-<li><p>file contents are not changed immediately. The operating system buffers changes in order to make file operations more efficient</p></li>
-<li><p>to force that the buffer is cleared, use <em>flush()</em>. The buffer is also cleared upon using <em>close()</em> or when closing a Python session.</p></li>
-<li><p>this can be useful if you want to ensure that file contents are securely saved in case the program might crash</p></li>
+<li><p>Note that file contents are not changed immediately. The operating system buffers changes in order to make file operations more efficient.</p></li>
+<li><p>To force that the buffer is cleared, use <em>flush()</em>. The buffer is also cleared upon using <em>close()</em> or when closing a Python session.</p></li>
+<li><p>This method can be useful if you want to ensure that file contents are securely saved in case the program might crash.</p></li>
 </ul>
 </li>
 <li><p><em>file.close()</em> finishes the creation of the file, and ensures that the file is closed correctly</p></li>
@@ -681,26 +687,27 @@ fr.close () #closes the file
 <p>Let’s presume we want to write a new file called <em>“example.txt”</em>.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fp = open(&quot;example.txt&quot;, &quot;w&quot;)
 while True:
-    text = input(&quot;Enter a line to write to the file , or press ENTER to quit!&quot;)
-    if text == &quot;&quot;:
-         break
-    fp.write(text)
-fp.close ()
+    text = input(&quot;Enter a line to write to the file , or press ENTER to quit!&quot;) #accepts new text input
+    if text == &quot;&quot;: #until the user enters nothing (just presses ENTER)
+         break 
+    fp.write(text) #writes the new input to the file
+fp.close () #closes the file
 </pre></div>
 </div>
 </section>
 </section>
 <section id="file-encodings">
 <h3>FIle encodings<a class="headerlink" href="#file-encodings" title="Permalink to this headline">#</a></h3>
-<p>As mentioned above, you can read and write files in various encodings. Technically, an encoding specifies the <strong>mapping between characters and the bit sequences that they are encoded as</strong>. Every text files encodes characters according to some encoding, the most relevant ones (for now) being <strong>ASCII</strong> (7-bit, English alphabet only), <strong>ISO 8859</strong> (8-bit, variable encodings depending on region/language, Latin alphabetial writing systems only), and <strong>UTF-8</strong> unicode (variable length of 1-4 bytes (fyi, 1 byte = 1 8-bit sequence), all writing systems). The default encoding in Python is <strong>UTF-8</strong>.</p>
+<p>As mentioned above, you can read and write files in various encodings. Technically, an encoding specifies the <strong>mapping between characters and the bit sequences that they are encoded as</strong>. Every text files encodes characters according to some encoding, the most relevant ones (for now) being <strong>ASCII</strong> (7-bit, English alphabet only), <strong>ISO 8859</strong> (8-bit, variable encodings depending on region/language, alphabetical writing systems only), and <strong>UTF-8</strong> unicode (variable length of 1-4 bytes (fyi, 1 byte = 1 8-bit sequence), all writing systems). The default encoding in Python is <strong>UTF-8</strong>.</p>
 <p><strong>Examples:</strong></p>
-<p>There’s no difference in the encoding of characters compatible with the English alphabet:</p>
+<p>There’s <strong>no difference in the encoding</strong> of characters compatible with the <strong>English alphabet</strong>:</p>
 <ul class="simple">
 <li><p>UTF-8 binary encoding of “A” = 01000001</p></li>
 <li><p>ASCII binary encoding of “A” = 01000001</p></li>
 <li><p>ISO 8859-1 binary encoding of “A” = 01000001</p></li>
 </ul>
-<p>But it matters for other languages (most obviously all languages with writing systems that do not use the Latin alphabet). Even for languages using the Latin alphabet, subtle differences mean that some encodings cannot capture their full character set. The following German sentence can only be encoded in UTF-8: <em>Frank sagt: „Es könnte dieses Jahr weiße Weihnachten geben.“</em> (Frank says: “We might get a white Christmas this year”). The probl</p>
+<p>But it <strong>matters for many other languages</strong> (most obviously all languages with writing systems that do not use the Latin alphabet). Even for languages using the Latin alphabet, subtle differences mean that some encodings cannot capture their full character set.<br />
+The following German sentence can only be encoded in UTF-8: <em>Frank sagt: „Es könnte dieses Jahr weiße Weihnachten geben.“</em> (Frank says: “We might get a white Christmas this year”). The problems for other encodings are:</p>
 <ul class="simple">
 <li><p>ASCII: No umlauts (<em>ä,ö,ü</em>), no <em>ß</em>, no German quotation marks (<em>„…“</em>)</p></li>
 <li><p>ISO 8859-1: No German quotation marks (<em>„…“</em>)</p></li>
@@ -745,10 +752,10 @@ latin1_file = open(file_name , encoding=&quot;latin-1&quot;, &quot;w&quot;) #wri
 <h3>File formats<a class="headerlink" href="#file-formats" title="Permalink to this headline">#</a></h3>
 <p>Above, we dealt with text files organised as sequences in the form of lines of text (<em>.txt</em> files). However, text-based data can be formatted in various ways for information exchange:</p>
 <ul class="simple">
-<li><p>Tab-Separated Values (TSV) or Comma-Separated Values (CSV) for tabular data (i.e. for datapoints consisting of values for predefined fields – think of <em>Excel</em> spreadsheets, but without colour, size , or font information)</p></li>
-<li><p>Extensible Markup Language (XML) for hierarchically structured data where format checking is necessary</p></li>
-<li><p>JavaScript Object Notation (JSON) for uncomplicated data exchange between programs</p></li>
-<li><p>various binary formats (database files, matrices)</p></li>
+<li><p>Tab-Separated Values <strong>(TSV)</strong> or Comma-Separated Values <strong>(CSV)</strong> for <strong>tabular data</strong> (i.e. for datapoints consisting of values for predefined fields – think of <em>Excel</em> spreadsheets, but without colour, size , or font information)</p></li>
+<li><p>Extensible Markup Language <strong>(XML)</strong> for <strong>hierarchically structured data</strong> where format checking is necessary (think of dictionaries, for instance)</p></li>
+<li><p>JavaScript Object Notation <strong>(JSON)</strong> for uncomplicated <strong>data exchange between programs</strong></p></li>
+<li><p>various <strong>binary formats</strong> (database files, matrices) for memory-efficient storage and transfer</p></li>
 </ul>
 <section id="csv-and-tsv">
 <h4>CSV and TSV<a class="headerlink" href="#csv-and-tsv" title="Permalink to this headline">#</a></h4>
@@ -836,8 +843,8 @@ spamreader = csv.reader(csvfile, delimiter=&#39;,&#39;, quotechar=&#39;&quot;&#3
 <h3>JavaScript Object Notation (JSON):<a class="headerlink" href="#javascript-object-notation-json" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>structured data represented using arrays and key-value pairs</p></li>
-<li><p>syntax is virtually identical to Python literals!</p></li>
-<li><p>When processing JSON files, some subtle differences between Python and JSON notation mean that not every Python literal can directly be interpreted as JSON, and vice versa (e.g. tuples dont’ exist in JSON, lists and tupley both correspond to arrays)</p></li>
+<li><p>syntax is mostly identical to Python literals!</p></li>
+<li><p>HOwever, when processing JSON files, some subtle differences between Python and JSON notation mean that not every Python literal can directly be interpreted as JSON, and vice versa (e.g. tuples don’t exist in JSON, lists and tuples both correspond to arrays)</p></li>
 <li><p><em>json</em> module can dump any nested data structure to a JSON file, and load any JSON structure from a file</p></li>
 </ul>
 <p><strong>Example of a JSON document:</strong></p>
@@ -877,7 +884,7 @@ json.dump(dictionary, outfile) #save dictionary to countries.json
 </section>
 <section id="wrapping-up-lose-ends-exception-handling">
 <h3>Wrapping up lose ends: exception handling<a class="headerlink" href="#wrapping-up-lose-ends-exception-handling" title="Permalink to this headline">#</a></h3>
-<p>Python will throw errors and end code execution if you try to read or write to files that:</p>
+<p>Python will <strong>throw errors and end code execution</strong> if you try to read or write to files that:</p>
 <ul class="simple">
 <li><p>do not exist (FileNotFoundError)</p></li>
 <li><p>you do not have the correct permissions for (PermissionError)</p></li>
@@ -957,6 +964,13 @@ json.dump(dictionary, outfile) #save dictionary to countries.json
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Advanced data types: lists, tuples, sets, dictionaries</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="session06.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Finishing the basics: more on functions, loops, dictionaries, and files</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

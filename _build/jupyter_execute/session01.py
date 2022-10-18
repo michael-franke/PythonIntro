@@ -8,11 +8,11 @@
 # ## Why programming?
 # Some of you may be wondering why you should have to learn about *computer science* if you are studying *linguistics*. Answers to this question are manifold, but typically fall into two broad categories: 
 # 
-# 1. It's a necessary, or at least highly useful, practical skill: programming is essential to study implementation + data analysis, corpus data processing + analysis, natural language processing (NLP), computational modeling of language   
-# 2. It trains your logical, mathematical thinking about structure and meaning in (natural and formal) languages: programming languages are formal languages with a strictly defined syntax and lexicon, but no pragmatics. They metaphorically allow you to "talk to" the computer. Computers act as naive, logical machines, requiring you to do the same when writing code: syntax errors, spelling mistakes, leaps in logical thinking, and ambiguity in the program will be punshed by errors or otherwise faulty output.
+# 1. It's a necessary, or at least highly useful, **practical skill**: programming is essential to study implementation + data analysis, corpus data processing + analysis, natural language processing (NLP), computational modeling of language   
+# 2. It trains your **logical, mathematical thinking** about structure and meaning in (natural and formal) languages: programming languages are formal languages with a strictly defined syntax and lexicon, but no pragmatics. They metaphorically allow you to "talk to" the computer. Computers act as naive, logical machines, requiring you to do the same when writing code: syntax errors, spelling mistakes, leaps in logical thinking, and ambiguity in the program will be punshed by errors or otherwise faulty output.
 # 
 # ## Higher- and lower-level programming languages
-# Computers (more precisely, CPUs) work off binary code (also called machine code), a string of 1's and 0's that form machine commands such as "load", "store". These are used to operate on units of data in the computer's register or memory.  
+# Computers (more precisely, CPUs) work off binary code (also called machine code), a string of 1's and 0's that form machine commands such as "load", "store", ... . These are used to operate on units of data in the computer's register or memory.  
 # 
 # Binary code is a **low-level programming language**. It works directly on the machine's hardware components. Since each CPU or family of CPUs has its own specific machine language, binary code is hardware-specific. This is because each processor (or family of processors) has its own set of instructions, telling it to perform simple tasks, encoded as series of bits. 
 # 
@@ -25,7 +25,7 @@
 # | jump | (to) address 1024 |
 # | 000010 | 00000 00000 00000 10000 000000 |
 # 
-# Low-level programs are fast and memory-efficient, but writing programs directly in binary would be cumbersome. **High-level programming languages** are more user-friendly because they allow us to write instructions in a language that is easier (for us) to understand and because they are hardware-independent. Behind the surface, translators transform programs written in high-level languages into machine code that is readable for the computer. This is done by "compilers" or "interpreters".  
+# Low-level programs are fast and memory-efficient, but writing programs directly in binary would be cumbersome. **High-level programming languages** are more user-friendly because they allow us to write instructions in a language that is easier (for us) to understand and because they are hardware-independent. Behind the surface, translators transform programs written in high-level languages into machine code that is readable for the computer. This is done by **"compilers"** or **"interpreters"**.  
 # 
 # For the rest of the course, we will be concerned with high-level programming languages only.
 # 
@@ -34,7 +34,7 @@
 # ### Definitions  
 # In computer science, an algorithm refers to any finitely long instruction, consisting of a sequence of sub-commands. Algorithms are performed deterministically, not at random. Algorithms are usually employed to solve specific problems or perform tasks. In contrasts to heuristics, algorithms are fully specified task instructions.  
 # 
-# Some commonplace situations can be thought of algorithmically:  
+# Some commonplace tasks can be thought of algorithmically:  
 # 
 # **Baking recipes**: Take 200g of flour, add 1 tsp of baking powder, mix. Add 1 egg...
 # 
@@ -71,7 +71,7 @@ get_ipython().run_cell_magic('capture', '', '"""\nDEFINE a function that takes a
 
 
 # ## Python
-# *Python* is a high-level programming language, just like *Java, Javascript, or C++*. It is also a *dynamically typed* programming language, meaning that some of its behaviours are evaluated at runtime, not during compilation (as for *statically typed* programming languages like *Java*). Statically typed programming languages require you to fully specify the relevant data types the code is operating on:  
+# *Python* is a high-level programming language, just like *Java, Javascript, or C++*. It is also a *dynamically typed* programming language, meaning that some of its behaviours are evaluated at runtime, not during compilation (contrary to *statically typed* programming languages like *Java*). Statically typed programming languages require you to fully specify the relevant data types the code is operating on:  
 # 
 # **Example of static typing systems**:  
 # 
@@ -93,25 +93,25 @@ y = 1
 a = "duck"
 b = 0.1
 
-type(x)
+print(type(x))
 
 
 # In[4]:
 
 
-type(y)
+print(type(y))
 
 
 # In[5]:
 
 
-type(a)
+print(type(a))
 
 
 # In[6]:
 
 
-type(b)
+print(type(b))
 
 
 # In[7]:
@@ -125,7 +125,7 @@ print(z)
 # In[8]:
 
 
-type(z)
+print(type(z))
 
 
 # In[9]:
@@ -140,7 +140,7 @@ b = x + a
 # 
 # But what happens if we want to add an integer and a float variable?
 
-# In[10]:
+# In[8]:
 
 
 c = x + b
@@ -148,10 +148,10 @@ c = x + b
 print(c)
 
 
-# In[11]:
+# In[9]:
 
 
-type(c)
+print(type(c))
 
 
 # The resulting variable *c* is of type float! In a statically typed language, we would have had to know beforehand whether we want *c* to be the sum of integers or float variables. In Python, we can let the interpreter work its magic for us.

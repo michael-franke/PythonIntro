@@ -50,12 +50,12 @@ print(fc(4)) #prints 4!
 
 # ### File I/O
 # 
-# Now that you know how to use **modules**, we'd also like to know how to use **files**. Creating data by assigning values to variables worked fine so far, but more commonly data already exists and we want to work with it. Python allows you to **read in data** from external files such that you can **extract, analyse or modify** its contents and **save the results** to (another) file.  
+# Now that you know how to use **modules**, we'd also like to know how to use **files**. Creating data by assigning values to variables worked fine so far, but more often than not data already exists and we want to work with it. Python allows you to **read in data** from external files such that you can **extract, analyse or modify** its contents and **save the results** to (another) file.  
 # 
 # Files have two key properties: a filename (including name + file type, e.g. *example.txt*) and a path, which specifies its location on the computer (e.g. *C:\Users\jschwab\Documents\Teaching\Methods I\*)
 # 
 # #### Reading and writing to text files
-# Plaintext files (*.txt*) contain only basic text characters and do not include font, size, or color information. They consist of lines of text with a newline symbol at the end of each line (in Python strings, a newline is represented by "\n"). Text files are one of the most elementary file types that we will deal with. Python can easily read their contents, treating their contents as string values. 
+# Plaintext files (*.txt*) contain only basic text characters and do not include font, size, or color information. They consist of lines of text with a newline symbol at the end of each line (in Python strings, a newline is represented by "\n"). Text files are one of the most elementary file types that we will deal with. Python can easily read them, treating their contents as string values. 
 # 
 # ##### Basic elements of file input:
 # - The function *open()* creates and returns a file handle
@@ -66,9 +66,9 @@ print(fc(4)) #prints 4!
 # 
 # - The default mode if no other is specified: **"r" (“reading”** -- opens a file for reading only).   
 #     Other options:   
-#     **"w" ("writing"** -- opens a file for writing only. If the file does not exist, creates a new file for writing.),   
-#     **"a" ("appending"** -- opens a file for appending. New content is appended to the end of the file. If the file does not exist, creates a new file for writing.)  
-#     **"x" ("creating"** -- creates a file and opens it. Fails if a file by that name already exists.)
+#     **"w" ("writing"** -- opens a file for writing only. If the file does not exist, creates a new file for writing).   
+#     **"a" ("appending"** -- opens a file for appending. New content is appended to the end of the file. If the file does not exist, creates a new file for writing).  
+#     **"x" ("creating"** -- creates a file and opens it. Fails if a file by that name already exists).
 # - Additional specifiers to the mode: **"+"** (*r+ = read and write, w+ = write and read, a+ = append and read*), **"b"** (*rb/wb/ab = read/write/append in binary format*)
 # 
 # 
@@ -104,7 +104,7 @@ print(fc(4)) #prints 4!
 #     fr = open("guide.txt", "r")
 #     title = fr.readline () #assigns the contents of the first line to a variable called title
 #     chapter = fr.readline() #assigns the contents of the next line to a variable called chapter
-#     contents = fr.read() #stores the full file contents in a variable calles contents
+#     contents = fr.read() #stores the full file contents in a variable called contents
 #     fr.close () #closes the file
 
 # ##### Basic elements of file output:
@@ -113,9 +113,9 @@ print(fc(4)) #prints 4!
 # - *file.write()* writes a string to the file, and returns the number of characters written
 # - *file.writelines()* takes a list of strings, and writes each of them into a new line of the file
 # - *file.flush()* forces the buffer to be flushed 
-#     - file contents are not changed immediately. The operating system buffers changes in order to make file operations more efficient
-#     - to force that the buffer is cleared, use *flush()*. The buffer is also cleared upon using *close()* or when closing a Python session. 
-#     - this can be useful if you want to ensure that file contents are securely saved in case the program might crash 
+#     - Note that file contents are not changed immediately. The operating system buffers changes in order to make file operations more efficient.
+#     - To force that the buffer is cleared, use *flush()*. The buffer is also cleared upon using *close()* or when closing a Python session. 
+#     - This method can be useful if you want to ensure that file contents are securely saved in case the program might crash.
 # - *file.close()* finishes the creation of the file, and ensures that the file is closed correctly
 # 
 # Note that the *write* (**"w"**) and *append* (**"a"**) modes functions very similarly, except that the latter allows you to add new contents to the end of an existing file, whereas the former will overwrite all previous file contents.
@@ -124,23 +124,24 @@ print(fc(4)) #prints 4!
 # 
 #     fp = open("example.txt", "w")
 #     while True:
-#         text = input("Enter a line to write to the file , or press ENTER to quit!")
-#         if text == "":
-#              break
-#         fp.write(text)
-#     fp.close ()
+#         text = input("Enter a line to write to the file , or press ENTER to quit!") #accepts new text input
+#         if text == "": #until the user enters nothing (just presses ENTER)
+#              break 
+#         fp.write(text) #writes the new input to the file
+#     fp.close () #closes the file
 
 # #### FIle encodings
-# As mentioned above, you can read and write files in various encodings. Technically, an encoding specifies the **mapping between characters and the bit sequences that they are encoded as**. Every text files encodes characters according to some encoding, the most relevant ones (for now) being **ASCII** (7-bit, English alphabet only), **ISO 8859** (8-bit, variable encodings depending on region/language, Latin alphabetial writing systems only), and **UTF-8** unicode (variable length of 1-4 bytes (fyi, 1 byte = 1 8-bit sequence), all writing systems). The default encoding in Python is **UTF-8**.  
+# As mentioned above, you can read and write files in various encodings. Technically, an encoding specifies the **mapping between characters and the bit sequences that they are encoded as**. Every text files encodes characters according to some encoding, the most relevant ones (for now) being **ASCII** (7-bit, English alphabet only), **ISO 8859** (8-bit, variable encodings depending on region/language, alphabetical writing systems only), and **UTF-8** unicode (variable length of 1-4 bytes (fyi, 1 byte = 1 8-bit sequence), all writing systems). The default encoding in Python is **UTF-8**.  
 # 
 # **Examples:**  
 # 
-# There's no difference in the encoding of characters compatible with the English alphabet:  
+# There's **no difference in the encoding** of characters compatible with the **English alphabet**:  
 # - UTF-8 binary encoding of "A" = 01000001  
 # - ASCII binary encoding of "A" = 01000001  
 # - ISO 8859-1 binary encoding of "A" = 01000001  
 # 
-# But it matters for other languages (most obviously all languages with writing systems that do not use the Latin alphabet). Even for languages using the Latin alphabet, subtle differences mean that some encodings cannot capture their full character set. The following German sentence can only be encoded in UTF-8: *Frank sagt: &bdquo;Es könnte dieses Jahr weiße Weihnachten geben.&ldquo;* (Frank says: "We might get a white Christmas this year"). The probl
+# But it **matters for many other languages** (most obviously all languages with writing systems that do not use the Latin alphabet). Even for languages using the Latin alphabet, subtle differences mean that some encodings cannot capture their full character set.  
+# The following German sentence can only be encoded in UTF-8: *Frank sagt: &bdquo;Es könnte dieses Jahr weiße Weihnachten geben.&ldquo;* (Frank says: "We might get a white Christmas this year"). The problems for other encodings are:
 # 
 # - ASCII: No umlauts (*ä,ö,ü*), no *ß*, no German quotation marks (*&bdquo;...&ldquo;*)
 # - ISO 8859-1: No German quotation marks (*&bdquo;...&ldquo;*)
@@ -179,10 +180,10 @@ print(fc(4)) #prints 4!
 # 
 # Above, we dealt with text files organised as sequences in the form of lines of text (*.txt* files). However, text-based data can be formatted in various ways for information exchange:
 # 
-# - Tab-Separated Values (TSV) or Comma-Separated Values (CSV) for tabular data (i.e. for datapoints consisting of values for predefined fields -- think of *Excel* spreadsheets, but without colour, size , or font information)
-# - Extensible Markup Language (XML) for hierarchically structured data where format checking is necessary
-# - JavaScript Object Notation (JSON) for uncomplicated data exchange between programs 
-# - various binary formats (database files, matrices)
+# - Tab-Separated Values **(TSV)** or Comma-Separated Values **(CSV)** for **tabular data** (i.e. for datapoints consisting of values for predefined fields -- think of *Excel* spreadsheets, but without colour, size , or font information)
+# - Extensible Markup Language **(XML)** for **hierarchically structured data** where format checking is necessary (think of dictionaries, for instance)
+# - JavaScript Object Notation **(JSON)** for uncomplicated **data exchange between programs** 
+# - various **binary formats** (database files, matrices) for memory-efficient storage and transfer
 # 
 # ##### CSV and TSV
 # 
@@ -247,8 +248,8 @@ print(fc(4)) #prints 4!
 # #### JavaScript Object Notation (JSON):
 # 
 # - structured data represented using arrays and key-value pairs
-# - syntax is virtually identical to Python literals!
-# - When processing JSON files, some subtle differences between Python and JSON notation mean that not every Python literal can directly be interpreted as JSON, and vice versa (e.g. tuples dont' exist in JSON, lists and tupley both correspond to arrays)
+# - syntax is mostly identical to Python literals!
+# - HOwever, when processing JSON files, some subtle differences between Python and JSON notation mean that not every Python literal can directly be interpreted as JSON, and vice versa (e.g. tuples don't exist in JSON, lists and tuples both correspond to arrays)
 # - *json* module can dump any nested data structure to a JSON file, and load any JSON structure from a file
 # 
 # **Example of a JSON document:**
@@ -289,7 +290,7 @@ print(fc(4)) #prints 4!
 
 # #### Wrapping up lose ends: exception handling
 # 
-# Python will throw errors and end code execution if you try to read or write to files that:
+# Python will **throw errors and end code execution** if you try to read or write to files that:
 # - do not exist (FileNotFoundError)
 # - you do not have the correct permissions for (PermissionError)
 # - the storage device does not have enough space for (IOError)
