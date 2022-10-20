@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Advanced data types: lists, tuples, sets, dictionaries &#8212; Scientific programming in Python</title>
+    <title>Advanced data types: lists, tuples, sets, dictionaries (November 22 and 29, 2022) &#8212; Scientific programming in Python</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Modules, file I/O (input/output)" href="session05.html" />
-    <link rel="prev" title="Functions and conditional execution" href="session03.html" />
+    <link rel="next" title="Modules, file I/O (input/output) (December 06, 2022)" href="session05.html" />
+    <link rel="prev" title="Functions and conditional execution (November 15 and 22, 2022)" href="session03.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -111,32 +111,32 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="session01.html">
-   Introduction
+   Introduction (October 18 and 25, 2022)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session02.html">
-   Data types and statements
+   Data types and statements (October 25 and November 08, 2022)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session03.html">
-   Functions and conditional execution
+   Functions and conditional execution (November 15 and 22, 2022)
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Advanced data types: lists, tuples, sets, dictionaries
+   Advanced data types: lists, tuples, sets, dictionaries (November 22 and 29, 2022)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session05.html">
-   Modules, file I/O (input/output)
+   Modules, file I/O (input/output) (December 06, 2022)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session06.html">
-   Finishing the basics: more on functions, loops, dictionaries, and files
+   Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)
   </a>
  </li>
 </ul>
@@ -450,7 +450,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Advanced data types: lists, tuples, sets, dictionaries</h1>
+                <h1>Advanced data types: lists, tuples, sets, dictionaries (November 22 and 29, 2022)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -548,8 +548,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="advanced-data-types-lists-tuples-sets-dictionaries">
-<h1>Advanced data types: lists, tuples, sets, dictionaries<a class="headerlink" href="#advanced-data-types-lists-tuples-sets-dictionaries" title="Permalink to this headline">#</a></h1>
+  <section id="advanced-data-types-lists-tuples-sets-dictionaries-november-22-and-29-2022">
+<h1>Advanced data types: lists, tuples, sets, dictionaries (November 22 and 29, 2022)<a class="headerlink" href="#advanced-data-types-lists-tuples-sets-dictionaries-november-22-and-29-2022" title="Permalink to this headline">#</a></h1>
 <p>So far, we have dealt with data types that encode a single value – a number, a string, or a Boolean value. In this session, we will learn about <strong>data types that can contain multiple values</strong>, which is essential when you are handling large amounts of data. At the end of this session, you should know the distinctions between four such data types, namely <em>lists</em>, <em>tuples</em>, <em>dictionaries</em>, and <em>sets</em>, and you should be able to write simple programs in which you create and modify these data types.</p>
 <section id="lists">
 <h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">#</a></h2>
@@ -1188,7 +1188,7 @@ I have the following information:  Phone number : 0176123456
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_24476</span>\<span class="mf">3349261285.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_4604</span>\<span class="mf">3349261285.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">notebook</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please add a new&quot;</span><span class="p">,</span> <span class="n">key_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 <span class="ne">----&gt; </span><span class="mi">6</span>     <span class="n">new_entry</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
@@ -1196,11 +1196,11 @@ I have the following information:  Phone number : 0176123456
 <span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
 <span class="nn">~\miniconda3\lib\site-packages\ipykernel\kernelbase.py</span> in <span class="ni">raw_input</span><span class="nt">(self, prompt)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1172</span>         <span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1173</span><span class="s2">         if not self._allow_stdin:</span>
-<span class="ne">-&gt; </span><span class="mi">1174</span><span class="s2">             raise StdinNotImplementedError(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1175</span><span class="s2">                 &quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1176</span><span class="s2">             )</span>
+<span class="g g-Whitespace">   </span><span class="mi">1070</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1071</span><span class="s2">         if not self._allow_stdin:</span>
+<span class="ne">-&gt; </span><span class="mi">1072</span><span class="s2">             raise StdinNotImplementedError(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1073</span><span class="s2">                 &quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1074</span><span class="s2">             )</span>
 
 <span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
 </pre></div>
@@ -1288,13 +1288,13 @@ The sum of the rows is: [7.3, 18.1]
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Functions and conditional execution</p>
+            <p class="prev-next-title">Functions and conditional execution (November 15 and 22, 2022)</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="session05.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Modules, file I/O (input/output)</p>
+        <p class="prev-next-title">Modules, file I/O (input/output) (December 06, 2022)</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
