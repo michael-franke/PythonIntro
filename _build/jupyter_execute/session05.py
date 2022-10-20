@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## Modules, file I/O (input/output)
+# ## Modules, file I/O (input/output) (December 06, 2022)
 # 
 # **So far, all of our Python programs were self-contained**, that is, they did not rely on external data files or pieces of code (except for in-built Python functions and methods). In most real-life situations, however, you will work off of existing files (e.g., for data analysis) or from pre-existing code (e.g., when adding new functionalities to an app or program). In this session, you will learn how to **import and use** external Python code as **modules** and how to **create, read from, and write to files**.
 # 

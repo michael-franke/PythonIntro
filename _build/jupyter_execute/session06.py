@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## Finishing the basics: more on functions, loops, dictionaries, and files
+# ## Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)
 # 
 # The concepts introduced in previous sessions have additional functionalities worth introducing. In this session, we will therefore look at advanced (combined) uses of functions, loops, and file I/O, which allow you to code more efficiently. 
 
@@ -34,7 +34,7 @@ print(sort_text(unsorted_file))
 # In[2]:
 
 
-unsorted_file = open("hitchhikers_guide_full.txt", "r")
+unsorted_file.seek(0) #reset file handle. I'll explain this in a bit...
 
 sorted_tuple = tuple(sort_text(unsorted_file))
 
@@ -44,7 +44,7 @@ sorted_tuple = tuple(sort_text(unsorted_file))
 # In[3]:
 
 
-unsorted_file = open("hitchhikers_guide_full.txt", "r")
+unsorted_file.seek(0) #reset file handle. I'll explain this in a bit...
 
 #inefficient code:
 sorted_file = sort_text(unsorted_file)
@@ -54,21 +54,27 @@ print(sorted_file)
 print(sort_text(unsorted_file))
 
 
-# Some functions and methods **don't return anything** (= return *None*), but **still modify the objects** passed as their arguments:
+# Some functions and methods **don't return anything** (= return *None*), but **still modify the objects** passed as their arguments. The list method *sort()* is such an example. Trying to assign the result of the function call to a new variable (presumable a sorted list?) will not have the effect you want:
 
 # In[4]:
 
 
-#inefficient
-sorted_file = sorted_file.sort(reverse = True) 
+#don't do this!
+sorted_file_v2 = sorted_file.sort() 
+print(type(sorted_file_v2))
 
-#more efficient
-sorted_file.sort(reverse = True)
+
+# In[5]:
+
+
+#instead
+sorted_file.sort()
+print(type(sorted_file))
 
 
 # **Don't forget that functions can call other functions!**
 
-# In[4]:
+# In[6]:
 
 
 def count_word_occurence(file):
@@ -76,18 +82,19 @@ def count_word_occurence(file):
     word = input()
     return "The word '{}' occurs {} times in the text.".format(word,sorted_file.count(word)) #note that we can use placeholders {} in the string, filled by the two objects named later
 
-unsorted_file = open("hitchhikers_guide_full.txt", "r")
+unsorted_file.seek(0) #reset file handle. I'll explain this in a bit...
 
 count_word_occurence(unsorted_file)
 
 
 # ### More on loops
 # 
-# **Recap on *ranges***: One of the most basic iterables is the range. The *range* function generates iterable sequences of numbers based on upto 3 input parameters: *range(i,n,k)* produces integers in the range from *i* to *n*-1, but only produces every *k*th integer in that sequence.
+# #### **Recap on *ranges***: 
+# One of the most basic iterables is the range. The *range* function generates iterable sequences of numbers based on upto 3 input parameters: *range(i,n,k)* produces integers in the range from *i* to *n*-1, but only produces every *k*th integer in that sequence.
 # 
 # Ranges are **widespread and versatile for iterating over collections of elements** (lists, tuples, sets, dictionaries).
 
-# In[21]:
+# In[9]:
 
 
 for i in range(len(sorted_file)): #iterate over full length of list
@@ -98,14 +105,15 @@ for i in range(len(sorted_file)): #iterate over full length of list
 
 # **An issue for you to think of**: Try to understand the order of operations with nested loops. Why does the loop above not print output ordered by increasing string length, first printing all strings of length 17, then 18, 19,...? 
 
-# **File handles are iterables**: As you can see from the first code block in this session, loops can iterate over lines in a file. 
+# #### **File handles are iterables**: 
+# As you can see from the first code block in this session, loops can iterate over lines in a file. 
 # 
 # Note, though, that **file handles have *states***, that is, they **'remember where (in the file) they are'**. For this reason, you have to reset the state of the file handle if you want to loop over file handles multiple times, using ***file.seek(0)***.
 
-# In[37]:
+# In[19]:
 
 
-unsorted_file = open("hitchhikers_guide_full.txt", "r")
+unsorted_file.seek(0)
 print("The first 20 lines of the book are:\n")
 for line in range(20):
     print(unsorted_file.readline())
@@ -117,7 +125,7 @@ for line in range(20):
     print(unsorted_file.readline())
 
 
-# ***While* loops, or "Anything you can do, *for* can do better"?**
+# #### ***While* loops, or "Anything you can do, *for* can do better"?**
 # 
 # We saw in an earlier session that *for* loops and *while* loops can be used to achieve the same outcome. So how should you decide which loop to choose in the first place?  
 # 
@@ -126,7 +134,7 @@ for line in range(20):
 # - *While* loops can be used on data structures that are not iterable. 
 # - *While* loops may also be prefered if you do not know the number of required iterations beforehand.
 
-# In[ ]:
+# In[11]:
 
 
 from random import randrange
@@ -141,7 +149,7 @@ while command !="stop":
     if command == "repeat":
         print("Repeating song:", current_song)
     else:
-        current_song = playlist[randrange(7)]
+        current_song = playlist[randrange(7)] #on each execution, randrange picks a random integer from the specified range, here between 0 and 6
         print("Now playing: ", current_song ) 
     command = input()
 print("Playback stopped.")   
@@ -149,4 +157,137 @@ print("Playback stopped.")
 
 # ### Sorting, reverse sorting, sorting by key
 # 
-# So far we've primarily relied on the **default sorting order**, which is in **ascending** order (numerically or alphabetically). 
+# Sorting elemens in a sequence or collection of objects is essential to many use-cases of programming. Luckily, the functionality of sorting functions in Python is much more versatile than we have seen thus far:
+# 
+# #### - *sort()* and *sorted()*
+# As seen above, *sort()* modifies the original sequence it was passed. **To sort sequences or collections without disturbing the original sequence** of the object, use the ***sorted()*** function. *Sorted()* returns an ordered copy of the sequence passed as its argument:
+
+# In[12]:
+
+
+sorted_file_v3 = sorted(sorted_file, reverse = True) 
+print(type(sorted_file_v3))
+
+
+# #### - Sorting order
+# The keyword ***reverse = True*** can be passed to both *sort()* and *sorted()* to reverse the sorting order from the **default sorting order**, which is **ascending** (numerically or alphabetically). 
+# 
+# Both *sort()* and *sorted()* can also be passed a ***key* parameter**, which can be used to specify alternative sorting orders. The key parameter **should be a function that takes a single argument** (the respective element of the to-be-sorted sequence) **and returns a key** (the value the function returns for the passed element) **to use for sorting purposes**. 
+# 
+# For instance, you may want to ignore capitalization when sorting list elements alphabetically:
+
+# In[13]:
+
+
+#case-insensitive string comparison
+sorted_file_v3 = sorted(sorted_file, key = str.lower) #sorts all list elements as if they were lower-case versions of themselves
+print(sorted_file_v3)
+
+
+# #### - Sorting dictionaries by key or value
+# **Dictionaries** are mappings between keys and values. As such, they are **not intrinsically ordered**. However, sometimes we may want to **sort dictionaries into a sequence of ordered elements**, e.g., when trying to read out the mapping between students' names and grades by order of their first/last name (A-Z) or grade (1-6 in the German system). 
+# 
+# By default, when applying the ***sorted()*** function, dictionaries are **sorted by their keys**. In fact, just feeding a dictionary straight to the *sorted()* function will simply return a sorted list of its keys.
+
+# In[14]:
+
+
+#initialize dictionary (see session04)
+first_names = ["Arthur", "Ford", "Zaphod", "Marvin"]
+last_names = ["Dent", "Prefect", "Beeblebrox", ""]
+lifeform = ["Human", "Betelgeusian", "Betelgeusian", "Android"]
+feature = ["Worried","Endlessly broad-minded","Two-headed","Paranoid"]
+
+notebook = {"First name" : first_names, "Last name" : last_names, "Life form" : lifeform, "Distinct feature" : feature}
+
+
+# In[15]:
+
+
+print(sorted(notebook)) #just returns sorted list of keys
+
+
+# **Option for sorting dictionary and returning a list sorted by key**: Using the dictionary method *items()*, we receive a dictionary view object, a list of tuples containing all key-value pairs (see also the methosd *values()* and *keys()*, session 04). Calling *sorted()* on this object will return a list sorted by the dictionary's keys.
+
+# In[16]:
+
+
+print(sorted(notebook.items()))
+
+
+# **Option for sorting dictionary and retuning a list sorted by value**: To sort a dictionary by value, we need to use a *key* parameter that specifies which value of the dictionary elements to sort over.
+# 
+# - **Lambda functions** may specify the sort key. Lambda functions are *anonymous* functions, that is, functions that are never defined with a name. They are useful when the function is only required for a short time/single application.
+# 
+# - Their syntax is:
+#            
+#            lambda arguments: expression
+#     
+# - This is akin to a function defined as:
+#     
+#         def function(arguments):
+#             return expression
+#     
+# - Lambda functions can have **any number of arguments but only one expression**. That expression is **evaluated and returned**.
+
+# In[17]:
+
+
+#using a lambda function
+print(sorted(notebook.items(), key = lambda x: x[1]))#sorts by value ==> here, alphabetical order of the lists (by their first element)
+
+
+# - Alternatively, **the operator module** has convenience functions to fetch items from an operand, which can be any sequence or collection of elements:
+
+# In[18]:
+
+
+from operator import itemgetter
+
+print(sorted(notebook.items(), key = itemgetter(1)))#sorts by value, same as the lambda function above
+
+
+# ### Notes on code efficiency and maintainability
+# 
+# #### Optimization
+# For every **computable problem or task**, there are infinitely many programs which solve it; they will differ in **memory** and **time usage**. You may not care much about this for now, while working on toy examples with little computational demands. But if you **get used to writing reasonably efficient code** now, you will have a much easier time later!
+# 
+# **What does it mean for code to be efficient?** Some principles:
+# 
+# - **Avoid creating unnecessary objects**. *Do you really need that value stored in a variable?*
+# - Conversely **avoid computing the same thing twice** by storing the value in a variable. *Do you compute the same value on every execution of a loop? Why not save it in a variable?*
+# - **Avoid running costly operations** (such as file I/O, search) multiple times. *Are you reading the same file at various places in your code? Why?*
+# - **Use functions (and classes, see later sessions)** to generalize and modularize your code. Avoid declaring variables with global scope to prevent unnecessary clutter. *Will you really need that variable in your for loop again later on? Probably not...*
+# 
+# An extreme example:
+
+# In[42]:
+
+
+for i in range (2): #for i in range 0-1
+    unsorted_file = open("hitchhikers_guide_full.txt", "r") #read in the file
+    x = unsorted_file.readline().split() #read the first line, split into list of words
+    global y #create global variable
+    y = x[i] #save i-th word in list x in variable y
+    print(y) #print variable
+
+
+# The same thing, but more efficiently:
+
+# In[41]:
+
+
+for i in range (2): #for i in range 0-1
+    unsorted_file.seek(0) #reset file handle
+    print(unsorted_file.readline().split()[i]) #print i-th word in first line
+
+
+# #### Maintainability
+# 
+# While **code efficiency** is about reducing **computational complexity**, **code maintainability** is about reducing **complexity for (human) programmers**. 
+# 
+# **Principles for code maintainability** include:
+# - **Comment your code**, explain user-defined functions' behaviors, and use informative variable + function names to ensure your code is understandable to others
+# - **Don't copy and paste** code, use functions and loops.
+# - **Encapsulate elements** that are subject to change (e.g., user input, file I/O) and those that stay the same (e.g., functions, classes). This makes it easier to identify adaptable components.
+# - **Minimize coupling** between different code components. This makes your code more *changeable*.

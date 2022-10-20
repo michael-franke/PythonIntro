@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Data types and statements
+# # Data types and statements (October 25 and November 08, 2022)
 # 
 # In this session, you will learn about the different **data types** Python can handle, about **storing data in variables** and modifying their contents through **assignment operators**, and about some of the essential basic **functions** in Python. At the end of this session, you should be able to write simple programs that assign, manipulate and return different types of data.  
 # 
@@ -66,6 +66,8 @@ b = 300
 print(type(b))
 
 
+# ### <span style="color:red">End of lecture 1 (October 25, 2022).</span>
+# 
 # #### Float
 # 
 # Positive and negative numbers with a decimal point are called *floating-point numbers*. Floating-point numbers are expressed by their **sign** (positive/negative), their **mantissa**, and their **exponent to the power of two**.  

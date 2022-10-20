@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Functions and conditional execution
+# # Functions and conditional execution (November 15 and 22, 2022)
 # 
 # In this session, you will learn about **functions** and **flow control statements**. These are essential concepts to any programming language and will allow you to write more complex programs that execute blocks of statements based on variables types of input and output values. 
 # 
