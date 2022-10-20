@@ -17,20 +17,37 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-#inefficient
-sorted_file = sorted_file.sort(reverse = True) 
+def count_word_occurence(file):
+    sorted_file = sort_text(file) #function call to user-defined function "sort_text"
+    word = input()
+    return "The word '{}' occurs {} times in the text.".format(word,sorted_file.count(word)) #note that we can use placeholders {} in the string, filled by the two objects named later
 
-#more efficient
-sorted_file.sort(reverse = True)
+unsorted_file = open("hitchhikers_guide_full.txt", "r")
+
+count_word_occurence(unsorted_file)
 ------------------
 
 [1;31m---------------------------------------------------------------------------[0m
-[1;31mAttributeError[0m                            Traceback (most recent call last)
-[1;32m~\AppData\Local\Temp\ipykernel_7444\30965946.py[0m in [0;36m<module>[1;34m[0m
-[0;32m      3[0m [1;33m[0m[0m
-[0;32m      4[0m [1;31m#more efficient[0m[1;33m[0m[1;33m[0m[0m
-[1;32m----> 5[1;33m [0msorted_file[0m[1;33m.[0m[0msort[0m[1;33m([0m[0mreverse[0m [1;33m=[0m [1;32mTrue[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
+[1;31mStdinNotImplementedError[0m                  Traceback (most recent call last)
+[1;32m~\AppData\Local\Temp\ipykernel_5876\1921159991.py[0m in [0;36m<module>[1;34m[0m
+[0;32m      6[0m [0munsorted_file[0m [1;33m=[0m [0mopen[0m[1;33m([0m[1;34m"hitchhikers_guide_full.txt"[0m[1;33m,[0m [1;34m"r"[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
+[0;32m      7[0m [1;33m[0m[0m
+[1;32m----> 8[1;33m [0mcount_word_occurence[0m[1;33m([0m[0munsorted_file[0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
 [0m
-[1;31mAttributeError[0m: 'NoneType' object has no attribute 'sort'
-AttributeError: 'NoneType' object has no attribute 'sort'
+[1;32m~\AppData\Local\Temp\ipykernel_5876\1921159991.py[0m in [0;36mcount_word_occurence[1;34m(file)[0m
+[0;32m      1[0m [1;32mdef[0m [0mcount_word_occurence[0m[1;33m([0m[0mfile[0m[1;33m)[0m[1;33m:[0m[1;33m[0m[1;33m[0m[0m
+[0;32m      2[0m     [0msorted_file[0m [1;33m=[0m [0msort_text[0m[1;33m([0m[0mfile[0m[1;33m)[0m [1;31m#function call to user-defined function "sort_text"[0m[1;33m[0m[1;33m[0m[0m
+[1;32m----> 3[1;33m     [0mword[0m [1;33m=[0m [0minput[0m[1;33m([0m[1;33m)[0m[1;33m[0m[1;33m[0m[0m
+[0m[0;32m      4[0m     [1;32mreturn[0m [1;34m"The word '{}' occurs {} times in the text."[0m[1;33m.[0m[0mformat[0m[1;33m([0m[0mword[0m[1;33m,[0m[0msorted_file[0m[1;33m.[0m[0mcount[0m[1;33m([0m[0mword[0m[1;33m)[0m[1;33m)[0m [1;31m#note that we can use placeholders {} in the string, filled by the two objects named later[0m[1;33m[0m[1;33m[0m[0m
+[0;32m      5[0m [1;33m[0m[0m
+
+[1;32m~\miniconda3\lib\site-packages\ipykernel\kernelbase.py[0m in [0;36mraw_input[1;34m(self, prompt)[0m
+[0;32m   1070[0m         """
+[0;32m   1071[0m         [1;32mif[0m [1;32mnot[0m [0mself[0m[1;33m.[0m[0m_allow_stdin[0m[1;33m:[0m[1;33m[0m[1;33m[0m[0m
+[1;32m-> 1072[1;33m             raise StdinNotImplementedError(
+[0m[0;32m   1073[0m                 [1;34m"raw_input was called, but this frontend does not support input requests."[0m[1;33m[0m[1;33m[0m[0m
+[0;32m   1074[0m             )
+
+[1;31mStdinNotImplementedError[0m: raw_input was called, but this frontend does not support input requests.
+StdinNotImplementedError: raw_input was called, but this frontend does not support input requests.
 
