@@ -131,7 +131,7 @@ print(type(z))
 # In[9]:
 
 
-b = x + a
+b = print(str(x) + a)
 
 
 # As you see above, the data types are of *x* and *y* are interpreted as integers (=whole numbers), whereas *a* is interpreted as string variable (=series of letters). *b* is a float variable, that is, a number that contains a floating decimal point. We will learn more about different variable types in next week's session.  
@@ -140,7 +140,7 @@ b = x + a
 # 
 # But what happens if we want to add an integer and a float variable?
 
-# In[8]:
+# In[10]:
 
 
 c = x + b
@@ -148,10 +148,11 @@ c = x + b
 print(c)
 
 
-# In[9]:
+# In[11]:
 
 
-print(type(c))
+print(type(int(c)))
+print(int(c))
 
 
 # The resulting variable *c* is of type float! In a statically typed language, we would have had to know beforehand whether we want *c* to be the sum of integers or float variables. In Python, we can let the interpreter work its magic for us.
