@@ -31,6 +31,7 @@ print(type(a))
 # In[3]:
 
 
+false =1
 a = false
 
 
@@ -58,7 +59,7 @@ a = false
 # | 150 | 0|0|0|0| 0|0|0|0| 1|0|0|1| 0|1|1|0| 
 # | 32000 | 0|1|1|1| 1|1|0|1| 0|0|0|0| 0|0|0|0| 
 
-# In[3]:
+# In[4]:
 
 
 b = 300
@@ -66,8 +67,6 @@ b = 300
 print(type(b))
 
 
-# ### <span style="color:red">End of lecture 1 (October 25, 2022).</span>
-# 
 # #### Float
 # 
 # Positive and negative numbers with a decimal point are called *floating-point numbers*. Floating-point numbers are expressed by their **sign** (positive/negative), their **mantissa**, and their **exponent to the power of two**.  
@@ -92,7 +91,7 @@ print(type(b))
 # | pos. | (1.) | 2<sup>-1</sup> =  $\frac{1}{2}$ | 2<sup>-2</sup> = $\frac{1}{4}$ | 2<sup>-3</sup> | 2<sup>-4</sup> | 2<sup>-5</sup> | 2<sup>-6</sup> | 2<sup>-7</sup> | 2<sup>-8</sup> | 2<sup>-9</sup> | 32 | 16 | 8 | 4 | 2 | 1 |
 # | 0 | | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 |  
 
-# In[4]:
+# In[5]:
 
 
 c = 15.5
@@ -100,7 +99,7 @@ c = 15.5
 print("c is of type",type(c))
 
 
-# In[5]:
+# In[6]:
 
 
 #Note that we can transform integer numbers into float numbers and the other way around.
@@ -112,7 +111,7 @@ print("d equals",d)
 print("d is of type",type(d))
 
 
-# In[6]:
+# In[7]:
 
 
 #2. We can transform our float variable c into an integer as follows:
@@ -126,7 +125,7 @@ print("CAREFUL! Note that tranforming floats into integers may change the value 
 # 
 # For some reason (feel free to go down the rabbithole on that one...), Python uses *j* instead of *i* to represent the imaginary unit. Complex numbers can thus be written as *x = a + bj*.
 
-# In[7]:
+# In[8]:
 
 
 f = 1 + 2j
@@ -137,7 +136,7 @@ print(f)
 
 # What happens if we leave out either the real or imaginary part of the numbers? Let's try it out:
 
-# In[8]:
+# In[9]:
 
 
 g = 2j
@@ -146,7 +145,7 @@ print("g is of type",type(g))
 print(g)
 
 
-# In[9]:
+# In[10]:
 
 
 h = 1 + 0j
@@ -169,9 +168,11 @@ print(h)
 # |%|Modulus/remainder|22 % 8|6|
 # |//|Integer division/floored quotient|22 // 8|2|
 
+# ### <span style="color:red">End of lecture 1 (October 25, 2022).</span>
+# 
 # ### Strings
 # 
-# String values are sequences of characters (length $\geq$ 0). Internally, they are stored as a ssequence of letters, each of which has specific bit-encodings. Strings have to obey a number of rules:
+# String values are sequences of characters (length $\geq$ 0). Internally, they are stored as a sequence of letters, each of which has a specific bit encoding. Strings have to obey a number of rules:
 # 
 #  - must be surrounded by single ( 'string' ) or double quotes ( "string" )
 # - only the other type of quotes is allowed inside a string:
@@ -179,7 +180,7 @@ print(h)
 #     - "I am a ’string’" is also a string
 #     - "I am a "string"" is not a valid string
 # - the backslash has special significance as an escape character, "some\time\ago" will look different from what you think
-# - to produce an actual backslash, you need to have it twice: "some\\time\\ago"
+# - to produce an actual backslash, you need to have it twice: "some\\\time\\\ago"
 # - Other common escape characters are:
 #     - *\b* - Backspace         
 #     - *\r* - Carriage Return                      
@@ -187,7 +188,7 @@ print(h)
 #     - *\’* - Single Quote    
 #     - *\t* - Tab   
 
-# In[7]:
+# In[11]:
 
 
 i = "Hello world!"
@@ -204,7 +205,7 @@ print(type(i))
 # 2. Strings can be replicated by mutiplication with an integer number.
 # 
 
-# In[11]:
+# In[12]:
 
 
 j = "\nWhere\nare\nyou?"
@@ -212,7 +213,7 @@ j = "\nWhere\nare\nyou?"
 print(i+j)
 
 
-# In[12]:
+# In[13]:
 
 
 print(j*2)
@@ -222,7 +223,7 @@ print(j*2)
 # 
 # 1. *len()* : returns the length of a string in number of characters. *len()* is an example of a **built-in function** which can also be applied to other objects representing sequences
 
-# In[13]:
+# In[14]:
 
 
 len(i)
@@ -233,25 +234,25 @@ len(i)
 #     - They are sensitive to capitalization.
 #     - You can feed a string of arbitrary length into startswith()/endswith(), even the full string whose contents you are testing.
 
-# In[14]:
+# In[15]:
 
 
 print(i.startswith("He"))
 
 
-# In[15]:
+# In[16]:
 
 
 print(i.startswith("he"))
 
 
-# In[16]:
+# In[17]:
 
 
 print(j.endswith("!"))
 
 
-# In[17]:
+# In[18]:
 
 
 print(j.endswith(j))
@@ -261,13 +262,13 @@ print(j.endswith(j))
 #     - *in* will only return True or False, but will not tell you how many times an object is contained within the sequence
 #     - *index()* starts counting at 0
 
-# In[18]:
+# In[19]:
 
 
 print("mäh" in "Rasenmäher")
 
 
-# In[19]:
+# In[20]:
 
 
 print("Rasenmäher".index("mäh"))
@@ -275,13 +276,13 @@ print("Rasenmäher".index("mäh"))
 
 # 4. *lower()* and *upper()*: methods than return lower- or uppercase copies of the strings they operate on
 
-# In[20]:
+# In[21]:
 
 
 print(i.lower())
 
 
-# In[21]:
+# In[22]:
 
 
 print(j.upper())
@@ -290,7 +291,7 @@ print(j.upper())
 # 5. *replace()*: method that replaces all instances of the first type with instances of the second
 #    - an optional third argument can limit how many instances of the first type should be replaced
 
-# In[22]:
+# In[23]:
 
 
 k = "Far out in the uncharted backwaters of the unfashionable end of the western spiral arm of the Galaxy lies a small unregarded yellow sun."
@@ -298,13 +299,13 @@ k = "Far out in the uncharted backwaters of the unfashionable end of the western
 print(k)
 
 
-# In[23]:
+# In[24]:
 
 
 print(k.replace(" ","_"))
 
 
-# In[24]:
+# In[25]:
 
 
 print(k.replace("a","AAA",2))
@@ -317,31 +318,31 @@ print(k.replace("a","AAA",2))
 #     - a position *-x* will be interpreted as *len(string)-s*
 #     - providing a third number *k* will return every *k*th letter: *str[start : end : k]*
 
-# In[25]:
+# In[26]:
 
 
 print(k[0:7]) #returns letters 0-7
 
 
-# In[26]:
+# In[27]:
 
 
 print(k[:7]) #returns letters 0-7
 
 
-# In[27]:
+# In[28]:
 
 
 print(k[45:]) #returns all letters from the 45th letter to the end of the string
 
 
-# In[28]:
+# In[29]:
 
 
 print(k[::5]) #returns every 5th letter
 
 
-# In[29]:
+# In[30]:
 
 
 print(k[+20:-20:5]) #returns every 5th letter, starting 20 letters after the start of the string and ending 20 letters before its end
@@ -376,7 +377,7 @@ print(k[+20:-20:5]) #returns every 5th letter, starting 20 letters after the sta
 # - Throwaway/Temporary variables get single-letter names (e.g., a, b, i, j, ...). 
 # - Variable names must start with a letter and can contain only letters, numbers, and underscores. Although they can start with an uppercase letter, it is convention to use lowercase variable names.
 
-# In[2]:
+# In[31]:
 
 
 l = "a"

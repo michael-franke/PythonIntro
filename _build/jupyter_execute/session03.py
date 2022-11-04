@@ -340,18 +340,15 @@ print(x)
 # - define additional exit points using *break* statements (see below)
 # - ensure that the test condition changes in each iteration (as in code block [10], but not always possible)
 
-# In[14]:
-
-
-#Example of a non-terminating loop
-reply = ""
-while (reply != "Who's there?"):
-    print("Knock knock")
-    reply = "Yes?"
-    print(reply)
-    #reply = input() #allowing user input would enable changing the value of reply on every iteration
-print("Stop asking questions and let me in.")
-
+# **Example of a non-terminating loop**:
+#     
+#     reply = ""
+#     while (reply != "Who's there?"):
+#         print("Knock knock")
+#         reply = "Yes?"
+#         print(reply)
+#         #reply = input() #allowing user input would enable changing the value of reply on every iteration
+#     print("Stop asking questions and let me in.")
 
 # #### Exiting the loop with 'break' or 'continue'
 # *Break* causes the loop to stop at the point at which it appears, without completing the current iteration. This is useful to ensure termination for certain cases.  

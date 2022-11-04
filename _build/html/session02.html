@@ -385,15 +385,6 @@ title="Print to PDF"
        Integer
       </a>
      </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#span-style-color-red-end-of-lecture-1-october-25-2022-span">
-     <span style="color:red">
-      End of lecture 1 (October 25, 2022).
-     </span>
-    </a>
-    <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#float">
        Float
@@ -410,6 +401,13 @@ title="Print to PDF"
       </a>
      </li>
     </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#span-style-color-red-end-of-lecture-1-october-25-2022-span">
+     <span style="color:red">
+      End of lecture 1 (October 25, 2022).
+     </span>
+    </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#strings">
@@ -508,15 +506,6 @@ title="Print to PDF"
        Integer
       </a>
      </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#span-style-color-red-end-of-lecture-1-october-25-2022-span">
-     <span style="color:red">
-      End of lecture 1 (October 25, 2022).
-     </span>
-    </a>
-    <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#float">
        Float
@@ -533,6 +522,13 @@ title="Print to PDF"
       </a>
      </li>
     </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#span-style-color-red-end-of-lecture-1-october-25-2022-span">
+     <span style="color:red">
+      End of lecture 1 (October 25, 2022).
+     </span>
+    </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#strings">
@@ -639,17 +635,8 @@ title="Print to PDF"
 <p><strong>Question</strong>: Why does the following not work?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">false</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_7196</span>\<span class="mf">1478238585.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">a</span> <span class="o">=</span> <span class="n">false</span>
-
-<span class="ne">NameError</span>: name &#39;false&#39; is not defined
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">false</span> <span class="o">=</span><span class="mi">1</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">false</span>
 </pre></div>
 </div>
 </div>
@@ -794,9 +781,6 @@ title="Print to PDF"
 </div>
 </div>
 </section>
-</section>
-<section id="span-style-color-red-end-of-lecture-1-october-25-2022-span">
-<h3><span style="color:red">End of lecture 1 (October 25, 2022).</span><a class="headerlink" href="#span-style-color-red-end-of-lecture-1-october-25-2022-span" title="Permalink to this headline">#</a></h3>
 <section id="float">
 <h4>Float<a class="headerlink" href="#float" title="Permalink to this headline">#</a></h4>
 <p>Positive and negative numbers with a decimal point are called <em>floating-point numbers</em>. Floating-point numbers are expressed by their <strong>sign</strong> (positive/negative), their <strong>mantissa</strong>, and their <strong>exponent to the power of two</strong>.</p>
@@ -1026,9 +1010,12 @@ CAREFUL! Note that tranforming floats into integers may change the value of your
 </table>
 </section>
 </section>
+<section id="span-style-color-red-end-of-lecture-1-october-25-2022-span">
+<h3><span style="color:red">End of lecture 1 (October 25, 2022).</span><a class="headerlink" href="#span-style-color-red-end-of-lecture-1-october-25-2022-span" title="Permalink to this headline">#</a></h3>
+</section>
 <section id="strings">
 <h3>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">#</a></h3>
-<p>String values are sequences of characters (length <span class="math notranslate nohighlight">\(\geq\)</span> 0). Internally, they are stored as a ssequence of letters, each of which has specific bit-encodings. Strings have to obey a number of rules:</p>
+<p>String values are sequences of characters (length <span class="math notranslate nohighlight">\(\geq\)</span> 0). Internally, they are stored as a sequence of letters, each of which has a specific bit encoding. Strings have to obey a number of rules:</p>
 <ul class="simple">
 <li><p>must be surrounded by single ( ‘string’ ) or double quotes ( “string” )</p></li>
 <li><p>only the other type of quotes is allowed inside a string:</p>
@@ -1438,7 +1425,7 @@ YOU?
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_2128</span>\<span class="mf">3018096921.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_2524</span>\<span class="mf">3018096921.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">n</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> 
 <span class="ne">----&gt; </span><span class="mi">5</span> <span class="nb">print</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
