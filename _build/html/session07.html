@@ -1,0 +1,964 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>For efficiency’s sake: structured programs, packages, regular expressions (December 20, 2022) &#8212; Scientific programming in Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)" href="session06.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Scientific programming in Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Scientific Programming in Python
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="session01.html">
+   Introduction (October 18 and 25, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session02.html">
+   Data types and statements (October 25 and November 08, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session03.html">
+   Functions and conditional execution (November 15 and 22, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session04.html">
+   Advanced data types: lists, tuples, sets, dictionaries (November 22 and 29, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session05.html">
+   Modules, file I/O (input/output) (December 06, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session06.html">
+   Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022)
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/julianeschwab/ScientificProgramming/master?urlpath=tree/docs/session07.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/julianeschwab/ScientificProgramming"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/julianeschwab/ScientificProgramming/issues/new?title=Issue%20on%20page%20%2Fsession07.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/session07.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structured-programs">
+   Structured programs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#introducing-the-main-block">
+     Introducing the
+     <em>
+      main
+     </em>
+     block
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-the-main-block-to-separate-functionality-from-function">
+     Using the main block to separate functionality from function
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#packages">
+   Packages
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-find-and-install-a-package">
+     How to find and install a package:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-use-an-installed-package">
+     How to use an installed package:
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#many-packages-define-their-own-classes-data-types">
+       Many packages define their own classes (data types):
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-the-polyglot-package">
+     Example: The
+     <em>
+      polyglot
+     </em>
+     package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pattern-detection-via-regular-expressions">
+   Pattern detection via regular expressions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regular-expressions-as-regular-language">
+     Regular expressions as regular language
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finite-state-automata">
+     Finite state automata
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#so-what-s-the-use-of-this-again">
+     So what’s the use of this again?
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022)</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structured-programs">
+   Structured programs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#introducing-the-main-block">
+     Introducing the
+     <em>
+      main
+     </em>
+     block
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-the-main-block-to-separate-functionality-from-function">
+     Using the main block to separate functionality from function
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#packages">
+   Packages
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-find-and-install-a-package">
+     How to find and install a package:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-use-an-installed-package">
+     How to use an installed package:
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#many-packages-define-their-own-classes-data-types">
+       Many packages define their own classes (data types):
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-the-polyglot-package">
+     Example: The
+     <em>
+      polyglot
+     </em>
+     package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pattern-detection-via-regular-expressions">
+   Pattern detection via regular expressions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regular-expressions-as-regular-language">
+     Regular expressions as regular language
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finite-state-automata">
+     Finite state automata
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#so-what-s-the-use-of-this-again">
+     So what’s the use of this again?
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="for-efficiency-s-sake-structured-programs-packages-regular-expressions-december-20-2022">
+<h1>For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022)<a class="headerlink" href="#for-efficiency-s-sake-structured-programs-packages-regular-expressions-december-20-2022" title="Permalink to this headline">#</a></h1>
+<p>Efficiency is key. Therefore, in this session, you will learn more about advanced aspects of efficient programming. We have already discussed how to improve code efficiency and maintainability in small programs. Sooner or later, however, additional questions may emerge: How should you <strong>distribute code over a main program and importable modules</strong>? Where can time and effort be saved by **relying on already available modules and <strong>packages</strong>? Can <strong>repeating patterns</strong> in the task at hand be detected and exploited for further automization?</p>
+<section id="structured-programs">
+<h2>Structured programs<a class="headerlink" href="#structured-programs" title="Permalink to this headline">#</a></h2>
+<p>Python code (in .py files) can be used in two ways:</p>
+<ul class="simple">
+<li><p>as a standalone program (e.g., the code file that you run from within Spyder)</p></li>
+<li><p>as a module that is imported and used from inside another program</p></li>
+</ul>
+<p><strong>Recap</strong>: Any .py file can be loaded as a module. As such, modules allow us (a) to distribute code across multiple files (which is convenient for bigger coding projects). Modules are loaded with an <em>import</em> statement.</p>
+<p><strong>Larger projects should make use of the distinction between standalone programs and modules.</strong></p>
+<ul class="simple">
+<li><p>package the main functionality in different Python files</p></li>
+<li><p>import these files as modules from a main file where the execution code resides</p></li>
+<li><p>this main code should only be executed when the code is run as a standalone program</p></li>
+</ul>
+<section id="introducing-the-main-block">
+<h3>Introducing the <em>main</em> block<a class="headerlink" href="#introducing-the-main-block" title="Permalink to this headline">#</a></h3>
+<p>Upon importing a module, <strong>all statements in the imported module are executed</strong>. This may be fine if the module is explicitly design with a singular intended function as module imported to other programs. But <strong>sometimes you may want to be able to use a script as both a module and an executable standalone program in and of itself</strong>. This is where the <em>main</em> block comes in handy.</p>
+<p>Why would you want this functionality?</p>
+<ul class="simple">
+<li><p>Your code’s <strong>main function may be for use as module</strong>, but you still want to include a script mode where it runs some <strong>unit tests or a demo</strong>.</p></li>
+<li><p>Your code’s <strong>main function may be for use as standalone program</strong>, but you still want to <strong>make some of its functionalities available to other programs</strong>, without needing to create a new .py file.</p></li>
+<li><p>Finally, your code may be for <strong>use as standalone program (by you)</strong>, but may have some unit tests and the <strong>testing framework (by your teachers)</strong> works by importing .py files like your script and running special test functions. This is the case for your homework exercises.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Example from homework exercise 01</span>
+<span class="k">def</span> <span class="nf">pig_latin_name</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transform a name to the Pig Latin variant (paying attention to capital letters).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+
+<span class="c1"># paste your test code here (will not be tested)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In your homework exercises, <strong>you can test your own code in the main block of your script</strong>. This part of the code is <strong>only exectued when the file runs as standalone program</strong>. If it is instead imported as module (e.g., to our testing scripts), execution of the module’s main block is skipped.</p>
+<p><strong>But how does this work, exactly?</strong></p>
+<p>Upon initializing a script, the Python interpreter will…</p>
+<ol class="simple">
+<li><p>read the source files and <strong>assign certain special variable names</strong></p></li>
+<li><p>execute all code</p></li>
+</ol>
+<p>Special variables are preceded and followed by __ . Here, we care in particular about the <strong>__name__</strong> variable.</p>
+<p>If you are <strong>running a source file as the main program</strong>, the interpreter will assign the hard-coded string “__main__” to the __name__ variable. It’s as if the interpreter inserts this at the top of your code (you don’t actually have to add this to your code):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>__name__ = &quot;__main__&quot; 
+</pre></div>
+</div>
+<p>If you want to convince yourself of this, try and print out the variable’s value on your next homework exercise:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>__main__
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you are <strong>importing a source file as module to another program</strong>, the interpreter will search for the respective .py file and will assign the name from the import statement as value of its __name__ variable.</p>
+<p>For instance, if we are importing the module <em>math</em>, it’s as if the interpreter inserts this at the top of the <em><a class="reference external" href="http://math.py">math.py</a></em> file:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>__name__ = &quot;math&quot;
+</pre></div>
+</div>
+<p>Note that the name of your main program remains __main__:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;the live script&#39;s name remains: &quot;</span><span class="p">,</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;the imported module&#39;s name is:&quot;</span><span class="p">,</span><span class="n">math</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>the live script&#39;s name remains:  __main__
+the imported module&#39;s name is: math
+</pre></div>
+</div>
+</div>
+</div>
+<p>Coming back to the question as to <strong>how this is useful</strong>, note that we can <strong>conditionalize the execution of certain statements on whether the file is executed as main file or as module</strong>. Code that is embedded under the <em>if</em> statement will only be executed if the __name__ variable is assigned the “__main__” value at runtime:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is now running as standalone program!&quot;</span><span class="p">)</span>
+    
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__math__&#39;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We never get here from the main program.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is now running as standalone program!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-the-main-block-to-separate-functionality-from-function">
+<h3>Using the main block to separate functionality from function<a class="headerlink" href="#using-the-main-block-to-separate-functionality-from-function" title="Permalink to this headline">#</a></h3>
+<p>It is efficient, and good practice, in programming to <strong>separate code functionality (the function definitions) from code function (the executable program code)</strong>. You are already using this pattern in your homeworks!</p>
+<p>The following program provides an <strong>example of well-packaged code</strong> that could readily be imported as module to other programs, which would provide them with the specified functions’ functionalities:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sum_lists</span><span class="p">(</span><span class="n">list1</span> <span class="p">,</span> <span class="n">list2</span><span class="p">):</span>    <span class="c1">#functionalities are defined for generalized usability and can be imported into other files</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">list2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">read_floats_from_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span> <span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">in_file</span><span class="p">:</span>
+         <span class="n">lines</span> <span class="o">=</span> <span class="n">in_file</span><span class="o">.</span><span class="n">readlines</span> <span class="p">()</span>
+    <span class="n">float_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="n">float_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span> <span class="p">()))</span>
+    <span class="k">return</span> <span class="n">float_list</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span> <span class="c1">#input is read in only here, that is, when executing the source file as standalone program.</span>
+    <span class="n">l1</span> <span class="o">=</span> <span class="n">read_floats_from_file</span><span class="p">(</span><span class="s2">&quot;test.txt&quot;</span><span class="p">)</span>
+    <span class="n">l2</span> <span class="o">=</span> <span class="n">read_floats_from_file</span><span class="p">(</span><span class="s2">&quot;test2.txt&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum of both lists: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sum_lists</span><span class="p">(</span><span class="n">l1</span> <span class="p">,</span><span class="n">l2</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sum of both lists: 103301.5
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="packages">
+<h2>Packages<a class="headerlink" href="#packages" title="Permalink to this headline">#</a></h2>
+<p>Some functionality is needed by many different programs, but isn’t part of the core language (like built in string methods) or the built-in modules/libraries (like <em>math</em> or <em>itertools</em>).</p>
+<p><strong>Linguistic examples:</strong></p>
+<ul class="simple">
+<li><p>visualization of objects likes trees and graphs</p></li>
+<li><p>efficient natural language parsing</p></li>
+<li><p>multilingual text processing and conversion between alphabets</p></li>
+</ul>
+<p>You don’t need to reinvent the wheel. Focus on the novel functionality of your program while relying on stable code used (and tested) by other programmers for common tasks.</p>
+<p><strong>Python packages</strong> are shared by programmers via package management systems, from which they can be installed via automated tools.</p>
+<section id="how-to-find-and-install-a-package">
+<h3>How to find and install a package:<a class="headerlink" href="#how-to-find-and-install-a-package" title="Permalink to this headline">#</a></h3>
+<ul>
+<li><p>Google for packages that might provide the functionality you want.</p></li>
+<li><p>If you are using the configuration that was recommended at the outset of this course, try installing it via <em>conda</em> first:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  conda install the-package   (the-package is our dummy name, replace it by the package&#39;s real name)
+</pre></div>
+</div>
+</li>
+<li><p>If it says <em>package not found</em>, access the Python Package Index (PyPI) via pip:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> pip install the-package
+</pre></div>
+</div>
+</li>
+<li><p>For the latter option, you might need to install pip first:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  conda install pip
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="how-to-use-an-installed-package">
+<h3>How to use an installed package:<a class="headerlink" href="#how-to-use-an-installed-package" title="Permalink to this headline">#</a></h3>
+<p><strong>Installed packages are available as importable modules.</strong> Take a look at the examples on the package’s website to figure out what modules can be imported. Try out some of the code provided on the package’s website to test that everything works as expected.</p>
+<p>Not sure about what one of the functions or variables in the module’s namespace does? <strong>Many packages provide good documentation online!</strong></p>
+<section id="many-packages-define-their-own-classes-data-types">
+<h4>Many packages define their own classes (data types):<a class="headerlink" href="#many-packages-define-their-own-classes-data-types" title="Permalink to this headline">#</a></h4>
+<ul>
+<li><p>Class names are conventionally written with an uppercase letter (example: Text)</p></li>
+<li><p>Classes are similar to the built-in complex datatypes like lists and dictionaries: they define the behavior of objects of their type (e.g., what properties should Text objects have)</p></li>
+<li><p>creating an instance of a class (an object of its type) works by calling its constructor, like you used dict() to create a new dictionary:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  my_text = Text(str)
+</pre></div>
+</div>
+</li>
+<li><p>Classes provide methods, i.e. functions which take an instance of the class as their first argument, and calls to which are written instance.method(additional arguments)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  my_text.words
+</pre></div>
+</div>
+</li>
+<li><p>You will learn how to create your own classes in a later session.</p></li>
+</ul>
+</section>
+</section>
+<section id="example-the-polyglot-package">
+<h3>Example: The <em>polyglot</em> package<a class="headerlink" href="#example-the-polyglot-package" title="Permalink to this headline">#</a></h3>
+<p>The <em>polyglot</em> package is a natural language processing toolbox specialized on multilingual language applications. It offers tools for tokenization, language detection, morphological analysis and more in 150+ languages.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">polyglot</span> <span class="c1">#import the polyglot package</span>
+<span class="kn">from</span> <span class="nn">polyglot.text</span> <span class="kn">import</span> <span class="n">Detector</span><span class="p">,</span> <span class="n">Text</span><span class="p">,</span> <span class="n">Word</span> <span class="c1">#imports the Text and Word classes</span>
+
+<span class="n">text_en</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="s2">&quot;Enjoy the Christmas break and have a happy new year!&quot;</span><span class="p">)</span>
+<span class="n">text_ar</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="s2">&quot;عيد ميلاد مجيد وكل عام وانتم بخير&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text_en</span><span class="o">.</span><span class="n">words</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Language Detected: Name=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text_en</span><span class="o">.</span><span class="n">language</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Language Detected: Name=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text_ar</span><span class="o">.</span><span class="n">language</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_2528</span>\<span class="mf">1050358319.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">polyglot</span> <span class="c1">#import the polyglot package</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">polyglot.text</span> <span class="kn">import</span> <span class="n">Detector</span><span class="p">,</span> <span class="n">Text</span><span class="p">,</span> <span class="n">Word</span> <span class="c1">#imports the Text and Word classes</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">text_en</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="s2">&quot;Enjoy the Christmas break and have a happy new year!&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">text_ar</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="s2">&quot;عيد ميلاد مجيد وكل عام وانتم بخير&quot;</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;polyglot&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">polyglot.transliteration</span> <span class="kn">import</span> <span class="n">Transliterator</span>
+
+<span class="c1">#english-arabic transliteration</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">text_en</span><span class="o">.</span><span class="n">transliterate</span><span class="p">(</span><span class="s2">&quot;ar&quot;</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ينجوي
+ثي
+كريستماس
+برياك
+اند
+هافي
+ا
+هاببي
+نيو
+يير
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="pattern-detection-via-regular-expressions">
+<h2>Pattern detection via regular expressions<a class="headerlink" href="#pattern-detection-via-regular-expressions" title="Permalink to this headline">#</a></h2>
+<p><strong>Beware, the following may even be useful in real life.</strong></p>
+<p>In many applications, we need to <strong>find strings matching a pattern</strong>:</p>
+<ul class="simple">
+<li><p>find all documents containing a given name</p></li>
+<li><p>find example sentences for the usage of some word in a corpus</p></li>
+<li><p>find the places in your code where you used some variable</p></li>
+</ul>
+<p>Also, we often need to <strong>extract parts of a string matching a pattern</strong>:</p>
+<ul class="simple">
+<li><p>extract everything that is formatted like a name</p></li>
+<li><p>extract the words which can occur as arguments to a specific verb from a corpus</p></li>
+</ul>
+<p><strong>Regular expressions</strong> are sequences of strings and special operators that define a regular language (in the Chomskian sense). They allow you to specify search patterns for text data.</p>
+<section id="regular-expressions-as-regular-language">
+<h3>Regular expressions as regular language<a class="headerlink" href="#regular-expressions-as-regular-language" title="Permalink to this headline">#</a></h3>
+<p>Regular languages, in general, are characterized as follows:</p>
+<p><strong>Given a finite alphabet Σ</strong> (e.g., a collection of characters),…</p>
+<ul class="simple">
+<li><p>the <strong>empty language Ø</strong> is a regular language.</p></li>
+<li><p>for each a ∈ Σ, the <strong>singleton language {a}</strong> is a regular language.</p></li>
+<li><p>If A is a regular language, <strong>A* (Kleene star, more below)</strong> is a regular language. That means the empty string language {ε} is also regular.</p></li>
+<li><p>If A and B are regular languages, then <strong>A ∪ B (union)</strong> and <strong>A • B (concatenation)</strong> are regular languages.</p></li>
+<li><p><strong>No other languages over Σ are regular.</strong></p></li>
+<li><p>In particular, that means that A<sup>n</sup>B<sup>n</sup> does not describe a regular language (because there is no memory for the value of <em>n</em>)</p></li>
+</ul>
+<p>All regular languages are describable by regular expressions. Let’s assume a language with alphabet Σ = {a, b, c}. Regular expressions over this alphabet can use any of its constants (characters) as well as the three basic operations admittable by the definition of regular languages:</p>
+<ul class="simple">
+<li><p><strong>Concatenation</strong>: in linear order, combine two elements of the alphabet: <em>ab, aab, aaabb, aacbbb, …</em></p></li>
+<li><p><strong>Alternation</strong>: free choice of either the (potentially multi-character) expressions on the left or right of the pipe symbol: <em>a|b, (ab)|(bc), (accc)|b,…</em></p></li>
+<li><p><strong>Kleene star</strong>: denotes the smallest superset of the set described by the expression it is applied to that contains ε and is closed under string concatenation: <em>a* = {ε, a, aa, aaa, aaaa,…}</em>, <em>(ab)* = {ε, ab, abab, ababab,…}</em></p></li>
+</ul>
+</section>
+<section id="finite-state-automata">
+<h3>Finite state automata<a class="headerlink" href="#finite-state-automata" title="Permalink to this headline">#</a></h3>
+<p>Regular languages (and thus regular expressions) can also be represented visually in (deterministic or nondeterministic) <em>finite state automata</em> (FSA). These consist of:</p>
+<ul class="simple">
+<li><p>a finite number of states Z = {Z<sub>1</sub>, Z<sub>2</sub>, …, Z<sub>k</sub>}</p></li>
+<li><p>a starting state Z<sub>start</sub> ∈ Z</p></li>
+<li><p>one (or possibly several) final states Z<sub>end</sub> ⊆ Z</p></li>
+<li><p>a transition function to move from Z<sub>i</sub> to Z<sub>j</sub> depending on an input symbol from the alphabet Σ. δ : Z × Σ → Z</p></li>
+</ul>
+<p>Determinisitic FSA need to specify exactly one possible transition per input symbol on each state. Nondeterministic FSA can have multiple transition options for an input symbol (e.g., for a on Z<sub>1</sub> below).</p>
+<img src="https://www.dropbox.com/s/sbye5rzzqoxa0lw/automata_regex.png?raw=1" width="500" height="500" />
+</section>
+<section id="so-what-s-the-use-of-this-again">
+<h3>So what’s the use of this again?<a class="headerlink" href="#so-what-s-the-use-of-this-again" title="Permalink to this headline">#</a></h3>
+<p>Using just the set of operations defined above, we can significantly improve pattern detection for various types of text input.</p>
+<p><strong>Regular expressions can be used in Google</strong>: “(parties|concerts) in Tübingen on (Friday|Saturday)”.</p>
+<p>Using the <strong>Python module <em>re</em></strong>, we can find and extract text patterns by matching them against specified regular expressions. Note that the package’s syntax is a bit differnt from the notation introduced above and introduces a few extra operators:</p>
+<ul class="simple">
+<li><p>* :zero or more repetitions; <em>b*t</em> matches <em>t, bt, bbt, …</em></p></li>
+<li><p>+: at least one repetition; <em>b+t</em> matches <em>bt, bbt, …</em></p></li>
+<li><p>?: optional items (zero or one repetition); <em>b?t</em> matches <em>t</em> and <em>bt</em></p></li>
+<li><p>[]: alternation between single characters; <em>b[aeiou]t</em> matches <em>bat, bet, bit, bot, but</em>, but not <em>beet</em></p></li>
+<li></li>
+<li><p>{min, max}: more general quantification; <em>a{4,6}</em> matches <em>aaaa, aaaaa</em>, and <em>aaaaaa</em></p></li>
+<li><p>. (dot): wildcard symbol that matches any character except the new-line character; <em>b.t</em> matches <em>bat, bbt, bct, bdt, bet,…</em></p></li>
+<li><p>(): grouping as above; <em>(ab)+</em> matches <em>ab, abab, ababab,…</em></p></li>
+<li><p>|: alternation as above; <em>apple|banana</em> matches <em>apple, banana</em></p></li>
+</ul>
+<p>Further useful shorthand notations:</p>
+<ul class="simple">
+<li><p>[A-Z] matches any uppercase letter of the alphabet</p></li>
+<li><p>[0-9] matches any digit</p></li>
+<li><p>\d stands for digits (= [0-9])</p></li>
+<li><p>\w stands for word characters (= [a-z A-Z 0-9])</p></li>
+<li><p>\s stands for whitespaces (= [\t\r\n])</p></li>
+</ul>
+<p><strong>Re</strong> requires you to specify an expression against which to match the designated string. You can set this using <em>re.compile(regex)</em>. <strong>Simple pattern matching operations on that basis include</strong>:</p>
+<ul class="simple">
+<li><p><em>regex.match(str)</em>: matches the regex pattern <strong>for its appearance at the beginning of the string</strong>.</p></li>
+<li><p><em>regex.search(str)</em>: matches the regex pattern <strong>for its appearance anywhere in the string</strong>. Only returns the first match.</p></li>
+<li><p><em>regex.findall(str)</em>: matches the regex pattern <strong>for its appearance anywhere in the string</strong> and returns all matches.</p></li>
+<li><p><em>regex.split(str)</em>: matches the regex pattern <strong>for its appearance anywhere in the string</strong> and splits the string into a list of substrings.</p></li>
+</ul>
+<p>The first three of these methods return a <em>match</em> object, which can be further processed using methods within the <em>Re</em> module (check out the online documentation).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">sentence</span> <span class="o">=</span> <span class="s2">&quot;The quick brown fox jumps over the lazy dog.&quot;</span>
+
+<span class="n">matcher</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(\s[d|f]o[^aeiou])&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">matcher</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">sentence</span><span class="p">))</span> <span class="c1">#find all instances matching the regex</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">matcher</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sentence</span><span class="p">))</span> <span class="c1">#split string around all instances matching the regex</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39; fox&#39;, &#39; dog&#39;]
+[&#39;The quick brown&#39;, &#39; fox&#39;, &#39; jumps over the lazy&#39;, &#39; dog&#39;, &#39;.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "julianeschwab/ScientificProgramming",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="session06.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Juliane Schwab<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
