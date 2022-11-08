@@ -393,19 +393,19 @@ print(o)
 # 
 # The following example illustrates:
 
-# In[15]:
+# In[32]:
 
 
 o = 17
 
 
-# In[10]:
+# In[33]:
 
 
 17 = o
 
 
-# In[11]:
+# In[34]:
 
 
 17 == o
@@ -413,7 +413,7 @@ o = 17
 
 # Once you assign a new value to a variable, you lose (access to) its previous value. It is **often wise to create temporary copies of important variables**, which you can modify without losing knowledge of the original variable's value.
 
-# In[16]:
+# In[35]:
 
 
 o = o + 1
@@ -427,7 +427,7 @@ print(o)
 # - analogously, *a -= b*, *a *= b*,*a /= b*
 # - remember that + and * also have functionality for strings!
 
-# In[22]:
+# In[36]:
 
 
 o += 1
@@ -435,7 +435,7 @@ o += 1
 print(o)
 
 
-# In[21]:
+# In[37]:
 
 
 study_program = "Linguistics"
@@ -462,7 +462,7 @@ print(study_program)
 # 
 # **Expressions** are pieces of code that **evaluate to an object** and do nothing else but to perform this evaluation. They can be (any combination of) values, variables, operators, and calls to functions. Typing expressions into the command prompt will cause Python to evaluate it and return its result.
 
-# In[27]:
+# In[38]:
 
 
 (20 + o) * 3
@@ -470,7 +470,7 @@ print(study_program)
 
 # While expressions ARE something, statements DO something. **Statements are instructions** for Python to execute. Examples that we have already encountered include variable assignments and the *print()* function. We will see other examples in later sessions. Typing statements into the command prompt will cause Python to execute that statement. This will not result in the display of results.
 
-# In[29]:
+# In[39]:
 
 
 p = "I am a statement" #no output from executing this line
