@@ -169,7 +169,7 @@ if __name__ == "__main__": #input is read in only here, that is, when executing 
 # 
 # The *polyglot* package is a natural language processing toolbox specialized on multilingual language applications. It offers tools for tokenization, language detection, morphological analysis and more in 150+ languages.
 
-# In[6]:
+# In[7]:
 
 
 import polyglot #import the polyglot package
@@ -182,7 +182,7 @@ print("\nLanguage Detected: Name={}".format(text_en.language.name))
 print("\nLanguage Detected: Name={}".format(text_ar.language.name))
 
 
-# In[9]:
+# In[5]:
 
 
 from polyglot.transliteration import Transliterator
@@ -277,7 +277,7 @@ for x in text_en.transliterate("ar"):
 # 
 # The first three of these methods return a *match* object, which can be further processed using methods within the *Re* module (check out the online documentation).
 
-# In[50]:
+# In[8]:
 
 
 import re

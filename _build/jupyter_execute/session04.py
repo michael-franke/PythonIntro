@@ -393,7 +393,7 @@ print(notebook)
 # 
 # Remember that all data types that encode collections of elements (lists, tuples, sets, dictionaries) can be nested! A more elegant way of representing our little notebook of friends uses **nested dictionaries**:
 
-# In[100]:
+# In[27]:
 
 
 revised_notebook = dict()
@@ -407,7 +407,7 @@ print("\n",revised_notebook["Friend 1"])
 
 # Similarly, lists can be nested into arbitrarily complex hierarchical list structures. **It is very common to represent matrices as nested lists**, for instance: 
 
-# In[122]:
+# In[28]:
 
 
 #initializing a matrix with m rows and n columns:

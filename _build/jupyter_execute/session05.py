@@ -329,3 +329,9 @@ with open('text.txt', 'w') as file:
 
 
 # Notice that there is **no need to call *file.close()***. The *with* statement itself ensures proper acquisition and release of resources, regardless of whether the *file.write* method throws exceptions.
+
+# In[ ]:
+
+
+
+

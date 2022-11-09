@@ -163,7 +163,7 @@ outer_function()
 print(z)
 
 
-# In[9]:
+# In[25]:
 
 
 print(y)
@@ -178,7 +178,7 @@ print(y)
 # 
 # **Python also supports the use of multiple return values**, separated by commas. The result of the function call needs to be assigned to the same number of variables, also separated by commas
 
-# In[10]:
+# In[26]:
 
 
 def string_percentage(word,length):
@@ -188,7 +188,7 @@ x = string_percentage("return",20)
 print(x)
 
 
-# In[11]:
+# In[27]:
 
 
 def get_word_statistics(word , length):
@@ -205,7 +205,7 @@ print(w + " (length:" + str(wlen) + ", percentage: " + str(wperc) + ")")
 # 
 # Internally, Python adds *return None* to the end of any function body with no return statement. If you assign the result of a function call without return value to a variable, that variable will also have the *None* value (see code block below).
 
-# In[12]:
+# In[28]:
 
 
 def string_percentage(word,length):
@@ -225,7 +225,7 @@ print(x)
 # ### if
 # The most basic flow control statement is the *if*-clause. It will execute the code block in its body *iff* (if and only if) the statement's condition is *True*. Its execution is skipped whenever the condition is *False*. We have seen an *if* statement before:
 
-# In[3]:
+# In[29]:
 
 
 x = 'Forest runs'
@@ -238,7 +238,7 @@ print(y) #then print the new variable
 # #### if...else
 # *If* statements can be optionally followed by *else* statements, which are executed *iff* the statement's condition is *False*.
 
-# In[4]:
+# In[30]:
 
 
 if 'runs' in y: #if variable x contains the string 'runs'
@@ -255,7 +255,7 @@ print(z) #then print the new variable
 # 
 # Thus, given that z = *Natasha walks*, what will be the output of the following statement?
 
-# In[5]:
+# In[31]:
 
 
 if 'runs' in z: #if variable x contains the string 'runs'
@@ -276,7 +276,7 @@ print(z) #then print the variable
 # 
 # Finally, **flow control statements can be nested**:
 
-# In[6]:
+# In[32]:
 
 
 if 'runs' in z: #if variable z contains the string 'runs'
@@ -303,7 +303,7 @@ print(z) #then print the variable
 # - *A or B* is true *iff* A is true or B is true or both A and B are true
 # - *not A* is true *iff* A is false
 
-# In[9]:
+# In[33]:
 
 
 if 'walks' in z and len(z) < 20:
@@ -322,7 +322,7 @@ print(z)
 # 
 # We have already seen one example for a loop, the **while** loop. This loop repeats executing the code in its body as long as its condition is met.
 
-# In[10]:
+# In[34]:
 
 
 x = 'Forest runs'
@@ -355,7 +355,7 @@ print(x)
 # 
 # *Continue* statements end the current iteration of the loop and cause it to repeat from the top. This is useful if there are cases you'd like to skip or ignore.
 
-# In[34]:
+# In[35]:
 
 
 reply = ""
@@ -381,7 +381,7 @@ print("Stop asking questions and let me in.")
 # - *ranges*: variable is assigned to iterable sequence of numbers, see details below
 # - *lists*,*tuples*,*sets*,*dictionairies*: next week
 
-# In[49]:
+# In[36]:
 
 
 #for loop on strings
@@ -401,7 +401,7 @@ for i in example_string: #for each character in the example string
 # - *range(i,n)* generates a sequence of integers from i to n-1. For instance *range(10,20)* generates 10,11,12,13,14,15,16,17,18,19
 # - *range(i,n,k)* generates sequences of integers from i to n-1, but only generates every *k*th integer in that sequence. For instance *range(1,20,5)* generates 1,6,11,16
 
-# In[48]:
+# In[37]:
 
 
 #for loop on numbers
@@ -409,4 +409,16 @@ example_string = "Far out in the uncharted backwaters of the unfashionable end o
 for i in range(1,20,5): #for each character in the example string
     print("The letter at position",i,"is",example_string[i-1]) #print this
 #terminates at the end of the string
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
