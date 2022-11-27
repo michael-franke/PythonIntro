@@ -381,7 +381,9 @@ for key in notebook:
 #Adding a new friend to our notebook:
 key_list = list(notebook.keys())
 i = 0
-for entry in notebook.values():
+
+#a loop over dictionary values
+for entry in notebook.values(): 
     print("Please add a new", key_list[i])
     new_entry = input()
     entry.append(new_entry)
@@ -389,11 +391,37 @@ for entry in notebook.values():
 print(notebook)
 
 
+# In this particular case, the same result may also be achieved by looping over dictionary keys. Whether you should loop over keys or values will always depend on your application.
+
+# In[32]:
+
+
+#a loop over dictionary keys
+for i in notebook.keys():
+    print("Please add a new", i)
+    new_entry= input()
+    notebook[i].append(new_entry)
+
+print(notebook)
+
+
+# Note, crucially, that **we can't access dictionary entries by using a numeric index**, as we would for lists. The following command raises a *key error*:
+
+# In[33]:
+
+
+print(notebook[1])
+
+
+# This is because **although it looks like a numeric index, it is not**. As specified earlier, any immutable type can be a dictionary key, including integer numbers. Therefore, *notebook[1]* is understood as command to look up the values paired with the key *1* (and we never defined such a key in this dictionary).
+# 
+# **Dictionaries are not inherently ordered, therefore accessing its items always relies on referring to their keys and/or values.** Although Python does guarantee that the order of items in a dictionary is preserved when displayed or iterated over, this is only the case since very recently. It has been added as a part of the Python language specification in version 3.7 (released in 2018).
+
 # ### Hierarchical structure
 # 
 # Remember that all data types that encode collections of elements (lists, tuples, sets, dictionaries) can be nested! A more elegant way of representing our little notebook of friends uses **nested dictionaries**:
 
-# In[27]:
+# In[34]:
 
 
 revised_notebook = dict()
@@ -407,7 +435,7 @@ print("\n",revised_notebook["Friend 1"])
 
 # Similarly, lists can be nested into arbitrarily complex hierarchical list structures. **It is very common to represent matrices as nested lists**, for instance: 
 
-# In[28]:
+# In[49]:
 
 
 #initializing a matrix with m rows and n columns:
@@ -419,4 +447,7 @@ print(matrix)
 
 #summing up the rows
 print("The sum of the rows is:",list(map(sum , matrix)))
+
+#Question: How would you sum up the columns?
+print("The sum of the columns is:", []) 
 
