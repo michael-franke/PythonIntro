@@ -194,8 +194,6 @@ for x in text_en.transliterate("ar"):
 
 # ### Pattern detection via regular expressions
 # 
-# **Beware, the following may even be useful in real life.** 
-# 
 # In many applications, we need to **find strings matching a pattern**:
 # - find all documents containing a given name
 # - find example sentences for the usage of some word in a corpus
@@ -248,17 +246,20 @@ for x in text_en.transliterate("ar"):
 # 
 # **Regular expressions can be used in Google**: "(parties|concerts) in Tübingen on (Friday|Saturday)".
 # 
+# #### The *re* module
 # Using the **Python module *re***, we can find and extract text patterns by matching them against specified regular expressions. Note that the package's syntax is a bit differnt from the notation introduced above and introduces a few extra operators:
 # 
-# - &ast; :zero or more repetitions; *b&ast;t* matches *t, bt, bbt, ...* 
-# - +: at least one repetition; *b+t* matches *bt, bbt, ...*
-# - ?: optional items (zero or one repetition); *b?t* matches *t* and *bt*
-# - []: alternation between single characters; *b[aeiou]t* matches *bat, bet, bit, bot, but*, but not *beet*
-# - [^...]: the hat symbol inside square brackets serves to negate the characters therein; *b[^aeiou]t* matches bbt, bct, ...*, but not *bat, bet, bit, bot, but*
-# - {min, max}: more general quantification; *a{4,6}* matches *aaaa, aaaaa*, and *aaaaaa*
-# - . (dot): wildcard symbol that matches any character except the new-line character; *b.t* matches *bat, bbt, bct, bdt, bet,...*
-# - (): grouping as above; *(ab)+* matches *ab, abab, ababab,...*
-# - |: alternation as above; *apple|banana* matches *apple, banana*
+# |Operator|Meaning|Example|
+# |---|---|---|
+# | &ast; | zero or more repetitions | *b&ast;t* matches *t, bt, bbt, ...* |
+# | + | at least one repetition | *b+t* matches *bt, bbt, ...*|
+# | ? | optional items (zero or one repetition) | *b?t* matches *t* and *bt*|
+# | [] | alternation between single characters | *b[aeiou]t* matches *bat, bet, bit, bot, but*, but not *beet*|
+# | [^...] | the hat symbol inside square brackets serves to negate the characters therein | *b[^aeiou]t* matches bbt, bct, ...*, but not *bat, bet, bit, bot, but*|
+# | {min, max} | more general quantification | *a{4,6}* matches *aaaa, aaaaa*, and *aaaaaa*|
+# | . (dot) | wildcard symbol that matches any character except the new-line character | *b.t* matches *bat, bbt, bct, bdt, bet,...*|
+# | () | grouping metacharacter as above | *(ab)+* matches *ab, abab, ababab,...*|
+# | \| | alternation as above | *apple\|banana* matches *apple, banana*|
 # 
 # Further useful shorthand notations:
 # 
@@ -274,10 +275,8 @@ for x in text_en.transliterate("ar"):
 # - *regex.search(str)*: matches the regex pattern **for its appearance anywhere in the string**. Only returns the first match.
 # - *regex.findall(str)*: matches the regex pattern **for its appearance anywhere in the string** and returns all matches.
 # - *regex.split(str)*: matches the regex pattern **for its appearance anywhere in the string** and splits the string into a list of substrings.
-# 
-# The first three of these methods return a *match* object, which can be further processed using methods within the *Re* module (check out the online documentation).
 
-# In[8]:
+# In[1]:
 
 
 import re
@@ -288,4 +287,23 @@ matcher = re.compile("(\s[d|f]o[^aeiou])")
 
 print(matcher.findall(sentence)) #find all instances matching the regex
 print(matcher.split(sentence)) #split string around all instances matching the regex
+
+
+# The first two of these methods return a *match* object, which can be further processed using methods within the *Re* module (e.g., *start()* and *end()*, but check out the online documentation for more).
+
+# In[10]:
+
+
+match = matcher.search(sentence)
+print(match)
+
+match.start(), match.end()
+
+
+# You can replace matching substrings using the *sub(replacement, string)*:
+
+# In[12]:
+
+
+matcher.sub(" cat", sentence)
 

@@ -144,6 +144,23 @@ const thebe_selector_output = ".output, .cell_output"
    For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022)
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session08.html">
+   Applications (Part I): Processing corpus data using
+   <em>
+    NLTK
+   </em>
+   ,
+   <em>
+    numpy
+   </em>
+   , and
+   <em>
+    matplotlib
+   </em>
+   (January 10, 2023)
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -853,7 +870,7 @@ You can create <strong>global variables</strong> inside a function by using the 
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_5860</span>\<span class="mf">557461111.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_5548</span>\<span class="mf">557461111.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;z&#39; is not defined
@@ -1047,14 +1064,15 @@ place where function was called.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;walks&#39;</span> <span class="ow">in</span> <span class="n">z</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">z</span> <span class="o">+</span> <span class="s1">&#39; for a long time&#39;</span>
-<span class="k">elif</span> <span class="s1">&#39;walks&#39;</span> <span class="ow">in</span> <span class="n">z</span> <span class="ow">and</span> <span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Forest&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">z</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Natasha&#39;</span><span class="p">)):</span>
+<span class="k">elif</span> <span class="s1">&#39;walks&#39;</span> <span class="ow">in</span> <span class="n">z</span> <span class="ow">and</span> <span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Forest&#39;</span><span class="p">)</span> <span class="ow">or</span> 
+                       <span class="n">z</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Natasha&#39;</span><span class="p">)):</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">z</span> <span class="o">+</span> <span class="s1">&#39;. What is Ming doing now?&#39;</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Forest walks for a long time
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Forest walks for a long time. What is Ming doing now?. What is Ming doing now?. What is Ming doing now?
 </pre></div>
 </div>
 </div>
@@ -1092,15 +1110,31 @@ place where function was called.</p>
 <li><p>define additional exit points using <em>break</em> statements (see below)</p></li>
 <li><p>ensure that the test condition changes in each iteration (as in code block [10], but not always possible)</p></li>
 </ul>
-<p><strong>Example of a non-terminating loop</strong>:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>reply = &quot;&quot;
-while (reply != &quot;Who&#39;s there?&quot;):
-    print(&quot;Knock knock&quot;)
-    reply = &quot;Yes?&quot;
-    print(reply)
-    #reply = input() #allowing user input would enable changing the value of reply on every iteration
-print(&quot;Stop asking questions and let me in.&quot;)
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#**Example of a non-terminating loop**:</span>
+    
+<span class="n">reply</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">reply</span> <span class="o">!=</span> <span class="s2">&quot;Who&#39;s there?&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Knock knock&quot;</span><span class="p">)</span>
+    <span class="n">reply</span> <span class="o">=</span> <span class="s2">&quot;Yes?&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">reply</span><span class="p">)</span>
+    <span class="n">reply</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span> <span class="c1">#allowing user input would enable changing the value of reply on every iteration</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stop asking questions and let me in.&quot;</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Knock knock
+Yes?
+Yes?
+Knock knock
+Yes?
+Who&#39;s there?
+Stop asking questions and let me in.
+</pre></div>
+</div>
+</div>
 </div>
 <section id="exiting-the-loop-with-break-or-continue">
 <h4>Exiting the loop with ‘break’ or ‘continue’<a class="headerlink" href="#exiting-the-loop-with-break-or-continue" title="Permalink to this headline">#</a></h4>
@@ -1111,6 +1145,7 @@ print(&quot;Stop asking questions and let me in.&quot;)
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reply</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 <span class="k">while</span> <span class="p">(</span><span class="n">reply</span> <span class="o">!=</span> <span class="s2">&quot;Who&#39;s there?&quot;</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Knock knock&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;What&#39;s your reply?&quot;</span><span class="p">)</span>
     <span class="n">reply</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span> <span class="c1">#user can input their reply</span>
     <span class="k">if</span> <span class="n">reply</span> <span class="o">==</span> <span class="s2">&quot;Yes?&quot;</span><span class="p">:</span>
         <span class="k">break</span> <span class="c1">#exits loop immediately</span>
@@ -1125,10 +1160,12 @@ print(&quot;Stop asking questions and let me in.&quot;)
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Knock knock
-who&#39;s there?
+What&#39;s your reply?
+aa
 Try again:
-Who&#39;s there?
-Stop asking questions and let me in.
+ggg
+Knock knock
+What&#39;s your reply?
 </pre></div>
 </div>
 </div>

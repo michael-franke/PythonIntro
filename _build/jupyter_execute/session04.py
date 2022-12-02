@@ -311,8 +311,13 @@ print(lays_eggs & produces_milk)
 # In[21]:
 
 
-some_capital_cities_of_africa = {"Algeria" : "Algiers","Botswana": "Gaborone","Chad" : "N'Djamena","Egypt" : "Cairo"}
-print("The capital of Egypt is ",some_capital_cities_of_africa["Egypt"]) #retrieve dictionary entries by their key
+some_capital_cities_of_africa = {"Algeria" : "Algiers",
+                                 "Botswana": "Gaborone",
+                                 "Chad" : "N'Djamena",
+                                 "Egypt" : "Cairo",
+                                "Kenya" : "Abc"}
+print("The capital of Egypt is ",
+      some_capital_cities_of_africa["Egypt"]) #retrieve dictionary entries by their key
 
 #adding new dictionary entries is easy....
 some_capital_cities_of_africa["Kenya"] = "Nairobi"
@@ -327,7 +332,8 @@ some_capital_cities_of_africa["Kenya"] = "Nairobi"
 # In[22]:
 
 
-to_upper_dict = dict([(l.lower(),l) for l in "ABCDEFGHIJKLMNOPQRSTUVWXYZ "])
+to_upper_dict = dict([(l.lower(),l) for l in 
+                      "ABCDEFGHIJKLMNOPQRSTUVWXYZ "])
 print(to_upper_dict)
 
 
@@ -355,10 +361,13 @@ last_names = ["bin Hamad", "Schultz", "Sanchez", "Loren"]
 ages = [33, 28, 41, 38]
 phone_numbers = ["0176123456", "0176123456", "0176123456", "0176123456"]
 
-notebook = {"First name" : first_names, "Last name" : last_names, "Age" : ages, "Phone number" : phone_numbers}
+notebook = {"First name" : first_names, 
+            "Last name" : last_names, 
+            "Age" : ages, "Phone number" : phone_numbers}
 
-for key in notebook:
-    print("I have the following information: ", key,":", notebook[key][0]) #for each key, returns the list element with index 0
+for i in notebook:
+    print("I have the following information: ", 
+          i ,":", notebook[i][0]) #for each key, returns the list element with index 0
 
 
 # #### Modifying a dictionary
@@ -393,7 +402,7 @@ print(notebook)
 
 # In this particular case, the same result may also be achieved by looping over dictionary keys. Whether you should loop over keys or values will always depend on your application.
 
-# In[32]:
+# In[27]:
 
 
 #a loop over dictionary keys
@@ -407,7 +416,7 @@ print(notebook)
 
 # Note, crucially, that **we can't access dictionary entries by using a numeric index**, as we would for lists. The following command raises a *key error*:
 
-# In[33]:
+# In[28]:
 
 
 print(notebook[1])
@@ -421,21 +430,24 @@ print(notebook[1])
 # 
 # Remember that all data types that encode collections of elements (lists, tuples, sets, dictionaries) can be nested! A more elegant way of representing our little notebook of friends uses **nested dictionaries**:
 
-# In[34]:
+# In[29]:
 
 
 revised_notebook = dict()
 
 #len(first_names)
 for i in range(1,len(first_names)):
-    revised_notebook["Friend "+ str(i)] = {"First name" : first_names[i], "Last name" : last_names[i], "Age" : ages[i], "Phone number" : phone_numbers[i]}
-print(revised_notebook)
+    revised_notebook["Friend "+ str(i)] = {"First name" : first_names[i-1], 
+     "Last name" : last_names[i-1], 
+     "Age" : ages[i-1], 
+     "Phone number" : phone_numbers[i-1]}
+#print(revised_notebook)
 print("\n",revised_notebook["Friend 1"])
 
 
 # Similarly, lists can be nested into arbitrarily complex hierarchical list structures. **It is very common to represent matrices as nested lists**, for instance: 
 
-# In[49]:
+# In[30]:
 
 
 #initializing a matrix with m rows and n columns:
@@ -450,4 +462,10 @@ print("The sum of the rows is:",list(map(sum , matrix)))
 
 #Question: How would you sum up the columns?
 print("The sum of the columns is:", []) 
+
+
+# In[ ]:
+
+
+
 
