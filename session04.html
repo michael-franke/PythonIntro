@@ -144,6 +144,23 @@ const thebe_selector_output = ".output, .cell_output"
    For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022)
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session08.html">
+   Applications (Part I): Processing corpus data using
+   <em>
+    NLTK
+   </em>
+   ,
+   <em>
+    numpy
+   </em>
+   , and
+   <em>
+    matplotlib
+   </em>
+   (January 10, 2023)
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -1079,8 +1096,13 @@ This is equivalent to:
 <p>Like sets, dictionaries begin and end with curly brackets. Inside, they contain mappings between key and value, indicated as objects on the left-hand and ride-hand side of a colon, respectively.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">some_capital_cities_of_africa</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Algeria&quot;</span> <span class="p">:</span> <span class="s2">&quot;Algiers&quot;</span><span class="p">,</span><span class="s2">&quot;Botswana&quot;</span><span class="p">:</span> <span class="s2">&quot;Gaborone&quot;</span><span class="p">,</span><span class="s2">&quot;Chad&quot;</span> <span class="p">:</span> <span class="s2">&quot;N&#39;Djamena&quot;</span><span class="p">,</span><span class="s2">&quot;Egypt&quot;</span> <span class="p">:</span> <span class="s2">&quot;Cairo&quot;</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The capital of Egypt is &quot;</span><span class="p">,</span><span class="n">some_capital_cities_of_africa</span><span class="p">[</span><span class="s2">&quot;Egypt&quot;</span><span class="p">])</span> <span class="c1">#retrieve dictionary entries by their key</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">some_capital_cities_of_africa</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Algeria&quot;</span> <span class="p">:</span> <span class="s2">&quot;Algiers&quot;</span><span class="p">,</span>
+                                 <span class="s2">&quot;Botswana&quot;</span><span class="p">:</span> <span class="s2">&quot;Gaborone&quot;</span><span class="p">,</span>
+                                 <span class="s2">&quot;Chad&quot;</span> <span class="p">:</span> <span class="s2">&quot;N&#39;Djamena&quot;</span><span class="p">,</span>
+                                 <span class="s2">&quot;Egypt&quot;</span> <span class="p">:</span> <span class="s2">&quot;Cairo&quot;</span><span class="p">,</span>
+                                <span class="s2">&quot;Kenya&quot;</span> <span class="p">:</span> <span class="s2">&quot;Abc&quot;</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The capital of Egypt is &quot;</span><span class="p">,</span>
+      <span class="n">some_capital_cities_of_africa</span><span class="p">[</span><span class="s2">&quot;Egypt&quot;</span><span class="p">])</span> <span class="c1">#retrieve dictionary entries by their key</span>
 
 <span class="c1">#adding new dictionary entries is easy....</span>
 <span class="n">some_capital_cities_of_africa</span><span class="p">[</span><span class="s2">&quot;Kenya&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Nairobi&quot;</span>
@@ -1102,7 +1124,8 @@ This is equivalent to:
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">to_upper_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">l</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="s2">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ &quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">to_upper_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">l</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> 
+                      <span class="s2">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ &quot;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">to_upper_dict</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1141,10 +1164,13 @@ This is equivalent to:
 <span class="n">ages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">33</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">38</span><span class="p">]</span>
 <span class="n">phone_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;0176123456&quot;</span><span class="p">,</span> <span class="s2">&quot;0176123456&quot;</span><span class="p">,</span> <span class="s2">&quot;0176123456&quot;</span><span class="p">,</span> <span class="s2">&quot;0176123456&quot;</span><span class="p">]</span>
 
-<span class="n">notebook</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;First name&quot;</span> <span class="p">:</span> <span class="n">first_names</span><span class="p">,</span> <span class="s2">&quot;Last name&quot;</span> <span class="p">:</span> <span class="n">last_names</span><span class="p">,</span> <span class="s2">&quot;Age&quot;</span> <span class="p">:</span> <span class="n">ages</span><span class="p">,</span> <span class="s2">&quot;Phone number&quot;</span> <span class="p">:</span> <span class="n">phone_numbers</span><span class="p">}</span>
+<span class="n">notebook</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;First name&quot;</span> <span class="p">:</span> <span class="n">first_names</span><span class="p">,</span> 
+            <span class="s2">&quot;Last name&quot;</span> <span class="p">:</span> <span class="n">last_names</span><span class="p">,</span> 
+            <span class="s2">&quot;Age&quot;</span> <span class="p">:</span> <span class="n">ages</span><span class="p">,</span> <span class="s2">&quot;Phone number&quot;</span> <span class="p">:</span> <span class="n">phone_numbers</span><span class="p">}</span>
 
-<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">notebook</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I have the following information: &quot;</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">notebook</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="c1">#for each key, returns the list element with index 0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">notebook</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I have the following information: &quot;</span><span class="p">,</span> 
+          <span class="n">i</span> <span class="p">,</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">notebook</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="c1">#for each key, returns the list element with index 0</span>
 </pre></div>
 </div>
 </div>
@@ -1195,7 +1221,7 @@ I have the following information:  Phone number : 0176123456
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_12004</span>\<span class="mf">4274238906.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_10040</span>\<span class="mf">4274238906.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">notebook</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please add a new&quot;</span><span class="p">,</span> <span class="n">key_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 <span class="ne">----&gt; </span><span class="mi">8</span>     <span class="n">new_entry</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
@@ -1235,8 +1261,8 @@ Xiang
 Please add a new Age
 40
 Please add a new Phone number
-5678
-{&#39;First name&#39;: [&#39;Mohamed&#39;, &#39;Alina&#39;, &#39;Tracy&#39;, &#39;Sophia&#39;, &#39;Tim&#39;, &#39;Ming&#39;], &#39;Last name&#39;: [&#39;bin Hamad&#39;, &#39;Schultz&#39;, &#39;Sanchez&#39;, &#39;Loren&#39;, &#39;Key&#39;, &#39;Xiang&#39;], &#39;Age&#39;: [33, 28, 41, 38, &#39;33&#39;, &#39;40&#39;], &#39;Phone number&#39;: [&#39;0176123456&#39;, &#39;0176123456&#39;, &#39;0176123456&#39;, &#39;0176123456&#39;, &#39;1234&#39;, &#39;5678&#39;]}
+1234
+{&#39;First name&#39;: [&#39;Mohamed&#39;, &#39;Alina&#39;, &#39;Tracy&#39;, &#39;Sophia&#39;, &#39;Tom&#39;, &#39;Ming&#39;], &#39;Last name&#39;: [&#39;bin Hamad&#39;, &#39;Schultz&#39;, &#39;Sanchez&#39;, &#39;Loren&#39;, &#39;Key&#39;, &#39;Xiang&#39;], &#39;Age&#39;: [33, 28, 41, 38, &#39;33&#39;, &#39;40&#39;], &#39;Phone number&#39;: [&#39;0176123456&#39;, &#39;0176123456&#39;, &#39;0176123456&#39;, &#39;0176123456&#39;, &#39;1234&#39;, &#39;1234&#39;]}
 </pre></div>
 </div>
 </div>
@@ -1251,7 +1277,7 @@ Please add a new Phone number
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_11516</span>\<span class="mf">2738667397.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_8844</span>\<span class="mf">2738667397.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">notebook</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
 <span class="ne">KeyError</span>: 1
@@ -1272,16 +1298,17 @@ Please add a new Phone number
 
 <span class="c1">#len(first_names)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">first_names</span><span class="p">)):</span>
-    <span class="n">revised_notebook</span><span class="p">[</span><span class="s2">&quot;Friend &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;First name&quot;</span> <span class="p">:</span> <span class="n">first_names</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s2">&quot;Last name&quot;</span> <span class="p">:</span> <span class="n">last_names</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s2">&quot;Age&quot;</span> <span class="p">:</span> <span class="n">ages</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s2">&quot;Phone number&quot;</span> <span class="p">:</span> <span class="n">phone_numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">revised_notebook</span><span class="p">)</span>
+    <span class="n">revised_notebook</span><span class="p">[</span><span class="s2">&quot;Friend &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;First name&quot;</span> <span class="p">:</span> <span class="n">first_names</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> 
+     <span class="s2">&quot;Last name&quot;</span> <span class="p">:</span> <span class="n">last_names</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> 
+     <span class="s2">&quot;Age&quot;</span> <span class="p">:</span> <span class="n">ages</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> 
+     <span class="s2">&quot;Phone number&quot;</span> <span class="p">:</span> <span class="n">phone_numbers</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]}</span>
+<span class="c1">#print(revised_notebook)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">revised_notebook</span><span class="p">[</span><span class="s2">&quot;Friend 1&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Friend 1&#39;: {&#39;First name&#39;: &#39;Alina&#39;, &#39;Last name&#39;: &#39;Schultz&#39;, &#39;Age&#39;: 28, &#39;Phone number&#39;: &#39;0176123456&#39;}, &#39;Friend 2&#39;: {&#39;First name&#39;: &#39;Tracy&#39;, &#39;Last name&#39;: &#39;Sanchez&#39;, &#39;Age&#39;: 41, &#39;Phone number&#39;: &#39;0176123456&#39;}, &#39;Friend 3&#39;: {&#39;First name&#39;: &#39;Sophia&#39;, &#39;Last name&#39;: &#39;Loren&#39;, &#39;Age&#39;: 38, &#39;Phone number&#39;: &#39;0176123456&#39;}, &#39;Friend 4&#39;: {&#39;First name&#39;: &#39;Tim&#39;, &#39;Last name&#39;: &#39;Key&#39;, &#39;Age&#39;: &#39;33&#39;, &#39;Phone number&#39;: &#39;1234&#39;}, &#39;Friend 5&#39;: {&#39;First name&#39;: &#39;Ming&#39;, &#39;Last name&#39;: &#39;Xiang&#39;, &#39;Age&#39;: &#39;40&#39;, &#39;Phone number&#39;: &#39;5678&#39;}}
-
- {&#39;First name&#39;: &#39;Alina&#39;, &#39;Last name&#39;: &#39;Schultz&#39;, &#39;Age&#39;: 28, &#39;Phone number&#39;: &#39;0176123456&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> {&#39;First name&#39;: &#39;Mohamed&#39;, &#39;Last name&#39;: &#39;bin Hamad&#39;, &#39;Age&#39;: 33, &#39;Phone number&#39;: &#39;0176123456&#39;}
 </pre></div>
 </div>
 </div>
