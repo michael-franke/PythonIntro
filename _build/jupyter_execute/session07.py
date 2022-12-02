@@ -169,7 +169,7 @@ if __name__ == "__main__": #input is read in only here, that is, when executing 
 # 
 # The *polyglot* package is a natural language processing toolbox specialized on multilingual language applications. It offers tools for tokenization, language detection, morphological analysis and more in 150+ languages.
 
-# In[7]:
+# In[6]:
 
 
 import polyglot #import the polyglot package
@@ -276,7 +276,7 @@ for x in text_en.transliterate("ar"):
 # - *regex.findall(str)*: matches the regex pattern **for its appearance anywhere in the string** and returns all matches.
 # - *regex.split(str)*: matches the regex pattern **for its appearance anywhere in the string** and splits the string into a list of substrings.
 
-# In[1]:
+# In[7]:
 
 
 import re
@@ -291,7 +291,7 @@ print(matcher.split(sentence)) #split string around all instances matching the r
 
 # The first two of these methods return a *match* object, which can be further processed using methods within the *Re* module (e.g., *start()* and *end()*, but check out the online documentation for more).
 
-# In[10]:
+# In[8]:
 
 
 match = matcher.search(sentence)
@@ -302,8 +302,14 @@ match.start(), match.end()
 
 # You can replace matching substrings using the *sub(replacement, string)*:
 
-# In[12]:
+# In[9]:
 
 
 matcher.sub(" cat", sentence)
+
+
+# In[ ]:
+
+
+
 

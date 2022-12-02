@@ -716,23 +716,7 @@ the imported module&#39;s name is: math
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_1520</span>\<span class="mf">3358627449.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> 
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span> <span class="c1">#input is read in only here, that is, when executing the source file as standalone program.</span>
-<span class="ne">---&gt; </span><span class="mi">13</span>     <span class="n">l1</span> <span class="o">=</span> <span class="n">read_floats_from_file</span><span class="p">(</span><span class="s2">&quot;test.txt&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">l2</span> <span class="o">=</span> <span class="n">read_floats_from_file</span><span class="p">(</span><span class="s2">&quot;test2.txt&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum of both lists: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sum_lists</span><span class="p">(</span><span class="n">l1</span> <span class="p">,</span><span class="n">l2</span><span class="p">)))</span>
-
-<span class="nn">~\AppData\Local\Temp\ipykernel_1520\3358627449.py</span> in <span class="ni">read_floats_from_file</span><span class="nt">(filename)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">float_list</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
-<span class="ne">----&gt; </span><span class="mi">9</span>         <span class="n">float_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span> <span class="p">()))</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="k">return</span> <span class="n">float_list</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> 
-
-<span class="ne">ValueError</span>: could not convert string to float: &#39;hello world&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sum of both lists: 202001.2
 </pre></div>
 </div>
 </div>
@@ -811,11 +795,16 @@ the imported module&#39;s name is: math
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Enjoy&#39;, &#39;the&#39;, &#39;Christmas&#39;, &#39;break&#39;, &#39;and&#39;, &#39;have&#39;, &#39;a&#39;, &#39;happy&#39;, &#39;new&#39;, &#39;year&#39;, &#39;!&#39;]
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_2492</span>\<span class="mf">1050358319.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">polyglot</span> <span class="c1">#import the polyglot package</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">polyglot.text</span> <span class="kn">import</span> <span class="n">Detector</span><span class="p">,</span> <span class="n">Text</span><span class="p">,</span> <span class="n">Word</span> <span class="c1">#imports the Text and Word classes</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">text_en</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="s2">&quot;Enjoy the Christmas break and have a happy new year!&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">text_ar</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="s2">&quot;عيد ميلاد مجيد وكل عام وانتم بخير&quot;</span><span class="p">)</span>
 
-Language Detected: Name=English
-
-Language Detected: Name=Arabic
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;polyglot&#39;
 </pre></div>
 </div>
 </div>

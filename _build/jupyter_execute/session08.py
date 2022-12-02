@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # ## Applications (Part I): Processing corpus data using *NLTK*, *numpy*, and *matplotlib* (January 10, 2023)
-# At this point, we are ready to take our learned tools to look at some instances of real-world research applications for programming. In today's session, we will use several Python packages, specifically the Natural Language Toolkit (NLTK), NumPy, and MatPlotLib, to analyze large natural language corpora for the frequency of epistemic modal adverbs, English-German comparisons in word length, and relative clause structures in English.
+# At this point, we are ready to take our learned tools to look at some instances of real-world research applications for programming. In today's session, we will use several Python packages, specifically the Natural Language Toolkit (NLTK), NumPy, and MatPlotLib, to analyze large natural language corpora for the frequency of epistemic modal adverbs, English-German comparisons in word length, and a comparison of relative clause structures in English.
 # 
 # ### Laying the ground work: used packages
 # 
@@ -88,7 +88,7 @@ en = europarl_raw.english
 ger = europarl_raw.german
 
 
-# First, we should get an overview of the data we are dealing with. The **Europarl corpus data comes as a set of plaintext documents**. NLTK comes equipped with a **corpus reader methods** that allow us to extract the following information: a plaintext corpus like this one can be split into a **list of its words**, its **sentences** (as nested list of its sentences each being a list of words), or its **chapters** (as nested list of chapters each being a list of sentences as a list of words).
+# First, we should get an overview of the data we are dealing with. The **Europarl corpus data comes as a set of plaintext documents**. NLTK comes equipped with a **corpus reader method** that allow us to extract the following information: a **list of its words**, its **sentences** (as nested list of its sentences each being a list of words), or its **chapters** (as nested list of chapters each being a list of sentences as a list of words).
 
 # In[2]:
 
@@ -102,7 +102,7 @@ print(len(en.words()))
 print(len(ger.words()))
 
 
-# Our goal will be to extract **frequency information** about words in each of these languages. We will look at epistemic modal adverbs, that is, adverbs indicating the probability of the proposition they are modifying.
+# Our goal will be to extract **frequency information** about words in each of these languages. We will first look at epistemic modal adverbs, that is, adverbs indicating the probability of the proposition they are modifying.
 # 
 # English and German have a large inventory of epistemic modal expressions, including adverbs ('possibly'), adjectives ('possible'), verbs ('might', 'must'), and particles (German *wohl*, roughly 'probably'). We can select a few and check how they are distributed within the corpus:  
 
@@ -153,7 +153,7 @@ print('\n', ger.sents()[1042])
 # **In other cases, translations do not match as well.** In the following case, what is communicated with an epistemic modal adverb in German is communicated with an adjective in English. Note, though, that there appears to be a slight shift in meaning between these sentences:
 # 
 # 1. a. *...resulting in inevitable delays and underspends...*<br>
-# b. *...was zwangsläufig Verzögerungen und Nichtausschöpfung der Mitel zur Folge hat...*<br>
+# b. *...was zwangsläufig Verzögerungen und Nichtausschöpfung der Mittel zur Folge hat...*<br>
 #     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; which necessarily delays and non-exhaustive-use the<sub>GEN</sub> funds as consequence has
 # 
 
@@ -168,9 +168,9 @@ print('\n', ger.sents()[490])
 # 
 # In the following, we will visually compare the length of words in the German and English variants of the corpus. For this we need to:
 # 
-# - extract word length information from the corpora. We create two lists of integers comprising word length information for each word in the English and German corpora.
+# - extract word length information from the corpora. We create two lists of integers comprising word lengths for each word in the English and German corpora.
 # - use *matplotlib* to find a suitable way to visualize German and English words in comparison
-# - note that we gloss over some details that you would have to take into account in a "serious" research project: word frequency (frequent words tend to be shorter), word category (e.g., prepositions tend to be shorter than nouns)
+# - Note that we **gloss over some details** that you would have to take into account in a "serious" research project, e.g., word **frequency** (frequent words tend to be shorter), word **class** (e.g., prepositions tend to be shorter than nouns)
 
 # In[7]:
 
@@ -199,13 +199,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-# Using ***matplotlib***, we first create an empty figure (*fig*) containing a single plot (*ax*) and specify the figure dimensions.
+# Using ***matplotlib***, we now create an empty figure (*fig*) containing a single plot (*ax*) and specify the figure dimensions.
 # 
-# We define a variable x to be an evenly spaced array from 0 to the number of words contained in the (English) corpus.
+# We also define a variable x to be an evenly spaced array containing numbers from 0 to the total number of words contained in the (English) corpus.
 # 
-# To **build the plot**, we call the *plot()* method, specifying the values for the x- and y-axis of our plot, as well as design features. Crucially, we can **overlay plots** by calling the method again with a different set of arguments.
+# To **build the plot**, we call the *plot()* method, in which we specify the values for the x- and y-axis of our plot, as well as design features. Crucially, we can **overlay plots** by calling the method again with a different set of arguments.
 # 
-# By naming your overlayed plots (here, the scond one is called *l*), you can modify their attributes later, e.g., to change axis labels of style properties.
+# By naming the overlayed plots (here, the scond one is called *l*), we can modify their attributes later, e.g., to change axis labels or style properties.
 
 # In[10]:
 
@@ -226,9 +226,9 @@ ax.legend();
 
 # Alternatively, we may also create a **figure containing several subplots** arranged on a grid.
 # 
-# In the following, we specify that the figure should have subplots arranges in 1 row and 2 columns. We can **build these subplots** by calling the plotting method (here *scatter()* for a scatterplot) directly on the relevant subplot, indicated as index on the *axs* variable.
+# In the following, we specify that the figure should have subplots arranged in 1 row and 2 columns. We can **build these subplots** by calling the plot method (here, we use *scatter()* for a scatterplot) directly on the relevant subplot, indicated as index on the *axs* variable.
 # 
-# To ensure that the **y-axis is equally spaced** for both subplot, we set the y-axis ticks manually using *set_yticks* (analogously, you can use *set_xticks*)
+# To ensure that the **y-axis is equally spaced** for both subplots, we set the y-axis ticks manually using *set_yticks* (analogously, you can use *set_xticks*)
 
 # In[11]:
 
@@ -273,7 +273,7 @@ axs[1].set_title('German');
 
 # ### Parsing treebanks using NLTK
 # 
-# The Treebank corpora provide a syntactic parse for each sentence. We will look at a sample of the **Penn Treebank** (the full corpus is behind a paywall).
+# Treebank corpora provide a syntactic parse for each sentence. We will look at a sample of the **Penn Treebank** (the full corpus is behind a paywall).
 # 
 # It comes as a series of *.mrg* files, which can be read with the help of our friendly corpus reader methods.
 
@@ -326,7 +326,7 @@ t.leaves()
 # 2) a.  The journalist who the editor recommended __ for the assignment never took the job. (object-extracted)<br>
 #     &nbsp;&nbsp;&nbsp; b. The journalist who __ recommended the editor for the assignment never took the job. (subject-extracted)
 #     
-# We need to **think, first, of what the search pattern should look like**. Let's check out an instance in the corpus:
+# We need to **think, first, of what the search pattern should look like**. Let's check out an instance in the corpus to help us out with this:
 
 # In[19]:
 
@@ -336,9 +336,9 @@ print(treebank.parsed_sents()[4])
 
 # A few things are worth noting:
 # 
-# - NP subjects are tagged as "NP-SBJ" but NP objects are simple tagged "NP"
+# - NP subjects are tagged as "*NP-SBJ*" but NP objects are simple tagged "*NP*"
 # - Relative clauses are noun complements. As such, they appear as subtree of their host-NP.
-# - The highest node of a relative clause is S\' ("SBAR")
+# - The highest node of a relative clause is S\' ("*SBAR*")
 # 
 # Let's **write a function that exploits this pattern**:
 
@@ -378,7 +378,7 @@ for i in range(500):
  
 
 
-# In[225]:
+# In[22]:
 
 
 print("Frequency of subject-extracted RCs: \t", len(sbj_extr_RC))
@@ -389,7 +389,7 @@ print("Frequency of object-extracted RCs: \t", len(obj_extr_RC))
 # 
 # The function above isn't perfect. But we can have a look at its matches to identify potential problems:
 
-# In[226]:
+# In[23]:
 
 
 print(obj_extr_RC)
@@ -400,7 +400,7 @@ print(obj_extr_RC)
 #         ...the USD 2.29 billion value [United Illuminating places _ on its bid]
 #         
 
-# In[227]:
+# In[24]:
 
 
 print(treebank.parsed_sents()[115])
@@ -410,7 +410,7 @@ print(treebank.parsed_sents()[115])
 # 
 #     imports of certain watches [ that __ aren't produced __ in significant quantities in the US, the Virgin Islands, or other US possessions].  
 
-# In[228]:
+# In[25]:
 
 
 print(treebank.parsed_sents()[273])
@@ -424,7 +424,7 @@ print(treebank.parsed_sents()[273])
 # - https://www.nltk.org/book/
 # - written for beginners; can serve as general introduction to text processing in Python
 # 
-# **Matplotlib** has extensive online resouces, from simple vsualizations like the ones we saw today to highly sophisticated illustrations.
+# **Matplotlib** has extensive online resouces, from simple visualizations like the ones we saw today to highly sophisticated illustrations.
 # - https://matplotlib.org/stable/tutorials/index
 # - Split into different levels of difficulty
 # - These tutorials expect familiarity with Python and aren't terribly friendly for beginners
