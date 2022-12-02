@@ -551,7 +551,7 @@ title="Print to PDF"
                 
   <section id="applications-part-i-processing-corpus-data-using-nltk-numpy-and-matplotlib-january-10-2023">
 <h1>Applications (Part I): Processing corpus data using <em>NLTK</em>, <em>numpy</em>, and <em>matplotlib</em> (January 10, 2023)<a class="headerlink" href="#applications-part-i-processing-corpus-data-using-nltk-numpy-and-matplotlib-january-10-2023" title="Permalink to this headline">#</a></h1>
-<p>At this point, we are ready to take our learned tools to look at some instances of real-world research applications for programming. In today’s session, we will use several Python packages, specifically the Natural Language Toolkit (NLTK), NumPy, and MatPlotLib, to analyze large natural language corpora for the frequency of epistemic modal adverbs, English-German comparisons in word length, and relative clause structures in English.</p>
+<p>At this point, we are ready to take our learned tools to look at some instances of real-world research applications for programming. In today’s session, we will use several Python packages, specifically the Natural Language Toolkit (NLTK), NumPy, and MatPlotLib, to analyze large natural language corpora for the frequency of epistemic modal adverbs, English-German comparisons in word length, and a comparison of relative clause structures in English.</p>
 <section id="laying-the-ground-work-used-packages">
 <h2>Laying the ground work: used packages<a class="headerlink" href="#laying-the-ground-work-used-packages" title="Permalink to this headline">#</a></h2>
 <section id="nltk">
@@ -660,7 +660,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>First, we should get an overview of the data we are dealing with. The <strong>Europarl corpus data comes as a set of plaintext documents</strong>. NLTK comes equipped with a <strong>corpus reader methods</strong> that allow us to extract the following information: a plaintext corpus like this one can be split into a <strong>list of its words</strong>, its <strong>sentences</strong> (as nested list of its sentences each being a list of words), or its <strong>chapters</strong> (as nested list of chapters each being a list of sentences as a list of words).</p>
+<p>First, we should get an overview of the data we are dealing with. The <strong>Europarl corpus data comes as a set of plaintext documents</strong>. NLTK comes equipped with a <strong>corpus reader method</strong> that allow us to extract the following information: a <strong>list of its words</strong>, its <strong>sentences</strong> (as nested list of its sentences each being a list of words), or its <strong>chapters</strong> (as nested list of chapters each being a list of sentences as a list of words).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#let&#39;s find out how many words and sentences they contain. To do so, call the methods :</span>
@@ -684,7 +684,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>Our goal will be to extract <strong>frequency information</strong> about words in each of these languages. We will look at epistemic modal adverbs, that is, adverbs indicating the probability of the proposition they are modifying.</p>
+<p>Our goal will be to extract <strong>frequency information</strong> about words in each of these languages. We will first look at epistemic modal adverbs, that is, adverbs indicating the probability of the proposition they are modifying.</p>
 <p>English and German have a large inventory of epistemic modal expressions, including adverbs (‘possibly’), adjectives (‘possible’), verbs (‘might’, ‘must’), and particles (German <em>wohl</em>, roughly ‘probably’). We can select a few and check how they are distributed within the corpus:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -770,11 +770,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>490 [&#39;Es&#39;, &#39;sollte&#39;, &#39;nicht&#39;, &#39;darum&#39;, &#39;gehen&#39;, &#39;,&#39;, &#39;auf&#39;, &#39;halbem&#39;, &#39;Wege&#39;, &#39;Änderungen&#39;, &#39;an&#39;, &#39;den&#39;, &#39;Prioritäten&#39;, &#39;und&#39;, &#39;Politiken&#39;, &#39;vorzunehmen&#39;, &#39;,&#39;, &#39;was&#39;, &#39;zwangsläufig&#39;, &#39;Verzögerungen&#39;, &#39;und&#39;, &#39;Nichtausschöpfung&#39;, &#39;der&#39;, &#39;Mittel&#39;, &#39;zur&#39;, &#39;Folge&#39;, &#39;hat&#39;, &#39;.&#39;]
-1042 [&#39;Optimale&#39;, &#39;Effizienz&#39;, &#39;stellt&#39;, &#39;sich&#39;, &#39;aber&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;von&#39;, &#39;allein&#39;, &#39;ein&#39;, &#39;.&#39;]
-2207 [&#39;Besonders&#39;, &#39;bemerkenswert&#39;, &#39;ist&#39;, &#39;aus&#39;, &#39;meiner&#39;, &#39;Sicht&#39;, &#39;das&#39;, &#39;Signal&#39;, &#39;,&#39;, &#39;das&#39;, &#39;von&#39;, &#39;diesem&#39;, &#39;Vorschlag&#39;, &#39;ausgeht&#39;, &#39;:&#39;, &#39;die&#39;, &#39;Kommission&#39;, &#39;sieht&#39;, &#39;die&#39;, &#39;Auswirkungen&#39;, &#39;der&#39;, &#39;Erweiterung&#39;, &#39;voraus&#39;, &#39;und&#39;, &#39;hat&#39;, &#39;erkannt&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;diese&#39;, &#39;zwangsläufig&#39;, &#39;,&#39;, &#39;ja&#39;, &#39;quasi&#39;, &#39;automatisch&#39;, &#39;,&#39;, &#39;eine&#39;, &#39;Reform&#39;, &#39;des&#39;, &#39;zentralisierten&#39;, &#39;Systems&#39;, &#39;mit&#39;, &#39;sich&#39;, &#39;bringt&#39;, &#39;.&#39;]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2604 [&#39;Man&#39;, &#39;muß&#39;, &#39;im&#39;, &#39;Falle&#39;, &#39;von&#39;, &#39;Gefälligkeitsflaggen&#39;, &#39;strenger&#39;, &#39;vorgehen&#39;, &#39;,&#39;, &#39;nicht&#39;, &#39;weil&#39;, &#39;es&#39;, &#39;sich&#39;, &#39;dabei&#39;, &#39;zwangsläufig&#39;, &#39;um&#39;, &#39;schlechte&#39;, &#39;Schiffe&#39;, &#39;handelt&#39;, &#39;,&#39;, &#39;sondern&#39;, &#39;weil&#39;, &#39;viele&#39;, &#39;schlechte&#39;, &#39;Schiffe&#39;, &#39;darunter&#39;, &#39;sind&#39;, &#39;;&#39;, &#39;Verbesserung&#39;, &#39;der&#39;, &#39;Information&#39;, &#39;über&#39;, &#39;alle&#39;, &#39;Schiffe&#39;, &#39;der&#39;, &#39;Welt&#39;, &#39;,&#39;, &#39;aber&#39;, &#39;das&#39;, &#39;ist&#39;, &#39;ja&#39;, &#39;bereits&#39;, &#39;vorgesehen&#39;, &#39;;&#39;, &#39;genaue&#39;, &#39;Festlegungen&#39;, &#39;und&#39;, &#39;strenger&#39;, &#39;Umgang&#39;, &#39;mit&#39;, &#39;den&#39;, &#39;Verantwortlichkeiten&#39;, &#39;.&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1042 [&#39;Optimale&#39;, &#39;Effizienz&#39;, &#39;stellt&#39;, &#39;sich&#39;, &#39;aber&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;von&#39;, &#39;allein&#39;, &#39;ein&#39;, &#39;.&#39;]
+2207 [&#39;Besonders&#39;, &#39;bemerkenswert&#39;, &#39;ist&#39;, &#39;aus&#39;, &#39;meiner&#39;, &#39;Sicht&#39;, &#39;das&#39;, &#39;Signal&#39;, &#39;,&#39;, &#39;das&#39;, &#39;von&#39;, &#39;diesem&#39;, &#39;Vorschlag&#39;, &#39;ausgeht&#39;, &#39;:&#39;, &#39;die&#39;, &#39;Kommission&#39;, &#39;sieht&#39;, &#39;die&#39;, &#39;Auswirkungen&#39;, &#39;der&#39;, &#39;Erweiterung&#39;, &#39;voraus&#39;, &#39;und&#39;, &#39;hat&#39;, &#39;erkannt&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;diese&#39;, &#39;zwangsläufig&#39;, &#39;,&#39;, &#39;ja&#39;, &#39;quasi&#39;, &#39;automatisch&#39;, &#39;,&#39;, &#39;eine&#39;, &#39;Reform&#39;, &#39;des&#39;, &#39;zentralisierten&#39;, &#39;Systems&#39;, &#39;mit&#39;, &#39;sich&#39;, &#39;bringt&#39;, &#39;.&#39;]
+2604 [&#39;Man&#39;, &#39;muß&#39;, &#39;im&#39;, &#39;Falle&#39;, &#39;von&#39;, &#39;Gefälligkeitsflaggen&#39;, &#39;strenger&#39;, &#39;vorgehen&#39;, &#39;,&#39;, &#39;nicht&#39;, &#39;weil&#39;, &#39;es&#39;, &#39;sich&#39;, &#39;dabei&#39;, &#39;zwangsläufig&#39;, &#39;um&#39;, &#39;schlechte&#39;, &#39;Schiffe&#39;, &#39;handelt&#39;, &#39;,&#39;, &#39;sondern&#39;, &#39;weil&#39;, &#39;viele&#39;, &#39;schlechte&#39;, &#39;Schiffe&#39;, &#39;darunter&#39;, &#39;sind&#39;, &#39;;&#39;, &#39;Verbesserung&#39;, &#39;der&#39;, &#39;Information&#39;, &#39;über&#39;, &#39;alle&#39;, &#39;Schiffe&#39;, &#39;der&#39;, &#39;Welt&#39;, &#39;,&#39;, &#39;aber&#39;, &#39;das&#39;, &#39;ist&#39;, &#39;ja&#39;, &#39;bereits&#39;, &#39;vorgesehen&#39;, &#39;;&#39;, &#39;genaue&#39;, &#39;Festlegungen&#39;, &#39;und&#39;, &#39;strenger&#39;, &#39;Umgang&#39;, &#39;mit&#39;, &#39;den&#39;, &#39;Verantwortlichkeiten&#39;, &#39;.&#39;]
 3192 [&#39;Diese&#39;, &#39;Vertrauenskrise&#39;, &#39;hatte&#39;, &#39;zwangsläufig&#39;, &#39;leider&#39;, &#39;auch&#39;, &#39;zur&#39;, &#39;Folge&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;das&#39;, &#39;Vertrauen&#39;, &#39;der&#39;, &#39;Verbraucher&#39;, &#39;in&#39;, &#39;Systeme&#39;, &#39;und&#39;, &#39;Institutionen&#39;, &#39;auf&#39;, &#39;nationaler&#39;, &#39;und&#39;, &#39;europäischer&#39;, &#39;Ebene&#39;, &#39;,&#39;, &#39;die&#39;, &#39;für&#39;, &#39;die&#39;, &#39;Überwachung&#39;, &#39;und&#39;, &#39;Gewährleistung&#39;, &#39;der&#39;, &#39;Lebensmittelsicherheit&#39;, &#39;auf&#39;, &#39;höchstem&#39;, &#39;Niveau&#39;, &#39;verantwortlich&#39;, &#39;sind&#39;, &#39;,&#39;, &#39;erschüttert&#39;, &#39;wurde&#39;, &#39;.&#39;]
 3784 [&#39;Andererseits&#39;, &#39;führen&#39;, &#39;die&#39;, &#39;Verpflichtung&#39;, &#39;zur&#39;, &#39;transnationalen&#39;, &#39;Zusammenarbeit&#39;, &#39;und&#39;, &#39;die&#39;, &#39;komplizierten&#39;, &#39;Anforderungen&#39;, &#39;an&#39;, &#39;die&#39;, &#39;Planung&#39;, &#39;und&#39;, &#39;Umsetzung&#39;, &#39;von&#39;, &#39;Entwicklungspartnerschaften&#39;, &#39;zwangsläufig&#39;, &#39;zu&#39;, &#39;Großprojekten&#39;, &#39;,&#39;, &#39;da&#39;, &#39;nur&#39;, &#39;sie&#39;, &#39;diesen&#39;, &#39;Bedingungen&#39;, &#39;entsprechen&#39;, &#39;können&#39;, &#39;.&#39;]
 4046 [&#39;Ich&#39;, &#39;möchte&#39;, &#39;Ihnen&#39;, &#39;dennoch&#39;, &#39;zwei&#39;, &#39;Beispiele&#39;, &#39;dafür&#39;, &#39;nennen&#39;, &#39;,&#39;, &#39;weshalb&#39;, &#39;die&#39;, &#39;jetzt&#39;, &#39;von&#39;, &#39;der&#39;, &#39;Kommission&#39;, &#39;geäußerten&#39;, &#39;guten&#39;, &#39;Absichten&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;auch&#39;, &#39;zu&#39;, &#39;einem&#39;, &#39;befriedigenden&#39;, &#39;Resultat&#39;, &#39;führen&#39;, &#39;.&#39;]
@@ -826,7 +826,7 @@ title="Print to PDF"
 <p><strong>In other cases, translations do not match as well.</strong> In the following case, what is communicated with an epistemic modal adverb in German is communicated with an adjective in English. Note, though, that there appears to be a slight shift in meaning between these sentences:</p>
 <ol class="simple">
 <li><p>a. <em>…resulting in inevitable delays and underspends…</em><br>
-b. <em>…was zwangsläufig Verzögerungen und Nichtausschöpfung der Mitel zur Folge hat…</em><br>
+b. <em>…was zwangsläufig Verzögerungen und Nichtausschöpfung der Mittel zur Folge hat…</em><br>
       which necessarily delays and non-exhaustive-use the<sub>GEN</sub> funds as consequence has</p></li>
 </ol>
 <div class="cell docutils container">
@@ -848,9 +848,9 @@ b. <em>…was zwangsläufig Verzögerungen und Nichtausschöpfung der Mitel zur 
 <h3>Plotting word length information using <em>matplotlib</em><a class="headerlink" href="#plotting-word-length-information-using-matplotlib" title="Permalink to this headline">#</a></h3>
 <p>In the following, we will visually compare the length of words in the German and English variants of the corpus. For this we need to:</p>
 <ul class="simple">
-<li><p>extract word length information from the corpora. We create two lists of integers comprising word length information for each word in the English and German corpora.</p></li>
+<li><p>extract word length information from the corpora. We create two lists of integers comprising word lengths for each word in the English and German corpora.</p></li>
 <li><p>use <em>matplotlib</em> to find a suitable way to visualize German and English words in comparison</p></li>
-<li><p>note that we gloss over some details that you would have to take into account in a “serious” research project: word frequency (frequent words tend to be shorter), word category (e.g., prepositions tend to be shorter than nouns)</p></li>
+<li><p>Note that we <strong>gloss over some details</strong> that you would have to take into account in a “serious” research project, e.g., word <strong>frequency</strong> (frequent words tend to be shorter), word <strong>class</strong> (e.g., prepositions tend to be shorter than nouns)</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -887,10 +887,10 @@ b. <em>…was zwangsläufig Verzögerungen und Nichtausschöpfung der Mitel zur 
 </div>
 </div>
 </div>
-<p>Using <em><strong>matplotlib</strong></em>, we first create an empty figure (<em>fig</em>) containing a single plot (<em>ax</em>) and specify the figure dimensions.</p>
-<p>We define a variable x to be an evenly spaced array from 0 to the number of words contained in the (English) corpus.</p>
-<p>To <strong>build the plot</strong>, we call the <em>plot()</em> method, specifying the values for the x- and y-axis of our plot, as well as design features. Crucially, we can <strong>overlay plots</strong> by calling the method again with a different set of arguments.</p>
-<p>By naming your overlayed plots (here, the scond one is called <em>l</em>), you can modify their attributes later, e.g., to change axis labels of style properties.</p>
+<p>Using <em><strong>matplotlib</strong></em>, we now create an empty figure (<em>fig</em>) containing a single plot (<em>ax</em>) and specify the figure dimensions.</p>
+<p>We also define a variable x to be an evenly spaced array containing numbers from 0 to the total number of words contained in the (English) corpus.</p>
+<p>To <strong>build the plot</strong>, we call the <em>plot()</em> method, in which we specify the values for the x- and y-axis of our plot, as well as design features. Crucially, we can <strong>overlay plots</strong> by calling the method again with a different set of arguments.</p>
+<p>By naming the overlayed plots (here, the scond one is called <em>l</em>), we can modify their attributes later, e.g., to change axis labels or style properties.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
@@ -913,8 +913,8 @@ b. <em>…was zwangsläufig Verzögerungen und Nichtausschöpfung der Mitel zur 
 </div>
 </div>
 <p>Alternatively, we may also create a <strong>figure containing several subplots</strong> arranged on a grid.</p>
-<p>In the following, we specify that the figure should have subplots arranges in 1 row and 2 columns. We can <strong>build these subplots</strong> by calling the plotting method (here <em>scatter()</em> for a scatterplot) directly on the relevant subplot, indicated as index on the <em>axs</em> variable.</p>
-<p>To ensure that the <strong>y-axis is equally spaced</strong> for both subplot, we set the y-axis ticks manually using <em>set_yticks</em> (analogously, you can use <em>set_xticks</em>)</p>
+<p>In the following, we specify that the figure should have subplots arranged in 1 row and 2 columns. We can <strong>build these subplots</strong> by calling the plot method (here, we use <em>scatter()</em> for a scatterplot) directly on the relevant subplot, indicated as index on the <em>axs</em> variable.</p>
+<p>To ensure that the <strong>y-axis is equally spaced</strong> for both subplots, we set the y-axis ticks manually using <em>set_yticks</em> (analogously, you can use <em>set_xticks</em>)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
@@ -966,7 +966,7 @@ b. <em>…was zwangsläufig Verzögerungen und Nichtausschöpfung der Mitel zur 
 </section>
 <section id="parsing-treebanks-using-nltk">
 <h2>Parsing treebanks using NLTK<a class="headerlink" href="#parsing-treebanks-using-nltk" title="Permalink to this headline">#</a></h2>
-<p>The Treebank corpora provide a syntactic parse for each sentence. We will look at a sample of the <strong>Penn Treebank</strong> (the full corpus is behind a paywall).</p>
+<p>Treebank corpora provide a syntactic parse for each sentence. We will look at a sample of the <strong>Penn Treebank</strong> (the full corpus is behind a paywall).</p>
 <p>It comes as a series of <em>.mrg</em> files, which can be read with the help of our friendly corpus reader methods.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1092,7 +1092,7 @@ b. <em>…was zwangsläufig Verzögerungen und Nichtausschöpfung der Mitel zur 
 <li><p>a.  The journalist who the editor recommended __ for the assignment never took the job. (object-extracted)<br>
     b. The journalist who __ recommended the editor for the assignment never took the job. (subject-extracted)</p></li>
 </ol>
-<p>We need to <strong>think, first, of what the search pattern should look like</strong>. Let’s check out an instance in the corpus:</p>
+<p>We need to <strong>think, first, of what the search pattern should look like</strong>. Let’s check out an instance in the corpus to help us out with this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">parsed_sents</span><span class="p">()[</span><span class="mi">4</span><span class="p">])</span>
@@ -1144,9 +1144,9 @@ b. <em>…was zwangsläufig Verzögerungen und Nichtausschöpfung der Mitel zur 
 </div>
 <p>A few things are worth noting:</p>
 <ul class="simple">
-<li><p>NP subjects are tagged as “NP-SBJ” but NP objects are simple tagged “NP”</p></li>
+<li><p>NP subjects are tagged as “<em>NP-SBJ</em>” but NP objects are simple tagged “<em>NP</em>”</p></li>
 <li><p>Relative clauses are noun complements. As such, they appear as subtree of their host-NP.</p></li>
-<li><p>The highest node of a relative clause is S’ (“SBAR”)</p></li>
+<li><p>The highest node of a relative clause is S’ (”<em>SBAR</em>”)</p></li>
 </ul>
 <p>Let’s <strong>write a function that exploits this pattern</strong>:</p>
 <div class="cell docutils container">
@@ -1189,12 +1189,12 @@ b. <em>…was zwangsläufig Verzögerungen und Nichtausschöpfung der Mitel zur 
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_3460</span>\<span class="mf">2890514494.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="k">if</span> <span class="n">rc_type</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">parsed_sents</span><span class="p">()[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="s2">&quot;RC_SBJ&quot;</span><span class="p">:</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_11216</span>\<span class="mf">2890514494.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1">#just doing this on the first 500 sentences as it takes quite some time to run on the full corpus</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">):</span>
+<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="k">if</span> <span class="n">rc_type</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">parsed_sents</span><span class="p">()[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="s2">&quot;RC_SBJ&quot;</span><span class="p">:</span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="n">sbj_extr_RC</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">8</span>     <span class="k">elif</span> <span class="n">rc_type</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">parsed_sents</span><span class="p">()[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="s2">&quot;RC_OBJ&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>         <span class="n">obj_extr_RC</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="k">elif</span> <span class="n">rc_type</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">parsed_sents</span><span class="p">()[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="s2">&quot;RC_OBJ&quot;</span><span class="p">:</span>
 
 <span class="nn">~\miniconda3\lib\site-packages\nltk\collections.py</span> in <span class="ni">__getitem__</span><span class="nt">(self, i)</span>
 <span class="g g-Whitespace">    </span><span class="mi">170</span>             <span class="c1"># Use iterate_from to extract it.</span>
@@ -1211,39 +1211,25 @@ b. <em>…was zwangsläufig Verzögerungen und Nichtausschöpfung der Mitel zur 
 <span class="g g-Whitespace">    </span><span class="mi">426</span>             <span class="c1"># Update the offset table.</span>
 
 <span class="nn">~\miniconda3\lib\site-packages\nltk\corpus\reader\util.py</span> in <span class="ni">iterate_from</span><span class="nt">(self, start_tok)</span>
-<span class="g g-Whitespace">    </span><span class="mi">304</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_current_toknum</span> <span class="o">=</span> <span class="n">toknum</span>
-<span class="g g-Whitespace">    </span><span class="mi">305</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_current_blocknum</span> <span class="o">=</span> <span class="n">block_index</span>
-<span class="ne">--&gt; </span><span class="mi">306</span>             <span class="n">tokens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_block</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">307</span>             <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">AbstractLazySequence</span><span class="p">)),</span> <span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">308</span>                 <span class="s2">&quot;block reader </span><span class="si">%s</span><span class="s2">() should return list or tuple.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">290</span>         <span class="c1"># Open the stream, if it&#39;s not open already.</span>
+<span class="g g-Whitespace">    </span><span class="mi">291</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stream</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">292</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">293</span> 
+<span class="g g-Whitespace">    </span><span class="mi">294</span>         <span class="c1"># If the file is empty, the while loop will never run.</span>
 
-<span class="nn">~\miniconda3\lib\site-packages\nltk\corpus\reader\api.py</span> in <span class="ni">_read_parsed_sent_block</span><span class="nt">(self, stream)</span>
-<span class="g g-Whitespace">    </span><span class="mi">511</span> 
-<span class="g g-Whitespace">    </span><span class="mi">512</span>     <span class="k">def</span> <span class="nf">_read_parsed_sent_block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
-<span class="nn">--&gt; 513         return list(filter(None, [self._parse(t) for t</span> in <span class="ni">self._read_block</span><span class="nt">(stream)]))</span>
-<span class="g g-Whitespace">    </span><span class="mi">514</span> 
-<span class="g g-Whitespace">    </span><span class="mi">515</span>     <span class="c1"># } End of Block Readers</span>
+<span class="nn">~\miniconda3\lib\site-packages\nltk\corpus\reader\util.py</span> in <span class="ni">_open</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">207</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">208</span><span class="s2">         if isinstance(self._fileid, PathPointer):</span>
+<span class="ne">--&gt; </span><span class="mi">209</span><span class="s2">             self._stream = self._fileid.open(self._encoding)</span>
+<span class="g g-Whitespace">    </span><span class="mi">210</span><span class="s2">         elif self._encoding:</span>
+<span class="g g-Whitespace">    </span><span class="mi">211</span><span class="s2">             self._stream = SeekableUnicodeStreamReader(</span>
 
-<span class="nn">~\miniconda3\lib\site-packages\nltk\corpus\reader\bracket_parse.py</span> in <span class="ni">_read_block</span><span class="nt">(self, stream)</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span>         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_blocks</span> <span class="o">==</span> <span class="s2">&quot;unindented_paren&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">67</span>             <span class="c1"># Tokens start with unindented left parens.</span>
-<span class="ne">---&gt; </span><span class="mi">68</span>             <span class="n">toks</span> <span class="o">=</span> <span class="n">read_regexp_block</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">start_re</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;^\(&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">69</span>             <span class="c1"># Strip any comments out of the tokens.</span>
-<span class="g g-Whitespace">     </span><span class="mi">70</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comment_char</span><span class="p">:</span>
-
-<span class="nn">~\miniconda3\lib\site-packages\nltk\corpus\reader\util.py</span> in <span class="ni">read_regexp_block</span><span class="nt">(stream, start_re, end_re)</span>
-<span class="g g-Whitespace">    </span><span class="mi">657</span>     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">658</span>         <span class="n">oldpos</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
-<span class="ne">--&gt; </span><span class="mi">659</span>         <span class="n">line</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">660</span>         <span class="c1"># End of file:</span>
-<span class="g g-Whitespace">    </span><span class="mi">661</span>         <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
-
-<span class="nn">~\miniconda3\lib\site-packages\nltk\data.py</span> in <span class="ni">readline</span><span class="nt">(self, size)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1097</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1098</span>         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1099</span>             <span class="n">startpos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bytebuffer</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1100</span>             <span class="n">new_chars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">(</span><span class="n">readsize</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1101</span> 
+<span class="nn">~\miniconda3\lib\site-packages\nltk\data.py</span> in <span class="ni">open</span><span class="nt">(self, encoding)</span>
+<span class="g g-Whitespace">    </span><span class="mi">322</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">323</span><span class="s2">     def open(self, encoding=None):</span>
+<span class="ne">--&gt; </span><span class="mi">324</span><span class="s2">         stream = open(self._path, &quot;rb&quot;)</span>
+<span class="g g-Whitespace">    </span><span class="mi">325</span><span class="s2">         if encoding is not None:</span>
+<span class="g g-Whitespace">    </span><span class="mi">326</span><span class="s2">             stream = SeekableUnicodeStreamReader(stream, encoding)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -1437,7 +1423,7 @@ Frequency of object-extracted RCs: 	 19
 <li><p><a class="reference external" href="https://www.nltk.org/book/">https://www.nltk.org/book/</a></p></li>
 <li><p>written for beginners; can serve as general introduction to text processing in Python</p></li>
 </ul>
-<p><strong>Matplotlib</strong> has extensive online resouces, from simple vsualizations like the ones we saw today to highly sophisticated illustrations.</p>
+<p><strong>Matplotlib</strong> has extensive online resouces, from simple visualizations like the ones we saw today to highly sophisticated illustrations.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://matplotlib.org/stable/tutorials/index">https://matplotlib.org/stable/tutorials/index</a></p></li>
 <li><p>Split into different levels of difficulty</p></li>
