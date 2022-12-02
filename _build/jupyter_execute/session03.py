@@ -225,7 +225,7 @@ print(x)
 # ### if
 # The most basic flow control statement is the *if*-clause. It will execute the code block in its body *iff* (if and only if) the statement's condition is *True*. Its execution is skipped whenever the condition is *False*. We have seen an *if* statement before:
 
-# In[29]:
+# In[2]:
 
 
 x = 'Forest runs'
@@ -238,7 +238,7 @@ print(y) #then print the new variable
 # #### if...else
 # *If* statements can be optionally followed by *else* statements, which are executed *iff* the statement's condition is *False*.
 
-# In[30]:
+# In[3]:
 
 
 if 'runs' in y: #if variable x contains the string 'runs'
@@ -255,7 +255,7 @@ print(z) #then print the new variable
 # 
 # Thus, given that z = *Natasha walks*, what will be the output of the following statement?
 
-# In[31]:
+# In[4]:
 
 
 if 'runs' in z: #if variable x contains the string 'runs'
@@ -276,7 +276,7 @@ print(z) #then print the variable
 # 
 # Finally, **flow control statements can be nested**:
 
-# In[32]:
+# In[5]:
 
 
 if 'runs' in z: #if variable z contains the string 'runs'
@@ -303,12 +303,13 @@ print(z) #then print the variable
 # - *A or B* is true *iff* A is true or B is true or both A and B are true
 # - *not A* is true *iff* A is false
 
-# In[33]:
+# In[9]:
 
 
 if 'walks' in z and len(z) < 20:
     z = z + ' for a long time'
-elif 'walks' in z and (z.startswith('Forest') or z.startswith('Natasha')):
+elif 'walks' in z and (z.startswith('Forest') or 
+                       z.startswith('Natasha')):
     z = z + '. What is Ming doing now?'
 print(z)
 
@@ -340,27 +341,32 @@ print(x)
 # - define additional exit points using *break* statements (see below)
 # - ensure that the test condition changes in each iteration (as in code block [10], but not always possible)
 
-# **Example of a non-terminating loop**:
-#     
-#     reply = ""
-#     while (reply != "Who's there?"):
-#         print("Knock knock")
-#         reply = "Yes?"
-#         print(reply)
-#         #reply = input() #allowing user input would enable changing the value of reply on every iteration
-#     print("Stop asking questions and let me in.")
+# In[11]:
+
+
+#**Example of a non-terminating loop**:
+    
+reply = ""
+while (reply != "Who's there?"):
+    print("Knock knock")
+    reply = "Yes?"
+    print(reply)
+    reply = input() #allowing user input would enable changing the value of reply on every iteration
+print("Stop asking questions and let me in.")
+
 
 # #### Exiting the loop with 'break' or 'continue'
 # *Break* causes the loop to stop at the point at which it appears, without completing the current iteration. This is useful to ensure termination for certain cases.  
 # 
 # *Continue* statements end the current iteration of the loop and cause it to repeat from the top. This is useful if there are cases you'd like to skip or ignore.
 
-# In[35]:
+# In[ ]:
 
 
 reply = ""
 while (reply != "Who's there?"):
     print("Knock knock")
+    print("What's your reply?")
     reply = input() #user can input their reply
     if reply == "Yes?":
         break #exits loop immediately
