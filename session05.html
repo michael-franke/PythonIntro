@@ -144,6 +144,23 @@ const thebe_selector_output = ".output, .cell_output"
    For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022)
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session08.html">
+   Applications (Part I): Processing corpus data using
+   <em>
+    NLTK
+   </em>
+   ,
+   <em>
+    numpy
+   </em>
+   , and
+   <em>
+    matplotlib
+   </em>
+   (January 10, 2023)
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -572,7 +589,7 @@ title="Print to PDF"
 <p><strong>So far, all of our Python programs were self-contained</strong>, that is, they did not rely on external data files or pieces of code (except for in-built Python functions and methods). In most real-life situations, however, you will work off of existing files (e.g., for data analysis) or from pre-existing code (e.g., when adding new functionalities to an app or program). In this session, you will learn how to <strong>import and use</strong> external Python code as <strong>modules</strong> and how to <strong>create, read from, and write to files</strong>.</p>
 <section id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">#</a></h2>
-<p><strong>Modules are Python files intended for use in other Python programs</strong>. Any <em>.py</em> file can be loaded as a module. As such, modules allow us <strong>(a)</strong> to <strong>distribute code across multiple files</strong> (which is convenient for bigger coding projects) and <strong>(b)</strong> to make use of <strong>collections of useful functions</strong> provided by other programmers. Many modules come with Python as part of the default installation. One such example is the <em>Itertools</em> module we saw in the previous session. Others include the <em>math</em> module and the <em>random</em> module, which contain helpful functions for mathematical operations and for dealing with distributional data.</p>
+<p><strong>Modules are Python files intended for use in other Python programs</strong>. Any <em>.py</em> file can be loaded as a module. As such, modules allow us <strong>(a) to distribute code across multiple files</strong> (which is convenient for bigger coding projects) and <strong>(b) to make use of collections of useful functions</strong> provided by other programmers. Many modules come with Python as part of the default installation. One such example is the <em>Itertools</em> module we saw in the previous session. Others include the <em>math</em> module and the <em>random</em> module, which contain helpful functions for mathematical operations and for dealing with distributional data.</p>
 <p>Modules are <strong>loaded with an <em>import</em> statement</strong> (more below). Upon importing them, <strong>all statements in the imported module are executed</strong>.</p>
 <p>In the following, we will focus on the <em>math</em> module:</p>
 <section id="import-modules">
@@ -581,7 +598,7 @@ title="Print to PDF"
 <ul class="simple">
 <li><p><em>import math</em>: makes all objects available as <em>math.object</em></p></li>
 <li><p><em>from math import func</em>: makes <em>math.func</em> available as <em>func</em></p></li>
-<li><p><em>from example import long_function_name as func</em>: makes <em>math.function_name_in_module</em> available as <em>func_name_in_my_code</em></p></li>
+<li><p><em>from math import long_function_name as func</em>: makes <em>math.function_name_in_module</em> available as <em>func_name_in_my_code</em></p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -601,7 +618,7 @@ title="Print to PDF"
 </section>
 <section id="example-your-homework-as-module">
 <h3>Example: Your homework as module<a class="headerlink" href="#example-your-homework-as-module" title="Permalink to this headline">#</a></h3>
-<p>Our testing skripts import your homework as module. Your code gets loaded by <em>from ex_01 import *</em>, which causes your function definitions to be assigned to the function names, and the unit tests will be executed on your definitions.</p>
+<p>Our testing skripts import your homework as module. Your code gets loaded by <em>from ex_01 import *</em>. The star symbol indicates that the module should be imported with all functions and classes as elements in the current file’s namespace(, even if that would replace existing names). Thus, your function definitions are assigned to the function names, and the unit tests will be executed on your definitions.</p>
 <p>The most basic element of our test code is the <em>assert</em> statement. Each such statement represents a basic fact which should hold of the program. For instance, <em>assertEquals(value, expression)</em> checks whether an expression correctly evaluates to a given value.</p>
 <p>The code below also uses an object constructor (a <em>class</em>) and the <em>self</em> attribute. You’ll learn more about those in later sessions.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import unittest  
@@ -619,7 +636,11 @@ class TestTask1(unittest.TestCase):
 <section id="file-i-o">
 <h2>File I/O<a class="headerlink" href="#file-i-o" title="Permalink to this headline">#</a></h2>
 <p>Now that you know how to use <strong>modules</strong>, we’d also like to know how to use <strong>files</strong>. Creating data by assigning values to variables worked fine so far, but more often than not data already exists and we want to work with it. Python allows you to <strong>read in data</strong> from external files such that you can <strong>extract, analyse or modify</strong> its contents and <strong>save the results</strong> to (another) file.</p>
-<p>Files have two key properties: a filename (including name + file type, e.g. <em>example.txt</em>) and a path, which specifies its location on the computer (e.g. *C:\Users\jschwab\Documents\Teaching\Methods I*)</p>
+<p><strong>Files have two key properties</strong>:</p>
+<ul class="simple">
+<li><p>a filename (including name + file type, e.g. <em>example.txt</em>)</p></li>
+<li><p>a path, which specifies its location on the computer (e.g. *C:\Users\jschwab\Documents\Teaching\Methods I*)</p></li>
+</ul>
 <section id="reading-and-writing-to-text-files">
 <h3>Reading and writing to text files<a class="headerlink" href="#reading-and-writing-to-text-files" title="Permalink to this headline">#</a></h3>
 <p>Plaintext files (<em>.txt</em>) contain only basic text characters and do not include font, size, or color information. They consist of lines of text with a newline symbol at the end of each line (in Python strings, a newline is represented by “\n”). Text files are one of the most elementary file types that we will deal with. Python can easily read them, treating their contents as string values.</p>
@@ -633,6 +654,7 @@ class TestTask1(unittest.TestCase):
 <li><p>optional: a string representing the <strong>encoding</strong> of the file (see below)</p></li>
 </ul>
 </li>
+<li><p>Example: <em>open(“guide.txt”, “r”)</em></p></li>
 <li><p>The default mode if no other is specified: <strong>“r” (“reading”</strong> – opens a file for reading only).<br />
 Other options:<br />
 <strong>“w” (“writing”</strong> – opens a file for writing only. If the file does not exist, creates a new file for writing).<br />
@@ -711,8 +733,10 @@ fp.close () #closes the file
 <li><p>ASCII binary encoding of “A” = 01000001</p></li>
 <li><p>ISO 8859-1 binary encoding of “A” = 01000001</p></li>
 </ul>
-<p>But it <strong>matters for many other languages</strong> (most obviously all languages with writing systems that do not use the Latin alphabet). Even for languages using the Latin alphabet, subtle differences mean that some encodings cannot capture their full character set.<br />
-The following German sentence can only be encoded in UTF-8: <em>Frank sagt: „Es könnte dieses Jahr weiße Weihnachten geben.“</em> (Frank says: “We might get a white Christmas this year”). The problems for other encodings are:</p>
+<p>But it <strong>matters for many other languages</strong> (most obviously all languages with writing systems that do not use the Latin alphabet). Even for languages using the Latin alphabet, subtle differences mean that some encodings cannot capture their full character set.</p>
+<p>The following German sentence can only be encoded in UTF-8:</p>
+<p><em>Frank sagt: „Es könnte dieses Jahr weiße Weihnachten geben.“</em> (Frank says: “We might get a white Christmas this year”).</p>
+<p>The problems for other encodings are:</p>
 <ul class="simple">
 <li><p>ASCII: No umlauts (<em>ä,ö,ü</em>), no <em>ß</em>, no German quotation marks (<em>„…“</em>)</p></li>
 <li><p>ISO 8859-1: No German quotation marks (<em>„…“</em>)</p></li>
@@ -724,7 +748,7 @@ The following German sentence can only be encoded in UTF-8: <em>Frank sagt: „E
 <li><p>first introduced in the <strong>1960s</strong></p></li>
 <li><p>wide range of control characters</p></li>
 <li><p>limited to lower- and uppercase English alphabet</p></li>
-<li><p>7-bit encoding with a leading 0 = 128 characters, all encoded in a single byte (0 0000 000 to 0 1111 111)</p></li>
+<li><p>7-bit encoding with a leading 0 –&gt; 128 characters, all encoded in a single byte (0 0000 000 to 0 1111 111)</p></li>
 <li><p>limited for non-US usage: no umlauts, accents or other diacritics, no currency symbols other than dollar</p></li>
 <li><p>modifications were introduced in various countries, replacing ASCII characters with those of higher local significance, e.g., <em>ISCII</em> (Indian scripts), <em>VSCII</em> (Vietnamese)</p></li>
 </ul>
@@ -757,7 +781,7 @@ latin1_file = open(file_name , encoding=&quot;latin-1&quot;, &quot;w&quot;) #wri
 <h3>File formats<a class="headerlink" href="#file-formats" title="Permalink to this headline">#</a></h3>
 <p>Above, we dealt with text files organised as sequences in the form of lines of text (<em>.txt</em> files). However, text-based data can be formatted in various ways for information exchange:</p>
 <ul class="simple">
-<li><p>Tab-Separated Values <strong>(TSV)</strong> or Comma-Separated Values <strong>(CSV)</strong> for <strong>tabular data</strong> (i.e. for datapoints consisting of values for predefined fields – think of <em>Excel</em> spreadsheets, but without colour, size , or font information)</p></li>
+<li><p>Tab-Separated Values <strong>(TSV)</strong> or Comma-Separated Values <strong>(CSV)</strong> for <strong>tabular data</strong> (i.e. for datapoints consisting of values for predefined fields – think of <em>Excel</em> spreadsheets, but without colour, size, or font information)</p></li>
 <li><p>Extensible Markup Language <strong>(XML)</strong> for <strong>hierarchically structured data</strong> where format checking is necessary (think of dictionaries, for instance)</p></li>
 <li><p>JavaScript Object Notation <strong>(JSON)</strong> for uncomplicated <strong>data exchange between programs</strong></p></li>
 <li><p>various <strong>binary formats</strong> (database files, matrices) for memory-efficient storage and transfer</p></li>
@@ -849,7 +873,7 @@ spamreader = csv.reader(csvfile, delimiter=&#39;,&#39;, quotechar=&#39;&quot;&#3
 <ul class="simple">
 <li><p>structured data represented using arrays and key-value pairs</p></li>
 <li><p>syntax is mostly identical to Python literals!</p></li>
-<li><p>HOwever, when processing JSON files, some subtle differences between Python and JSON notation mean that not every Python literal can directly be interpreted as JSON, and vice versa (e.g. tuples don’t exist in JSON, lists and tuples both correspond to arrays)</p></li>
+<li><p>However, when processing JSON files, some subtle differences between Python and JSON notation mean that not every Python literal can directly be interpreted as JSON, and vice versa (e.g. tuples don’t exist in JSON, lists and tuples both correspond to arrays)</p></li>
 <li><p><em>json</em> module can dump any nested data structure to a JSON file, and load any JSON structure from a file</p></li>
 </ul>
 <p><strong>Example of a JSON document:</strong></p>
@@ -897,7 +921,7 @@ json.dump(dictionary, outfile) #save dictionary to countries.json
 </ul>
 <p>A more elegant solution for <strong>handling exceptions</strong> is to <strong>pre-define how potential errors should be handled at runtime</strong>:</p>
 <ul class="simple">
-<li><p>The <em>try</em> construct comprises a <strong>try</strong> block, an <strong>except</strong> block, and a <strong>finally</strong> block, which specify the statements that could raise exceptions, what should happen if exceptions occur, and what statements should be executed in any case, regardless of whether the try block was successfully executed or not.</p></li>
+<li><p>The <em>try</em> construct comprises a <strong>try</strong> block, an <strong>except</strong> block, and a <strong>finally</strong> block, which specify the statements that could raise exceptions, what should happen if exceptions occur, and what statements should be executed in any case, regardless of whether the <em>try</em> block was successfully executed or not.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -925,7 +949,7 @@ json.dump(dictionary, outfile) #save dictionary to countries.json
     <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 <span class="c1"># using with</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;text.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
     <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;hello world !&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
