@@ -54,7 +54,7 @@ print(sorted_file)
 print(sort_text(unsorted_file))
 
 
-# Some functions and methods **don't return anything** (= return *None*), but **still modify the objects** passed as their arguments. The list method *sort()* is such an example. Trying to assign the result of the function call to a new variable (presumable a sorted list?) will not have the effect you want:
+# Some functions and methods **don't return anything** (= return *None*), but **still modify the objects** passed as their arguments. The list method *sort()* is such an example. Trying to assign the result of the function call to a new variable (presumably, you'd want a sorted list from *sort()*?) will not have the effect you want:
 
 # In[4]:
 
@@ -94,7 +94,7 @@ count_word_occurence(unsorted_file)
 # 
 # Ranges are **widespread and versatile for iterating over collections of elements** (lists, tuples, sets, dictionaries).
 
-# In[9]:
+# In[7]:
 
 
 for i in range(len(sorted_file)): #iterate over full length of list
@@ -110,7 +110,7 @@ for i in range(len(sorted_file)): #iterate over full length of list
 # 
 # Note, though, that **file handles have *states***, that is, they **'remember where (in the file) they are'**. For this reason, you have to reset the state of the file handle if you want to loop over file handles multiple times, using ***file.seek(0)***.
 
-# In[19]:
+# In[8]:
 
 
 unsorted_file.seek(0)
@@ -134,7 +134,7 @@ for line in range(20):
 # - *While* loops can be used on data structures that are not iterable. 
 # - *While* loops may also be prefered if you do not know the number of required iterations beforehand.
 
-# In[11]:
+# In[9]:
 
 
 from random import randrange
@@ -162,7 +162,7 @@ print("Playback stopped.")
 # #### - *sort()* and *sorted()*
 # As seen above, *sort()* modifies the original sequence it was passed. **To sort sequences or collections without disturbing the original sequence** of the object, use the ***sorted()*** function. *Sorted()* returns an ordered copy of the sequence passed as its argument:
 
-# In[12]:
+# In[10]:
 
 
 sorted_file_v3 = sorted(sorted_file, reverse = True) 
@@ -176,7 +176,7 @@ print(type(sorted_file_v3))
 # 
 # For instance, you may want to ignore capitalization when sorting list elements alphabetically:
 
-# In[13]:
+# In[11]:
 
 
 #case-insensitive string comparison
@@ -189,7 +189,7 @@ print(sorted_file_v3)
 # 
 # By default, when applying the ***sorted()*** function, dictionaries are **sorted by their keys**. In fact, just feeding a dictionary straight to the *sorted()* function will simply return a sorted list of its keys.
 
-# In[14]:
+# In[12]:
 
 
 #initialize dictionary (see session04)
@@ -201,15 +201,15 @@ feature = ["Worried","Endlessly broad-minded","Two-headed","Paranoid"]
 notebook = {"First name" : first_names, "Last name" : last_names, "Life form" : lifeform, "Distinct feature" : feature}
 
 
-# In[15]:
+# In[13]:
 
 
 print(sorted(notebook)) #just returns sorted list of keys
 
 
-# **Option for sorting dictionary and returning a list sorted by key**: Using the dictionary method *items()*, we receive a dictionary view object, a list of tuples containing all key-value pairs (see also the methosd *values()* and *keys()*, session 04). Calling *sorted()* on this object will return a list sorted by the dictionary's keys.
+# **Option for sorting dictionary and returning a list sorted by key**: Using the dictionary method *items()*, we receive a dictionary view object, a list of tuples containing all key-value pairs (see also the methods *values()* and *keys()*, session 04). Calling *sorted()* on this object will return a list sorted by the dictionary's keys.
 
-# In[16]:
+# In[14]:
 
 
 print(sorted(notebook.items()))
@@ -230,14 +230,14 @@ print(sorted(notebook.items()))
 #     
 # - Lambda functions can have **any number of arguments but only one expression**. That expression is **evaluated and returned**.
 
-# In[17]:
+# In[15]:
 
 
 #using a lambda function
 print(sorted(notebook.items(), key = lambda x: x[1]))#sorts by value ==> here, alphabetical order of the lists (by their first element)
 
 
-# - Alternatively, **the operator module** has convenience functions to fetch items from an operand, which can be any sequence or collection of elements:
+# - Alternatively, **the *operator* module** has convenience functions to fetch items from an operand, which can be any sequence or collection of elements:
 
 # In[18]:
 
@@ -261,7 +261,7 @@ print(sorted(notebook.items(), key = itemgetter(1)))#sorts by value, same as the
 # 
 # An extreme example:
 
-# In[42]:
+# In[16]:
 
 
 for i in range (2): #for i in range 0-1
@@ -274,7 +274,7 @@ for i in range (2): #for i in range 0-1
 
 # The same thing, but more efficiently:
 
-# In[41]:
+# In[17]:
 
 
 for i in range (2): #for i in range 0-1

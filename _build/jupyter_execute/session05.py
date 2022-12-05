@@ -7,7 +7,7 @@
 # 
 # ### Modules
 # 
-# **Modules are Python files intended for use in other Python programs**. Any *.py* file can be loaded as a module. As such, modules allow us **(a)** to **distribute code across multiple files** (which is convenient for bigger coding projects) and **(b)** to make use of **collections of useful functions** provided by other programmers. Many modules come with Python as part of the default installation. One such example is the *Itertools* module we saw in the previous session. Others include the *math* module and the *random* module, which contain helpful functions for mathematical operations and for dealing with distributional data.
+# **Modules are Python files intended for use in other Python programs**. Any *.py* file can be loaded as a module. As such, modules allow us **(a) to distribute code across multiple files** (which is convenient for bigger coding projects) and **(b) to make use of collections of useful functions** provided by other programmers. Many modules come with Python as part of the default installation. One such example is the *Itertools* module we saw in the previous session. Others include the *math* module and the *random* module, which contain helpful functions for mathematical operations and for dealing with distributional data.
 # 
 # Modules are **loaded with an *import* statement** (more below). Upon importing them, **all statements in the imported module are executed**.  
 # 
@@ -19,7 +19,7 @@
 # 
 # - *import math*: makes all objects available as *math.object*
 # - *from math import func*: makes *math.func* available as *func*
-# - *from example import long_function_name as func*: makes *math.function_name_in_module* available as *func_name_in_my_code*
+# - *from math import long_function_name as func*: makes *math.function_name_in_module* available as *func_name_in_my_code*
 
 # In[1]:
 
@@ -33,7 +33,7 @@ print(fc(4)) #prints 4!
 
 # #### Example: Your homework as module
 # 
-# Our testing skripts import your homework as module. Your code gets loaded by *from ex_01 import \**, which causes your function definitions to be assigned to the function names, and the unit tests will be executed on your definitions.  
+# Our testing skripts import your homework as module. Your code gets loaded by *from ex_01 import \**. The star symbol indicates that the module should be imported with all functions and classes as elements in the current file's namespace(, even if that would replace existing names). Thus, your function definitions are assigned to the function names, and the unit tests will be executed on your definitions.  
 # 
 # The most basic element of our test code is the *assert* statement. Each such statement represents a basic fact which should hold of the program. For instance, *assertEquals(value, expression)* checks whether an expression correctly evaluates to a given value.   
 # 
@@ -52,7 +52,9 @@ print(fc(4)) #prints 4!
 # 
 # Now that you know how to use **modules**, we'd also like to know how to use **files**. Creating data by assigning values to variables worked fine so far, but more often than not data already exists and we want to work with it. Python allows you to **read in data** from external files such that you can **extract, analyse or modify** its contents and **save the results** to (another) file.  
 # 
-# Files have two key properties: a filename (including name + file type, e.g. *example.txt*) and a path, which specifies its location on the computer (e.g. *C:\Users\jschwab\Documents\Teaching\Methods I\*)
+# **Files have two key properties**: 
+# - a filename (including name + file type, e.g. *example.txt*) 
+# - a path, which specifies its location on the computer (e.g. *C:\Users\jschwab\Documents\Teaching\Methods I\*)
 # 
 # #### Reading and writing to text files
 # Plaintext files (*.txt*) contain only basic text characters and do not include font, size, or color information. They consist of lines of text with a newline symbol at the end of each line (in Python strings, a newline is represented by "\n"). Text files are one of the most elementary file types that we will deal with. Python can easily read them, treating their contents as string values. 
@@ -63,6 +65,8 @@ print(fc(4)) #prints 4!
 #     - obligatory argument: a file name (or a complete path)
 #     - optional: a string representing the **mode** in which the file is opened
 #     - optional: a string representing the **encoding** of the file (see below)
+# - Example: *open("guide.txt", "r")*
+# 
 # 
 # - The default mode if no other is specified: **"r" (“reading”** -- opens a file for reading only).   
 #     Other options:   
@@ -141,8 +145,13 @@ print(fc(4)) #prints 4!
 # - ISO 8859-1 binary encoding of "A" = 01000001  
 # 
 # But it **matters for many other languages** (most obviously all languages with writing systems that do not use the Latin alphabet). Even for languages using the Latin alphabet, subtle differences mean that some encodings cannot capture their full character set.  
-# The following German sentence can only be encoded in UTF-8: *Frank sagt: &bdquo;Es könnte dieses Jahr weiße Weihnachten geben.&ldquo;* (Frank says: "We might get a white Christmas this year"). The problems for other encodings are:
 # 
+# 
+# The following German sentence can only be encoded in UTF-8: 
+# 
+# *Frank sagt: &bdquo;Es könnte dieses Jahr weiße Weihnachten geben.&ldquo;* (Frank says: "We might get a white Christmas this year"). 
+# 
+# The problems for other encodings are:
 # - ASCII: No umlauts (*ä,ö,ü*), no *ß*, no German quotation marks (*&bdquo;...&ldquo;*)
 # - ISO 8859-1: No German quotation marks (*&bdquo;...&ldquo;*)
 # 
@@ -152,7 +161,7 @@ print(fc(4)) #prints 4!
 # - first introduced in the **1960s**
 # - wide range of control characters
 # - limited to lower- and uppercase English alphabet
-# - 7-bit encoding with a leading 0 = 128 characters, all encoded in a single byte (0 0000 000 to 0 1111 111)
+# - 7-bit encoding with a leading 0 --> 128 characters, all encoded in a single byte (0 0000 000 to 0 1111 111)
 # - limited for non-US usage: no umlauts, accents or other diacritics, no currency symbols other than dollar
 # - modifications were introduced in various countries, replacing ASCII characters with those of higher local significance, e.g., *ISCII* (Indian scripts), *VSCII* (Vietnamese)
 # 
@@ -180,7 +189,7 @@ print(fc(4)) #prints 4!
 # 
 # Above, we dealt with text files organised as sequences in the form of lines of text (*.txt* files). However, text-based data can be formatted in various ways for information exchange:
 # 
-# - Tab-Separated Values **(TSV)** or Comma-Separated Values **(CSV)** for **tabular data** (i.e. for datapoints consisting of values for predefined fields -- think of *Excel* spreadsheets, but without colour, size , or font information)
+# - Tab-Separated Values **(TSV)** or Comma-Separated Values **(CSV)** for **tabular data** (i.e. for datapoints consisting of values for predefined fields -- think of *Excel* spreadsheets, but without colour, size, or font information)
 # - Extensible Markup Language **(XML)** for **hierarchically structured data** where format checking is necessary (think of dictionaries, for instance)
 # - JavaScript Object Notation **(JSON)** for uncomplicated **data exchange between programs** 
 # - various **binary formats** (database files, matrices) for memory-efficient storage and transfer
@@ -249,7 +258,7 @@ print(fc(4)) #prints 4!
 # 
 # - structured data represented using arrays and key-value pairs
 # - syntax is mostly identical to Python literals!
-# - HOwever, when processing JSON files, some subtle differences between Python and JSON notation mean that not every Python literal can directly be interpreted as JSON, and vice versa (e.g. tuples don't exist in JSON, lists and tuples both correspond to arrays)
+# - However, when processing JSON files, some subtle differences between Python and JSON notation mean that not every Python literal can directly be interpreted as JSON, and vice versa (e.g. tuples don't exist in JSON, lists and tuples both correspond to arrays)
 # - *json* module can dump any nested data structure to a JSON file, and load any JSON structure from a file
 # 
 # **Example of a JSON document:**
@@ -297,7 +306,7 @@ print(fc(4)) #prints 4!
 # 
 # A more elegant solution for **handling exceptions** is to **pre-define how potential errors should be handled at runtime**:
 # 
-# - The *try* construct comprises a **try** block, an **except** block, and a **finally** block, which specify the statements that could raise exceptions, what should happen if exceptions occur, and what statements should be executed in any case, regardless of whether the try block was successfully executed or not.
+# - The *try* construct comprises a **try** block, an **except** block, and a **finally** block, which specify the statements that could raise exceptions, what should happen if exceptions occur, and what statements should be executed in any case, regardless of whether the *try* block was successfully executed or not.
 
 # In[2]:
 
@@ -324,14 +333,8 @@ finally:
     file.close()
 
 # using with
-with open('text.txt', 'w') as file:
+with open('test.txt', 'w') as file:
     file.write('hello world !')
 
 
 # Notice that there is **no need to call *file.close()***. The *with* statement itself ensures proper acquisition and release of resources, regardless of whether the *file.write* method throws exceptions.
-
-# In[ ]:
-
-
-
-

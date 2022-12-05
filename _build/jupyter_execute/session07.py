@@ -114,7 +114,7 @@ def read_floats_from_file(filename):
     return float_list
 
 if __name__ == "__main__": #input is read in only here, that is, when executing the source file as standalone program.
-    l1 = read_floats_from_file("test.txt")
+    l1 = read_floats_from_file("test1.txt")
     l2 = read_floats_from_file("test2.txt")
     print("Sum of both lists: " + str(sum_lists(l1 ,l2)))
 
@@ -182,7 +182,7 @@ print("\nLanguage Detected: Name={}".format(text_en.language.name))
 print("\nLanguage Detected: Name={}".format(text_ar.language.name))
 
 
-# In[5]:
+# In[7]:
 
 
 from polyglot.transliteration import Transliterator
@@ -276,7 +276,7 @@ for x in text_en.transliterate("ar"):
 # - *regex.findall(str)*: matches the regex pattern **for its appearance anywhere in the string** and returns all matches.
 # - *regex.split(str)*: matches the regex pattern **for its appearance anywhere in the string** and splits the string into a list of substrings.
 
-# In[7]:
+# In[8]:
 
 
 import re
@@ -291,7 +291,7 @@ print(matcher.split(sentence)) #split string around all instances matching the r
 
 # The first two of these methods return a *match* object, which can be further processed using methods within the *Re* module (e.g., *start()* and *end()*, but check out the online documentation for more).
 
-# In[8]:
+# In[9]:
 
 
 match = matcher.search(sentence)
@@ -302,14 +302,8 @@ match.start(), match.end()
 
 # You can replace matching substrings using the *sub(replacement, string)*:
 
-# In[9]:
+# In[10]:
 
 
 matcher.sub(" cat", sentence)
-
-
-# In[ ]:
-
-
-
 
