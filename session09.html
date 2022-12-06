@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Classes (January 17, 2023) &#8212; Scientific programming in Python</title>
+    <title>Recursion, trees, and search (January 24, 2023) &#8212; Scientific programming in Python</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,6 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Applications (Part I): Processing corpus data using NLTK, numpy, and matplotlib (January 31, 2023)" href="session10.html" />
     <link rel="prev" title="Applications (Part I): Processing corpus data using NLTK, numpy, and matplotlib (January 10, 2023)" href="session08.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -140,7 +141,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session07.html">
-   For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022)
+   For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023)
   </a>
  </li>
  <li class="toctree-l1">
@@ -162,7 +163,29 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Classes (January 17, 2023)
+   Recursion, trees, and search (January 24, 2023)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session10.html">
+   Applications (Part I): Processing corpus data using
+   <em>
+    NLTK
+   </em>
+   ,
+   <em>
+    numpy
+   </em>
+   , and
+   <em>
+    matplotlib
+   </em>
+   (January 31, 2023)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session11.html">
+   Applications (Part II): Programming in experimental research (February 07, 2023)
   </a>
  </li>
 </ul>
@@ -367,148 +390,23 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-basics">
-   The basics
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#defining-a-class-in-python">
-   Defining a class in Python
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-initialization-method">
-     The initialization method
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-simple-language-class">
-   A simple Language class
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calling-class-methods">
-     Calling class methods
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-class-objects-as-arguments-or-parameters">
-     Using class objects as arguments or parameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-several-instances-of-a-class">
-     Using several instances of a class
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#class-inheritance">
-   Class inheritance
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#objects-are-mutable">
-   Objects are mutable
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Classes (January 17, 2023)</h1>
+                <h1>Recursion, trees, and search (January 24, 2023)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-basics">
-   The basics
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#defining-a-class-in-python">
-   Defining a class in Python
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-initialization-method">
-     The initialization method
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-simple-language-class">
-   A simple Language class
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calling-class-methods">
-     Calling class methods
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-class-objects-as-arguments-or-parameters">
-     Using class objects as arguments or parameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-several-instances-of-a-class">
-     Using several instances of a class
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#class-inheritance">
-   Class inheritance
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#objects-are-mutable">
-   Objects are mutable
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -516,425 +414,9 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="classes-january-17-2023">
-<h1>Classes (January 17, 2023)<a class="headerlink" href="#classes-january-17-2023" title="Permalink to this headline">#</a></h1>
-<p>In previous sessions, we learned about various different data types (e.g., integers, strings, lists, tuples, dictionaries…) along with their methods (e.g., <em>str.split()</em>, <em>list.sort()</em>,…), <strong>but what if we could define our own?</strong></p>
-<p>With <strong>classes</strong>, you can write user-defined data types. This is a form of what’s called <strong>object-oriented programming</strong>. Instead of writing procedures / algorithms to solve a task, we are now writing code to define objects (of course these may subsequently be used in procedural programming tasks).</p>
-<section id="the-basics">
-<h2>The basics<a class="headerlink" href="#the-basics" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p><strong>A class specifies</strong> the <strong>format</strong> of instances of that class (in terms of data structure) and what <strong>procedures</strong> are available for them (in terms of user-defined methods).</p></li>
-<li><p>Instances of a class are called objects (just like there are integer objects, list objects, etc.)</p></li>
-</ul>
-<p><strong>You may think of the definition of a class as the definition of a concept</strong>. As in real life, <strong>concepts/classes are defined by their essential properties, specified in terms of more basis concepts</strong>;</p>
-<ul class="simple">
-<li><p>E.g., a <em>rectangle</em> may be defined as a quadrilateral with right angles, <em>angles</em> may be defined as the figure formed by two rays sharing a common endpoint, <em>rays</em> may be defined as […], and so forth).</p></li>
-<li><p><strong>In Python</strong>, that means that you can <strong>use any of the in-built basic data types to define objects of your own class</strong>, or may even define several classes (e.g., Rectangle and Angle), one of which inherits properties of the other (e.g. Rectangle inheriting properties of the Angle class).</p></li>
-</ul>
-<p><strong>Methods of a class can be thought of as definitions of the way in which instances of that concept / class interact with the world</strong>:</p>
-<ul class="simple">
-<li><p>E.g., a rectangle can be enlarged or shrunk by adding / removing the same amount of length from its opposing sides, two rectangles may be conjoined if they align on one of their dimensions, etc..</p></li>
-<li><p><strong>In Python, methods of a class are specified in terms of functions that take an instance of that class as argument</strong>.</p></li>
-</ul>
-</section>
-<section id="defining-a-class-in-python">
-<h2>Defining a class in Python<a class="headerlink" href="#defining-a-class-in-python" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Class names start with a capital letter.</p></li>
-<li><p>Classes usually start with an __init__ constructor (more on this below).</p></li>
-<li><p>The <em>self</em> parameter is automatically set to refer to an object of the data type you are defining. In the code below, it is a variable refering to an instance of <em>YourClass</em> and functions like any other variable inside the class definition.</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">YourClass</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">variable1</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">variable2</span> <span class="o">=</span> <span class="mi">2</span>
-           
-    <span class="k">def</span> <span class="nf">method1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1">#some method</span>
-        <span class="k">pass</span>
-           
-    <span class="k">def</span> <span class="nf">method2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1">#some other method</span>
-        <span class="k">pass</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="the-initialization-method">
-<h3>The initialization method<a class="headerlink" href="#the-initialization-method" title="Permalink to this headline">#</a></h3>
-<p>The <em>__init__(self)</em> method (also called the <em>class constructor</em>) is automatically called whenever you create an instance of the class. In it, you should specify the basic properties of all instances of that class. For instance, in the code above, it initializes all objects of the <em>YourClass</em> class as having two properties, <em>variable1</em> and <em>variable2</em>, which have the values <em>1</em> and <em>2</em>, respectively.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example</span> <span class="o">=</span> <span class="n">YourClass</span><span class="p">()</span> <span class="c1">#create an instance of the YourClass class  </span>
-<span class="nb">print</span><span class="p">(</span><span class="n">example</span><span class="p">)</span> 
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.YourClass object at 0x000001F4675FCB50&gt;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">variable1</span><span class="p">)</span> <span class="c1">#after initialization, this object has the properties we specified above</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">variable2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
-2
-</pre></div>
-</div>
-</div>
-</div>
-<p>We may not always want to initialize objects with the same values for <em>variable1</em> and <em>variable2</em>, though. <strong>To make the initialization method more general, we can add extra parameters in its definition</strong>, as in the following example. The way this works is that it sets <em>value1</em> and <em>value2</em> to <em>1</em> and <em>2</em>, respectively, as long as no other values are provided in your call to create an instance of that class.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">YourClass</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">value2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">variable1</span> <span class="o">=</span> <span class="n">value1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">variable2</span> <span class="o">=</span> <span class="n">value2</span>
-           
-    <span class="k">def</span> <span class="nf">method1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1">#some method</span>
-        <span class="k">pass</span>
-           
-    <span class="k">def</span> <span class="nf">method2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1">#some other method</span>
-        <span class="k">pass</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>We can still create objects like before:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example2</span> <span class="o">=</span> <span class="n">YourClass</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">example2</span><span class="o">.</span><span class="n">variable1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
-</pre></div>
-</div>
-</div>
-</div>
-<p>But we can also specify their values for <em>value1</em> and / or <em>value2</em>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example3</span> <span class="o">=</span> <span class="n">YourClass</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">example3</span><span class="o">.</span><span class="n">variable1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example4</span> <span class="o">=</span> <span class="n">YourClass</span><span class="p">(</span><span class="n">value2</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">example4</span><span class="o">.</span><span class="n">variable2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
-</pre></div>
-</div>
-</div>
-</div>
-<p>Note that if you do not provide default values as in <em>def __init__(self, value1 = 1, value2 = 2)</em>, you will always have to provide such values upon creating an object of that class.</p>
-</section>
-</section>
-<section id="a-simple-language-class">
-<h2>A simple Language class<a class="headerlink" href="#a-simple-language-class" title="Permalink to this headline">#</a></h2>
-<p>The following is <strong>not a complete representation of specific language families</strong>. It only serves for illustration:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Language</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="n">num_of_speakers</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="n">family</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">=</span> <span class="n">branch</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">num_of_speakers</span> <span class="o">=</span> <span class="n">num_of_speakers</span>
-
-    <span class="k">def</span> <span class="nf">branch_to_family</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">==</span> <span class="s2">&quot;unknown&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">!=</span> <span class="s2">&quot;unknown&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;Balto-Slavic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Germanic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Hellenic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Indo-Iranian&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Romance&quot;</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="s2">&quot;Indo-European&quot;</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;Sinitic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Tibeto-Burman&quot;</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="s2">&quot;Sino-Tibetan&quot;</span>
-            
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">de</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;German&quot;</span><span class="p">,</span> <span class="s2">&quot;Indo-European&quot;</span><span class="p">,</span> <span class="s2">&quot;Germanic&quot;</span><span class="p">,</span> <span class="mi">100000000</span><span class="p">)</span>
-<span class="n">lat</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;Latvian&quot;</span><span class="p">,</span> <span class="n">branch</span> <span class="o">=</span> <span class="s2">&quot;Balto-Slavic&quot;</span><span class="p">,</span><span class="n">num_of_speakers</span> <span class="o">=</span> <span class="mi">2200000</span><span class="p">)</span>
-
-<span class="n">ra_ha</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;Ramarih Hatohobei&quot;</span><span class="p">,</span> <span class="s2">&quot;Austronesian&quot;</span><span class="p">,</span> <span class="s2">&quot;Micronesian&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">de</span><span class="p">)</span> <span class="c1">#de is now a Language object</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.Language object at 0x000001F467551160&gt;
-</pre></div>
-</div>
-</div>
-</div>
-<section id="calling-class-methods">
-<h3>Calling class methods<a class="headerlink" href="#calling-class-methods" title="Permalink to this headline">#</a></h3>
-<p>We can call on a class method just as we called methods for other data types before:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lat</span><span class="o">.</span><span class="n">branch_to_family</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">lat</span><span class="o">.</span><span class="n">family</span><span class="p">)</span> <span class="c1">#family information has now been added</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Indo-European
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="using-class-objects-as-arguments-or-parameters">
-<h3>Using class objects as arguments or parameters<a class="headerlink" href="#using-class-objects-as-arguments-or-parameters" title="Permalink to this headline">#</a></h3>
-<p>We can use instances of our class as arguments or parameters in functions. For instance, we could write a function that outputs all information about a particular language:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_language_info</span><span class="p">(</span><span class="n">lang</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">lang</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;is an instance of a&quot;</span><span class="p">,</span> <span class="n">lang</span><span class="o">.</span><span class="n">branch</span><span class="p">,</span> <span class="s2">&quot;language in the&quot;</span><span class="p">,</span> <span class="n">lang</span><span class="o">.</span><span class="n">family</span><span class="p">,</span> <span class="s2">&quot;language family. It has&quot;</span><span class="p">,</span> <span class="n">lang</span><span class="o">.</span><span class="n">num_of_speakers</span><span class="p">,</span> <span class="s2">&quot;native speakers&quot;</span><span class="p">)</span>
-    
-<span class="n">print_language_info</span><span class="p">(</span><span class="n">de</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>German is an instance of a Germanic language in the Indo-European language family. It has 100000000 native speakers
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>Importantly, for general-purpose functions like this, it is preferred to add them as new methods of the class, rather than as functions operating outside of the class</strong>. One of the reasons for that is that your code stays more portable and comprehensible if all important functions / methods are contained within the class definition.</p>
-<p>So let’s add a print method to our class. <strong>Crucially, if we call it <em>__str__(self)</em>, it will function as the default output of the <em>print()</em> function called on objects of that class!</strong></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Language</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="n">num_of_speakers</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="n">family</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">=</span> <span class="n">branch</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">num_of_speakers</span> <span class="o">=</span> <span class="n">num_of_speakers</span>
-
-    <span class="k">def</span> <span class="nf">branch_to_family</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">==</span> <span class="s2">&quot;unknown&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">!=</span> <span class="s2">&quot;unknown&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;Balto-Slavic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Germanic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Hellenic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Indo-Iranian&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Romance&quot;</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="s2">&quot;Indo-European&quot;</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;Sinitic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Tibeto-Burman&quot;</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="s2">&quot;Sino-Tibetan&quot;</span>
-    
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> is an instance of a </span><span class="si">{1}</span><span class="s2"> language in the </span><span class="si">{2}</span><span class="s2"> language family. It has </span><span class="si">{3}</span><span class="s2"> native speakers.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_of_speakers</span><span class="p">))</span>
-    
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#create the objects again with the new Class definition:</span>
-<span class="n">de</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;German&quot;</span><span class="p">,</span> <span class="s2">&quot;Indo-European&quot;</span><span class="p">,</span> <span class="s2">&quot;Germanic&quot;</span><span class="p">,</span> <span class="mi">100000000</span><span class="p">)</span>
-<span class="n">lat</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;Latvian&quot;</span><span class="p">,</span> <span class="n">branch</span> <span class="o">=</span> <span class="s2">&quot;Balto-Slavic&quot;</span><span class="p">,</span><span class="n">num_of_speakers</span> <span class="o">=</span> <span class="mi">2200000</span><span class="p">)</span>
-
-<span class="n">ra_ha</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;Ramarih Hatohobei&quot;</span><span class="p">,</span> <span class="s2">&quot;Austronesian&quot;</span><span class="p">,</span> <span class="s2">&quot;Micronesian&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">de</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>German is an instance of a Germanic language in the Indo-European language family. It has 100000000 native speakers.
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="using-several-instances-of-a-class">
-<h3>Using several instances of a class<a class="headerlink" href="#using-several-instances-of-a-class" title="Permalink to this headline">#</a></h3>
-<p>We can also <strong>define methods that operate on several instances of the class we are in</strong>. For example, we could specify a class method that checks whether two languages are part of the same language family. This method takes <em>self</em> and a comparison language as arguments.</p>
-<p>Note also that <strong>we can call other class methods from within a class method</strong> (here, we call <em>branch_to_family</em>), just like we saw nested function calls in previous sessions.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Language</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="n">num_of_speakers</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="n">family</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">=</span> <span class="n">branch</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">num_of_speakers</span> <span class="o">=</span> <span class="n">num_of_speakers</span>
-
-    <span class="k">def</span> <span class="nf">branch_to_family</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">==</span> <span class="s2">&quot;unknown&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">!=</span> <span class="s2">&quot;unknown&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;Balto-Slavic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Germanic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Hellenic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Indo-Iranian&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Romance&quot;</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="s2">&quot;Indo-European&quot;</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;Sinitic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Tibeto-Burman&quot;</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="s2">&quot;Sino-Tibetan&quot;</span>
-    
-    <span class="k">def</span> <span class="nf">family_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comparison</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">==</span> <span class="s2">&quot;unknown&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">branch_to_family</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">comparison</span><span class="o">.</span><span class="n">family</span> <span class="o">==</span> <span class="s2">&quot;unknown&quot;</span><span class="p">:</span>
-            <span class="n">comparison</span><span class="o">.</span><span class="n">branch_to_family</span><span class="p">()</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">==</span> <span class="s2">&quot;unknown&quot;</span> <span class="ow">or</span> <span class="n">comparison</span><span class="o">.</span><span class="n">family</span> <span class="o">==</span> <span class="s2">&quot;unknown&quot;</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;At least one of the languages does not have a known language family.&quot;</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">==</span> <span class="n">comparison</span><span class="o">.</span><span class="n">family</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Same language family.&quot;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not the same language family.&quot;</span><span class="p">)</span>
-    
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> is an instance of a </span><span class="si">{1}</span><span class="s2"> language in the </span><span class="si">{2}</span><span class="s2"> language family. It has </span><span class="si">{3}</span><span class="s2"> native speakers.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_of_speakers</span><span class="p">))</span>
-    
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#create the objects again with the new Class definition:</span>
-<span class="n">de</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;German&quot;</span><span class="p">,</span> <span class="s2">&quot;Indo-European&quot;</span><span class="p">,</span> <span class="s2">&quot;Germanic&quot;</span><span class="p">,</span> <span class="mi">100000000</span><span class="p">)</span>
-<span class="n">lat</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;Latvian&quot;</span><span class="p">,</span> <span class="n">branch</span> <span class="o">=</span> <span class="s2">&quot;Balto-Slavic&quot;</span><span class="p">,</span><span class="n">num_of_speakers</span> <span class="o">=</span> <span class="mi">2200000</span><span class="p">)</span>
-
-<span class="n">ra_ha</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;Ramarih Hatohobei&quot;</span><span class="p">,</span> <span class="s2">&quot;Austronesian&quot;</span><span class="p">,</span> <span class="s2">&quot;Micronesian&quot;</span><span class="p">)</span>
-
-<span class="n">de</span><span class="o">.</span><span class="n">family_check</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span>
-<span class="n">ra_ha</span><span class="o">.</span><span class="n">family_check</span><span class="p">(</span><span class="n">de</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Same language family.
-Not the same language family.
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="class-inheritance">
-<h2>Class inheritance<a class="headerlink" href="#class-inheritance" title="Permalink to this headline">#</a></h2>
-<p>We can declare classes as subtypes of another class. For instance, below, we define a class IndoEuropean as a subtype of the Language class.</p>
-<p>All functionalities of the superclass (class variables, methods) are inherited by the subclass, but can be overridden by redefinition or reassignment.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">IndoEuropean</span><span class="p">(</span><span class="n">Language</span><span class="p">):</span>
-    <span class="k">pass</span>
-
-<span class="n">en</span> <span class="o">=</span> <span class="n">IndoEuropean</span><span class="p">(</span><span class="s2">&quot;English&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">en</span><span class="o">.</span><span class="n">family</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>unknown
-</pre></div>
-</div>
-</div>
-</div>
-<p>Below, we redefine the initialization method for the <em>IndoEuropean</em> class. Note that all other methods from the <em>Language</em> class will still be available in the <em>IndoEuropean</em> subclass.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">IndoEuropean</span><span class="p">(</span><span class="n">Language</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="n">num_of_speakers</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="s2">&quot;Indo-European&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">=</span> <span class="n">branch</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">num_of_speakers</span> <span class="o">=</span> <span class="n">num_of_speakers</span>
-        
-<span class="n">en</span> <span class="o">=</span> <span class="n">IndoEuropean</span><span class="p">(</span><span class="s2">&quot;English&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">en</span><span class="o">.</span><span class="n">family</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Indo-European
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="objects-are-mutable">
-<h2>Objects are mutable<a class="headerlink" href="#objects-are-mutable" title="Permalink to this headline">#</a></h2>
-<p>You know <em>mutability</em> from list objects. It means that we can we can directly add, remove, or change the values of the object without creating a new object. Specifically, we can change any of the object’s values, delete properties of the object, or delete the object altogether:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#change value of num_of_speakers</span>
-<span class="n">en</span><span class="o">.</span><span class="n">num_of_speakers</span> <span class="o">=</span> <span class="mi">370000000</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">en</span><span class="o">.</span><span class="n">num_of_speakers</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>370000000
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#delete num_of_speakers property</span>
-<span class="k">del</span> <span class="n">en</span><span class="o">.</span><span class="n">num_of_speakers</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">en</span><span class="o">.</span><span class="n">num_of_speakers</span><span class="p">)</span> <span class="c1">#results in error</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_12196</span>\<span class="mf">1514171247.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#delete num_of_speakers property</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">del</span> <span class="n">en</span><span class="o">.</span><span class="n">num_of_speakers</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">en</span><span class="o">.</span><span class="n">num_of_speakers</span><span class="p">)</span> <span class="c1">#results in error</span>
-
-<span class="ne">AttributeError</span>: &#39;IndoEuropean&#39; object has no attribute &#39;num_of_speakers&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#delete object</span>
-<span class="k">del</span> <span class="n">en</span>
-
-<span class="c1">#to remind you of the try block...</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">en</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The object no longer exists.&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The object no longer exists.
-</pre></div>
-</div>
-</div>
-</div>
-</section>
+  <section id="recursion-trees-and-search-january-24-2023">
+<h1>Recursion, trees, and search (January 24, 2023)<a class="headerlink" href="#recursion-trees-and-search-january-24-2023" title="Permalink to this headline">#</a></h1>
+<p>under construction…</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -970,6 +452,13 @@ Not the same language family.
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Applications (Part I): Processing corpus data using <em>NLTK</em>, <em>numpy</em>, and <em>matplotlib</em> (January 10, 2023)</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="session10.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Applications (Part I): Processing corpus data using <em>NLTK</em>, <em>numpy</em>, and <em>matplotlib</em> (January 31, 2023)</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
