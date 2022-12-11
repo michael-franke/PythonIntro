@@ -24,9 +24,9 @@
 # In[1]:
 
 
-from math import factorial as fc #imports the function factorial(x) from the math module, assigns it the name fc
+from math import factorial  #imports the function factorial(x) from the math module, assigns it the name fc
 
-print(fc(4)) #prints 4!
+print(factorial(4)) #prints 4!
 
 
 # The names and functionalities of available modules can be looked up in Python's documentation: https://docs.python.org/3/py-modindex.html

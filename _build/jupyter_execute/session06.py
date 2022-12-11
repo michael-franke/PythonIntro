@@ -8,19 +8,40 @@
 # In[1]:
 
 
+#an example
 import itertools
 
-def sort_text(file):
+def sort_text(file): #takes a plaintext file as input
+    words = list()
+    lines = [line.strip().split() for line in file] 
+    print("For your reference, this is what lines looks like now: ", lines[1:10])   
+    for word in itertools.chain.from_iterable(lines): 
+        words.append(word) 
+    words.sort()
+    return words
+    
+unsorted_file = open("hitchhikers_guide_full.txt", "r")
+
+print(sort_text(unsorted_file)[1:500]) #prints part of the output, not the full book
+
+
+# In[2]:
+
+
+#an example
+import itertools
+
+def sort_text(file): #takes a plaintext file as input
     words = list()
     lines = [line.strip().split() for line in file] #list comprehension: for each line of text, strip it of white spaces and split it into separate strings per word  
-    for word in itertools.chain.from_iterable(lines): #iterate through nested list
-        words.append(word) #add all words to flattened list of words
+    for word in itertools.chain.from_iterable(lines): #iterate through /nested/ list - important since lines from the book are nested lists in *lines*  
+        words.append(word) #add all words to flattened list of words - i.e., no more nesting now!
     words.sort() #sort list
     return words
     
 unsorted_file = open("hitchhikers_guide_full.txt", "r")
 
-print(sort_text(unsorted_file))
+print(sort_text(unsorted_file)[1:500])#prints part of the output, not the full book
 
 
 # ### Handling functions more efficiently
@@ -31,58 +52,60 @@ print(sort_text(unsorted_file))
 
 # **Function calls are expressions, therefore they evaluate to objects** (see session 02). This means you can directly operate on them:
 
-# In[2]:
+# In[3]:
 
 
 unsorted_file.seek(0) #reset file handle. I'll explain this in a bit...
 
-sorted_tuple = tuple(sort_text(unsorted_file))
+sorted_tuple = tuple(sort_text(unsorted_file)) #transform return value from function to a tuple before storing in variable
 
 
 # Note also that **if you use the result of a function call only once it is unnecessary to assign it to a variable**: 
 
-# In[3]:
+# In[4]:
 
 
 unsorted_file.seek(0) #reset file handle. I'll explain this in a bit...
 
 #inefficient code:
 sorted_file = sort_text(unsorted_file)
-print(sorted_file)
+print(sorted_file[1:500])
 
+unsorted_file.seek(0) 
 #more efficiently:
-print(sort_text(unsorted_file))
+print(sort_text(unsorted_file)[1:500])
 
 
 # Some functions and methods **don't return anything** (= return *None*), but **still modify the objects** passed as their arguments. The list method *sort()* is such an example. Trying to assign the result of the function call to a new variable (presumably, you'd want a sorted list from *sort()*?) will not have the effect you want:
 
-# In[4]:
-
-
-#don't do this!
-sorted_file_v2 = sorted_file.sort() 
-print(type(sorted_file_v2))
-
-
 # In[5]:
 
 
-#instead
+#don't do this!
+sorted_file_v2 = sorted_file.sort() #sorted_file is a list, but sort() does not return a new (sorted) list.
+print(type(sorted_file_v2)) #so this is not what we would want
+
+
+# In[6]:
+
+
+#instead do this:
 sorted_file.sort()
 print(type(sorted_file))
 
 
 # **Don't forget that functions can call other functions!**
 
-# In[6]:
+# In[7]:
 
 
 def count_word_occurence(file):
     sorted_file = sort_text(file) #function call to user-defined function "sort_text"
     word = input()
-    return "The word '{}' occurs {} times in the text.".format(word,sorted_file.count(word)) #note that we can use placeholders {} in the string, filled by the two objects named later
+    return "The word '{}' occurs {} times in the text.".format(word,sorted_file.count(word)) 
+    #note that we can use placeholders {} in the string, filled by the two objects named later
 
-unsorted_file.seek(0) #reset file handle. I'll explain this in a bit...
+unsorted_file.seek(0) #reset file handle.
 
 count_word_occurence(unsorted_file)
 
@@ -94,7 +117,7 @@ count_word_occurence(unsorted_file)
 # 
 # Ranges are **widespread and versatile for iterating over collections of elements** (lists, tuples, sets, dictionaries).
 
-# In[7]:
+# In[19]:
 
 
 for i in range(len(sorted_file)): #iterate over full length of list
@@ -125,7 +148,101 @@ for line in range(20):
     print(unsorted_file.readline())
 
 
-# #### ***While* loops, or "Anything you can do, *for* can do better"?**
+# ### Sorting, reverse sorting, sorting by key
+# 
+# Sorting elemens in a sequence or collection of objects is essential to many use-cases of programming. Luckily, the functionality of sorting functions in Python is much more versatile than we have seen thus far:
+# 
+# #### - *sort()* and *sorted()*
+# As seen above, *sort()* modifies the original sequence it was passed. **To sort sequences or collections without disturbing the original sequence** of the object, use the ***sorted()*** function. *Sorted()* returns an ordered copy of the sequence passed as its argument:
+
+# In[10]:
+
+
+sorted_file_v3 = sorted(sorted_file, reverse = True) 
+print(type(sorted_file_v3))
+
+
+# #### - Sorting order
+# The keyword ***reverse = True*** can be passed to both *sort()* and *sorted()* to reverse the sorting order from the **default sorting order**, which is **ascending** (numerically or alphabetically). 
+# 
+# Both *sort()* and *sorted()* can also be passed a ***key* parameter**, which can be used to specify alternative sorting orders. The key parameter **should be a function that takes a single argument** (the respective element of the to-be-sorted sequence) **and returns a key** (the value the function returns for the passed element) **to use for sorting purposes**. 
+# 
+# For instance, you may want to ignore capitalization when sorting list elements alphabetically:
+
+# In[20]:
+
+
+#case-insensitive string comparison
+sorted_file_v3 = sorted(sorted_file, key = str.lower) #sorts all list elements as if they were lower-case versions of themselves
+print(sorted_file_v3[1:500])
+
+
+# #### - Sorting dictionaries by key or value
+# **Dictionaries** are mappings between keys and values. As such, they are **not intrinsically ordered**. However, sometimes we may want to **sort dictionaries into a sequence of ordered elements**, e.g., when trying to read out the mapping between students' names and grades by order of their first/last name (A-Z) or grade (1-6 in the German system). 
+# 
+# By default, when applying the ***sorted()*** function, dictionaries are **sorted by their keys**. In fact, just feeding a dictionary straight to the *sorted()* function will simply return a sorted list of its keys.
+
+# In[22]:
+
+
+#initialize dictionary (see session04)
+first_names = ["Arthur", "Ford", "Zaphod", "Marvin"]
+last_names = ["Dent", "Prefect", "Beeblebrox", ""]
+lifeform = ["Human", "Betelgeusian", "Betelgeusian", "Android"]
+feature = ["Worried","Endlessly broad-minded","Two-headed","Paranoid"]
+
+notebook = {"First name" : first_names, "Last name" : last_names, "Life form" : lifeform, "Distinct feature" : feature}
+
+
+# In[23]:
+
+
+print(sorted(notebook)) #just returns sorted list of keys
+
+
+# **Option for sorting dictionary and returning a list sorted by key**: Using the dictionary method *items()*, we receive a dictionary view object, a list of tuples containing all key-value pairs (see also the methods *values()* and *keys()*, session 04). Calling *sorted()* on this object will return a list sorted by the dictionary's keys.
+
+# In[24]:
+
+
+print(sorted(notebook.items()))
+
+
+# **Option for sorting dictionary and retuning a list sorted by value**: To sort a dictionary by value, we need to use a *key* parameter in the *sorted()* function that specifies which value of the dictionary elements to sort over.
+# 
+# - Remember that **the key parameter should be a function**. But there is no in-built function for getting dictionary values...
+# 
+# - Instead, a **lambda function** may be used to specify the sort key. Lambda functions are *anonymous* functions, that is, functions that are never defined with a name. They are useful when the function is only required for a short time/single application.
+# 
+# - Their syntax is:
+#            
+#            lambda arguments: expression
+#     
+# - This is akin to a function defined as:
+#     
+#         def function(arguments):
+#             return expression
+#     
+# - Lambda functions can have **any number of arguments but only one expression**. That expression is **evaluated and returned**.
+
+# In[25]:
+
+
+#using a lambda function
+print(sorted(notebook.items(), key = lambda x: x[1]))#sorts by value ==> here, alphabetical order of the lists containing our dictionary values (by their first element)
+
+
+# - Alternatively, **the *operator* module** has convenience functions to fetch items from an operand, which can be any sequence or collection of elements:
+
+# In[18]:
+
+
+from operator import itemgetter
+
+print(sorted(notebook.items(), key = itemgetter(1)))#sorts by value, same as the lambda function above
+
+
+# ### ***While* loops, or "Anything you can do, *for* can do better"?**
 # 
 # We saw in an earlier session that *for* loops and *while* loops can be used to achieve the same outcome. So how should you decide which loop to choose in the first place?  
 # 
@@ -155,98 +272,6 @@ while command !="stop":
 print("Playback stopped.")   
 
 
-# ### Sorting, reverse sorting, sorting by key
-# 
-# Sorting elemens in a sequence or collection of objects is essential to many use-cases of programming. Luckily, the functionality of sorting functions in Python is much more versatile than we have seen thus far:
-# 
-# #### - *sort()* and *sorted()*
-# As seen above, *sort()* modifies the original sequence it was passed. **To sort sequences or collections without disturbing the original sequence** of the object, use the ***sorted()*** function. *Sorted()* returns an ordered copy of the sequence passed as its argument:
-
-# In[10]:
-
-
-sorted_file_v3 = sorted(sorted_file, reverse = True) 
-print(type(sorted_file_v3))
-
-
-# #### - Sorting order
-# The keyword ***reverse = True*** can be passed to both *sort()* and *sorted()* to reverse the sorting order from the **default sorting order**, which is **ascending** (numerically or alphabetically). 
-# 
-# Both *sort()* and *sorted()* can also be passed a ***key* parameter**, which can be used to specify alternative sorting orders. The key parameter **should be a function that takes a single argument** (the respective element of the to-be-sorted sequence) **and returns a key** (the value the function returns for the passed element) **to use for sorting purposes**. 
-# 
-# For instance, you may want to ignore capitalization when sorting list elements alphabetically:
-
-# In[11]:
-
-
-#case-insensitive string comparison
-sorted_file_v3 = sorted(sorted_file, key = str.lower) #sorts all list elements as if they were lower-case versions of themselves
-print(sorted_file_v3)
-
-
-# #### - Sorting dictionaries by key or value
-# **Dictionaries** are mappings between keys and values. As such, they are **not intrinsically ordered**. However, sometimes we may want to **sort dictionaries into a sequence of ordered elements**, e.g., when trying to read out the mapping between students' names and grades by order of their first/last name (A-Z) or grade (1-6 in the German system). 
-# 
-# By default, when applying the ***sorted()*** function, dictionaries are **sorted by their keys**. In fact, just feeding a dictionary straight to the *sorted()* function will simply return a sorted list of its keys.
-
-# In[12]:
-
-
-#initialize dictionary (see session04)
-first_names = ["Arthur", "Ford", "Zaphod", "Marvin"]
-last_names = ["Dent", "Prefect", "Beeblebrox", ""]
-lifeform = ["Human", "Betelgeusian", "Betelgeusian", "Android"]
-feature = ["Worried","Endlessly broad-minded","Two-headed","Paranoid"]
-
-notebook = {"First name" : first_names, "Last name" : last_names, "Life form" : lifeform, "Distinct feature" : feature}
-
-
-# In[13]:
-
-
-print(sorted(notebook)) #just returns sorted list of keys
-
-
-# **Option for sorting dictionary and returning a list sorted by key**: Using the dictionary method *items()*, we receive a dictionary view object, a list of tuples containing all key-value pairs (see also the methods *values()* and *keys()*, session 04). Calling *sorted()* on this object will return a list sorted by the dictionary's keys.
-
-# In[14]:
-
-
-print(sorted(notebook.items()))
-
-
-# **Option for sorting dictionary and retuning a list sorted by value**: To sort a dictionary by value, we need to use a *key* parameter that specifies which value of the dictionary elements to sort over.
-# 
-# - **Lambda functions** may specify the sort key. Lambda functions are *anonymous* functions, that is, functions that are never defined with a name. They are useful when the function is only required for a short time/single application.
-# 
-# - Their syntax is:
-#            
-#            lambda arguments: expression
-#     
-# - This is akin to a function defined as:
-#     
-#         def function(arguments):
-#             return expression
-#     
-# - Lambda functions can have **any number of arguments but only one expression**. That expression is **evaluated and returned**.
-
-# In[15]:
-
-
-#using a lambda function
-print(sorted(notebook.items(), key = lambda x: x[1]))#sorts by value ==> here, alphabetical order of the lists (by their first element)
-
-
-# - Alternatively, **the *operator* module** has convenience functions to fetch items from an operand, which can be any sequence or collection of elements:
-
-# In[18]:
-
-
-from operator import itemgetter
-
-print(sorted(notebook.items(), key = itemgetter(1)))#sorts by value, same as the lambda function above
-
-
 # ### Notes on code efficiency and maintainability
 # 
 # #### Optimization
@@ -255,13 +280,13 @@ print(sorted(notebook.items(), key = itemgetter(1)))#sorts by value, same as the
 # **What does it mean for code to be efficient?** Some principles:
 # 
 # - **Avoid creating unnecessary objects**. *Do you really need that value stored in a variable?*
-# - Conversely **avoid computing the same thing twice** by storing the value in a variable. *Do you compute the same value on every execution of a loop? Why not save it in a variable?*
+# - Conversely, **avoid computing the same thing twice** by storing the value in a variable. *Do you compute the same value on every execution of a loop? Why not save it in a variable?*
 # - **Avoid running costly operations** (such as file I/O, search) multiple times. *Are you reading the same file at various places in your code? Why?*
 # - **Use functions (and classes, see later sessions)** to generalize and modularize your code. Avoid declaring variables with global scope to prevent unnecessary clutter. *Will you really need that variable in your for loop again later on? Probably not...*
 # 
 # An extreme example:
 
-# In[16]:
+# In[26]:
 
 
 for i in range (2): #for i in range 0-1
@@ -274,7 +299,7 @@ for i in range (2): #for i in range 0-1
 
 # The same thing, but more efficiently:
 
-# In[17]:
+# In[27]:
 
 
 for i in range (2): #for i in range 0-1

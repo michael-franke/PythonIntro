@@ -402,7 +402,7 @@ print(notebook)
 
 # In this particular case, the same result may also be achieved by looping over dictionary keys. Whether you should loop over keys or values will always depend on your application.
 
-# In[27]:
+# In[26]:
 
 
 #a loop over dictionary keys
@@ -416,7 +416,7 @@ print(notebook)
 
 # Note, crucially, that **we can't access dictionary entries by using a numeric index**, as we would for lists. The following command raises a *key error*:
 
-# In[28]:
+# In[27]:
 
 
 print(notebook[1])
@@ -430,24 +430,23 @@ print(notebook[1])
 # 
 # Remember that all data types that encode collections of elements (lists, tuples, sets, dictionaries) can be nested! A more elegant way of representing our little notebook of friends uses **nested dictionaries**:
 
-# In[29]:
+# In[28]:
 
 
 revised_notebook = dict()
 
-#len(first_names)
 for i in range(1,len(first_names)):
     revised_notebook["Friend "+ str(i)] = {"First name" : first_names[i-1], 
      "Last name" : last_names[i-1], 
      "Age" : ages[i-1], 
      "Phone number" : phone_numbers[i-1]}
-#print(revised_notebook)
+
 print("\n",revised_notebook["Friend 1"])
 
 
 # Similarly, lists can be nested into arbitrarily complex hierarchical list structures. **It is very common to represent matrices as nested lists**, for instance: 
 
-# In[30]:
+# In[34]:
 
 
 #initializing a matrix with m rows and n columns:
@@ -461,7 +460,7 @@ print(matrix)
 print("The sum of the rows is:",list(map(sum , matrix)))
 
 #Question: How would you sum up the columns?
-print("The sum of the columns is:", []) 
+print("The sum of the columns is:", list(map(sum,zip(matrix[0],matrix[1]))) )
 
 
 # In[ ]:
