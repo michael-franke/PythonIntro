@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Applications (Part I): Processing corpus data using NLTK, numpy, and matplotlib (January 10, 2023) &#8212; Scientific programming in Python</title>
+    <title>Classes (January 17, 2023) &#8212; Scientific programming in Python</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,7 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="For efficiency’s sake: structured programs, packages, regular expressions (December 20, 2022)" href="session07.html" />
+    <link rel="next" title="Recursion, trees, and search (January 24, 2023)" href="session09.html" />
+    <link rel="prev" title="For efficiency’s sake: structured programs, packages, regular expressions (December 20, 2022 / January 10, 2023)" href="session07.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -140,11 +141,21 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session07.html">
-   For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022)
+   For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023)
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
+   Classes (January 17, 2023)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session09.html">
+   Recursion, trees, and search (January 24, 2023)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session10.html">
    Applications (Part I): Processing corpus data using
    <em>
     NLTK
@@ -157,7 +168,12 @@ const thebe_selector_output = ".output, .cell_output"
    <em>
     matplotlib
    </em>
-   (January 10, 2023)
+   (January 31, 2023)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session11.html">
+   Applications (Part II): Programming in experimental research (February 07, 2023)
   </a>
  </li>
 </ul>
@@ -385,71 +401,52 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#laying-the-ground-work-used-packages">
-   Laying the ground work: used packages
+  <a class="reference internal nav-link" href="#the-basics">
+   The basics
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#nltk">
-     NLTK
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#installation-and-use">
-       Installation and use
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#numpy">
-     NumPy
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id1">
-       Installation and use
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#matplotlib">
-     Matplotlib
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id2">
-       Installation and use
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#processing-parallel-corpus-data-using-nltk">
-   Processing parallel corpus data using NLTK
+  <a class="reference internal nav-link" href="#defining-a-class-in-python">
+   Defining a class in Python
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plotting-word-length-information-using-matplotlib">
-     Plotting word length information using
-     <em>
-      matplotlib
-     </em>
+    <a class="reference internal nav-link" href="#the-initialization-method">
+     The initialization method
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#parsing-treebanks-using-nltk">
-   Parsing treebanks using NLTK
+  <a class="reference internal nav-link" href="#a-simple-language-class">
+   A simple Language class
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calling-class-methods">
+     Calling class methods
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-class-objects-as-arguments-or-parameters">
+     Using class objects as arguments or parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-several-instances-of-a-class">
+     Using several instances of a class
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#class-inheritance">
+   Class inheritance
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#further-resources-on-nltk-and-matplotlib">
-   Further resources on NLTK and matplotlib
+  <a class="reference internal nav-link" href="#objects-are-mutable">
+   Objects are mutable
   </a>
  </li>
 </ul>
@@ -461,7 +458,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Applications (Part I): Processing corpus data using NLTK, numpy, and matplotlib (January 10, 2023)</h1>
+                <h1>Classes (January 17, 2023)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -472,71 +469,52 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#laying-the-ground-work-used-packages">
-   Laying the ground work: used packages
+  <a class="reference internal nav-link" href="#the-basics">
+   The basics
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#nltk">
-     NLTK
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#installation-and-use">
-       Installation and use
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#numpy">
-     NumPy
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id1">
-       Installation and use
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#matplotlib">
-     Matplotlib
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id2">
-       Installation and use
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#processing-parallel-corpus-data-using-nltk">
-   Processing parallel corpus data using NLTK
+  <a class="reference internal nav-link" href="#defining-a-class-in-python">
+   Defining a class in Python
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plotting-word-length-information-using-matplotlib">
-     Plotting word length information using
-     <em>
-      matplotlib
-     </em>
+    <a class="reference internal nav-link" href="#the-initialization-method">
+     The initialization method
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#parsing-treebanks-using-nltk">
-   Parsing treebanks using NLTK
+  <a class="reference internal nav-link" href="#a-simple-language-class">
+   A simple Language class
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calling-class-methods">
+     Calling class methods
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-class-objects-as-arguments-or-parameters">
+     Using class objects as arguments or parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-several-instances-of-a-class">
+     Using several instances of a class
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#class-inheritance">
+   Class inheritance
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#further-resources-on-nltk-and-matplotlib">
-   Further resources on NLTK and matplotlib
+  <a class="reference internal nav-link" href="#objects-are-mutable">
+   Objects are mutable
   </a>
  </li>
 </ul>
@@ -549,898 +527,424 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="applications-part-i-processing-corpus-data-using-nltk-numpy-and-matplotlib-january-10-2023">
-<h1>Applications (Part I): Processing corpus data using <em>NLTK</em>, <em>numpy</em>, and <em>matplotlib</em> (January 10, 2023)<a class="headerlink" href="#applications-part-i-processing-corpus-data-using-nltk-numpy-and-matplotlib-january-10-2023" title="Permalink to this headline">#</a></h1>
-<p>At this point, we are ready to take our learned tools to look at some instances of real-world research applications for programming. In today’s session, we will use several Python packages, specifically the Natural Language Toolkit (NLTK), NumPy, and MatPlotLib, to analyze large natural language corpora for the frequency of epistemic modal adverbs, English-German comparisons in word length, and a comparison of relative clause structures in English.</p>
-<section id="laying-the-ground-work-used-packages">
-<h2>Laying the ground work: used packages<a class="headerlink" href="#laying-the-ground-work-used-packages" title="Permalink to this headline">#</a></h2>
-<section id="nltk">
-<h3>NLTK<a class="headerlink" href="#nltk" title="Permalink to this headline">#</a></h3>
-<p>NLTK is yet another instance of a package for natural language processing (<a class="reference external" href="https://www.nltk.org/">https://www.nltk.org/</a>). It is more generalized than <em>polyglot</em>, housing a number of resources for dealing with any kind of human language data:</p>
+  <section id="classes-january-17-2023">
+<h1>Classes (January 17, 2023)<a class="headerlink" href="#classes-january-17-2023" title="Permalink to this headline">#</a></h1>
+<p>In previous sessions, we learned about various different data types (e.g., integers, strings, lists, tuples, dictionaries…) along with their methods (e.g., <em>str.split()</em>, <em>list.sort()</em>,…), <strong>but what if we could define our own?</strong></p>
+<p>With <strong>classes</strong>, you can write user-defined data types. This is a form of what’s called <strong>object-oriented programming</strong>. Instead of writing procedures / algorithms to solve a task, we are now writing code to define objects (of course these may subsequently be used in procedural programming tasks).</p>
+<section id="the-basics">
+<h2>The basics<a class="headerlink" href="#the-basics" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>interfaces to many corpora and lexical resources</p></li>
-<li><p>text processing libraries for classification, tokenization, stemming, tagging, parsing</p></li>
-<li><p>wrappers for industrial-strength NLP libraries</p></li>
-<li><p>great documentation</p></li>
+<li><p><strong>A class specifies</strong> the <strong>format</strong> of instances of that class (in terms of data structure) and what <strong>procedures</strong> are available for them (in terms of user-defined methods).</p></li>
+<li><p>Instances of a class are called objects (just like there are integer objects, list objects, etc.)</p></li>
 </ul>
-<section id="installation-and-use">
-<h4>Installation and use<a class="headerlink" href="#installation-and-use" title="Permalink to this headline">#</a></h4>
-<p>From the conda powershell, execute this command:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    conda install nltk
-</pre></div>
-</div>
-<p>To download packages and corpora included in nltk, open a Python console and execute the following:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    import nltk
-    nltk.download()
-</pre></div>
-</div>
-<p>In the window that appears, double click on <strong>book</strong> and <strong>popular</strong> to download a selection of commonly used packages. Or browse the full selection of corpora and packages.</p>
-</section>
-</section>
-<section id="numpy">
-<h3>NumPy<a class="headerlink" href="#numpy" title="Permalink to this headline">#</a></h3>
-<p>NumPy is an extremely popular package for scientific computing in Python (<a class="reference external" href="https://numpy.org/">https://numpy.org/</a>).</p>
+<p><strong>You may think of the definition of a class as the definition of a concept</strong>. As in real life, <strong>concepts/classes are defined by their essential properties, specified in terms of more basis concepts</strong>;</p>
 <ul class="simple">
-<li><p>provides a multidimensional array object</p></li>
-<li><p>…along with derived objects (such as masked arrays and matrices)</p></li>
-<li><p>provides methods for fast operations on arrays (mathematical, shape manipulation, sorting, selecting, basic linear algebra, basic statistical operations)</p></li>
+<li><p>E.g., a <em>rectangle</em> may be defined as a quadrilateral with right angles, <em>angles</em> may be defined as the figure formed by two rays sharing a common endpoint, <em>rays</em> may be defined as […], and so forth).</p></li>
+<li><p><strong>In Python</strong>, that means that you can <strong>use any of the in-built basic data types to define objects of your own class</strong>, or may even define several classes (e.g., Rectangle and Angle), one of which inherits properties of the other (e.g. Rectangle inheriting properties of the Angle class).</p></li>
 </ul>
-<section id="id1">
-<h4>Installation and use<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
-<p>The numpy packages comes as a pre-installed library (<a class="reference external" href="https://numpy.org/">https://numpy.org/</a>) with Anaconda/miniconda. To use it, just use the import statement:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    import numpy
-</pre></div>
-</div>
-</section>
-</section>
-<section id="matplotlib">
-<h3>Matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this headline">#</a></h3>
-<p>Matplotlib provides a comprehensive set of tools to visualize data in static, animated, or interactive plots (<a class="reference external" href="https://matplotlib.org/stable/index.html">https://matplotlib.org/stable/index.html</a>).</p>
-<section id="id2">
-<h4>Installation and use<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h4>
-<p>From the conda powershell, execute this command:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    conda install matplotlib
-</pre></div>
-</div>
-<p>Then use the import statement to use itin your python prgramme:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    import matplotlib
-</pre></div>
-</div>
-</section>
-</section>
-</section>
-<section id="processing-parallel-corpus-data-using-nltk">
-<h2>Processing parallel corpus data using NLTK<a class="headerlink" href="#processing-parallel-corpus-data-using-nltk" title="Permalink to this headline">#</a></h2>
-<p>NLTK can serve as <strong>interface to a range of corpora</strong> ( = huge natural language data bases, sometimes tagged and annotated for various properties, e.g., POS, dependency relations, text genre, …). The <em>nltk.corpus</em> package provides <em>readers</em> that allow you to process diverse types of corpus data (<a class="reference external" href="https://www.nltk.org/howto/corpus.html">https://www.nltk.org/howto/corpus.html</a>).</p>
-<p>Some of the corpora in NLTK include:</p>
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Corpus</p></th>
-<th class="head"><p>Contents</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Brown Corpus</p></td>
-<td><p>15 genres, 1.15M words, tagged, categorized</p></td>
-</tr>
-<tr class="row-odd"><td><p>Project Gutenberg (selections)</p></td>
-<td><p>18 literary texts, 2M words</p></td>
-</tr>
-<tr class="row-even"><td><p>Movie Reviews</p></td>
-<td><p>2k movie reviews with sentiment polarity classification</p></td>
-</tr>
-<tr class="row-odd"><td><p>NPS Chat Corpus</p></td>
-<td><p>10k IM chat posts, POS-tagged and dialogue-act tagged</p></td>
-</tr>
-<tr class="row-even"><td><p>Question Classification</p></td>
-<td><p>6k questions, categorized</p></td>
-</tr>
-<tr class="row-odd"><td><p>Shakespeare texts (selections)</p></td>
-<td><p>8 books in XML format</p></td>
-</tr>
-<tr class="row-even"><td><p>Univ Decl of Human Rights</p></td>
-<td><p>480k words, 300+ languages</p></td>
-</tr>
-<tr class="row-odd"><td><p>Penn Treebank (selections)</p></td>
-<td><p>40k words, tagged and parsed</p></td>
-</tr>
-</tbody>
-</table>
-<p>We will look at a sample of the <strong><em>Europarl</em> corpus</strong>, a parallel corpus of speeches in the proceedings of the European Parliament. The full corpus <strong>includes versions in 21 European languages</strong>: Romanic (French, Italian, Spanish, Portuguese, Romanian), Germanic (English, Dutch, German, Danish, Swedish), Slavik (Bulgarian, Czech, Polish, Slovak, Slovene), Finni-Ugric (Finnish, Hungarian, Estonian), Baltic (Latvian, Lithuanian), and Greek. NLTK includes a sample of 10 documents in 11 languages.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
-
-<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">europarl_raw</span>
-
-<span class="c1">#load any of the available language data</span>
-<span class="n">en</span> <span class="o">=</span> <span class="n">europarl_raw</span><span class="o">.</span><span class="n">english</span>
-<span class="n">ger</span> <span class="o">=</span> <span class="n">europarl_raw</span><span class="o">.</span><span class="n">german</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>First, we should get an overview of the data we are dealing with. The <strong>Europarl corpus data comes as a set of plaintext documents</strong>. NLTK comes equipped with a <strong>corpus reader method</strong> that allow us to extract the following information: a <strong>list of its words</strong>, its <strong>sentences</strong> (as nested list of its sentences each being a list of words), or its <strong>chapters</strong> (as nested list of chapters each being a list of sentences as a list of words).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#let&#39;s find out how many words and sentences they contain. To do so, call the methods :</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">en</span><span class="o">.</span><span class="n">words</span><span class="p">())</span> <span class="c1">#the method words() returns a list of words</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">ger</span><span class="o">.</span><span class="n">sents</span><span class="p">())</span> <span class="c1">#the method sents() returns a list of sentences as nested lists</span>
-
-<span class="c1">#the English version uses more words than the German one</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">en</span><span class="o">.</span><span class="n">words</span><span class="p">()))</span> 
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ger</span><span class="o">.</span><span class="n">words</span><span class="p">()))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Resumption&#39;, &#39;of&#39;, &#39;the&#39;, &#39;session&#39;, &#39;I&#39;, &#39;declare&#39;, ...]
-[[&#39;Wiederaufnahme&#39;, &#39;der&#39;, &#39;Sitzungsperiode&#39;, &#39;Ich&#39;, &#39;erkläre&#39;, &#39;die&#39;, &#39;am&#39;, &#39;Freitag&#39;, &#39;,&#39;, &#39;dem&#39;, &#39;17.&#39;, &#39;Dezember&#39;, &#39;unterbrochene&#39;, &#39;Sitzungsperiode&#39;, &#39;des&#39;, &#39;Europäischen&#39;, &#39;Parlaments&#39;, &#39;für&#39;, &#39;wiederaufgenommen&#39;, &#39;,&#39;, &#39;wünsche&#39;, &#39;Ihnen&#39;, &#39;nochmals&#39;, &#39;alles&#39;, &#39;Gute&#39;, &#39;zum&#39;, &#39;Jahreswechsel&#39;, &#39;und&#39;, &#39;hoffe&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;Sie&#39;, &#39;schöne&#39;, &#39;Ferien&#39;, &#39;hatten&#39;, &#39;.&#39;], [&#39;Wie&#39;, &#39;Sie&#39;, &#39;feststellen&#39;, &#39;konnten&#39;, &#39;,&#39;, &#39;ist&#39;, &#39;der&#39;, &#39;gefürchtete&#39;, &#39;&quot;&#39;, &#39;Millenium-Bug&#39;, &#39;&quot;&#39;, &#39;nicht&#39;, &#39;eingetreten&#39;, &#39;.&#39;], ...]
-556326
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>556226
-</pre></div>
-</div>
-</div>
-</div>
-<p>Our goal will be to extract <strong>frequency information</strong> about words in each of these languages. We will first look at epistemic modal adverbs, that is, adverbs indicating the probability of the proposition they are modifying.</p>
-<p>English and German have a large inventory of epistemic modal expressions, including adverbs (‘possibly’), adjectives (‘possible’), verbs (‘might’, ‘must’), and particles (German <em>wohl</em>, roughly ‘probably’). We can select a few and check how they are distributed within the corpus:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fdist</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">en</span><span class="o">.</span><span class="n">words</span><span class="p">())</span>
-
-<span class="n">epistemic_modal_adverbs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;maybe&#39;</span><span class="p">,</span> <span class="s1">&#39;probably&#39;</span><span class="p">,</span> <span class="s1">&#39;definitely&#39;</span><span class="p">,</span> <span class="s1">&#39;certainly&#39;</span><span class="p">,</span> <span class="s1">&#39;necessarily&#39;</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">epistemic_modal_adverbs</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">m</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">fdist</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="n">fdist2</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">ger</span><span class="o">.</span><span class="n">words</span><span class="p">())</span>
-<span class="n">epistemic_modal_adverbs_ger</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;vielleicht&#39;</span><span class="p">,</span><span class="s1">&#39;wahrscheinlich&#39;</span><span class="p">,</span><span class="s1">&#39;definitiv&#39;</span><span class="p">,</span><span class="s1">&#39;sicherlich&#39;</span><span class="p">,</span><span class="s1">&#39;zwangsläufig&#39;</span><span class="p">]</span>
-
-<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">epistemic_modal_adverbs_ger</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">m</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">fdist2</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> maybe: 8 
- probably: 53 
- definitely: 18 
- certainly: 173 
- necessarily: 28 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> vielleicht: 153 
- wahrscheinlich: 48 
- definitiv: 3 
- sicherlich: 80 
- zwangsläufig: 30 
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">en</span><span class="o">.</span><span class="n">sents</span><span class="p">():</span>
-    <span class="k">if</span> <span class="s1">&#39;necessarily&#39;</span> <span class="ow">in</span> <span class="n">w</span><span class="p">:</span>
-        <span class="nb">print</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">w</span><span class="p">)</span>
-    <span class="n">i</span> <span class="o">+=</span><span class="mi">1</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">ger</span><span class="o">.</span><span class="n">sents</span><span class="p">():</span>
-    <span class="k">if</span> <span class="s1">&#39;zwangsläufig&#39;</span> <span class="ow">in</span> <span class="n">w</span><span class="p">:</span>
-        <span class="nb">print</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">w</span><span class="p">)</span>
-    <span class="n">i</span> <span class="o">+=</span><span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>583 [&#39;Next&#39;, &#39;,&#39;, &#39;we&#39;, &#39;all&#39;, &#39;too&#39;, &#39;often&#39;, &#39;see&#39;, &#39;vast&#39;, &#39;sums&#39;, &#39;of&#39;, &#39;money&#39;, &#39;being&#39;, &#39;spent&#39;, &#39;on&#39;, &#39;projects&#39;, &#39;whose&#39;, &#39;outcomes&#39;, &#39;will&#39;, &#39;necessarily&#39;, &#39;be&#39;, &#39;unclear&#39;, &#39;at&#39;, &#39;the&#39;, &#39;start&#39;, &#39;of&#39;, &#39;the&#39;, &#39;programme&#39;, &#39;period&#39;, &#39;.&#39;]
-646 [&#39;Concerning&#39;, &#39;the&#39;, &#39;most&#39;, &#39;remote&#39;, &#39;regions&#39;, &#39;,&#39;, &#39;it&#39;, &#39;was&#39;, &#39;only&#39;, &#39;quite&#39;, &#39;belatedly&#39;, &#39;that&#39;, &#39;we&#39;, &#39;received&#39;, &#39;the&#39;, &#39;memorandums&#39;, &#39;from&#39;, &#39;the&#39;, &#39;various&#39;, &#39;governments&#39;, &#39;,&#39;, &#39;but&#39;, &#39;this&#39;, &#39;is&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;an&#39;, &#39;excuse&#39;, &#39;,&#39;, &#39;just&#39;, &#39;an&#39;, &#39;explanation&#39;, &#39;.&#39;]
-869 [&#39;On&#39;, &#39;this&#39;, &#39;point&#39;, &#39;which&#39;, &#39;is&#39;, &#39;of&#39;, &#39;personal&#39;, &#39;interest&#39;, &#39;to&#39;, &#39;me&#39;, &#39;,&#39;, &#39;let&#39;, &#39;me&#39;, &#39;remind&#39;, &#39;you&#39;, &#39;that&#39;, &#39;the&#39;, &#39;small&#39;, &#39;scale&#39;, &#39;of&#39;, &#39;this&#39;, &#39;sector&#39;, &#39;-&#39;, &#39;and&#39;, &#39;this&#39;, &#39;does&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;mean&#39;, &#39;that&#39;, &#39;it&#39;, &#39;is&#39;, &#39;an&#39;, &#39;insignificant&#39;, &#39;area&#39;, &#39;-&#39;, &#39;and&#39;, &#39;its&#39;, &#39;concentration&#39;, &#39;in&#39;, &#39;a&#39;, &#39;limited&#39;, &#39;number&#39;, &#39;of&#39;, &#39;regions&#39;, &#39;do&#39;, &#39;not&#39;, &#39;make&#39;, &#39;it&#39;, &#39;easy&#39;, &#39;to&#39;, &#39;analyse&#39;, &#39;in&#39;, &#39;a&#39;, &#39;regional&#39;, &#39;context&#39;, &#39;.&#39;]
-998 [&#39;But&#39;, &#39;optimum&#39;, &#39;efficiency&#39;, &#39;does&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;come&#39;, &#39;about&#39;, &#39;of&#39;, &#39;its&#39;, &#39;own&#39;, &#39;accord&#39;, &#39;.&#39;]
-1211 [&#39;Finally&#39;, &#39;,&#39;, &#39;on&#39;, &#39;the&#39;, &#39;subject&#39;, &#39;of&#39;, &#39;modernising&#39;, &#39;the&#39;, &#39;implementation&#39;, &#39;of&#39;, &#39;Articles&#39;, &#39;85&#39;, &#39;and&#39;, &#39;86&#39;, &#39;of&#39;, &#39;the&#39;, &#39;Treaty&#39;, &#39;,&#39;, &#39;we&#39;, &#39;do&#39;, &#39;not&#39;, &#39;think&#39;, &#39;that&#39;, &#39;decentralised&#39;, &#39;application&#39;, &#39;would&#39;, &#39;necessarily&#39;, &#39;be&#39;, &#39;going&#39;, &#39;in&#39;, &#39;the&#39;, &#39;right&#39;, &#39;direction&#39;, &#39;.&#39;]
-2125 [&#39;The&#39;, &#39;most&#39;, &#39;remarkable&#39;, &#39;thing&#39;, &#39;,&#39;, &#39;in&#39;, &#39;my&#39;, &#39;view&#39;, &#39;,&#39;, &#39;is&#39;, &#39;the&#39;, &#39;message&#39;, &#39;conveyed&#39;, &#39;by&#39;, &#39;this&#39;, &#39;proposal&#39;, &#39;:&#39;, &#39;that&#39;, &#39;the&#39;, &#39;Commission&#39;, &#39;is&#39;, &#39;anticipating&#39;, &#39;the&#39;, &#39;consequences&#39;, &#39;of&#39;, &#39;enlargement&#39;, &#39;and&#39;, &#39;realising&#39;, &#39;that&#39;, &#39;this&#39;, &#39;necessarily&#39;, &#39;,&#39;, &#39;and&#39;, &#39;virtually&#39;, &#39;automatically&#39;, &#39;,&#39;, &#39;requires&#39;, &#39;reform&#39;, &#39;of&#39;, &#39;the&#39;, &#39;centralised&#39;, &#39;system&#39;, &#39;.&#39;]
-2518 [&#39;We&#39;, &#39;must&#39;, &#39;be&#39;, &#39;tougher&#39;, &#39;on&#39;, &#39;vessels&#39;, &#39;flying&#39;, &#39;flags&#39;, &#39;of&#39;, &#39;convenience&#39;, &#39;,&#39;, &#39;not&#39;, &#39;because&#39;, &#39;they&#39;, &#39;are&#39;, &#39;necessarily&#39;, &#39;bad&#39;, &#39;boats&#39;, &#39;,&#39;, &#39;but&#39;, &#39;because&#39;, &#39;amongst&#39;, &#39;these&#39;, &#39;boats&#39;, &#39;there&#39;, &#39;are&#39;, &#39;many&#39;, &#39;bad&#39;, &#39;ones&#39;, &#39;.&#39;]
-3084 [&#39;Finally&#39;, &#39;,&#39;, &#39;I&#39;, &#39;would&#39;, &#39;like&#39;, &#39;to&#39;, &#39;say&#39;, &#39;-&#39;, &#39;or&#39;, &#39;repeat&#39;, &#39;-&#39;, &#39;that&#39;, &#39;not&#39;, &#39;all&#39;, &#39;of&#39;, &#39;these&#39;, &#39;disasters&#39;, &#39;necessarily&#39;, &#39;have&#39;, &#39;natural&#39;, &#39;causes&#39;, &#39;.&#39;]
-3940 [&#39;This&#39;, &#39;is&#39;, &#39;an&#39;, &#39;illustration&#39;, &#39;of&#39;, &#39;empty&#39;, &#39;pledges&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;leading&#39;, &#39;to&#39;, &#39;good&#39;, &#39;results&#39;, &#39;.&#39;]
-4213 [&#39;From&#39;, &#39;the&#39;, &#39;many&#39;, &#39;points&#39;, &#39;made&#39;, &#39;by&#39;, &#39;Mr&#39;, &#39;van&#39;, &#39;Hulten&#39;, &#39;in&#39;, &#39;his&#39;, &#39;report&#39;, &#39;,&#39;, &#39;I&#39;, &#39;would&#39;, &#39;like&#39;, &#39;to&#39;, &#39;highlight&#39;, &#39;a&#39;, &#39;few&#39;, &#39;,&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;in&#39;, &#39;order&#39;, &#39;of&#39;, &#39;importance&#39;, &#39;but&#39;, &#39;just&#39;, &#39;randomly&#39;, &#39;.&#39;]
-4388 [&#39;It&#39;, &#39;is&#39;, &#39;the&#39;, &#39;posts&#39;, &#39;which&#39;, &#39;should&#39;, &#39;possibly&#39;, &#39;be&#39;, &#39;made&#39;, &#39;permanent&#39;, &#39;and&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;those&#39;, &#39;employed&#39;, &#39;on&#39;, &#39;a&#39;, &#39;temporary&#39;, &#39;basis&#39;, &#39;.&#39;]
-4538 [&#39;Mr&#39;, &#39;President&#39;, &#39;,&#39;, &#39;as&#39;, &#39;you&#39;, &#39;will&#39;, &#39;know&#39;, &#39;,&#39;, &#39;Mr&#39;, &#39;van&#39;, &#39;Hulten&#39;, &quot;&#39;s&quot;, &#39;report&#39;, &#39;on&#39;, &#39;the&#39;, &#39;second&#39;, &#39;report&#39;, &#39;of&#39;, &#39;the&#39;, &#39;Committee&#39;, &#39;of&#39;, &#39;Independent&#39;, &#39;Experts&#39;, &#39;is&#39;, &#39;necessarily&#39;, &#39;long&#39;, &#39;and&#39;, &#39;,&#39;, &#39;since&#39;, &#39;I&#39;, &#39;want&#39;, &#39;to&#39;, &#39;make&#39;, &#39;a&#39;, &#39;comprehensive&#39;, &#39;reply&#39;, &#39;,&#39;, &#39;particularly&#39;, &#39;on&#39;, &#39;the&#39;, &#39;issues&#39;, &#39;relating&#39;, &#39;to&#39;, &#39;financial&#39;, &#39;management&#39;, &#39;and&#39;, &#39;control&#39;, &#39;,&#39;, &#39;I&#39;, &#39;seek&#39;, &#39;your&#39;, &#39;indulgence&#39;, &#39;.&#39;]
-5403 [&#39;Mrs&#39;, &#39;Hedkvist&#39;, &#39;Petersen&#39;, &#39;,&#39;, &#39;there&#39;, &#39;is&#39;, &#39;something&#39;, &#39;we&#39;, &#39;should&#39;, &#39;all&#39;, &#39;be&#39;, &#39;aware&#39;, &#39;of&#39;, &#39;:&#39;, &#39;there&#39;, &#39;is&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;a&#39;, &#39;huge&#39;, &#39;gulf&#39;, &#39;between&#39;, &#39;the&#39;, &#39;views&#39;, &#39;of&#39;, &#39;the&#39;, &#39;Council&#39;, &#39;and&#39;, &#39;Parliament&#39;, &#39;and&#39;, &#39;between&#39;, &#39;the&#39;, &#39;views&#39;, &#39;of&#39;, &#39;the&#39;, &#39;members&#39;, &#39;of&#39;, &#39;the&#39;, &#39;Council&#39;, &#39;and&#39;, &#39;the&#39;, &#39;Members&#39;, &#39;of&#39;, &#39;this&#39;, &#39;Parliament&#39;, &#39;on&#39;, &#39;the&#39;, &#39;advantages&#39;, &#39;or&#39;, &#39;disadvantages&#39;, &#39;of&#39;, &#39;transparency&#39;, &#39;.&#39;]
-6515 [&#39;Anyone&#39;, &#39;,&#39;, &#39;therefore&#39;, &#39;,&#39;, &#39;who&#39;, &#39;invites&#39;, &#39;Franz&#39;, &#39;Fischler&#39;, &#39;to&#39;, &#39;his&#39;, &#39;house&#39;, &#39;to&#39;, &#39;somehow&#39;, &#39;account&#39;, &#39;for&#39;, &#39;the&#39;, &#39;fact&#39;, &#39;that&#39;, &#39;his&#39;, &#39;nationality&#39;, &#39;is&#39;, &#39;Austrian&#39;, &#39;,&#39;, &#39;should&#39;, &#39;examine&#39;, &#39;their&#39;, &#39;own&#39;, &#39;motives&#39;, &#39;in&#39;, &#39;the&#39;, &#39;context&#39;, &#39;of&#39;, &#39;a&#39;, &#39;debate&#39;, &#39;,&#39;, &#39;which&#39;, &#39;has&#39;, &#39;been&#39;, &#39;necessarily&#39;, &#39;shadowed&#39;, &#39;by&#39;, &#39;references&#39;, &#39;to&#39;, &#39;xenophobia&#39;, &#39;and&#39;, &#39;even&#39;, &#39;more&#39;, &#39;lethal&#39;, &#39;evils&#39;, &#39;in&#39;, &#39;this&#39;, &#39;world&#39;, &#39;.&#39;]
-6532 [&#39;We&#39;, &#39;will&#39;, &#39;continue&#39;, &#39;to&#39;, &#39;do&#39;, &#39;that&#39;, &#39;with&#39;, &#39;energy&#39;, &#39;and&#39;, &#39;with&#39;, &#39;consistency&#39;, &#39;and&#39;, &#39;as&#39;, &#39;Mr&#39;, &#39;Cox&#39;, &#39;said&#39;, &#39;in&#39;, &#39;the&#39;, &#39;debate&#39;, &#39;,&#39;, &quot;&#39;&quot;, &#39;necessarily&#39;, &#39;with&#39;, &#39;acute&#39;, &#39;vigilance&#39;, &quot;&#39;&quot;, &#39;.&#39;]
-6773 [&#39;Nevertheless&#39;, &#39;,&#39;, &#39;I&#39;, &#39;think&#39;, &#39;that&#39;, &#39;I&#39;, &#39;can&#39;, &#39;safely&#39;, &#39;say&#39;, &#39;that&#39;, &#39;the&#39;, &#39;various&#39;, &#39;Member&#39;, &#39;States&#39;, &#39;are&#39;, &#39;willing&#39;, &#39;to&#39;, &#39;open&#39;, &#39;the&#39;, &#39;debate&#39;, &#39;,&#39;, &#39;but&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;to&#39;, &#39;conclude&#39;, &#39;it&#39;, &#39;-&#39;, &#39;and&#39;, &#39;this&#39;, &#39;should&#39;, &#39;be&#39;, &#39;made&#39;, &#39;clear&#39;, &#39;from&#39;, &#39;the&#39;, &#39;outset&#39;, &#39;-&#39;, &#39;in&#39;, &#39;line&#39;, &#39;with&#39;, &#39;this&#39;, &#39;Parliament&#39;, &quot;&#39;&quot;, &#39;s&#39;, &#39;interpretation&#39;, &#39;of&#39;, &#39;certain&#39;, &#39;reforms&#39;, &#39;that&#39;, &#39;are&#39;, &#39;necessary&#39;, &#39;.&#39;]
-7217 [&#39;Not&#39;, &#39;only&#39;, &#39;that&#39;, &#39;a&#39;, &#39;conclusion&#39;, &#39;can&#39;, &#39;be&#39;, &#39;reached&#39;, &#39;,&#39;, &#39;but&#39;, &#39;that&#39;, &#39;a&#39;, &#39;successful&#39;, &#39;conclusion&#39;, &#39;can&#39;, &#39;be&#39;, &#39;reached&#39;, &#39;,&#39;, &#39;which&#39;, &#39;is&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;the&#39;, &#39;same&#39;, &#39;thing&#39;, &#39;.&#39;]
-8164 [&#39;After&#39;, &#39;all&#39;, &#39;,&#39;, &#39;recycling&#39;, &#39;and&#39;, &#39;the&#39;, &#39;re-use&#39;, &#39;of&#39;, &#39;components&#39;, &#39;form&#39;, &#39;part&#39;, &#39;of&#39;, &#39;a&#39;, &#39;sector&#39;, &#39;which&#39;, &#39;is&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;loss-making&#39;, &#39;.&#39;]
-8473 [&#39;I&#39;, &#39;would&#39;, &#39;oppose&#39;, &#39;this&#39;, &#39;directive&#39;, &#39;on&#39;, &#39;the&#39;, &#39;basis&#39;, &#39;that&#39;, &#39;it&#39;, &#39;is&#39;, &#39;too&#39;, &#39;prescriptive&#39;, &#39;,&#39;, &#39;it&#39;, &#39;ignores&#39;, &#39;what&#39;, &#39;is&#39;, &#39;actually&#39;, &#39;going&#39;, &#39;on&#39;, &#39;in&#39;, &#39;the&#39;, &#39;car&#39;, &#39;recycling&#39;, &#39;market&#39;, &#39;at&#39;, &#39;the&#39;, &#39;moment&#39;, &#39;and&#39;, &#39;it&#39;, &#39;sets&#39;, &#39;in&#39;, &#39;stone&#39;, &#39;methods&#39;, &#39;which&#39;, &#39;are&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;the&#39;, &#39;best&#39;, &#39;environmentally&#39;, &#39;,&#39;, &#39;and&#39;, &#39;are&#39;, &#39;certainly&#39;, &#39;very&#39;, &#39;damaging&#39;, &#39;economically&#39;, &#39;.&#39;]
-8689 [&#39;This&#39;, &#39;necessary&#39;, &#39;realistic&#39;, &#39;and&#39;, &#39;pragmatic&#39;, &#39;policy&#39;, &#39;,&#39;, &#39;however&#39;, &#39;,&#39;, &#39;which&#39;, &#39;will&#39;, &#39;have&#39;, &#39;to&#39;, &#39;be&#39;, &#39;associated&#39;, &#39;with&#39;, &#39;the&#39;, &#39;elimination&#39;, &#39;of&#39;, &#39;the&#39;, &#39;practical&#39;, &#39;obstacles&#39;, &#39;identified&#39;, &#39;as&#39;, &#39;unquestionable&#39;, &#39;factors&#39;, &#39;in&#39;, &#39;this&#39;, &#39;inequality&#39;, &#39;must&#39;, &#39;,&#39;, &#39;as&#39;, &#39;far&#39;, &#39;as&#39;, &#39;we&#39;, &#39;are&#39;, &#39;concerned&#39;, &#39;,&#39;, &#39;necessarily&#39;, &#39;be&#39;, &#39;based&#39;, &#39;on&#39;, &#39;the&#39;, &#39;idea&#39;, &#39;of&#39;, &#39;complementarity&#39;, &#39;,&#39;, &#39;which&#39;, &#39;is&#39;, &#39;the&#39;, &#39;only&#39;, &#39;one&#39;, &#39;capable&#39;, &#39;of&#39;, &#39;justifying&#39;, &#39;a&#39;, &#39;proactive&#39;, &#39;policy&#39;, &#39;on&#39;, &#39;the&#39;, &#39;subject&#39;, &#39;.&#39;]
-8748 [&#39;When&#39;, &#39;it&#39;, &#39;comes&#39;, &#39;to&#39;, &#39;pollution&#39;, &#39;,&#39;, &#39;like&#39;, &#39;sin&#39;, &#39;,&#39;, &#39;we&#39;, &#39;are&#39;, &#39;all&#39;, &#39;against&#39;, &#39;it&#39;, &#39;,&#39;, &#39;but&#39;, &#39;from&#39;, &#39;there&#39;, &#39;it&#39;, &#39;is&#39;, &#39;a&#39;, &#39;far&#39;, &#39;cry&#39;, &#39;from&#39;, &#39;believing&#39;, &#39;that&#39;, &#39;just&#39;, &#39;because&#39;, &#39;a&#39;, &#39;measure&#39;, &#39;is&#39;, &#39;proposed&#39;, &#39;against&#39;, &#39;this&#39;, &#39;evil&#39;, &#39;it&#39;, &#39;is&#39;, &#39;necessarily&#39;, &#39;good&#39;, &#39;.&#39;]
-10594 [&#39;Finally&#39;, &#39;,&#39;, &#39;on&#39;, &#39;the&#39;, &#39;subject&#39;, &#39;of&#39;, &#39;the&#39;, &#39;WTO&#39;, &#39;,&#39;, &#39;the&#39;, &#39;idea&#39;, &#39;of&#39;, &#39;relaunching&#39;, &#39;a&#39;, &#39;new&#39;, &#39;global&#39;, &#39;round&#39;, &#39;is&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;bad&#39;, &#39;.&#39;]
-10901 [&#39;I&#39;, &#39;do&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;mean&#39;, &#39;financial&#39;, &#39;resources&#39;, &#39;.&#39;]
-11107 [&#39;Madam&#39;, &#39;President&#39;, &#39;,&#39;, &#39;the&#39;, &#39;presentation&#39;, &#39;by&#39;, &#39;President&#39;, &#39;Prodi&#39;, &#39;today&#39;, &#39;has&#39;, &#39;necessarily&#39;, &#39;been&#39;, &#39;a&#39;, &#39;fairly&#39;, &#39;broad&#39;, &#39;brush&#39;, &#39;affair&#39;, &#39;.&#39;]
-12323 [&#39;You&#39;, &#39;are&#39;, &#39;expected&#39;, &#39;to&#39;, &#39;ask&#39;, &#39;questions&#39;, &#39;,&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;make&#39;, &#39;lengthy&#39;, &#39;statements&#39;, &#39;.&#39;]
-15567 [&#39;The&#39;, &#39;first&#39;, &#39;is&#39;, &#39;the&#39;, &#39;possibility&#39;, &#39;of&#39;, &#39;opening&#39;, &#39;up&#39;, &#39;a&#39;, &#39;direct&#39;, &#39;information&#39;, &#39;channel&#39;, &#39;between&#39;, &#39;the&#39;, &#39;European&#39;, &#39;Union&#39;, &#39;and&#39;, &#39;the&#39;, &#39;north&#39;, &#39;of&#39;, &#39;the&#39;, &#39;island&#39;, &#39;,&#39;, &#39;without&#39;, &#39;this&#39;, &#39;necessarily&#39;, &#39;signifying&#39;, &#39;recognition&#39;, &#39;of&#39;, &#39;this&#39;, &#39;part&#39;, &#39;of&#39;, &#39;the&#39;, &#39;island&#39;, &#39;as&#39;, &#39;a&#39;, &#39;legal&#39;, &#39;personality&#39;, &#39;at&#39;, &#39;international&#39;, &#39;level&#39;, &#39;,&#39;, &#39;but&#39;, &#39;as&#39;, &#39;a&#39;, &#39;means&#39;, &#39;of&#39;, &#39;facilitating&#39;, &#39;adoption&#39;, &#39;of&#39;, &#39;the&#39;, &#39;acquis&#39;, &#39;communautaire&#39;, &#39;with&#39;, &#39;a&#39;, &#39;view&#39;, &#39;to&#39;, &#39;eventual&#39;, &#39;accession&#39;, &#39;of&#39;, &#39;the&#39;, &#39;whole&#39;, &#39;island&#39;, &#39;,&#39;, &#39;if&#39;, &#39;a&#39;, &#39;solution&#39;, &#39;can&#39;, &#39;,&#39;, &#39;in&#39;, &#39;the&#39;, &#39;meantime&#39;, &#39;,&#39;, &#39;be&#39;, &#39;found&#39;, &#39;to&#39;, &#39;the&#39;, &#39;broader&#39;, &#39;problem&#39;, &#39;of&#39;, &#39;the&#39;, &#39;partition&#39;, &#39;of&#39;, &#39;the&#39;, &#39;island&#39;, &#39;.&#39;]
-16459 [&#39;That&#39;, &#39;is&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;a&#39;, &#39;good&#39;, &#39;thing&#39;, &#39;and&#39;, &#39;I&#39;, &#39;welcome&#39;, &#39;with&#39;, &#39;satisfaction&#39;, &#39;the&#39;, &#39;fact&#39;, &#39;that&#39;, &#39;our&#39;, &#39;Europeanism&#39;, &#39;is&#39;, &#39;starting&#39;, &#39;to&#39;, &#39;emerge&#39;, &#39;clearly&#39;, &#39;today&#39;, &#39;from&#39;, &#39;the&#39;, &#39;vast&#39;, &#39;melting&#39;, &#39;pot&#39;, &#39;of&#39;, &#39;concepts&#39;, &#39;which&#39;, &#39;&quot;&#39;, &#39;speak&#39;, &#39;for&#39;, &#39;themselves&#39;, &#39;&quot;&#39;, &#39;.&#39;]
-19630 [&#39;Of&#39;, &#39;course&#39;, &#39;the&#39;, &#39;promotion&#39;, &#39;of&#39;, &#39;this&#39;, &#39;is&#39;, &#39;desirable&#39;, &#39;and&#39;, &#39;permanent&#39;, &#39;employment&#39;, &#39;need&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;mean&#39;, &#39;full-time&#39;, &#39;employment&#39;, &#39;.&#39;]
-
-
-490 [&#39;Es&#39;, &#39;sollte&#39;, &#39;nicht&#39;, &#39;darum&#39;, &#39;gehen&#39;, &#39;,&#39;, &#39;auf&#39;, &#39;halbem&#39;, &#39;Wege&#39;, &#39;Änderungen&#39;, &#39;an&#39;, &#39;den&#39;, &#39;Prioritäten&#39;, &#39;und&#39;, &#39;Politiken&#39;, &#39;vorzunehmen&#39;, &#39;,&#39;, &#39;was&#39;, &#39;zwangsläufig&#39;, &#39;Verzögerungen&#39;, &#39;und&#39;, &#39;Nichtausschöpfung&#39;, &#39;der&#39;, &#39;Mittel&#39;, &#39;zur&#39;, &#39;Folge&#39;, &#39;hat&#39;, &#39;.&#39;]
-1042 [&#39;Optimale&#39;, &#39;Effizienz&#39;, &#39;stellt&#39;, &#39;sich&#39;, &#39;aber&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;von&#39;, &#39;allein&#39;, &#39;ein&#39;, &#39;.&#39;]
-2207 [&#39;Besonders&#39;, &#39;bemerkenswert&#39;, &#39;ist&#39;, &#39;aus&#39;, &#39;meiner&#39;, &#39;Sicht&#39;, &#39;das&#39;, &#39;Signal&#39;, &#39;,&#39;, &#39;das&#39;, &#39;von&#39;, &#39;diesem&#39;, &#39;Vorschlag&#39;, &#39;ausgeht&#39;, &#39;:&#39;, &#39;die&#39;, &#39;Kommission&#39;, &#39;sieht&#39;, &#39;die&#39;, &#39;Auswirkungen&#39;, &#39;der&#39;, &#39;Erweiterung&#39;, &#39;voraus&#39;, &#39;und&#39;, &#39;hat&#39;, &#39;erkannt&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;diese&#39;, &#39;zwangsläufig&#39;, &#39;,&#39;, &#39;ja&#39;, &#39;quasi&#39;, &#39;automatisch&#39;, &#39;,&#39;, &#39;eine&#39;, &#39;Reform&#39;, &#39;des&#39;, &#39;zentralisierten&#39;, &#39;Systems&#39;, &#39;mit&#39;, &#39;sich&#39;, &#39;bringt&#39;, &#39;.&#39;]
-2604 [&#39;Man&#39;, &#39;muß&#39;, &#39;im&#39;, &#39;Falle&#39;, &#39;von&#39;, &#39;Gefälligkeitsflaggen&#39;, &#39;strenger&#39;, &#39;vorgehen&#39;, &#39;,&#39;, &#39;nicht&#39;, &#39;weil&#39;, &#39;es&#39;, &#39;sich&#39;, &#39;dabei&#39;, &#39;zwangsläufig&#39;, &#39;um&#39;, &#39;schlechte&#39;, &#39;Schiffe&#39;, &#39;handelt&#39;, &#39;,&#39;, &#39;sondern&#39;, &#39;weil&#39;, &#39;viele&#39;, &#39;schlechte&#39;, &#39;Schiffe&#39;, &#39;darunter&#39;, &#39;sind&#39;, &#39;;&#39;, &#39;Verbesserung&#39;, &#39;der&#39;, &#39;Information&#39;, &#39;über&#39;, &#39;alle&#39;, &#39;Schiffe&#39;, &#39;der&#39;, &#39;Welt&#39;, &#39;,&#39;, &#39;aber&#39;, &#39;das&#39;, &#39;ist&#39;, &#39;ja&#39;, &#39;bereits&#39;, &#39;vorgesehen&#39;, &#39;;&#39;, &#39;genaue&#39;, &#39;Festlegungen&#39;, &#39;und&#39;, &#39;strenger&#39;, &#39;Umgang&#39;, &#39;mit&#39;, &#39;den&#39;, &#39;Verantwortlichkeiten&#39;, &#39;.&#39;]
-3192 [&#39;Diese&#39;, &#39;Vertrauenskrise&#39;, &#39;hatte&#39;, &#39;zwangsläufig&#39;, &#39;leider&#39;, &#39;auch&#39;, &#39;zur&#39;, &#39;Folge&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;das&#39;, &#39;Vertrauen&#39;, &#39;der&#39;, &#39;Verbraucher&#39;, &#39;in&#39;, &#39;Systeme&#39;, &#39;und&#39;, &#39;Institutionen&#39;, &#39;auf&#39;, &#39;nationaler&#39;, &#39;und&#39;, &#39;europäischer&#39;, &#39;Ebene&#39;, &#39;,&#39;, &#39;die&#39;, &#39;für&#39;, &#39;die&#39;, &#39;Überwachung&#39;, &#39;und&#39;, &#39;Gewährleistung&#39;, &#39;der&#39;, &#39;Lebensmittelsicherheit&#39;, &#39;auf&#39;, &#39;höchstem&#39;, &#39;Niveau&#39;, &#39;verantwortlich&#39;, &#39;sind&#39;, &#39;,&#39;, &#39;erschüttert&#39;, &#39;wurde&#39;, &#39;.&#39;]
-3784 [&#39;Andererseits&#39;, &#39;führen&#39;, &#39;die&#39;, &#39;Verpflichtung&#39;, &#39;zur&#39;, &#39;transnationalen&#39;, &#39;Zusammenarbeit&#39;, &#39;und&#39;, &#39;die&#39;, &#39;komplizierten&#39;, &#39;Anforderungen&#39;, &#39;an&#39;, &#39;die&#39;, &#39;Planung&#39;, &#39;und&#39;, &#39;Umsetzung&#39;, &#39;von&#39;, &#39;Entwicklungspartnerschaften&#39;, &#39;zwangsläufig&#39;, &#39;zu&#39;, &#39;Großprojekten&#39;, &#39;,&#39;, &#39;da&#39;, &#39;nur&#39;, &#39;sie&#39;, &#39;diesen&#39;, &#39;Bedingungen&#39;, &#39;entsprechen&#39;, &#39;können&#39;, &#39;.&#39;]
-4046 [&#39;Ich&#39;, &#39;möchte&#39;, &#39;Ihnen&#39;, &#39;dennoch&#39;, &#39;zwei&#39;, &#39;Beispiele&#39;, &#39;dafür&#39;, &#39;nennen&#39;, &#39;,&#39;, &#39;weshalb&#39;, &#39;die&#39;, &#39;jetzt&#39;, &#39;von&#39;, &#39;der&#39;, &#39;Kommission&#39;, &#39;geäußerten&#39;, &#39;guten&#39;, &#39;Absichten&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;auch&#39;, &#39;zu&#39;, &#39;einem&#39;, &#39;befriedigenden&#39;, &#39;Resultat&#39;, &#39;führen&#39;, &#39;.&#39;]
-4058 [&#39;Derzeit&#39;, &#39;vertrauen&#39;, &#39;wir&#39;, &#39;darauf&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;die&#39;, &#39;Kommission&#39;, &#39;diese&#39;, &#39;ehrgeizigen&#39;, &#39;Vorschläge&#39;, &#39;unterbreiten&#39;, &#39;wird&#39;, &#39;,&#39;, &#39;was&#39;, &#39;aber&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;der&#39;, &#39;Fall&#39;, &#39;ist&#39;, &#39;.&#39;]
-4849 [&#39;Die&#39;, &#39;Einhaltung&#39;, &#39;dieses&#39;, &#39;Termins&#39;, &#39;hängt&#39;, &#39;,&#39;, &#39;wie&#39;, &#39;allgemein&#39;, &#39;bekannt&#39;, &#39;,&#39;, &#39;mit&#39;, &#39;dem&#39;, &#39;Umstand&#39;, &#39;zusammen&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;jede&#39;, &#39;Verlängerung&#39;, &#39;der&#39;, &#39;Debatte&#39;, &#39;zu&#39;, &#39;Verzögerungen&#39;, &#39;im&#39;, &#39;Erweiterungsprozeß&#39;, &#39;führen&#39;, &#39;kann&#39;, &#39;,&#39;, &#39;und&#39;, &#39;das&#39;, &#39;wäre&#39;, &#39;zwangsläufig&#39;, &#39;mit&#39;, &#39;negativen&#39;, &#39;politischen&#39;, &#39;Auswirkungen&#39;, &#39;verbunden&#39;, &#39;,&#39;, &#39;die&#39;, &#39;man&#39;, &#39;berücksichtigen&#39;, &#39;muß&#39;, &#39;.&#39;]
-5979 [&#39;Dennoch&#39;, &#39;wird&#39;, &#39;dieser&#39;, &#39;schwierige&#39;, &#39;Prozeß&#39;, &#39;zwangsläufig&#39;, &#39;von&#39;, &#39;Problemen&#39;, &#39;und&#39;, &#39;Enttäuschungen&#39;, &#39;begleitet&#39;, &#39;sein&#39;, &#39;.&#39;]
-6282 [&#39;Damit&#39;, &#39;möchte&#39;, &#39;ich&#39;, &#39;Ihnen&#39;, &#39;sagen&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;die&#39;, &#39;portugiesische&#39;, &#39;Präsidentschaft&#39;, &#39;-&#39;, &#39;und&#39;, &#39;auch&#39;, &#39;ich&#39;, &#39;selbst&#39;, &#39;und&#39;, &#39;der&#39;, &#39;Justizminister&#39;, &#39;,&#39;, &#39;die&#39;, &#39;wir&#39;, &#39;uns&#39;, &#39;mit&#39;, &#39;dem&#39;, &#39;Bereich&#39;, &#39;der&#39;, &#39;Justiz&#39;, &#39;und&#39;, &#39;der&#39;, &#39;inneren&#39;, &#39;Angelegenheiten&#39;, &#39;beschäftigen&#39;, &#39;-&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;wir&#39;, &#39;mit&#39;, &#39;diesem&#39;, &#39;Parlament&#39;, &#39;eine&#39;, &#39;neue&#39;, &#39;Zeit&#39;, &#39;einläuten&#39;, &#39;und&#39;, &#39;die&#39;, &#39;Beziehungen&#39;, &#39;zwischen&#39;, &#39;Rat&#39;, &#39;und&#39;, &#39;Parlament&#39;, &#39;fördern&#39;, &#39;wollen&#39;, &#39;,&#39;, &#39;wobei&#39;, &#39;dies&#39;, &#39;zwangsläufig&#39;, &#39;unter&#39;, &#39;dem&#39;, &#39;Eindruck&#39;, &#39;meiner&#39;, &#39;parlamentarischen&#39;, &#39;Erfahrung&#39;, &#39;im&#39;, &#39;Europäischen&#39;, &#39;Parlament&#39;, &#39;und&#39;, &#39;selbstverständlich&#39;, &#39;auch&#39;, &#39;von&#39;, &#39;der&#39;, &#39;parlamentarischen&#39;, &#39;Erfahrung&#39;, &#39;des&#39;, &#39;großen&#39;, &#39;nationalen&#39;, &#39;Abgeordneten&#39;, &#39;geschieht&#39;, &#39;,&#39;, &#39;der&#39;, &#39;bis&#39;, &#39;heute&#39;, &#39;Herr&#39;, &#39;Justizminister&#39;, &#39;und&#39;, &#39;mein&#39;, &#39;Kollege&#39;, &#39;gewesen&#39;, &#39;ist&#39;, &#39;.&#39;]
-6342 [&#39;Ich&#39;, &#39;glaube&#39;, &#39;,&#39;, &#39;in&#39;, &#39;diesem&#39;, &#39;Bereich&#39;, &#39;und&#39;, &#39;im&#39;, &#39;Bereich&#39;, &#39;des&#39;, &#39;Dialogs&#39;, &#39;,&#39;, &#39;den&#39;, &#39;Rat&#39;, &#39;und&#39;, &#39;Parlament&#39;, &#39;zwangsläufig&#39;, &#39;über&#39;, &#39;die&#39;, &#39;Entwicklung&#39;, &#39;von&#39;, &#39;EUROPOL&#39;, &#39;und&#39;, &#39;EUROJUST&#39;, &#39;führen&#39;, &#39;müssen&#39;, &#39;,&#39;, &#39;haben&#39;, &#39;wir&#39;, &#39;die&#39;, &#39;Möglichkeit&#39;, &#39;,&#39;, &#39;im&#39;, &#39;Zusammenhang&#39;, &#39;mit&#39;, &#39;EUROPOL&#39;, &#39;eine&#39;, &#39;institutionell&#39;, &#39;annehmbare&#39;, &#39;Lösung&#39;, &#39;für&#39;, &#39;die&#39;, &#39;Beziehungen&#39;, &#39;zwischen&#39;, &#39;Rat&#39;, &#39;und&#39;, &#39;Parlament&#39;, &#39;zu&#39;, &#39;finden&#39;, &#39;.&#39;]
-6777 [&#39;Wir&#39;, &#39;sollten&#39;, &#39;uns&#39;, &#39;alle&#39;, &#39;einer&#39;, &#39;Sache&#39;, &#39;bewußt&#39;, &#39;sein&#39;, &#39;:&#39;, &#39;Zwischen&#39;, &#39;Rat&#39;, &#39;und&#39;, &#39;Parlament&#39;, &#39;,&#39;, &#39;zwischen&#39;, &#39;den&#39;, &#39;Ratsmitgliedern&#39;, &#39;und&#39;, &#39;den&#39;, &#39;Mitgliedern&#39;, &#39;dieses&#39;, &#39;Parlaments&#39;, &#39;besteht&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;eine&#39;, &#39;Diskrepanz&#39;, &#39;in&#39;, &#39;bezug&#39;, &#39;auf&#39;, &#39;die&#39;, &#39;Vor-&#39;, &#39;oder&#39;, &#39;Nachteile&#39;, &#39;der&#39;, &#39;Transparenz&#39;, &#39;.&#39;]
-7648 [&#39;Unser&#39;, &#39;Kollege&#39;, &#39;Dominique&#39;, &#39;Souchet&#39;, &#39;hat&#39;, &#39;daher&#39;, &#39;fünf&#39;, &#39;Änderungsanträge&#39;, &#39;eingereicht&#39;, &#39;,&#39;, &#39;mit&#39;, &#39;denen&#39;, &#39;unterstrichen&#39;, &#39;werden&#39;, &#39;soll&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;die&#39;, &#39;Fangkapazitäten&#39;, &#39;angepaßt&#39;, &#39;und&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;systematisch&#39;, &#39;reduziert&#39;, &#39;werden&#39;, &#39;müssen&#39;, &#39;.&#39;]
-7913 [&#39;Ein&#39;, &#39;Problem&#39;, &#39;besteht&#39;, &#39;darin&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;Käufer&#39;, &#39;und&#39;, &#39;Nutzer&#39;, &#39;von&#39;, &#39;Leuchten&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;identisch&#39;, &#39;sind&#39;, &#39;.&#39;]
-7939 [&#39;Hinzugefügt&#39;, &#39;sei&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;der&#39;, &#39;Industrie&#39;, &#39;bereits&#39;, &#39;seit&#39;, &#39;1992&#39;, &#39;klar&#39;, &#39;war&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;es&#39;, &#39;zwangsläufig&#39;, &#39;zu&#39;, &#39;Änderungen&#39;, &#39;kommen&#39;, &#39;wird&#39;, &#39;.&#39;]
-10873 [&#39;Ich&#39;, &#39;kann&#39;, &#39;aber&#39;, &#39;wohl&#39;, &#39;feststellen&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;von&#39;, &#39;seiten&#39;, &#39;der&#39;, &#39;einzelnen&#39;, &#39;Länder&#39;, &#39;eine&#39;, &#39;Bereitschaft&#39;, &#39;besteht&#39;, &#39;,&#39;, &#39;die&#39;, &#39;Debatte&#39;, &#39;zu&#39;, &#39;eröffnen&#39;, &#39;,&#39;, &#39;was&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;-&#39;, &#39;und&#39;, &#39;bereits&#39;, &#39;jetzt&#39;, &#39;muß&#39;, &#39;das&#39;, &#39;ganz&#39;, &#39;klar&#39;, &#39;sein&#39;, &#39;-&#39;, &#39;eine&#39;, &#39;Bereitschaft&#39;, &#39;bedeutet&#39;, &#39;,&#39;, &#39;die&#39;, &#39;Debatte&#39;, &#39;in&#39;, &#39;einer&#39;, &#39;Weise&#39;, &#39;abzuschließen&#39;, &#39;,&#39;, &#39;die&#39;, &#39;sich&#39;, &#39;mit&#39;, &#39;der&#39;, &#39;Auffassung&#39;, &#39;dieses&#39;, &#39;Parlaments&#39;, &#39;zum&#39;, &#39;Zweck&#39;, &#39;einiger&#39;, &#39;notwendiger&#39;, &#39;Reformen&#39;, &#39;deckt&#39;, &#39;.&#39;]
-11559 [&#39;Ich&#39;, &#39;halte&#39;, &#39;dies&#39;, &#39;tatsächlich&#39;, &#39;für&#39;, &#39;notwendig&#39;, &#39;,&#39;, &#39;weil&#39;, &#39;wir&#39;, &#39;bei&#39;, &#39;dem&#39;, &#39;Besuch&#39;, &#39;des&#39;, &#39;Rechtsausschusses&#39;, &#39;in&#39;, &#39;Luxemburg&#39;, &#39;gehört&#39;, &#39;haben&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;natürlich&#39;, &#39;ganz&#39;, &#39;zwangsläufig&#39;, &#39;,&#39;, &#39;sozusagen&#39;, &#39;Gottgegeben&#39;, &#39;,&#39;, &#39;bei&#39;, &#39;der&#39;, &#39;Nutzung&#39;, &#39;des&#39;, &#39;gemeinsamen&#39;, &#39;Übersetzungsdienstes&#39;, &#39;der&#39;, &#39;Gerichtshof&#39;, &#39;Vorrang&#39;, &#39;vor&#39;, &#39;dem&#39;, &#39;Gericht&#39;, &#39;Erster&#39;, &#39;Instanz&#39;, &#39;hat&#39;, &#39;und&#39;, &#39;darum&#39;, &#39;oftmals&#39;, &#39;wichtige&#39;, &#39;Sachen&#39;, &#39;am&#39;, &#39;Gericht&#39;, &#39;Erster&#39;, &#39;Instanz&#39;, &#39;nicht&#39;, &#39;ausreichend&#39;, &#39;behandelt&#39;, &#39;werden&#39;, &#39;können&#39;, &#39;.&#39;]
-12352 [&#39;Die&#39;, &#39;Kosten&#39;, &#39;würden&#39;, &#39;zwangsläufig&#39;, &#39;auf&#39;, &#39;die&#39;, &#39;Preise&#39;, &#39;und&#39;, &#39;damit&#39;, &#39;auf&#39;, &#39;die&#39;, &#39;Käufer&#39;, &#39;von&#39;, &#39;Neuwagen&#39;, &#39;umgelegt&#39;, &#39;.&#39;]
-13853 [&#39;Besonders&#39;, &#39;benachteiligt&#39;, &#39;sind&#39;, &#39;die&#39;, &#39;Inselgebiete&#39;, &#39;,&#39;, &#39;die&#39;, &#39;in&#39;, &#39;einer&#39;, &#39;regionalen&#39;, &#39;Situation&#39;, &#39;leben&#39;, &#39;,&#39;, &#39;die&#39;, &#39;zwangsläufig&#39;, &#39;mit&#39;, &#39;reinen&#39;, &#39;Seegrenzen&#39;, &#39;verbunden&#39;, &#39;ist&#39;, &#39;.&#39;]
-15028 [&#39;Für&#39;, &#39;die&#39;, &#39;Umsetzung&#39;, &#39;der&#39;, &#39;Agenda&#39;, &#39;2000&#39;, &#39;im&#39;, &#39;Agrarbereich&#39;, &#39;ist&#39;, &#39;schließlich&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;mehr&#39;, &#39;Geld&#39;, &#39;notwendig&#39;, &#39;.&#39;]
-17949 [&#39;Wenn&#39;, &#39;der&#39;, &#39;Arbeitsmarkt&#39;, &#39;hinsichtlich&#39;, &#39;des&#39;, &#39;Beschäftigungs-&#39;, &#39;,&#39;, &#39;Flexibilitäts-&#39;, &#39;und&#39;, &#39;Lohnkostenniveaus&#39;, &#39;funktioniert&#39;, &#39;,&#39;, &#39;funktionieren&#39;, &#39;zwangsläufig&#39;, &#39;auch&#39;, &#39;der&#39;, &#39;welfare&#39;, &#39;state&#39;, &#39;und&#39;, &#39;der&#39;, &#39;Sozialschutz&#39;, &#39;,&#39;, &#39;und&#39;, &#39;umgekehrt&#39;, &#39;.&#39;]
-18190 [&#39;Wie&#39;, &#39;man&#39;, &#39;festgestellt&#39;, &#39;hat&#39;, &#39;,&#39;, &#39;sind&#39;, &#39;die&#39;, &#39;Bedingungen&#39;, &#39;,&#39;, &#39;unter&#39;, &#39;denen&#39;, &#39;diese&#39;, &#39;Märkte&#39;, &#39;funktionieren&#39;, &#39;,&#39;, &#39;stark&#39;, &#39;verzerrt&#39;, &#39;,&#39;, &#39;was&#39;, &#39;naturgemäß&#39;, &#39;bedeutende&#39;, &#39;Korrekturen&#39;, &#39;erforderlich&#39;, &#39;macht&#39;, &#39;,&#39;, &#39;die&#39;, &#39;wiederum&#39;, &#39;-&#39;, &#39;ebenfalls&#39;, &#39;zwangsläufig&#39;, &#39;-&#39;, &#39;neue&#39;, &#39;Optionen&#39;, &#39;für&#39;, &#39;die&#39;, &#39;Entwicklungspolitik&#39;, &#39;bedingen&#39;, &#39;.&#39;]
-18230 [&#39;Sagen&#39;, &#39;wir&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;auch&#39;, &#39;auf&#39;, &#39;dieser&#39;, &#39;Ebene&#39;, &#39;,&#39;, &#39;der&#39;, &#39;der&#39;, &#39;Europäischen&#39;, &#39;Union&#39;, &#39;,&#39;, &#39;die&#39;, &#39;Einbeziehung&#39;, &#39;der&#39;, &#39;Entwicklungspolitik&#39;, &#39;in&#39;, &#39;die&#39;, &#39;Außenpolitik&#39;, &#39;sicherlich&#39;, &#39;auf&#39;, &#39;dem&#39;, &#39;gleiche&#39;, &#39;Wege&#39;, &#39;vonstatten&#39;, &#39;gehen&#39;, &#39;muß&#39;, &#39;,&#39;, &#39;wie&#39;, &#39;es&#39;, &#39;in&#39;, &#39;vielen&#39;, &#39;Mitgliedstaaten&#39;, &#39;bei&#39;, &#39;der&#39;, &#39;Entwicklungspolitik&#39;, &#39;und&#39;, &#39;der&#39;, &#39;jeweiligen&#39;, &#39;Außenpolitik&#39;, &#39;geschehen&#39;, &#39;ist&#39;, &#39;,&#39;, &#39;und&#39;, &#39;ihre&#39;, &#39;Bestätigung&#39;, &#39;bedingt&#39;, &#39;zwangsläufig&#39;, &#39;den&#39;, &#39;Ausbau&#39;, &#39;von&#39;, &#39;Entscheidungsmechanismen&#39;, &#39;und&#39;, &#39;institutionellen&#39;, &#39;Strukturen&#39;, &#39;der&#39;, &#39;Mittel&#39;, &#39;der&#39;, &#39;GASP&#39;, &#39;in&#39;, &#39;der&#39;, &#39;Weise&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;sie&#39;, &#39;eine&#39;, &#39;vorteilhaftere&#39;, &#39;Verbindung&#39;, &#39;zwischen&#39;, &#39;dem&#39;, &#39;entwicklungspolitischen&#39;, &#39;und&#39;, &#39;dem&#39;, &#39;außenpolitischen&#39;, &#39;Instrumentarium&#39;, &#39;ermöglichen&#39;, &#39;.&#39;]
-18235 [&#39;Der&#39;, &#39;vierte&#39;, &#39;und&#39;, &#39;letzte&#39;, &#39;Gesichtspunkt&#39;, &#39;,&#39;, &#39;den&#39;, &#39;ich&#39;, &#39;den&#39;, &#39;Damen&#39;, &#39;und&#39;, &#39;Herren&#39;, &#39;Abgeordneten&#39;, &#39;zu&#39;, &#39;bedenken&#39;, &#39;geben&#39;, &#39;möchte&#39;, &#39;,&#39;, &#39;steht&#39;, &#39;zwangsläufig&#39;, &#39;in&#39;, &#39;Verbindung&#39;, &#39;mit&#39;, &#39;diesem&#39;, &#39;Aspekt&#39;, &#39;der&#39;, &#39;Entwicklungspolitik&#39;, &#39;:&#39;, &#39;die&#39;, &#39;Rolle&#39;, &#39;des&#39;, &#39;Entwicklungsrates&#39;, &#39;.&#39;]
-18760 [&#39;Die&#39;, &#39;mangelnde&#39;, &#39;Kohärenz&#39;, &#39;zwischen&#39;, &#39;der&#39;, &#39;Entwicklungspolitik&#39;, &#39;und&#39;, &#39;der&#39;, &#39;Handelspolitik&#39;, &#39;beeinträchtigt&#39;, &#39;unsere&#39;, &#39;Entwicklungsarbeit&#39;, &#39;und&#39;, &#39;führt&#39;, &#39;zwangsläufig&#39;, &#39;dazu&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;die&#39;, &#39;Entwicklungsländer&#39;, &#39;an&#39;, &#39;der&#39;, &#39;politischen&#39;, &#39;Glaubwürdigkeit&#39;, &#39;Europas&#39;, &#39;und&#39;, &#39;an&#39;, &#39;unseren&#39;, &#39;schönen&#39;, &#39;Worten&#39;, &#39;zweifeln&#39;, &#39;.&#39;]
-18817 [&#39;Alle&#39;, &#39;stellen&#39;, &#39;fest&#39;, &#39;,&#39;, &#39;und&#39;, &#39;das&#39;, &#39;war&#39;, &#39;das&#39;, &#39;Thema&#39;, &#39;der&#39;, &#39;heutigen&#39;, &#39;Aussprache&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;die&#39;, &#39;Europäische&#39;, &#39;Union&#39;, &#39;zwangsläufig&#39;, &#39;die&#39;, &#39;Kohärenz&#39;, &#39;ihrer&#39;, &#39;einzelnen&#39;, &#39;zu&#39;, &#39;den&#39;, &#39;Entwicklungszielen&#39;, &#39;beitragenden&#39;, &#39;Politiken&#39;, &#39;verstärken&#39;, &#39;muß&#39;, &#39;,&#39;, &#39;damit&#39;, &#39;sie&#39;, &#39;bei&#39;, &#39;der&#39;, &#39;Entwicklungspolitik&#39;, &#39;international&#39;, &#39;eine&#39;, &#39;aktivere&#39;, &#39;und&#39;, &#39;führende&#39;, &#39;Rolle&#39;, &#39;übernehmen&#39;, &#39;kann&#39;, &#39;.&#39;]
-19226 [&#39;Aufgrund&#39;, &#39;dieser&#39;, &#39;fehlenden&#39;, &#39;Sensibilität&#39;, &#39;und&#39;, &#39;Solidarität&#39;, &#39;war&#39;, &#39;die&#39;, &#39;von&#39;, &#39;mir&#39;, &#39;,&#39;, &#39;einem&#39;, &#39;Abgeordneten&#39;, &#39;aus&#39;, &#39;einer&#39;, &#39;der&#39;, &#39;trockenen&#39;, &#39;,&#39;, &#39;aber&#39;, &#39;entwicklungsfähigen&#39;, &#39;Agrarregionen&#39;, &#39;des&#39;, &#39;Mittelmeerraums&#39;, &#39;wie&#39;, &#39;der&#39;, &#39;Region&#39;, &#39;Murcia&#39;, &#39;,&#39;, &#39;abgegebene&#39;, &#39;Stimme&#39;, &#39;zwangsläufig&#39;, &#39;die&#39;, &#39;Konsequenz&#39;, &#39;aus&#39;, &#39;meinen&#39;, &#39;Darlegungen&#39;, &#39;.&#39;]
-19693 [&#39;In&#39;, &#39;den&#39;, &#39;bisherigen&#39;, &#39;Gespräche&#39;, &#39;gab&#39;, &#39;es&#39;, &#39;im&#39;, &#39;wesentlichen&#39;, &#39;zwei&#39;, &#39;Entwicklungen&#39;, &#39;:&#39;, &#39;Es&#39;, &#39;zeichnet&#39;, &#39;sich&#39;, &#39;die&#39;, &#39;Möglichkeit&#39;, &#39;ab&#39;, &#39;,&#39;, &#39;einen&#39;, &#39;direkten&#39;, &#39;Informationskanal&#39;, &#39;zwischen&#39;, &#39;der&#39;, &#39;Europäischen&#39;, &#39;Union&#39;, &#39;und&#39;, &#39;dem&#39;, &#39;Nordteil&#39;, &#39;der&#39;, &#39;Insel&#39;, &#39;einzurichten&#39;, &#39;,&#39;, &#39;ohne&#39;, &#39;daß&#39;, &#39;dies&#39;, &#39;zwangsläufig&#39;, &#39;eine&#39;, &#39;Anerkennung&#39;, &#39;dieses&#39;, &#39;Inselteils&#39;, &#39;als&#39;, &#39;eines&#39;, &#39;Gebildes&#39;, &#39;mit&#39;, &#39;eigener&#39;, &#39;Rechtspersönlichkeit&#39;, &#39;auf&#39;, &#39;internationaler&#39;, &#39;Ebene&#39;, &#39;bedeutet&#39;, &#39;.&#39;]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20631 [&#39;Die&#39;, &#39;dramatischen&#39;, &#39;Veränderungen&#39;, &#39;der&#39;, &#39;letzten&#39;, &#39;zehn&#39;, &#39;Jahre&#39;, &#39;in&#39;, &#39;Europa&#39;, &#39;,&#39;, &#39;seit&#39;, &#39;dem&#39;, &#39;Fall&#39;, &#39;des&#39;, &#39;Eisernen&#39;, &#39;Vorhangs&#39;, &#39;,&#39;, &#39;sowie&#39;, &#39;die&#39;, &#39;immer&#39;, &#39;deutlicher&#39;, &#39;hervortretende&#39;, &#39;Notwendigkeit&#39;, &#39;einer&#39;, &#39;Erweiterung&#39;, &#39;der&#39;, &#39;Europäischen&#39;, &#39;Union&#39;, &#39;,&#39;, &#39;die&#39;, &#39;sich&#39;, &#39;immer&#39;, &#39;mehr&#39;, &#39;beschleunigende&#39;, &#39;wirtschaftliche&#39;, &#39;Integration&#39;, &#39;und&#39;, &#39;die&#39;, &#39;Vielzahl&#39;, &#39;neuer&#39;, &#39;Gefahren&#39;, &#39;der&#39;, &#39;heutigen&#39;, &#39;Zeit&#39;, &#39;sind&#39;, &#39;Elemente&#39;, &#39;,&#39;, &#39;durch&#39;, &#39;die&#39;, &#39;die&#39;, &#39;Europäische&#39;, &#39;Union&#39;, &#39;zwangsläufig&#39;, &#39;zu&#39;, &#39;einer&#39;, &#39;Öffnung&#39;, &#39;geführt&#39;, &#39;wurde&#39;, &#39;,&#39;, &#39;mit&#39;, &#39;dem&#39;, &#39;Ziel&#39;, &#39;,&#39;, &#39;zu&#39;, &#39;einem&#39;, &#39;neuen&#39;, &#39;und&#39;, &#39;intensiveren&#39;, &#39;Nachdenken&#39;, &#39;über&#39;, &#39;sich&#39;, &#39;selbst&#39;, &#39;und&#39;, &#39;zu&#39;, &#39;einer&#39;, &#39;neuen&#39;, &#39;Definition&#39;, &#39;und&#39;, &#39;Suche&#39;, &#39;nach&#39;, &#39;den&#39;, &#39;Werten&#39;, &#39;,&#39;, &#39;die&#39;, &#39;es&#39;, &#39;verbinden&#39;, &#39;und&#39;, &#39;seiner&#39;, &#39;Existenz&#39;, &#39;Sinn&#39;, &#39;verleihen&#39;, &#39;,&#39;, &#39;zu&#39;, &#39;finden&#39;, &#39;.&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-<p>One <strong>obvious issue with the present corpus</strong> is that the sentences are not perfectly aligned. Nonetheless, we can see that there are a few <strong>matching translations</strong>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">en</span><span class="o">.</span><span class="n">sents</span><span class="p">()[</span><span class="mi">998</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ger</span><span class="o">.</span><span class="n">sents</span><span class="p">()[</span><span class="mi">1042</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> [&#39;But&#39;, &#39;optimum&#39;, &#39;efficiency&#39;, &#39;does&#39;, &#39;not&#39;, &#39;necessarily&#39;, &#39;come&#39;, &#39;about&#39;, &#39;of&#39;, &#39;its&#39;, &#39;own&#39;, &#39;accord&#39;, &#39;.&#39;]
-
- [&#39;Optimale&#39;, &#39;Effizienz&#39;, &#39;stellt&#39;, &#39;sich&#39;, &#39;aber&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;von&#39;, &#39;allein&#39;, &#39;ein&#39;, &#39;.&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>In other cases, translations do not match as well.</strong> In the following case, what is communicated with an epistemic modal adverb in German is communicated with an adjective in English. Note, though, that there appears to be a slight shift in meaning between these sentences:</p>
-<ol class="simple">
-<li><p>a. <em>…resulting in inevitable delays and underspends…</em><br>
-b. <em>…was zwangsläufig Verzögerungen und Nichtausschöpfung der Mittel zur Folge hat…</em><br>
-      which necessarily delays and non-exhaustive-use the<sub>GEN</sub> funds as consequence has</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">en</span><span class="o">.</span><span class="n">sents</span><span class="p">()[</span><span class="mi">464</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ger</span><span class="o">.</span><span class="n">sents</span><span class="p">()[</span><span class="mi">490</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> [&#39;They&#39;, &#39;should&#39;, &#39;not&#39;, &#39;be&#39;, &#39;about&#39;, &#39;shifting&#39;, &#39;priorities&#39;, &#39;and&#39;, &#39;policies&#39;, &#39;halfway&#39;, &#39;through&#39;, &#39;project&#39;, &#39;development&#39;, &#39;,&#39;, &#39;resulting&#39;, &#39;in&#39;, &#39;inevitable&#39;, &#39;delays&#39;, &#39;and&#39;, &#39;underspends&#39;, &#39;,&#39;, &#39;particularly&#39;, &#39;in&#39;, &#39;the&#39;, &#39;light&#39;, &#39;of&#39;, &#39;the&#39;, &#39;new&#39;, &#39;budgetary&#39;, &#39;requirement&#39;, &#39;.&#39;]
-
- [&#39;Es&#39;, &#39;sollte&#39;, &#39;nicht&#39;, &#39;darum&#39;, &#39;gehen&#39;, &#39;,&#39;, &#39;auf&#39;, &#39;halbem&#39;, &#39;Wege&#39;, &#39;Änderungen&#39;, &#39;an&#39;, &#39;den&#39;, &#39;Prioritäten&#39;, &#39;und&#39;, &#39;Politiken&#39;, &#39;vorzunehmen&#39;, &#39;,&#39;, &#39;was&#39;, &#39;zwangsläufig&#39;, &#39;Verzögerungen&#39;, &#39;und&#39;, &#39;Nichtausschöpfung&#39;, &#39;der&#39;, &#39;Mittel&#39;, &#39;zur&#39;, &#39;Folge&#39;, &#39;hat&#39;, &#39;.&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-<section id="plotting-word-length-information-using-matplotlib">
-<h3>Plotting word length information using <em>matplotlib</em><a class="headerlink" href="#plotting-word-length-information-using-matplotlib" title="Permalink to this headline">#</a></h3>
-<p>In the following, we will visually compare the length of words in the German and English variants of the corpus. For this we need to:</p>
+<p><strong>Methods of a class can be thought of as definitions of the way in which instances of that concept / class interact with the world</strong>:</p>
 <ul class="simple">
-<li><p>extract word length information from the corpora. We create two lists of integers comprising word lengths for each word in the English and German corpora.</p></li>
-<li><p>use <em>matplotlib</em> to find a suitable way to visualize German and English words in comparison</p></li>
-<li><p>Note that we <strong>gloss over some details</strong> that you would have to take into account in a “serious” research project, e.g., word <strong>frequency</strong> (frequent words tend to be shorter), word <strong>class</strong> (e.g., prepositions tend to be shorter than nouns)</p></li>
+<li><p>E.g., a rectangle can be enlarged or shrunk by adding / removing the same amount of length from its opposing sides, two rectangles may be conjoined if they align on one of their dimensions, etc..</p></li>
+<li><p><strong>In Python, methods of a class are specified in terms of functions that take an instance of that class as argument</strong>.</p></li>
+</ul>
+</section>
+<section id="defining-a-class-in-python">
+<h2>Defining a class in Python<a class="headerlink" href="#defining-a-class-in-python" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Class names start with a capital letter.</p></li>
+<li><p>Classes usually start with an __init__ constructor (more on this below).</p></li>
+<li><p>The <em>self</em> parameter is automatically set to refer to an object of the data type you are defining. In the code below, it is a variable refering to an instance of <em>YourClass</em> and functions like any other variable inside the class definition.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">word_len_en</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">en</span><span class="o">.</span><span class="n">words</span><span class="p">()))</span> <span class="c1">#apply function len() to each entry in en.words(); store as list</span>
-<span class="n">word_len_ger</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">ger</span><span class="o">.</span><span class="n">words</span><span class="p">()))</span> <span class="c1">#as above</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word_len_en</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word_len_ger</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">YourClass</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable1</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable2</span> <span class="o">=</span> <span class="mi">2</span>
+           
+    <span class="k">def</span> <span class="nf">method1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1">#some method</span>
+        <span class="k">pass</span>
+           
+    <span class="k">def</span> <span class="nf">method2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1">#some other method</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="the-initialization-method">
+<h3>The initialization method<a class="headerlink" href="#the-initialization-method" title="Permalink to this headline">#</a></h3>
+<p>The <em>__init__(self)</em> method (also called the <em>class constructor</em>) is automatically called whenever you create an instance of the class. In it, you should specify the basic properties of all instances of that class. For instance, in the code above, it initializes all objects of the <em>YourClass</em> class as having two properties, <em>variable1</em> and <em>variable2</em>, which have the values <em>1</em> and <em>2</em>, respectively.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example</span> <span class="o">=</span> <span class="n">YourClass</span><span class="p">()</span> <span class="c1">#create an instance of the YourClass class  </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">example</span><span class="p">)</span> 
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>556326
-556226
-</pre></div>
-</div>
-</div>
-</div>
-<p>The English corpus contains more words than the German one. Since we want to be able to plot them on the same x-y-coordinate system, we adjust the length of the German word length list by adding a number of 0’s at the end.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word_len_en</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">word_len_ger</span><span class="p">))</span>
-<span class="n">word_len_ger_adjusted</span> <span class="o">=</span> <span class="n">word_len_ger</span><span class="o">+</span><span class="n">b</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.YourClass object at 0x000002100A521C10&gt;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Using <em><strong>matplotlib</strong></em>, we now create an empty figure (<em>fig</em>) containing a single plot (<em>ax</em>) and specify the figure dimensions.</p>
-<p>We also define a variable x to be an evenly spaced array containing numbers from 0 to the total number of words contained in the (English) corpus.</p>
-<p>To <strong>build the plot</strong>, we call the <em>plot()</em> method, in which we specify the values for the x- and y-axis of our plot, as well as design features. Crucially, we can <strong>overlay plots</strong> by calling the method again with a different set of arguments.</p>
-<p>By naming the overlayed plots (here, the scond one is called <em>l</em>), we can modify their attributes later, e.g., to change axis labels or style properties.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">en</span><span class="o">.</span><span class="n">words</span><span class="p">()))</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">word_len_en</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;English&#39;</span><span class="p">)</span> <span class="c1">#value on alpha channel adds transparency</span>
-<span class="n">l</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">word_len_ger_adjusted</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;German&#39;</span><span class="p">)</span>
-
-<span class="c1">#labeling and design</span>
-<span class="n">l</span><span class="o">.</span><span class="n">set_linestyle</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Word number&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Word length in characters&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Length of words in the German-English version of the Europarl corpus&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">variable1</span><span class="p">)</span> <span class="c1">#after initialization, this object has the properties we specified above</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">variable2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/session08_18_0.png" src="_images/session08_18_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+</pre></div>
 </div>
 </div>
-<p>Alternatively, we may also create a <strong>figure containing several subplots</strong> arranged on a grid.</p>
-<p>In the following, we specify that the figure should have subplots arranged in 1 row and 2 columns. We can <strong>build these subplots</strong> by calling the plot method (here, we use <em>scatter()</em> for a scatterplot) directly on the relevant subplot, indicated as index on the <em>axs</em> variable.</p>
-<p>To ensure that the <strong>y-axis is equally spaced</strong> for both subplots, we set the y-axis ticks manually using <em>set_yticks</em> (analogously, you can use <em>set_xticks</em>)</p>
+</div>
+<p>We may not always want to initialize objects with the same values for <em>variable1</em> and <em>variable2</em>, though. <strong>To make the initialization method more general, we can add extra parameters in its definition</strong>, as in the following example. The way this works is that it sets <em>value1</em> and <em>value2</em> to <em>1</em> and <em>2</em>, respectively, as long as no other values are provided in your call to create an instance of that class.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
-
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">word_len_en</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;English&#39;</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ger</span><span class="o">.</span><span class="n">words</span><span class="p">())),</span> <span class="n">word_len_ger</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;German&#39;</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]);</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]);</span>
-
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Word number&#39;</span><span class="p">);</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Word length in characters&#39;</span><span class="p">);</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Word number&#39;</span><span class="p">);</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Word length in characters&#39;</span><span class="p">);</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;English&#39;</span><span class="p">);</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;German&#39;</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">YourClass</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">value2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable1</span> <span class="o">=</span> <span class="n">value1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variable2</span> <span class="o">=</span> <span class="n">value2</span>
+           
+    <span class="k">def</span> <span class="nf">method1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1">#some method</span>
+        <span class="k">pass</span>
+           
+    <span class="k">def</span> <span class="nf">method2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1">#some other method</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can still create objects like before:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example2</span> <span class="o">=</span> <span class="n">YourClass</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">example2</span><span class="o">.</span><span class="n">variable1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/session08_20_0.png" src="_images/session08_20_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
 </div>
 </div>
-<p>This visualization still isn’t quite satisfactory. It tells us that German words tend to be longer than English ones, but the plot design makes it difficult to extract information about the <strong>frequency of long vs. short words</strong>.</p>
-<p>In the following, we therefore display sorted lists of the English/German word lengths on the y-axis.</p>
+</div>
+<p>But we can also specify their values for <em>value1</em> and / or <em>value2</em>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">en</span><span class="o">.</span><span class="n">words</span><span class="p">()))</span>
-
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">word_len_en</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;English&#39;</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ger</span><span class="o">.</span><span class="n">words</span><span class="p">())),</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">word_len_ger</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;German&#39;</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]);</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]);</span>
-
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Word number&#39;</span><span class="p">);</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Word length in characters&#39;</span><span class="p">);</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Word number&#39;</span><span class="p">);</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Word length in characters&#39;</span><span class="p">);</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;English&#39;</span><span class="p">);</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;German&#39;</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example3</span> <span class="o">=</span> <span class="n">YourClass</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">example3</span><span class="o">.</span><span class="n">variable1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/session08_22_0.png" src="_images/session08_22_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example4</span> <span class="o">=</span> <span class="n">YourClass</span><span class="p">(</span><span class="n">value2</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">example4</span><span class="o">.</span><span class="n">variable2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that if you do not provide default values as in <em>def __init__(self, value1 = 1, value2 = 2)</em>, you will always have to provide such values upon creating an object of that class.</p>
+</section>
+</section>
+<section id="a-simple-language-class">
+<h2>A simple Language class<a class="headerlink" href="#a-simple-language-class" title="Permalink to this headline">#</a></h2>
+<p>The following is <strong>not a complete representation of specific language families</strong>. It only serves for illustration:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Language</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="n">num_of_speakers</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="n">family</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">=</span> <span class="n">branch</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_of_speakers</span> <span class="o">=</span> <span class="n">num_of_speakers</span>
+
+    <span class="k">def</span> <span class="nf">branch_to_family</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">==</span> <span class="s2">&quot;unknown&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">!=</span> <span class="s2">&quot;unknown&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;Balto-Slavic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Germanic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Hellenic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Indo-Iranian&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Romance&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="s2">&quot;Indo-European&quot;</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;Sinitic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Tibeto-Burman&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="s2">&quot;Sino-Tibetan&quot;</span>
+            
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">de</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;German&quot;</span><span class="p">,</span> <span class="s2">&quot;Indo-European&quot;</span><span class="p">,</span> <span class="s2">&quot;Germanic&quot;</span><span class="p">,</span> <span class="mi">100000000</span><span class="p">)</span>
+<span class="n">lat</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;Latvian&quot;</span><span class="p">,</span> <span class="n">branch</span> <span class="o">=</span> <span class="s2">&quot;Balto-Slavic&quot;</span><span class="p">,</span><span class="n">num_of_speakers</span> <span class="o">=</span> <span class="mi">2200000</span><span class="p">)</span>
+
+<span class="n">ra_ha</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;Ramarih Hatohobei&quot;</span><span class="p">,</span> <span class="s2">&quot;Austronesian&quot;</span><span class="p">,</span> <span class="s2">&quot;Micronesian&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">de</span><span class="p">)</span> <span class="c1">#de is now a Language object</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.Language object at 0x000002100A4FE760&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="calling-class-methods">
+<h3>Calling class methods<a class="headerlink" href="#calling-class-methods" title="Permalink to this headline">#</a></h3>
+<p>We can call on a class method just as we called methods for other data types before:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lat</span><span class="o">.</span><span class="n">branch_to_family</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lat</span><span class="o">.</span><span class="n">family</span><span class="p">)</span> <span class="c1">#family information has now been added</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Indo-European
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-class-objects-as-arguments-or-parameters">
+<h3>Using class objects as arguments or parameters<a class="headerlink" href="#using-class-objects-as-arguments-or-parameters" title="Permalink to this headline">#</a></h3>
+<p>We can use instances of our class as arguments or parameters in functions. For instance, we could write a function that outputs all information about a particular language:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_language_info</span><span class="p">(</span><span class="n">lang</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">lang</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;is an instance of a&quot;</span><span class="p">,</span> <span class="n">lang</span><span class="o">.</span><span class="n">branch</span><span class="p">,</span> <span class="s2">&quot;language in the&quot;</span><span class="p">,</span> <span class="n">lang</span><span class="o">.</span><span class="n">family</span><span class="p">,</span> <span class="s2">&quot;language family. It has&quot;</span><span class="p">,</span> <span class="n">lang</span><span class="o">.</span><span class="n">num_of_speakers</span><span class="p">,</span> <span class="s2">&quot;native speakers&quot;</span><span class="p">)</span>
+    
+<span class="n">print_language_info</span><span class="p">(</span><span class="n">de</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>German is an instance of a Germanic language in the Indo-European language family. It has 100000000 native speakers
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Importantly, for general-purpose functions like this, it is preferred to add them as new methods of the class, rather than as functions operating outside of the class</strong>. One of the reasons for that is that your code stays more portable and comprehensible if all important functions / methods are contained within the class definition.</p>
+<p>So let’s add a print method to our class. <strong>Crucially, if we call it <em>__str__(self)</em>, it will function as the default output of the <em>print()</em> function called on objects of that class!</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Language</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="n">num_of_speakers</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="n">family</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">=</span> <span class="n">branch</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_of_speakers</span> <span class="o">=</span> <span class="n">num_of_speakers</span>
+
+    <span class="k">def</span> <span class="nf">branch_to_family</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">==</span> <span class="s2">&quot;unknown&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">!=</span> <span class="s2">&quot;unknown&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;Balto-Slavic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Germanic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Hellenic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Indo-Iranian&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Romance&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="s2">&quot;Indo-European&quot;</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;Sinitic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Tibeto-Burman&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="s2">&quot;Sino-Tibetan&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> is an instance of a </span><span class="si">{1}</span><span class="s2"> language in the </span><span class="si">{2}</span><span class="s2"> language family. It has </span><span class="si">{3}</span><span class="s2"> native speakers.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_of_speakers</span><span class="p">))</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#create the objects again with the new Class definition:</span>
+<span class="n">de</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;German&quot;</span><span class="p">,</span> <span class="s2">&quot;Indo-European&quot;</span><span class="p">,</span> <span class="s2">&quot;Germanic&quot;</span><span class="p">,</span> <span class="mi">100000000</span><span class="p">)</span>
+<span class="n">lat</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;Latvian&quot;</span><span class="p">,</span> <span class="n">branch</span> <span class="o">=</span> <span class="s2">&quot;Balto-Slavic&quot;</span><span class="p">,</span><span class="n">num_of_speakers</span> <span class="o">=</span> <span class="mi">2200000</span><span class="p">)</span>
+
+<span class="n">ra_ha</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;Ramarih Hatohobei&quot;</span><span class="p">,</span> <span class="s2">&quot;Austronesian&quot;</span><span class="p">,</span> <span class="s2">&quot;Micronesian&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">de</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>German is an instance of a Germanic language in the Indo-European language family. It has 100000000 native speakers.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-several-instances-of-a-class">
+<h3>Using several instances of a class<a class="headerlink" href="#using-several-instances-of-a-class" title="Permalink to this headline">#</a></h3>
+<p>We can also <strong>define methods that operate on several instances of the class we are in</strong>. For example, we could specify a class method that checks whether two languages are part of the same language family. This method takes <em>self</em> and a comparison language as arguments.</p>
+<p>Note also that <strong>we can call other class methods from within a class method</strong> (here, we call <em>branch_to_family</em>), just like we saw nested function calls in previous sessions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Language</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="n">num_of_speakers</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="n">family</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">=</span> <span class="n">branch</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_of_speakers</span> <span class="o">=</span> <span class="n">num_of_speakers</span>
+
+    <span class="k">def</span> <span class="nf">branch_to_family</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">==</span> <span class="s2">&quot;unknown&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">!=</span> <span class="s2">&quot;unknown&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;Balto-Slavic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Germanic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Hellenic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Indo-Iranian&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Romance&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="s2">&quot;Indo-European&quot;</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;Sinitic&quot;</span> <span class="ow">or</span> <span class="s2">&quot;Tibeto-Burman&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="s2">&quot;Sino-Tibetan&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">family_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comparison</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">==</span> <span class="s2">&quot;unknown&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">branch_to_family</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">comparison</span><span class="o">.</span><span class="n">family</span> <span class="o">==</span> <span class="s2">&quot;unknown&quot;</span><span class="p">:</span>
+            <span class="n">comparison</span><span class="o">.</span><span class="n">branch_to_family</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">==</span> <span class="s2">&quot;unknown&quot;</span> <span class="ow">or</span> <span class="n">comparison</span><span class="o">.</span><span class="n">family</span> <span class="o">==</span> <span class="s2">&quot;unknown&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;At least one of the languages does not have a known language family.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">==</span> <span class="n">comparison</span><span class="o">.</span><span class="n">family</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Same language family.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not the same language family.&quot;</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> is an instance of a </span><span class="si">{1}</span><span class="s2"> language in the </span><span class="si">{2}</span><span class="s2"> language family. It has </span><span class="si">{3}</span><span class="s2"> native speakers.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_of_speakers</span><span class="p">))</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#create the objects again with the new Class definition:</span>
+<span class="n">de</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;German&quot;</span><span class="p">,</span> <span class="s2">&quot;Indo-European&quot;</span><span class="p">,</span> <span class="s2">&quot;Germanic&quot;</span><span class="p">,</span> <span class="mi">100000000</span><span class="p">)</span>
+<span class="n">lat</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;Latvian&quot;</span><span class="p">,</span> <span class="n">branch</span> <span class="o">=</span> <span class="s2">&quot;Balto-Slavic&quot;</span><span class="p">,</span><span class="n">num_of_speakers</span> <span class="o">=</span> <span class="mi">2200000</span><span class="p">)</span>
+
+<span class="n">ra_ha</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span><span class="s2">&quot;Ramarih Hatohobei&quot;</span><span class="p">,</span> <span class="s2">&quot;Austronesian&quot;</span><span class="p">,</span> <span class="s2">&quot;Micronesian&quot;</span><span class="p">)</span>
+
+<span class="n">de</span><span class="o">.</span><span class="n">family_check</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span>
+<span class="n">ra_ha</span><span class="o">.</span><span class="n">family_check</span><span class="p">(</span><span class="n">de</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Same language family.
+Not the same language family.
+</pre></div>
+</div>
 </div>
 </div>
 </section>
 </section>
-<section id="parsing-treebanks-using-nltk">
-<h2>Parsing treebanks using NLTK<a class="headerlink" href="#parsing-treebanks-using-nltk" title="Permalink to this headline">#</a></h2>
-<p>Treebank corpora provide a syntactic parse for each sentence. We will look at a sample of the <strong>Penn Treebank</strong> (the full corpus is behind a paywall).</p>
-<p>It comes as a series of <em>.mrg</em> files, which can be read with the help of our friendly corpus reader methods.</p>
+<section id="class-inheritance">
+<h2>Class inheritance<a class="headerlink" href="#class-inheritance" title="Permalink to this headline">#</a></h2>
+<p>We can declare classes as subtypes of another class. For instance, below, we define a class IndoEuropean as a subtype of the Language class.</p>
+<p>All functionalities of the superclass (class variables, methods) are inherited by the subclass, but can be overridden by redefinition or reassignment.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">treebank</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">IndoEuropean</span><span class="p">(</span><span class="n">Language</span><span class="p">):</span>
+    <span class="k">pass</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">fileids</span><span class="p">())</span>
+<span class="n">en</span> <span class="o">=</span> <span class="n">IndoEuropean</span><span class="p">(</span><span class="s2">&quot;English&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">en</span><span class="o">.</span><span class="n">family</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;wsj_0001.mrg&#39;, &#39;wsj_0002.mrg&#39;, &#39;wsj_0003.mrg&#39;, &#39;wsj_0004.mrg&#39;, &#39;wsj_0005.mrg&#39;, &#39;wsj_0006.mrg&#39;, &#39;wsj_0007.mrg&#39;, &#39;wsj_0008.mrg&#39;, &#39;wsj_0009.mrg&#39;, &#39;wsj_0010.mrg&#39;, &#39;wsj_0011.mrg&#39;, &#39;wsj_0012.mrg&#39;, &#39;wsj_0013.mrg&#39;, &#39;wsj_0014.mrg&#39;, &#39;wsj_0015.mrg&#39;, &#39;wsj_0016.mrg&#39;, &#39;wsj_0017.mrg&#39;, &#39;wsj_0018.mrg&#39;, &#39;wsj_0019.mrg&#39;, &#39;wsj_0020.mrg&#39;, &#39;wsj_0021.mrg&#39;, &#39;wsj_0022.mrg&#39;, &#39;wsj_0023.mrg&#39;, &#39;wsj_0024.mrg&#39;, &#39;wsj_0025.mrg&#39;, &#39;wsj_0026.mrg&#39;, &#39;wsj_0027.mrg&#39;, &#39;wsj_0028.mrg&#39;, &#39;wsj_0029.mrg&#39;, &#39;wsj_0030.mrg&#39;, &#39;wsj_0031.mrg&#39;, &#39;wsj_0032.mrg&#39;, &#39;wsj_0033.mrg&#39;, &#39;wsj_0034.mrg&#39;, &#39;wsj_0035.mrg&#39;, &#39;wsj_0036.mrg&#39;, &#39;wsj_0037.mrg&#39;, &#39;wsj_0038.mrg&#39;, &#39;wsj_0039.mrg&#39;, &#39;wsj_0040.mrg&#39;, &#39;wsj_0041.mrg&#39;, &#39;wsj_0042.mrg&#39;, &#39;wsj_0043.mrg&#39;, &#39;wsj_0044.mrg&#39;, &#39;wsj_0045.mrg&#39;, &#39;wsj_0046.mrg&#39;, &#39;wsj_0047.mrg&#39;, &#39;wsj_0048.mrg&#39;, &#39;wsj_0049.mrg&#39;, &#39;wsj_0050.mrg&#39;, &#39;wsj_0051.mrg&#39;, &#39;wsj_0052.mrg&#39;, &#39;wsj_0053.mrg&#39;, &#39;wsj_0054.mrg&#39;, &#39;wsj_0055.mrg&#39;, &#39;wsj_0056.mrg&#39;, &#39;wsj_0057.mrg&#39;, &#39;wsj_0058.mrg&#39;, &#39;wsj_0059.mrg&#39;, &#39;wsj_0060.mrg&#39;, &#39;wsj_0061.mrg&#39;, &#39;wsj_0062.mrg&#39;, &#39;wsj_0063.mrg&#39;, &#39;wsj_0064.mrg&#39;, &#39;wsj_0065.mrg&#39;, &#39;wsj_0066.mrg&#39;, &#39;wsj_0067.mrg&#39;, &#39;wsj_0068.mrg&#39;, &#39;wsj_0069.mrg&#39;, &#39;wsj_0070.mrg&#39;, &#39;wsj_0071.mrg&#39;, &#39;wsj_0072.mrg&#39;, &#39;wsj_0073.mrg&#39;, &#39;wsj_0074.mrg&#39;, &#39;wsj_0075.mrg&#39;, &#39;wsj_0076.mrg&#39;, &#39;wsj_0077.mrg&#39;, &#39;wsj_0078.mrg&#39;, &#39;wsj_0079.mrg&#39;, &#39;wsj_0080.mrg&#39;, &#39;wsj_0081.mrg&#39;, &#39;wsj_0082.mrg&#39;, &#39;wsj_0083.mrg&#39;, &#39;wsj_0084.mrg&#39;, &#39;wsj_0085.mrg&#39;, &#39;wsj_0086.mrg&#39;, &#39;wsj_0087.mrg&#39;, &#39;wsj_0088.mrg&#39;, &#39;wsj_0089.mrg&#39;, &#39;wsj_0090.mrg&#39;, &#39;wsj_0091.mrg&#39;, &#39;wsj_0092.mrg&#39;, &#39;wsj_0093.mrg&#39;, &#39;wsj_0094.mrg&#39;, &#39;wsj_0095.mrg&#39;, &#39;wsj_0096.mrg&#39;, &#39;wsj_0097.mrg&#39;, &#39;wsj_0098.mrg&#39;, &#39;wsj_0099.mrg&#39;, &#39;wsj_0100.mrg&#39;, &#39;wsj_0101.mrg&#39;, &#39;wsj_0102.mrg&#39;, &#39;wsj_0103.mrg&#39;, &#39;wsj_0104.mrg&#39;, &#39;wsj_0105.mrg&#39;, &#39;wsj_0106.mrg&#39;, &#39;wsj_0107.mrg&#39;, &#39;wsj_0108.mrg&#39;, &#39;wsj_0109.mrg&#39;, &#39;wsj_0110.mrg&#39;, &#39;wsj_0111.mrg&#39;, &#39;wsj_0112.mrg&#39;, &#39;wsj_0113.mrg&#39;, &#39;wsj_0114.mrg&#39;, &#39;wsj_0115.mrg&#39;, &#39;wsj_0116.mrg&#39;, &#39;wsj_0117.mrg&#39;, &#39;wsj_0118.mrg&#39;, &#39;wsj_0119.mrg&#39;, &#39;wsj_0120.mrg&#39;, &#39;wsj_0121.mrg&#39;, &#39;wsj_0122.mrg&#39;, &#39;wsj_0123.mrg&#39;, &#39;wsj_0124.mrg&#39;, &#39;wsj_0125.mrg&#39;, &#39;wsj_0126.mrg&#39;, &#39;wsj_0127.mrg&#39;, &#39;wsj_0128.mrg&#39;, &#39;wsj_0129.mrg&#39;, &#39;wsj_0130.mrg&#39;, &#39;wsj_0131.mrg&#39;, &#39;wsj_0132.mrg&#39;, &#39;wsj_0133.mrg&#39;, &#39;wsj_0134.mrg&#39;, &#39;wsj_0135.mrg&#39;, &#39;wsj_0136.mrg&#39;, &#39;wsj_0137.mrg&#39;, &#39;wsj_0138.mrg&#39;, &#39;wsj_0139.mrg&#39;, &#39;wsj_0140.mrg&#39;, &#39;wsj_0141.mrg&#39;, &#39;wsj_0142.mrg&#39;, &#39;wsj_0143.mrg&#39;, &#39;wsj_0144.mrg&#39;, &#39;wsj_0145.mrg&#39;, &#39;wsj_0146.mrg&#39;, &#39;wsj_0147.mrg&#39;, &#39;wsj_0148.mrg&#39;, &#39;wsj_0149.mrg&#39;, &#39;wsj_0150.mrg&#39;, &#39;wsj_0151.mrg&#39;, &#39;wsj_0152.mrg&#39;, &#39;wsj_0153.mrg&#39;, &#39;wsj_0154.mrg&#39;, &#39;wsj_0155.mrg&#39;, &#39;wsj_0156.mrg&#39;, &#39;wsj_0157.mrg&#39;, &#39;wsj_0158.mrg&#39;, &#39;wsj_0159.mrg&#39;, &#39;wsj_0160.mrg&#39;, &#39;wsj_0161.mrg&#39;, &#39;wsj_0162.mrg&#39;, &#39;wsj_0163.mrg&#39;, &#39;wsj_0164.mrg&#39;, &#39;wsj_0165.mrg&#39;, &#39;wsj_0166.mrg&#39;, &#39;wsj_0167.mrg&#39;, &#39;wsj_0168.mrg&#39;, &#39;wsj_0169.mrg&#39;, &#39;wsj_0170.mrg&#39;, &#39;wsj_0171.mrg&#39;, &#39;wsj_0172.mrg&#39;, &#39;wsj_0173.mrg&#39;, &#39;wsj_0174.mrg&#39;, &#39;wsj_0175.mrg&#39;, &#39;wsj_0176.mrg&#39;, &#39;wsj_0177.mrg&#39;, &#39;wsj_0178.mrg&#39;, &#39;wsj_0179.mrg&#39;, &#39;wsj_0180.mrg&#39;, &#39;wsj_0181.mrg&#39;, &#39;wsj_0182.mrg&#39;, &#39;wsj_0183.mrg&#39;, &#39;wsj_0184.mrg&#39;, &#39;wsj_0185.mrg&#39;, &#39;wsj_0186.mrg&#39;, &#39;wsj_0187.mrg&#39;, &#39;wsj_0188.mrg&#39;, &#39;wsj_0189.mrg&#39;, &#39;wsj_0190.mrg&#39;, &#39;wsj_0191.mrg&#39;, &#39;wsj_0192.mrg&#39;, &#39;wsj_0193.mrg&#39;, &#39;wsj_0194.mrg&#39;, &#39;wsj_0195.mrg&#39;, &#39;wsj_0196.mrg&#39;, &#39;wsj_0197.mrg&#39;, &#39;wsj_0198.mrg&#39;, &#39;wsj_0199.mrg&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>unknown
 </pre></div>
 </div>
 </div>
 </div>
+<p>Below, we redefine the initialization method for the <em>IndoEuropean</em> class. Note that all other methods from the <em>Language</em> class will still be available in the <em>IndoEuropean</em> subclass.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;wsj_0004.mrg&#39;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">IndoEuropean</span><span class="p">(</span><span class="n">Language</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="n">num_of_speakers</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="o">=</span> <span class="s2">&quot;Indo-European&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">=</span> <span class="n">branch</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_of_speakers</span> <span class="o">=</span> <span class="n">num_of_speakers</span>
+        
+<span class="n">en</span> <span class="o">=</span> <span class="n">IndoEuropean</span><span class="p">(</span><span class="s2">&quot;English&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">en</span><span class="o">.</span><span class="n">family</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Yields&#39;, &#39;on&#39;, &#39;money-market&#39;, &#39;mutual&#39;, &#39;funds&#39;, ...]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Indo-European
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="objects-are-mutable">
+<h2>Objects are mutable<a class="headerlink" href="#objects-are-mutable" title="Permalink to this headline">#</a></h2>
+<p>You know <em>mutability</em> from list objects. It means that we can we can directly add, remove, or change the values of the object without creating a new object. Specifically, we can change any of the object’s values, delete properties of the object, or delete the object altogether:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">tagged_words</span><span class="p">(</span><span class="s1">&#39;wsj_0004.mrg&#39;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#change value of num_of_speakers</span>
+<span class="n">en</span><span class="o">.</span><span class="n">num_of_speakers</span> <span class="o">=</span> <span class="mi">370000000</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">en</span><span class="o">.</span><span class="n">num_of_speakers</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Yields&#39;, &#39;NNS&#39;), (&#39;on&#39;, &#39;IN&#39;), ...]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>370000000
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">parsed_sents</span><span class="p">(</span><span class="s1">&#39;wsj_0005.mrg&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(S
-  (NP-SBJ-10
-    (NP (NNP J.P.) (NNP Bolduc))
-    (, ,)
-    (NP
-      (NP (NN vice) (NN chairman))
-      (PP
-        (IN of)
-        (NP
-          (NP (NNP W.R.) (NNP Grace) (CC &amp;) (NNP Co.))
-          (, ,)
-          (SBAR
-            (WHNP-10 (WDT which))
-            (S
-              (NP-SBJ (-NONE- *T*-10))
-              (VP
-                (VBZ holds)
-                (NP
-                  (NP (DT a) (ADJP (CD 83.4) (NN %)) (NN interest))
-                  (PP-LOC
-                    (IN in)
-                    (NP (DT this) (JJ energy-services) (NN company))))))))))
-    (, ,))
-  (VP
-    (VBD was)
-    (VP
-      (VBN elected)
-      (S (NP-SBJ (-NONE- *-10)) (NP-PRD (DT a) (NN director)))))
-  (. .))
-</pre></div>
-</div>
-</div>
-</div>
-<p>Parsed sentences are <strong>tree objects</strong> and can be displayed as such using the <em>svgling</em> package:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">svgling</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">treebank</span><span class="o">.</span><span class="n">parsed_sents</span><span class="p">(</span><span class="s1">&#39;wsj_0005.mrg&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">t</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/session08_29_0.svg" src="_images/session08_29_0.svg" /></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="o">.</span><span class="n">leaves</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;He&#39;,
- &#39;succeeds&#39;,
- &#39;Terrence&#39;,
- &#39;D.&#39;,
- &#39;Daniels&#39;,
- &#39;,&#39;,
- &#39;formerly&#39;,
- &#39;a&#39;,
- &#39;W.R.&#39;,
- &#39;Grace&#39;,
- &#39;vice&#39;,
- &#39;chairman&#39;,
- &#39;,&#39;,
- &#39;who&#39;,
- &#39;*T*-11&#39;,
- &#39;resigned&#39;,
- &#39;.&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>Tagged and parsed corpora provide a great tool</strong> if you are interested not just in a word’s frequency or lexical category, but its <strong>grammatical role within a sentence</strong>, or if you are interested in exploring the possible structures of the target language, more generally.</p>
-<p>Let’s illustrate by writing a (hacky) function aimed to <strong>distinguish object- from subject-extracted relative clauses</strong>.</p>
-<ol class="simple">
-<li><p>a.  The journalist who the editor recommended __ for the assignment never took the job. (object-extracted)<br>
-    b. The journalist who __ recommended the editor for the assignment never took the job. (subject-extracted)</p></li>
-</ol>
-<p>We need to <strong>think, first, of what the search pattern should look like</strong>. Let’s check out an instance in the corpus to help us out with this:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">parsed_sents</span><span class="p">()[</span><span class="mi">4</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(S
-  (S-TPC-2
-    (NP-SBJ
-      (NP (DT The) (NN asbestos) (NN fiber))
-      (, ,)
-      (NP (NN crocidolite))
-      (, ,))
-    (VP
-      (VBZ is)
-      (ADJP-PRD (RB unusually) (JJ resilient))
-      (SBAR-TMP
-        (IN once)
-        (S
-          (NP-SBJ (PRP it))
-          (VP (VBZ enters) (NP (DT the) (NNS lungs)))))
-      (, ,)
-      (PP
-        (IN with)
-        (S-NOM
-          (NP-SBJ
-            (NP (RB even) (JJ brief) (NNS exposures))
-            (PP (TO to) (NP (PRP it))))
-          (VP
-            (VBG causing)
-            (NP
-              (NP (NNS symptoms))
-              (SBAR
-                (WHNP-1 (WDT that))
-                (S
-                  (NP-SBJ (-NONE- *T*-1))
-                  (VP
-                    (VBP show)
-                    (PRT (RP up))
-                    (ADVP-TMP (NP (NNS decades)) (JJ later)))))))))))
-  (, ,)
-  (NP-SBJ (NNS researchers))
-  (VP (VBD said) (SBAR (-NONE- 0) (S (-NONE- *T*-2))))
-  (. .))
-</pre></div>
-</div>
-</div>
-</div>
-<p>A few things are worth noting:</p>
-<ul class="simple">
-<li><p>NP subjects are tagged as “<em>NP-SBJ</em>” but NP objects are simple tagged “<em>NP</em>”</p></li>
-<li><p>Relative clauses are noun complements. As such, they appear as subtree of their host-NP.</p></li>
-<li><p>The highest node of a relative clause is S’ (”<em>SBAR</em>”)</p></li>
-</ul>
-<p>Let’s <strong>write a function that exploits this pattern</strong>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#define function that searches for object- and subject-extracted RCs:</span>
-
-<span class="k">def</span> <span class="nf">rc_type</span><span class="p">(</span><span class="n">tree</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">st</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">subtrees</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">label</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;NP&quot;</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">stst</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">subtrees</span><span class="p">():</span>
-                <span class="k">if</span> <span class="n">stst</span><span class="o">.</span><span class="n">label</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;SBAR&quot;</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">ststst</span> <span class="ow">in</span> <span class="n">stst</span><span class="o">.</span><span class="n">subtrees</span><span class="p">():</span>
-                        <span class="k">if</span> <span class="n">ststst</span><span class="o">.</span><span class="n">label</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;NP-SBJ&quot;</span><span class="p">:</span>
-                            <span class="k">if</span> <span class="n">ststst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">label</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;-NONE-&quot;</span><span class="p">:</span>                
-                                <span class="k">return</span> <span class="s2">&quot;RC_SBJ&quot;</span>
-                        <span class="k">elif</span> <span class="n">ststst</span><span class="o">.</span><span class="n">label</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;NP&quot;</span><span class="p">:</span>
-                            <span class="k">if</span> <span class="n">ststst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">label</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;-NONE-&quot;</span><span class="p">:</span>
-                                <span class="k">return</span> <span class="s2">&quot;RC_OBJ&quot;</span>
- 
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sbj_extr_RC</span> <span class="o">=</span> <span class="p">[];</span>
-<span class="n">obj_extr_RC</span> <span class="o">=</span> <span class="p">[];</span>
-
-<span class="c1">#just doing this on the first 500 sentences as it takes quite some time to run on the full corpus</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">rc_type</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">parsed_sents</span><span class="p">()[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="s2">&quot;RC_SBJ&quot;</span><span class="p">:</span>
-        <span class="n">sbj_extr_RC</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">rc_type</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">parsed_sents</span><span class="p">()[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="s2">&quot;RC_OBJ&quot;</span><span class="p">:</span>
-        <span class="n">obj_extr_RC</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-
- 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#delete num_of_speakers property</span>
+<span class="k">del</span> <span class="n">en</span><span class="o">.</span><span class="n">num_of_speakers</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">en</span><span class="o">.</span><span class="n">num_of_speakers</span><span class="p">)</span> <span class="c1">#results in error</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_19656</span>\<span class="mf">2890514494.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1">#just doing this on the first 500 sentences as it takes quite some time to run on the full corpus</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">):</span>
-<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="k">if</span> <span class="n">rc_type</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">parsed_sents</span><span class="p">()[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="s2">&quot;RC_SBJ&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="n">sbj_extr_RC</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="k">elif</span> <span class="n">rc_type</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">parsed_sents</span><span class="p">()[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="s2">&quot;RC_OBJ&quot;</span><span class="p">:</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_19272</span>\<span class="mf">1514171247.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#delete num_of_speakers property</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">del</span> <span class="n">en</span><span class="o">.</span><span class="n">num_of_speakers</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">en</span><span class="o">.</span><span class="n">num_of_speakers</span><span class="p">)</span> <span class="c1">#results in error</span>
 
-<span class="nn">~\miniconda3\lib\site-packages\nltk\collections.py</span> in <span class="ni">__getitem__</span><span class="nt">(self, i)</span>
-<span class="g g-Whitespace">    </span><span class="mi">170</span>             <span class="c1"># Use iterate_from to extract it.</span>
-<span class="g g-Whitespace">    </span><span class="mi">171</span>             <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">172</span>                 <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iterate_from</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">173</span>             <span class="k">except</span> <span class="ne">StopIteration</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">174</span>                 <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;index out of range&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
-
-<span class="nn">~\miniconda3\lib\site-packages\nltk\corpus\reader\util.py</span> in <span class="ni">iterate_from</span><span class="nt">(self, start_tok)</span>
-<span class="g g-Whitespace">    </span><span class="mi">422</span> 
-<span class="g g-Whitespace">    </span><span class="mi">423</span>             <span class="c1"># Get everything we can from this piece.</span>
-<span class="ne">--&gt; </span><span class="mi">424</span>             <span class="k">yield from</span> <span class="n">piece</span><span class="o">.</span><span class="n">iterate_from</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">start_tok</span> <span class="o">-</span> <span class="n">offset</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">425</span> 
-<span class="g g-Whitespace">    </span><span class="mi">426</span>             <span class="c1"># Update the offset table.</span>
-
-<span class="nn">~\miniconda3\lib\site-packages\nltk\corpus\reader\util.py</span> in <span class="ni">iterate_from</span><span class="nt">(self, start_tok)</span>
-<span class="g g-Whitespace">    </span><span class="mi">304</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_current_toknum</span> <span class="o">=</span> <span class="n">toknum</span>
-<span class="g g-Whitespace">    </span><span class="mi">305</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_current_blocknum</span> <span class="o">=</span> <span class="n">block_index</span>
-<span class="ne">--&gt; </span><span class="mi">306</span>             <span class="n">tokens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_block</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">307</span>             <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">AbstractLazySequence</span><span class="p">)),</span> <span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">308</span>                 <span class="s2">&quot;block reader </span><span class="si">%s</span><span class="s2">() should return list or tuple.&quot;</span>
-
-<span class="nn">~\miniconda3\lib\site-packages\nltk\corpus\reader\api.py</span> in <span class="ni">_read_parsed_sent_block</span><span class="nt">(self, stream)</span>
-<span class="g g-Whitespace">    </span><span class="mi">511</span> 
-<span class="g g-Whitespace">    </span><span class="mi">512</span>     <span class="k">def</span> <span class="nf">_read_parsed_sent_block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
-<span class="nn">--&gt; 513         return list(filter(None, [self._parse(t) for t</span> in <span class="ni">self._read_block</span><span class="nt">(stream)]))</span>
-<span class="g g-Whitespace">    </span><span class="mi">514</span> 
-<span class="g g-Whitespace">    </span><span class="mi">515</span>     <span class="c1"># } End of Block Readers</span>
-
-<span class="nn">~\miniconda3\lib\site-packages\nltk\corpus\reader\bracket_parse.py</span> in <span class="ni">_read_block</span><span class="nt">(self, stream)</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span>         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_blocks</span> <span class="o">==</span> <span class="s2">&quot;unindented_paren&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">67</span>             <span class="c1"># Tokens start with unindented left parens.</span>
-<span class="ne">---&gt; </span><span class="mi">68</span>             <span class="n">toks</span> <span class="o">=</span> <span class="n">read_regexp_block</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">start_re</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;^\(&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">69</span>             <span class="c1"># Strip any comments out of the tokens.</span>
-<span class="g g-Whitespace">     </span><span class="mi">70</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comment_char</span><span class="p">:</span>
-
-<span class="nn">~\miniconda3\lib\site-packages\nltk\corpus\reader\util.py</span> in <span class="ni">read_regexp_block</span><span class="nt">(stream, start_re, end_re)</span>
-<span class="g g-Whitespace">    </span><span class="mi">656</span>     <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">657</span>     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">658</span>         <span class="n">oldpos</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">659</span>         <span class="n">line</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">660</span>         <span class="c1"># End of file:</span>
-
-<span class="nn">~\miniconda3\lib\site-packages\nltk\data.py</span> in <span class="ni">tell</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1290</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1291</span>         <span class="c1"># Store our original file position, so we can return here.</span>
-<span class="ne">-&gt; </span><span class="mi">1292</span>         <span class="n">orig_filepos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1293</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1294</span>         <span class="c1"># Calculate an estimate of where we think the newline is.</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<span class="ne">AttributeError</span>: &#39;IndoEuropean&#39; object has no attribute &#39;num_of_speakers&#39;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Frequency of subject-extracted RCs: </span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sbj_extr_RC</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Frequency of object-extracted RCs: </span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj_extr_RC</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#delete object</span>
+<span class="k">del</span> <span class="n">en</span>
+
+<span class="c1">#to remind you of the try block...</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">en</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The object no longer exists.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Frequency of subject-extracted RCs: 	 49
-Frequency of object-extracted RCs: 	 19
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The object no longer exists.
 </pre></div>
 </div>
 </div>
 </div>
-<p>It often takes <strong>many rounds of trial and error</strong> to ensure that your search pattern <strong>finds all instances</strong> of the structure you are looking for and <strong>excludes all unrelated structures</strong>.</p>
-<p>The function above isn’t perfect. But we can have a look at its matches to identify potential problems:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">obj_extr_RC</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[115, 152, 168, 188, 195, 197, 212, 215, 228, 246, 273, 329, 345, 359, 364, 417, 457, 459, 461]
-</pre></div>
-</div>
-</div>
-</div>
-<p>This instance seems fine:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    ...the USD 2.29 billion value [United Illuminating places _ on its bid]
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">parsed_sents</span><span class="p">()[</span><span class="mi">115</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(S
-  (NP-SBJ-4
-    (NP (NNP New) (NNP England) (NNP Electric))
-    (, ,)
-    (VP
-      (VBN based)
-      (NP (-NONE- *))
-      (PP-LOC-CLR
-        (IN in)
-        (NP (NP (NNP Westborough)) (, ,) (NP (NNP Mass.)))))
-    (, ,))
-  (VP
-    (VBD had)
-    (VP
-      (VBN offered)
-      (NP
-        (NP (QP ($ $) (CD 2) (CD billion)) (-NONE- *U*))
-        (PP (-NONE- *ICH*-1)))
-      (S-PRP
-        (NP-SBJ (-NONE- *-4))
-        (VP
-          (TO to)
-          (VP
-            (VB acquire)
-            (NP
-              (NP (NNP PS))
-              (PP (IN of) (NP (NNP New) (NNP Hampshire)))))))
-      (, ,)
-      (PP-1
-        (ADVP (RB well))
-        (IN below)
-        (NP
-          (NP
-            (NP
-              (DT the)
-              (ADJP (QP ($ $) (CD 2.29) (CD billion)) (-NONE- *U*))
-              (NN value))
-            (SBAR
-              (WHNP-2 (-NONE- 0))
-              (S
-                (NP-SBJ (NNP United) (NNP Illuminating))
-                (VP
-                  (NNS places)
-                  (NP (-NONE- *T*-2))
-                  (PP-DIR (IN on) (NP (PRP$ its) (NN bid)))))))
-          (CC and)
-          (NP
-            (NP
-              (DT the)
-              (QP ($ $) (CD 2.25) (CD billion))
-              (-NONE- *U*))
-            (SBAR
-              (WHNP-3 (-NONE- 0))
-              (S
-                (NP-SBJ (NNP Northeast))
-                (VP
-                  (VBZ says)
-                  (SBAR
-                    (-NONE- 0)
-                    (S
-                      (NP-SBJ (PRP$ its) (NN bid))
-                      (VP
-                        (VBZ is)
-                        (ADJP-PRD (IN worth) (NP (-NONE- *T*-3))))))))))))))
-  (. .))
-</pre></div>
-</div>
-</div>
-</div>
-<p>But below our search pattern for object-extracted relative clauses fails because the RC contains several gaps:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>imports of certain watches [ that __ aren&#39;t produced __ in significant quantities in the US, the Virgin Islands, or other US possessions].  
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">parsed_sents</span><span class="p">()[</span><span class="mi">273</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(S
-  (NP-SBJ (DT The) (NNP White) (NNP House))
-  (VP
-    (VBD said)
-    (SBAR
-      (-NONE- 0)
-      (S
-        (NP-SBJ (NNP President) (NNP Bush))
-        (VP
-          (VBZ has)
-          (VP
-            (VBN approved)
-            (NP
-              (NP (JJ duty-free) (NN treatment))
-              (PP
-                (IN for)
-                (NP
-                  (NP (NNS imports))
-                  (PP
-                    (IN of)
-                    (NP
-                      (NP (JJ certain) (NNS types))
-                      (PP (IN of) (NP (NNS watches)))
-                      (SBAR
-                        (WHNP-35 (WDT that))
-                        (S
-                          (NP-SBJ-1 (-NONE- *T*-35))
-                          (VP
-                            (VBP are)
-                            (RB n&#39;t)
-                            (VP
-                              (VBN produced)
-                              (NP (-NONE- *-1))
-                              (PP-MNR
-                                (IN in)
-                                (`` ``)
-                                (NP
-                                  (JJ significant)
-                                  (NNS quantities))
-                                (&#39;&#39; &#39;&#39;))
-                              (PP-LOC
-                                (IN in)
-                                (NP
-                                  (NP (DT the) (NNP U.S.))
-                                  (, ,)
-                                  (NP
-                                    (DT the)
-                                    (NNP Virgin)
-                                    (NNPS Islands))
-                                  (CC and)
-                                  (NP
-                                    (JJ other)
-                                    (NNP U.S.)
-                                    (NNS possessions))))))))))))))))))
-  (. .))
-</pre></div>
-</div>
-</div>
-</div>
-<p>Further improvements to the search function could be made. But even so, <strong>sometimes a corpus just does not contain all the necessary annotations to uniquely identify a particular pattern</strong>. Manual annotation of (a limited number of) search results is still quite common in corpus-based research.</p>
-</section>
-<section id="further-resources-on-nltk-and-matplotlib">
-<h2>Further resources on NLTK and matplotlib<a class="headerlink" href="#further-resources-on-nltk-and-matplotlib" title="Permalink to this headline">#</a></h2>
-<p><strong>NLTK</strong> comes with great documentation and an online book that walks you through many of its basic use cases:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://www.nltk.org/book/">https://www.nltk.org/book/</a></p></li>
-<li><p>written for beginners; can serve as general introduction to text processing in Python</p></li>
-</ul>
-<p><strong>Matplotlib</strong> has extensive online resouces, from simple visualizations like the ones we saw today to highly sophisticated illustrations.</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://matplotlib.org/stable/tutorials/index">https://matplotlib.org/stable/tutorials/index</a></p></li>
-<li><p>Split into different levels of difficulty</p></li>
-<li><p>These tutorials expect familiarity with Python and aren’t terribly friendly for beginners</p></li>
-</ul>
 </section>
 </section>
 
@@ -1475,8 +979,15 @@ Frequency of object-extracted RCs: 	 19
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022)</p>
+            <p class="prev-next-title">For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023)</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="session09.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Recursion, trees, and search (January 24, 2023)</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

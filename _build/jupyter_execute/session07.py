@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## For efficiency's sake: structured programs, packages, regular expressions  (December 20, 2022) 
+# ## For efficiency's sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023) 
 # 
 # Efficiency is key. Therefore, in this session, you will learn more about advanced aspects of efficient programming. We have already discussed how to improve code efficiency and maintainability in small programs. Sooner or later, however, additional questions may emerge: How should you **distribute code over a main program and importable modules**? Where can time and effort be saved by **relying on already available modules and **packages**? Can **repeating patterns** in the task at hand be detected and exploited for further automization? 
 # 

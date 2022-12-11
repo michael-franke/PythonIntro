@@ -1,430 +1,328 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## Applications (Part I): Processing corpus data using *NLTK*, *numpy*, and *matplotlib* (January 10, 2023)
-# At this point, we are ready to take our learned tools to look at some instances of real-world research applications for programming. In today's session, we will use several Python packages, specifically the Natural Language Toolkit (NLTK), NumPy, and MatPlotLib, to analyze large natural language corpora for the frequency of epistemic modal adverbs, English-German comparisons in word length, and a comparison of relative clause structures in English.
+# ## Classes (January 17, 2023) 
 # 
-# ### Laying the ground work: used packages
 # 
-# #### NLTK
+# In previous sessions, we learned about various different data types (e.g., integers, strings, lists, tuples, dictionaries...) along with their methods (e.g., *str.split()*, *list.sort()*,...), **but what if we could define our own?**
 # 
-# NLTK is yet another instance of a package for natural language processing (https://www.nltk.org/). It is more generalized than *polyglot*, housing a number of resources for dealing with any kind of human language data:
+# With **classes**, you can write user-defined data types. This is a form of what's called **object-oriented programming**. Instead of writing procedures / algorithms to solve a task, we are now writing code to define objects (of course these may subsequently be used in procedural programming tasks). 
 # 
-# - interfaces to many corpora and lexical resources
-# - text processing libraries for classification, tokenization, stemming, tagging, parsing
-# - wrappers for industrial-strength NLP libraries
-# - great documentation
+# ### The basics
 # 
-# ##### Installation and use
+# - **A class specifies** the **format** of instances of that class (in terms of data structure) and what **procedures** are available for them (in terms of user-defined methods). 
+# - Instances of a class are called objects (just like there are integer objects, list objects, etc.)
 # 
-# From the conda powershell, execute this command:
+# **You may think of the definition of a class as the definition of a concept**. As in real life, **concepts/classes are defined by their essential properties, specified in terms of more basis concepts**; 
 # 
-#         conda install nltk
+# - E.g., a *rectangle* may be defined as a quadrilateral with right angles, *angles* may be defined as the figure formed by two rays sharing a common endpoint, *rays* may be defined as [...], and so forth). 
+# - **In Python**, that means that you can **use any of the in-built basic data types to define objects of your own class**, or may even define several classes (e.g., Rectangle and Angle), one of which inherits properties of the other (e.g. Rectangle inheriting properties of the Angle class).
 # 
-# To download packages and corpora included in nltk, open a Python console and execute the following:
-# 
-#         import nltk
-#         nltk.download()
-# 
-# In the window that appears, double click on **book** and **popular** to download a selection of commonly used packages. Or browse the full selection of corpora and packages.
-# 
-# #### NumPy
-# 
-# NumPy is an extremely popular package for scientific computing in Python (https://numpy.org/). 
-# 
-# - provides a multidimensional array object
-# - ...along with derived objects (such as masked arrays and matrices)
-# - provides methods for fast operations on arrays (mathematical, shape manipulation, sorting, selecting, basic linear algebra, basic statistical operations)
-# 
-# ##### Installation and use
-# 
-# The numpy packages comes as a pre-installed library (https://numpy.org/) with Anaconda/miniconda. To use it, just use the import statement:
-# 
-#         import numpy
-# 
-# #### Matplotlib
-# 
-# Matplotlib provides a comprehensive set of tools to visualize data in static, animated, or interactive plots (https://matplotlib.org/stable/index.html). 
-# 
-# ##### Installation and use
-# 
-# From the conda powershell, execute this command:
-# 
-#         conda install matplotlib
-#       
-# Then use the import statement to use itin your python prgramme:
-# 
-#         import matplotlib
+# **Methods of a class can be thought of as definitions of the way in which instances of that concept / class interact with the world**:
+# - E.g., a rectangle can be enlarged or shrunk by adding / removing the same amount of length from its opposing sides, two rectangles may be conjoined if they align on one of their dimensions, etc..
+# - **In Python, methods of a class are specified in terms of functions that take an instance of that class as argument**.
 
-# ### Processing parallel corpus data using NLTK
+# ### Defining a class in Python
 # 
-# NLTK can serve as **interface to a range of corpora** ( = huge natural language data bases, sometimes tagged and annotated for various properties, e.g., POS, dependency relations, text genre, ...). The *nltk.corpus* package provides *readers* that allow you to process diverse types of corpus data (https://www.nltk.org/howto/corpus.html).
-# 
-# Some of the corpora in NLTK include:
-# 
-# |Corpus |	Contents |
-# |---|---|
-# |Brown Corpus 	| 15 genres, 1.15M words, tagged, categorized |
-# |Project Gutenberg (selections)  |	18 literary texts, 2M words |
-# |Movie Reviews 	| 2k movie reviews with sentiment polarity classification |
-# |NPS Chat Corpus |	 	10k IM chat posts, POS-tagged and dialogue-act tagged |
-# |Question Classification 	|	6k questions, categorized |
-# |Shakespeare texts (selections) | 	8 books in XML format |
-# |Univ Decl of Human Rights 	|	480k words, 300+ languages |
-# |Penn Treebank (selections) | 	40k words, tagged and parsed |
-# 
-# 
-# We will look at a sample of the ***Europarl* corpus**, a parallel corpus of speeches in the proceedings of the European Parliament. The full corpus **includes versions in 21 European languages**: Romanic (French, Italian, Spanish, Portuguese, Romanian), Germanic (English, Dutch, German, Danish, Swedish), Slavik (Bulgarian, Czech, Polish, Slovak, Slovene), Finni-Ugric (Finnish, Hungarian, Estonian), Baltic (Latvian, Lithuanian), and Greek. NLTK includes a sample of 10 documents in 11 languages.
+# - Class names start with a capital letter.
+# - Classes usually start with an \_\_init\_\_ constructor (more on this below).
+# - The *self* parameter is automatically set to refer to an object of the data type you are defining. In the code below, it is a variable refering to an instance of *YourClass* and functions like any other variable inside the class definition.
 
 # In[1]:
 
 
-import nltk
+class YourClass:
+    def __init__(self):
+        self.variable1 = 1
+        self.variable2 = 2
+           
+    def method1(self):
+        #some method
+        pass
+           
+    def method2(self):
+        #some other method
+        pass
 
-from nltk.corpus import europarl_raw
 
-#load any of the available language data
-en = europarl_raw.english
-ger = europarl_raw.german
-
-
-# First, we should get an overview of the data we are dealing with. The **Europarl corpus data comes as a set of plaintext documents**. NLTK comes equipped with a **corpus reader method** that allow us to extract the following information: a **list of its words**, its **sentences** (as nested list of its sentences each being a list of words), or its **chapters** (as nested list of chapters each being a list of sentences as a list of words).
+# #### The initialization method
+# 
+# The *\_\_init\_\_(self)* method (also called the *class constructor*) is automatically called whenever you create an instance of the class. In it, you should specify the basic properties of all instances of that class. For instance, in the code above, it initializes all objects of the *YourClass* class as having two properties, *variable1* and *variable2*, which have the values *1* and *2*, respectively. 
 
 # In[2]:
 
 
-#let's find out how many words and sentences they contain. To do so, call the methods :
-print(en.words()) #the method words() returns a list of words
-print(ger.sents()) #the method sents() returns a list of sentences as nested lists
+example = YourClass() #create an instance of the YourClass class  
+print(example) 
 
-#the English version uses more words than the German one
-print(len(en.words())) 
-print(len(ger.words()))
-
-
-# Our goal will be to extract **frequency information** about words in each of these languages. We will first look at epistemic modal adverbs, that is, adverbs indicating the probability of the proposition they are modifying.
-# 
-# English and German have a large inventory of epistemic modal expressions, including adverbs ('possibly'), adjectives ('possible'), verbs ('might', 'must'), and particles (German *wohl*, roughly 'probably'). We can select a few and check how they are distributed within the corpus:  
 
 # In[3]:
 
 
-fdist = nltk.FreqDist(w.lower() for w in en.words())
+print(example.variable1) #after initialization, this object has the properties we specified above
+print(example.variable2)
 
-epistemic_modal_adverbs = ['maybe', 'probably', 'definitely', 'certainly', 'necessarily']
-for m in epistemic_modal_adverbs:
-    print('\n', m + ':', fdist[m], end=' ')
 
-print('\n')
-
-fdist2 = nltk.FreqDist(w.lower() for w in ger.words())
-epistemic_modal_adverbs_ger = ['vielleicht','wahrscheinlich','definitiv','sicherlich','zwangsläufig']
-
-for m in epistemic_modal_adverbs_ger:
-    print('\n', m + ':', fdist2[m], end=' ')
-
+# We may not always want to initialize objects with the same values for *variable1* and *variable2*, though. **To make the initialization method more general, we can add extra parameters in its definition**, as in the following example. The way this works is that it sets *value1* and *value2* to *1* and *2*, respectively, as long as no other values are provided in your call to create an instance of that class.
 
 # In[4]:
 
 
-i = 0
-for w in en.sents():
-    if 'necessarily' in w:
-        print (i,w)
-    i +=1
+class YourClass:
+    def __init__(self, value1 = 1, value2 = 2):
+        self.variable1 = value1
+        self.variable2 = value2
+           
+    def method1(self):
+        #some method
+        pass
+           
+    def method2(self):
+        #some other method
+        pass
 
-print('\n')
-i = 0
-for w in ger.sents():
-    if 'zwangsläufig' in w:
-        print (i,w)
-    i +=1
 
-
-# One **obvious issue with the present corpus** is that the sentences are not perfectly aligned. Nonetheless, we can see that there are a few **matching translations**:
+# We can still create objects like before:
 
 # In[5]:
 
 
-print('\n', en.sents()[998])
-print('\n', ger.sents()[1042])
+example2 = YourClass()
+print(example2.variable1)
 
 
-# **In other cases, translations do not match as well.** In the following case, what is communicated with an epistemic modal adverb in German is communicated with an adjective in English. Note, though, that there appears to be a slight shift in meaning between these sentences:
-# 
-# 1. a. *...resulting in inevitable delays and underspends...*<br>
-# b. *...was zwangsläufig Verzögerungen und Nichtausschöpfung der Mittel zur Folge hat...*<br>
-#     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; which necessarily delays and non-exhaustive-use the<sub>GEN</sub> funds as consequence has
-# 
+# But we can also specify their values for *value1* and / or *value2*:
 
 # In[6]:
 
 
-print('\n', en.sents()[464])
-print('\n', ger.sents()[490])
+example3 = YourClass(2,3)
+print(example3.variable1)
 
-
-# #### Plotting word length information using *matplotlib*
-# 
-# In the following, we will visually compare the length of words in the German and English variants of the corpus. For this we need to:
-# 
-# - extract word length information from the corpora. We create two lists of integers comprising word lengths for each word in the English and German corpora.
-# - use *matplotlib* to find a suitable way to visualize German and English words in comparison
-# - Note that we **gloss over some details** that you would have to take into account in a "serious" research project, e.g., word **frequency** (frequent words tend to be shorter), word **class** (e.g., prepositions tend to be shorter than nouns)
 
 # In[7]:
 
 
-word_len_en = list(map(len, en.words())) #apply function len() to each entry in en.words(); store as list
-word_len_ger = list(map(len, ger.words())) #as above
-
-print(len(word_len_en))
-print(len(word_len_ger))
+example4 = YourClass(value2=3)
+print(example4.variable2)
 
 
-# The English corpus contains more words than the German one. Since we want to be able to plot them on the same x-y-coordinate system, we adjust the length of the German word length list by adding a number of 0's at the end.
+# Note that if you do not provide default values as in *def \_\_init\_\_(self, value1 = 1, value2 = 2)*, you will always have to provide such values upon creating an object of that class.
+
+# ### A simple Language class
+# 
+# The following is **not a complete representation of specific language families**. It only serves for illustration:
 
 # In[8]:
 
 
-b = [0]*(len(word_len_en)-len(word_len_ger))
-word_len_ger_adjusted = word_len_ger+b
+class Language:
+    def __init__(self, name, family="unknown", branch="unknown", num_of_speakers="unknown"):
+        self.name = name
+        self.family = family
+        self.branch = branch
+        self.num_of_speakers = num_of_speakers
+
+    def branch_to_family(self):
+        if self.family == "unknown" and self.branch != "unknown":
+            if self.branch == ("Balto-Slavic" or "Germanic" or "Hellenic" or "Indo-Iranian" or "Romance"):
+                self.family = "Indo-European"
+            elif self.branch == ("Sinitic" or "Tibeto-Burman"):
+                self.family = "Sino-Tibetan"
+            
 
 
 # In[9]:
 
 
-import matplotlib
-import matplotlib.pyplot as plt
-import numpy as np
+de = Language("German", "Indo-European", "Germanic", 100000000)
+lat = Language("Latvian", branch = "Balto-Slavic",num_of_speakers = 2200000)
+
+ra_ha = Language("Ramarih Hatohobei", "Austronesian", "Micronesian")
+
+print(de) #de is now a Language object
 
 
-# Using ***matplotlib***, we now create an empty figure (*fig*) containing a single plot (*ax*) and specify the figure dimensions.
+# #### Calling class methods
 # 
-# We also define a variable x to be an evenly spaced array containing numbers from 0 to the total number of words contained in the (English) corpus.
-# 
-# To **build the plot**, we call the *plot()* method, in which we specify the values for the x- and y-axis of our plot, as well as design features. Crucially, we can **overlay plots** by calling the method again with a different set of arguments.
-# 
-# By naming the overlayed plots (here, the scond one is called *l*), we can modify their attributes later, e.g., to change axis labels or style properties.
+# We can call on a class method just as we called methods for other data types before:
 
 # In[10]:
 
 
-fig, ax = plt.subplots(figsize=(15, 7))
-x = np.arange(len(en.words()))
-
-ax.plot(x, word_len_en, color='blue', linewidth=1, linestyle='--',alpha=0.7,label='English') #value on alpha channel adds transparency
-l, = ax.plot(x, word_len_ger_adjusted, color='orange', linewidth=1,alpha=0.4, label = 'German')
-
-#labeling and design
-l.set_linestyle(':');
-ax.set_xlabel('Word number')
-ax.set_ylabel('Word length in characters')
-ax.set_title('Length of words in the German-English version of the Europarl corpus')
-ax.legend();
+lat.branch_to_family()
+print(lat.family) #family information has now been added
 
 
-# Alternatively, we may also create a **figure containing several subplots** arranged on a grid.
-# 
-# In the following, we specify that the figure should have subplots arranged in 1 row and 2 columns. We can **build these subplots** by calling the plot method (here, we use *scatter()* for a scatterplot) directly on the relevant subplot, indicated as index on the *axs* variable.
-# 
-# To ensure that the **y-axis is equally spaced** for both subplots, we set the y-axis ticks manually using *set_yticks* (analogously, you can use *set_xticks*)
+# #### Using class objects as arguments or parameters
+# We can use instances of our class as arguments or parameters in functions. For instance, we could write a function that outputs all information about a particular language:
 
 # In[11]:
 
 
-fig, axs = plt.subplots(1,2,figsize=(15, 7))
-
-axs[0].scatter(x, word_len_en, color='blue',s=1, alpha=0.2, label = 'English')
-axs[1].scatter(np.arange(len(ger.words())), word_len_ger, color='red',s = 1, alpha = 0.2, label = 'German')
-axs[0].set_yticks([0, 10, 20, 30, 40]);
-axs[1].set_yticks([0, 10, 20, 30, 40]);
-
-axs[0].set_xlabel('Word number');
-axs[0].set_ylabel('Word length in characters');
-axs[1].set_xlabel('Word number');
-axs[1].set_ylabel('Word length in characters');
-axs[0].set_title('English');
-axs[1].set_title('German');
+def print_language_info(lang):
+    print(lang.name, "is an instance of a", lang.branch, "language in the", lang.family, "language family. It has", lang.num_of_speakers, "native speakers")
+    
+print_language_info(de)
 
 
-# This visualization still isn't quite satisfactory. It tells us that German words tend to be longer than English ones, but the plot design makes it difficult to extract information about the **frequency of long vs. short words**.
+# **Importantly, for general-purpose functions like this, it is preferred to add them as new methods of the class, rather than as functions operating outside of the class**. One of the reasons for that is that your code stays more portable and comprehensible if all important functions / methods are contained within the class definition. 
 # 
-# In the following, we therefore display sorted lists of the English/German word lengths on the y-axis.
+# So let's add a print method to our class. **Crucially, if we call it *\_\_str\_\_(self)*, it will function as the default output of the *print()* function called on objects of that class!**
 
 # In[12]:
 
 
-fig, axs = plt.subplots(1,2,figsize=(15, 7))
-x = np.arange(len(en.words()))
+class Language:
+    def __init__(self, name, family="unknown", branch="unknown", num_of_speakers="unknown"):
+        self.name = name
+        self.family = family
+        self.branch = branch
+        self.num_of_speakers = num_of_speakers
 
-axs[0].scatter(x, sorted(word_len_en), color='blue',s=1, alpha=0.2, label = 'English')
-axs[1].scatter(np.arange(len(ger.words())), sorted(word_len_ger), color='red',s = 1, alpha = 0.2, label = 'German')
-axs[0].set_yticks([0, 10, 20, 30, 40]);
-axs[1].set_yticks([0, 10, 20, 30, 40]);
+    def branch_to_family(self):
+        if self.family == "unknown" and self.branch != "unknown":
+            if self.branch == ("Balto-Slavic" or "Germanic" or "Hellenic" or "Indo-Iranian" or "Romance"):
+                self.family = "Indo-European"
+            elif self.branch == ("Sinitic" or "Tibeto-Burman"):
+                self.family = "Sino-Tibetan"
+    
+    def __str__(self):
+        return ("{0} is an instance of a {1} language in the {2} language family. It has {3} native speakers.".format(self.name, self.branch, self.family, self.num_of_speakers))
+    
 
-axs[0].set_xlabel('Word number');
-axs[0].set_ylabel('Word length in characters');
-axs[1].set_xlabel('Word number');
-axs[1].set_ylabel('Word length in characters');
-axs[0].set_title('English');
-axs[1].set_title('German');
-
-
-# ### Parsing treebanks using NLTK
-# 
-# Treebank corpora provide a syntactic parse for each sentence. We will look at a sample of the **Penn Treebank** (the full corpus is behind a paywall).
-# 
-# It comes as a series of *.mrg* files, which can be read with the help of our friendly corpus reader methods.
 
 # In[13]:
 
 
-from nltk.corpus import treebank
+#create the objects again with the new Class definition:
+de = Language("German", "Indo-European", "Germanic", 100000000)
+lat = Language("Latvian", branch = "Balto-Slavic",num_of_speakers = 2200000)
 
-print(treebank.fileids())
+ra_ha = Language("Ramarih Hatohobei", "Austronesian", "Micronesian")
 
+print(de)
+
+
+# #### Using several instances of a class
+# 
+# We can also **define methods that operate on several instances of the class we are in**. For example, we could specify a class method that checks whether two languages are part of the same language family. This method takes *self* and a comparison language as arguments.
+# 
+# Note also that **we can call other class methods from within a class method** (here, we call *branch_to_family*), just like we saw nested function calls in previous sessions.
 
 # In[14]:
 
 
-print(treebank.words('wsj_0004.mrg'))
+class Language:
+    def __init__(self, name, family="unknown", branch="unknown", num_of_speakers="unknown"):
+        self.name = name
+        self.family = family
+        self.branch = branch
+        self.num_of_speakers = num_of_speakers
+
+    def branch_to_family(self):
+        if self.family == "unknown" and self.branch != "unknown":
+            if self.branch == ("Balto-Slavic" or "Germanic" or "Hellenic" or "Indo-Iranian" or "Romance"):
+                self.family = "Indo-European"
+            elif self.branch == ("Sinitic" or "Tibeto-Burman"):
+                self.family = "Sino-Tibetan"
+    
+    def family_check(self, comparison):
+        if self.family == "unknown":
+            self.branch_to_family()
+        if comparison.family == "unknown":
+            comparison.branch_to_family()
+        if self.family == "unknown" or comparison.family == "unknown":
+            print("At least one of the languages does not have a known language family.")
+        elif self.family == comparison.family:
+            print("Same language family.")
+        else:
+            print("Not the same language family.")
+    
+    def __str__(self):
+        return ("{0} is an instance of a {1} language in the {2} language family. It has {3} native speakers.".format(self.name, self.branch, self.family, self.num_of_speakers))
+    
 
 
 # In[15]:
 
 
-print(treebank.tagged_words('wsj_0004.mrg'))
+#create the objects again with the new Class definition:
+de = Language("German", "Indo-European", "Germanic", 100000000)
+lat = Language("Latvian", branch = "Balto-Slavic",num_of_speakers = 2200000)
 
+ra_ha = Language("Ramarih Hatohobei", "Austronesian", "Micronesian")
+
+de.family_check(lat)
+ra_ha.family_check(de)
+
+
+# ### Class inheritance
+# We can declare classes as subtypes of another class. For instance, below, we define a class IndoEuropean as a subtype of the Language class.
+# 
+# All functionalities of the superclass (class variables, methods) are inherited by the subclass, but can be overridden by redefinition or reassignment.
 
 # In[16]:
 
 
-print(treebank.parsed_sents('wsj_0005.mrg')[0])
+class IndoEuropean(Language):
+    pass
+
+en = IndoEuropean("English")
+print(en.family)
 
 
-# Parsed sentences are **tree objects** and can be displayed as such using the *svgling* package:
+# Below, we redefine the initialization method for the *IndoEuropean* class. Note that all other methods from the *Language* class will still be available in the *IndoEuropean* subclass.
 
 # In[17]:
 
 
-import svgling
-t = treebank.parsed_sents('wsj_0005.mrg')[1]
-t
+class IndoEuropean(Language):
+    def __init__(self, name, branch="unknown", num_of_speakers="unknown"):
+        self.name = name
+        self.family = "Indo-European"
+        self.branch = branch
+        self.num_of_speakers = num_of_speakers
+        
+en = IndoEuropean("English")
+print(en.family)
 
+
+# ### Objects are mutable
+# 
+# You know *mutability* from list objects. It means that we can we can directly add, remove, or change the values of the object without creating a new object. Specifically, we can change any of the object's values, delete properties of the object, or delete the object altogether:
 
 # In[18]:
 
 
-t.leaves()
+#change value of num_of_speakers
+en.num_of_speakers = 370000000
+print(en.num_of_speakers)
 
-
-# **Tagged and parsed corpora provide a great tool** if you are interested not just in a word's frequency or lexical category, but its **grammatical role within a sentence**, or if you are interested in exploring the possible structures of the target language, more generally.
-# 
-# Let's illustrate by writing a (hacky) function aimed to **distinguish object- from subject-extracted relative clauses**. 
-# 
-# 2) a.  The journalist who the editor recommended __ for the assignment never took the job. (object-extracted)<br>
-#     &nbsp;&nbsp;&nbsp; b. The journalist who __ recommended the editor for the assignment never took the job. (subject-extracted)
-#     
-# We need to **think, first, of what the search pattern should look like**. Let's check out an instance in the corpus to help us out with this:
 
 # In[19]:
 
 
-print(treebank.parsed_sents()[4])
+#delete num_of_speakers property
+del en.num_of_speakers
+print(en.num_of_speakers) #results in error
 
 
-# A few things are worth noting:
-# 
-# - NP subjects are tagged as "*NP-SBJ*" but NP objects are simple tagged "*NP*"
-# - Relative clauses are noun complements. As such, they appear as subtree of their host-NP.
-# - The highest node of a relative clause is S\' ("*SBAR*")
-# 
-# Let's **write a function that exploits this pattern**:
-
-# In[20]:
+# In[194]:
 
 
-#define function that searches for object- and subject-extracted RCs:
+#delete object
+del en
 
-def rc_type(tree):
-    for st in tree.subtrees():
-        if st.label() == "NP":
-            for stst in st.subtrees():
-                if stst.label() == "SBAR":
-                    for ststst in stst.subtrees():
-                        if ststst.label() == "NP-SBJ":
-                            if ststst[0].label() == "-NONE-":                
-                                return "RC_SBJ"
-                        elif ststst.label() == "NP":
-                            if ststst[0].label() == "-NONE-":
-                                return "RC_OBJ"
- 
+#to remind you of the try block...
+try:
+    print(en)
+except NameError:
+    print("The object no longer exists.")
 
 
-# In[21]:
+# In[ ]:
 
 
-sbj_extr_RC = [];
-obj_extr_RC = [];
-
-#just doing this on the first 500 sentences as it takes quite some time to run on the full corpus
-for i in range(500):
-    if rc_type(treebank.parsed_sents()[i]) == "RC_SBJ":
-        sbj_extr_RC.append(i)
-    elif rc_type(treebank.parsed_sents()[i]) == "RC_OBJ":
-        obj_extr_RC.append(i)
-
- 
 
 
-# In[22]:
-
-
-print("Frequency of subject-extracted RCs: \t", len(sbj_extr_RC))
-print("Frequency of object-extracted RCs: \t", len(obj_extr_RC))
-
-
-# It often takes **many rounds of trial and error** to ensure that your search pattern **finds all instances** of the structure you are looking for and **excludes all unrelated structures**. 
-# 
-# The function above isn't perfect. But we can have a look at its matches to identify potential problems:
-
-# In[23]:
-
-
-print(obj_extr_RC)
-
-
-# This instance seems fine:
-# 
-#         ...the USD 2.29 billion value [United Illuminating places _ on its bid]
-#         
-
-# In[24]:
-
-
-print(treebank.parsed_sents()[115])
-
-
-# But below our search pattern for object-extracted relative clauses fails because the RC contains several gaps:
-# 
-#     imports of certain watches [ that __ aren't produced __ in significant quantities in the US, the Virgin Islands, or other US possessions].  
-
-# In[25]:
-
-
-print(treebank.parsed_sents()[273])
-
-
-# Further improvements to the search function could be made. But even so, **sometimes a corpus just does not contain all the necessary annotations to uniquely identify a particular pattern**. Manual annotation of (a limited number of) search results is still quite common in corpus-based research.
-
-# ### Further resources on NLTK and matplotlib
-# 
-# **NLTK** comes with great documentation and an online book that walks you through many of its basic use cases:
-# - https://www.nltk.org/book/
-# - written for beginners; can serve as general introduction to text processing in Python
-# 
-# **Matplotlib** has extensive online resouces, from simple visualizations like the ones we saw today to highly sophisticated illustrations.
-# - https://matplotlib.org/stable/tutorials/index
-# - Split into different levels of difficulty
-# - These tutorials expect familiarity with Python and aren't terribly friendly for beginners

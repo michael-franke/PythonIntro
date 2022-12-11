@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## Classes and inheritance
+# ## Recursion, trees, and search (January 24, 2023)
 # 
-# ## Next session: Recursive programming + search
-# 
-# ## Next session: Applications (Part II): Processing experimental data using *pandas* and ...
+# under construction...
