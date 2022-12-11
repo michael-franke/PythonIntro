@@ -1,0 +1,641 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Bonus session: Well-organized, readable code - “The Tower of Hanoi” &#8212; Scientific programming in Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Scientific programming in Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Scientific Programming in Python
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="session01.html">
+   Introduction (October 18 and 25, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session02.html">
+   Data types and statements (October 25 and November 08, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session03.html">
+   Functions and conditional execution (November 15 and 22, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session04.html">
+   Advanced data types: lists, tuples, sets, dictionaries (November 22 and 29, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session05.html">
+   Modules, file I/O (input/output) (December 06, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session06.html">
+   Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session07.html">
+   For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session08.html">
+   Classes (January 17, 2023)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session09.html">
+   Recursion and trees (January 24, 2023)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session10.html">
+   Applications (Part I): Processing corpus data using
+   <em>
+    NLTK
+   </em>
+   ,
+   <em>
+    numpy
+   </em>
+   , and
+   <em>
+    matplotlib
+   </em>
+   (January 31, 2023)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session11.html">
+   Applications (Part II): Programming in experimental research (February 07, 2023)
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/julianeschwab/ScientificProgramming/master?urlpath=tree/docs/bonus_session.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/julianeschwab/ScientificProgramming"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/julianeschwab/ScientificProgramming/issues/new?title=Issue%20on%20page%20%2Fbonus_session.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/bonus_session.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Bonus session: Well-organized, readable code - “The Tower of Hanoi”</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="bonus-session-well-organized-readable-code-the-tower-of-hanoi">
+<h1>Bonus session: Well-organized, readable code - “The Tower of Hanoi”<a class="headerlink" href="#bonus-session-well-organized-readable-code-the-tower-of-hanoi" title="Permalink to this headline">#</a></h1>
+<p>In this little bonus session, we will look at code written by Al Sweigart for his advanced book on Python programming “Beyond the basic stuff with Python” (<a class="reference external" href="https://inventwithpython.com/beyond/">https://inventwithpython.com/beyond/</a>).</p>
+<p>It will demonstrate the use of functions and data types introduced within this course and serves as an <strong>illustration of code that follows best practices with regard to code maintainability and efficiency</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;THE TOWER OF HANOI, by Al Sweigart al@inventwithpython.com</span>
+<span class="sd">A stack-moving puzzle game.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">copy</span>
+
+<span class="n">TOTAL_DISKS</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># More disks means a more difficult puzzle.</span>
+
+<span class="c1"># Start with all disks on tower A:</span>
+<span class="n">SOLVED_TOWER</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">TOTAL_DISKS</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># evaluates to: [5,4,3,2,1] with TOTAL_DISKS = 5</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Runs a single game of The Tower of Hanoi.&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sd">&quot;&quot;&quot;THE TOWER OF HANOI, by Al Sweigart al@inventwithpython.com</span>
+
+<span class="sd">Move the tower of disks, one disk at a time, to another tower. Larger</span>
+<span class="sd">disks cannot rest on top of a smaller disk.</span>
+
+<span class="sd">More info at https://en.wikipedia.org/wiki/Tower_of_Hanoi</span>
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span>
+
+    <span class="sd">&quot;&quot;&quot;The towers dictionary has keys &quot;A&quot;, &quot;B&quot;, and &quot;C&quot; and values</span>
+<span class="sd">    that are lists representing a tower of disks. The list contains</span>
+<span class="sd">    integers representing disks of different sizes, and the start of</span>
+<span class="sd">    the list is the bottom of the tower. For a game with 5 disks,</span>
+<span class="sd">    the list [5, 4, 3, 2, 1] represents a completed tower. The blank</span>
+<span class="sd">    list [] represents a tower of no disks. The list [1, 3] has a</span>
+<span class="sd">    larger disk on top of a smaller disk and is an invalid</span>
+<span class="sd">    configuration. The list [3, 1] is allowed since smaller disks</span>
+<span class="sd">    can go on top of larger ones.&quot;&quot;&quot;</span>
+    <span class="n">towers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">SOLVED_TOWER</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>  <span class="c1"># Run a single turn on each iteration of this loop.</span>
+        <span class="c1"># Display the towers and disks:</span>
+        <span class="n">displayTowers</span><span class="p">(</span><span class="n">towers</span><span class="p">)</span>
+
+        <span class="c1"># Ask the user for a move:</span>
+        <span class="n">fromTower</span><span class="p">,</span> <span class="n">toTower</span> <span class="o">=</span> <span class="n">getPlayerMove</span><span class="p">(</span><span class="n">towers</span><span class="p">)</span>
+
+        <span class="c1"># Move the top disk from fromTower to toTower:</span>
+        <span class="n">disk</span> <span class="o">=</span> <span class="n">towers</span><span class="p">[</span><span class="n">fromTower</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="n">towers</span><span class="p">[</span><span class="n">toTower</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">disk</span><span class="p">)</span>
+
+        <span class="c1"># Check if the user has solved the puzzle:</span>
+        <span class="k">if</span> <span class="n">SOLVED_TOWER</span> <span class="ow">in</span> <span class="p">(</span><span class="n">towers</span><span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">],</span> <span class="n">towers</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">]):</span>
+            <span class="n">displayTowers</span><span class="p">(</span><span class="n">towers</span><span class="p">)</span>  <span class="c1"># Display the towers one last time.</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have solved the puzzle! Well done!&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">getPlayerMove</span><span class="p">(</span><span class="n">towers</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Asks the player for a move. Returns (fromTower, toTower).&quot;&quot;&quot;</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>  <span class="c1"># Keep asking player until they enter a valid move.</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enter the letters of &quot;from&quot; and &quot;to&quot; towers, or QUIT.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(e.g., AB to move a disk from tower A to tower B.)&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="s2">&quot;QUIT&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thanks for playing!&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+        <span class="c1"># Make sure the user entered valid tower letters:</span>
+        <span class="k">if</span> <span class="n">response</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;AB&quot;</span><span class="p">,</span> <span class="s2">&quot;AC&quot;</span><span class="p">,</span> <span class="s2">&quot;BA&quot;</span><span class="p">,</span> <span class="s2">&quot;BC&quot;</span><span class="p">,</span> <span class="s2">&quot;CA&quot;</span><span class="p">,</span> <span class="s2">&quot;CB&quot;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter one of AB, AC, BA, BC, CA, or CB.&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>  <span class="c1"># Ask player again for their move.</span>
+
+        <span class="c1"># Use more descriptive variable names:</span>
+        <span class="n">fromTower</span><span class="p">,</span> <span class="n">toTower</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">towers</span><span class="p">[</span><span class="n">fromTower</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># The &quot;from&quot; tower cannot be an empty tower:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You selected a tower with no disks.&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>  <span class="c1"># Ask player again for their move.</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">towers</span><span class="p">[</span><span class="n">toTower</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Any disk can be moved onto an empty &quot;to&quot; tower:</span>
+            <span class="k">return</span> <span class="n">fromTower</span><span class="p">,</span> <span class="n">toTower</span>
+        <span class="k">elif</span> <span class="n">towers</span><span class="p">[</span><span class="n">toTower</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">towers</span><span class="p">[</span><span class="n">fromTower</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Can&#39;t put larger disks on top of smaller ones.&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>  <span class="c1"># Ask player again for their move.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># This is a valid move, so return the selected towers:</span>
+            <span class="k">return</span> <span class="n">fromTower</span><span class="p">,</span> <span class="n">toTower</span>
+
+
+<span class="k">def</span> <span class="nf">displayTowers</span><span class="p">(</span><span class="n">towers</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Display the three towers with their disks.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Display the three towers:</span>
+    <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">TOTAL_DISKS</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">tower</span> <span class="ow">in</span> <span class="p">(</span><span class="n">towers</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">],</span> <span class="n">towers</span><span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">],</span> <span class="n">towers</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">level</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tower</span><span class="p">):</span>
+                <span class="n">displayDisk</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Display the bare pole with no disk.</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">displayDisk</span><span class="p">(</span><span class="n">tower</span><span class="p">[</span><span class="n">level</span><span class="p">])</span>  <span class="c1"># Display the disk.</span>
+        <span class="nb">print</span><span class="p">()</span>
+
+    <span class="c1"># Display the tower labels A, B, and C:</span>
+    <span class="n">emptySpace</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="p">(</span><span class="n">TOTAL_DISKS</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> A</span><span class="si">{0}{0}</span><span class="s2"> B</span><span class="si">{0}{0}</span><span class="s2"> C</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">emptySpace</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">displayDisk</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Display a disk of the given width. A width of 0 means no disk.&quot;&quot;&quot;</span>
+    <span class="n">emptySpace</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="p">(</span><span class="n">TOTAL_DISKS</span> <span class="o">-</span> <span class="n">width</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">width</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Display a pole segment without a disk:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">emptySpace</span><span class="si">}</span><span class="s2">||</span><span class="si">{</span><span class="n">emptySpace</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Display the disk:</span>
+        <span class="n">disk</span> <span class="o">=</span> <span class="s2">&quot;@&quot;</span> <span class="o">*</span> <span class="n">width</span>
+        <span class="n">numLabel</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">width</span><span class="p">)</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">emptySpace</span><span class="si">}{</span><span class="n">disk</span><span class="si">}{</span><span class="n">numLabel</span><span class="si">}{</span><span class="n">disk</span><span class="si">}{</span><span class="n">emptySpace</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># If this program was run (instead of imported), run the game:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>THE TOWER OF HANOI, by Al Sweigart al@inventwithpython.com
+
+Move the tower of disks, one disk at a time, to another tower. Larger
+disks cannot rest on top of a smaller disk.
+
+More info at https://en.wikipedia.org/wiki/Tower_of_Hanoi
+
+     ||          ||          ||     
+    @_1@         ||          ||     
+   @@_2@@        ||          ||     
+  @@@_3@@@       ||          ||     
+ @@@@_4@@@@      ||          ||     
+@@@@@_5@@@@@     ||          ||     
+      A           B           C
+
+Enter the letters of &quot;from&quot; and &quot;to&quot; towers, or QUIT.
+(e.g., AB to move a disk from tower A to tower B.)
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_2560</span>\<span class="mf">2194971151.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">    </span><span class="mi">120</span> <span class="c1"># If this program was run (instead of imported), run the game:</span>
+<span class="g g-Whitespace">    </span><span class="mi">121</span> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">122</span>     <span class="n">main</span><span class="p">()</span>
+
+<span class="nn">~\AppData\Local\Temp\ipykernel_2560\2194971151.py</span> in <span class="ni">main</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> 
+<span class="g g-Whitespace">     </span><span class="mi">39</span>         <span class="c1"># Ask the user for a move:</span>
+<span class="ne">---&gt; </span><span class="mi">40</span>         <span class="n">fromTower</span><span class="p">,</span> <span class="n">toTower</span> <span class="o">=</span> <span class="n">getPlayerMove</span><span class="p">(</span><span class="n">towers</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span> 
+<span class="g g-Whitespace">     </span><span class="mi">42</span>         <span class="c1"># Move the top disk from fromTower to toTower:</span>
+
+<span class="nn">~\AppData\Local\Temp\ipykernel_2560\2194971151.py</span> in <span class="ni">getPlayerMove</span><span class="nt">(towers)</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span>         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(e.g., AB to move a disk from tower A to tower B.)&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span>         <span class="nb">print</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">60</span>         <span class="n">response</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span> 
+<span class="g g-Whitespace">     </span><span class="mi">62</span>         <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="s2">&quot;QUIT&quot;</span><span class="p">:</span>
+
+<span class="nn">~\miniconda3\lib\site-packages\ipykernel\kernelbase.py</span> in <span class="ni">raw_input</span><span class="nt">(self, prompt)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1172</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1173</span><span class="s2">         if not self._allow_stdin:</span>
+<span class="ne">-&gt; </span><span class="mi">1174</span><span class="s2">             raise StdinNotImplementedError(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1175</span><span class="s2">                 &quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1176</span><span class="s2">             )</span>
+
+<span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "julianeschwab/ScientificProgramming",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Juliane Schwab<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

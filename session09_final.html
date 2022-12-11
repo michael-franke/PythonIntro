@@ -1,0 +1,798 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Recursion and trees (January 24, 2023) &#8212; Scientific programming in Python</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Scientific programming in Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Scientific Programming in Python
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="session01.html">
+   Introduction (October 18 and 25, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session02.html">
+   Data types and statements (October 25 and November 08, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session03.html">
+   Functions and conditional execution (November 15 and 22, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session04.html">
+   Advanced data types: lists, tuples, sets, dictionaries (November 22 and 29, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session05.html">
+   Modules, file I/O (input/output) (December 06, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session06.html">
+   Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session07.html">
+   For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session08.html">
+   Classes (January 17, 2023)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session09.html">
+   Recursion and trees (January 24, 2023)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session10.html">
+   Applications (Part I): Processing corpus data using
+   <em>
+    NLTK
+   </em>
+   ,
+   <em>
+    numpy
+   </em>
+   , and
+   <em>
+    matplotlib
+   </em>
+   (January 31, 2023)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session11.html">
+   Applications (Part II): Programming in experimental research (February 07, 2023)
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/julianeschwab/ScientificProgramming/master?urlpath=tree/docs/session09_final.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/julianeschwab/ScientificProgramming"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/julianeschwab/ScientificProgramming/issues/new?title=Issue%20on%20page%20%2Fsession09_final.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/session09_final.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recursion-in-logic-and-mathematics">
+   Recursion in logic and mathematics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recursion-vs-iteration-in-programming">
+   Recursion vs. iteration in programming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#in-class-exercise-fibonacci-numbers">
+   In-class exercise: Fibonacci numbers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-recursion-with-the-turtle-module">
+   Visualizing recursion with the
+   <em>
+    Turtle
+   </em>
+   module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#trees-tree-traversal">
+   Trees + tree traversal
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementing-a-tree-structure">
+     Implementing a tree structure
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Recursion and trees (January 24, 2023)</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recursion-in-logic-and-mathematics">
+   Recursion in logic and mathematics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recursion-vs-iteration-in-programming">
+   Recursion vs. iteration in programming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#in-class-exercise-fibonacci-numbers">
+   In-class exercise: Fibonacci numbers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-recursion-with-the-turtle-module">
+   Visualizing recursion with the
+   <em>
+    Turtle
+   </em>
+   module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#trees-tree-traversal">
+   Trees + tree traversal
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementing-a-tree-structure">
+     Implementing a tree structure
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="recursion-and-trees-january-24-2023">
+<h1>Recursion and trees (January 24, 2023)<a class="headerlink" href="#recursion-and-trees-january-24-2023" title="Permalink to this headline">#</a></h1>
+<p>It is time to turn everything on its head and introduce recursion into the game. <strong>Recursion</strong> occurs when we <strong>define something in terms of itself or something else of its type</strong>. For instance, we may define a file directory as a location on the computer that contains files <em>and (possibly) other directories</em>.</p>
+<p>Recursion is <strong>useful for problems that can be represented as a series of subproblems of the same type</strong>. To stay with the previous example, the problem of searching for a file, for instance, can be formulated recursively as follows (in pseudocode):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    def search(directory):
+        if file in directory:
+            return(directory)
+        for subdirectory in directory:
+                if search(subdirectory) != None:
+                    return search(subdirectory)
+        return None
+</pre></div>
+</div>
+<p>Note that we are <strong>calling the function <em>search()</em></strong> within the body of the <em>search()</em> function, and are <strong>doing so on a smaller problem space</strong> (i.e., a subdirectory of our main directory).</p>
+<p>Successful recursion, that is, recursion that terminates at some point, requires that we define both a <strong>base case</strong> and a <strong>recursive case</strong>. In the example above, the base case is such that either (a) we find the <em>file</em> in the current directory or (b) there is no further subdirectory to search and the file does not exist. The recursive case is entered with a <em>for</em>-loop over all subdirectories, which calls on the search function again and returns the subdirectory in which the file is located.</p>
+<p><strong>Thus, keep the following in mind when defining recursive functions:</strong></p>
+<ul class="simple">
+<li><p>if the function calls itself on every input, we get infinite recursion</p></li>
+<li><p>in all useful recursive functions, each nested call differs in its arguments (e.g. execution on subproblems)</p></li>
+<li><p>for recursive functions to terminate, we need base cases!</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#another example by the same principle as the file search algorithm in pseudocode above</span>
+<span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">example</span><span class="p">):</span>
+    <span class="n">list_of_lists</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">example</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="nb">list</span><span class="p">]</span>
+    <span class="k">if</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">example</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">example</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">list_of_lists</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">search</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">search</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
+        
+<span class="nb">print</span><span class="p">(</span><span class="n">search</span><span class="p">([</span><span class="mi">2</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span><span class="mi">4</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 5]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="recursion-in-logic-and-mathematics">
+<h2>Recursion in logic and mathematics<a class="headerlink" href="#recursion-in-logic-and-mathematics" title="Permalink to this headline">#</a></h2>
+<p>Recursive definitions are very common in logic and mathematics. <strong>In particular, all inductive proofs are recursive</strong>:</p>
+<p>In induction, you prove that a theorem holds e.g. for <em>n = 0</em> (the base case), and that, under the assumption that the statement holds for any given case <em>n = k</em>, it also hold for the next case <em>n = k + 1</em> (recursive case). This proves that the theorem must hold for any natural number.</p>
+<p><strong>Many definitions in logic are recursive. We have already seen an example within this class</strong>. In a previous ression, <strong>regular languages</strong> were characterized as follows:</p>
+<p><strong>Given a finite alphabet Σ</strong> (e.g., a collection of characters),…</p>
+<ul class="simple">
+<li><p>the empty language Ø is a regular language. <strong>(base case)</strong></p></li>
+<li><p>for each a ∈ Σ, the singleton language {a} is a regular language. <strong>(base case)</strong></p></li>
+<li><p>If A is a regular language, A* (Kleene star, more below) is a regular language. That means the empty string language {ε} is also regular. <strong>(recursive case)</strong></p></li>
+<li><p>If A and B are regular languages, then A ∪ B (union)** and A • B (concatenation) are regular languages. <strong>(recursive case)</strong></p></li>
+<li><p>No other languages over Σ are regular.</p></li>
+</ul>
+</section>
+<section id="recursion-vs-iteration-in-programming">
+<h2>Recursion vs. iteration in programming<a class="headerlink" href="#recursion-vs-iteration-in-programming" title="Permalink to this headline">#</a></h2>
+<p>In principle, <strong>recursion and iteration are equally powerful (meaning that one can be used to emulate the other)</strong>. Some algorithms are <strong>easier to write</strong> iteratively, others are easier using recursion. In addition, recursive and iterative solutions to a problem can <strong>differ in efficiency</strong> (in terms of memory usage and completion time).</p>
+<p><strong>Iteration –&gt; Recursion</strong>: Note that all loops can be implemented using recursion! In the following, we replace a <em>for</em>-loop with a recursive function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span><span class="mi">4</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+
+<span class="c1">#iterative solution to print each element in list</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">example2</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+[2, 3, [1, 5], 4]
+[4, 2]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#recursive solution to print each element in list</span>
+<span class="k">def</span> <span class="nf">recursive_print</span><span class="p">(</span><span class="n">example2</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">example2</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">example2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">recursive_print</span><span class="p">(</span><span class="n">example2</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">recursive_print</span><span class="p">(</span><span class="n">example2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+[2, 3, [1, 5], 4]
+[4, 2]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Recursion –&gt; Iteration</strong>: At the same time, every recursive function can be implemented using iteration! Our search function from above could be rewritten as follows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#another example by the same principle as the file search algorithm in pseudocode above</span>
+<span class="n">example3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span><span class="mi">4</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">example3</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">example3</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">j</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 5]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Recursive definitions are often easier to write for processing data structures which contain substructures of varying size (i.e. data that is not tabular in shape).</p>
+<p><strong>Examples</strong>:</p>
+<ul class="simple">
+<li><p>processing syntax trees for programming languages (in a compiler) and natural languages (in a parser)</p></li>
+<li><p>processing more general graph structures like networks</p></li>
+<li><p>sorting and searching in structures that are more complex than lists or dictionaries (e.g. 3-D models)</p></li>
+</ul>
+</section>
+<section id="in-class-exercise-fibonacci-numbers">
+<h2>In-class exercise: Fibonacci numbers<a class="headerlink" href="#in-class-exercise-fibonacci-numbers" title="Permalink to this headline">#</a></h2>
+<p>The following is the Fibonacci sequence, a sequence of numbers starting at <em>F<sub>0</sub> = 0</em> and <em>F<sub>1</sub> = 1</em>, in which each number is the sum of the previous two numbers.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...
+</pre></div>
+</div>
+<p>To determine the <em>n</em>-th Fibonacci number in the sequence, we can write a simple recursive program:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#in-class exercise</span>
+<span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">fib</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-recursion-with-the-turtle-module">
+<h2>Visualizing recursion with the <em>Turtle</em> module<a class="headerlink" href="#visualizing-recursion-with-the-turtle-module" title="Permalink to this headline">#</a></h2>
+<p>A useful <strong>tool to train your recursive thinking is to use a graphical interface</strong> on which you can draw recursive structures. Just googling for <em>recursive fractals</em> should give you some inspiration.</p>
+<p>In the following, we will <strong>draw a tree structure in which every branch splits up into two smaller branches (recursion) unless it has leaves at its end (base case)</strong>. We use the <em>Turtle</em> module (<a class="reference external" href="https://docs.python.org/3/library/turtle.html">https://docs.python.org/3/library/turtle.html</a>) to draw this figure, a module that provides a basic graphical interface in which we control the movements of a “turtle” (the cursor). The module has methods like <em>left(angle)</em>, <em>right(angle)</em>, <em>forward(length)</em>, <em>backward(length)</em> determining the movement of the turtle, and methods like <em>color(color_string)</em> or <em>pensize(int)</em> determining its visual properties.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">turtle</span> <span class="c1">#import turtle module, a graphical interface to draw shapes; opens in separate window</span>
+
+<span class="n">turtle</span><span class="o">.</span><span class="n">speed</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="c1">#set speed of animation</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">setheading</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span> <span class="c1">#set initial orientation of the turtle as looking straight up</span>
+
+<span class="k">def</span> <span class="nf">draw_branch</span><span class="p">(</span><span class="nb">len</span><span class="p">):</span> <span class="c1">#recursive function to draw a tree</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="s2">&quot;brown&quot;</span><span class="p">)</span> <span class="c1">#draw branches in brown</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+        <span class="n">draw_branch</span><span class="p">(</span><span class="nb">len</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span> <span class="c1">#recursive function call</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+        <span class="n">draw_branch</span><span class="p">(</span><span class="nb">len</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span> <span class="c1">#recursive function call</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="s2">&quot;green&quot;</span><span class="p">)</span> <span class="c1">#draw leaves in green</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">begin_fill</span><span class="p">()</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">end_fill</span><span class="p">()</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="s2">&quot;brown&quot;</span><span class="p">)</span> <span class="c1">#reset color to brown</span>
+        
+<span class="n">draw_branch</span><span class="p">(</span><span class="mi">35</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">turtle</span><span class="o">.</span><span class="n">bye</span><span class="p">()</span> <span class="c1">#close Turtle window</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>The output looks like this:</strong></p>
+<p><img alt="" src="https://www.dropbox.com/s/rq7gdv0w4w1alhp/turtle_tree.png?raw=1" /></p>
+</section>
+<section id="trees-tree-traversal">
+<h2>Trees + tree traversal<a class="headerlink" href="#trees-tree-traversal" title="Permalink to this headline">#</a></h2>
+<p>Speaking of trees, trees are not only ubiquitous in linguistics, they are also one of the most important data structures in computer science.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Trees in linguistics</strong></p></th>
+<th class="head"><p><strong>Tree structures in computer science</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>syllable structure trees</p></td>
+<td><p>directory structure on file systems</p></td>
+</tr>
+<tr class="row-odd"><td><p>word structure trees</p></td>
+<td><p>“call trees” during program execution</p></td>
+</tr>
+<tr class="row-even"><td><p>phrase structure trees</p></td>
+<td><p>dependencies between software packages</p></td>
+</tr>
+<tr class="row-odd"><td><p>dependency trees</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>derivation trees</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>formula structure trees</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p>Trees are a useful way to maintain sorted records and <strong>allow for efficient data retrieval and insertion</strong>. We will see that they can be searched (“traversed”) and expanded quite easily.</p>
+<section id="implementing-a-tree-structure">
+<h3>Implementing a tree structure<a class="headerlink" href="#implementing-a-tree-structure" title="Permalink to this headline">#</a></h3>
+<p>The tree isn’t a built-in data type in Python, but we can easily define our own data type, the Tree, as a user-defined class. We would like our Tree to have <em>nodes</em> and <em>leaves</em>, such that nodes are branching points with labels and leaves are endpoints (i.e., nodes that do not have any children).</p>
+<p>For all trees, it holds that:</p>
+<ul class="simple">
+<li><p>nodes have a label, which we will store as instance variable</p></li>
+<li><p>nodes have children which we will model as a list of trees</p></li>
+</ul>
+<p><img alt="" src="https://www.dropbox.com/s/4a6s9i6etks8ryt/tree_example.png?raw=1" /></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "julianeschwab/ScientificProgramming",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Juliane Schwab<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

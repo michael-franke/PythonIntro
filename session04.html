@@ -141,11 +141,21 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session07.html">
-   For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022)
+   For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session08.html">
+   Classes (January 17, 2023)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session09.html">
+   Recursion and trees (January 24, 2023)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session10.html">
    Applications (Part I): Processing corpus data using
    <em>
     NLTK
@@ -158,7 +168,12 @@ const thebe_selector_output = ".output, .cell_output"
    <em>
     matplotlib
    </em>
-   (January 10, 2023)
+   (January 31, 2023)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session11.html">
+   Applications (Part II): Programming in experimental research (February 07, 2023)
   </a>
  </li>
 </ul>
@@ -1221,7 +1236,7 @@ I have the following information:  Phone number : 0176123456
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_10040</span>\<span class="mf">4274238906.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_12148</span>\<span class="mf">4274238906.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">notebook</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please add a new&quot;</span><span class="p">,</span> <span class="n">key_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 <span class="ne">----&gt; </span><span class="mi">8</span>     <span class="n">new_entry</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
@@ -1229,11 +1244,11 @@ I have the following information:  Phone number : 0176123456
 <span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
 <span class="nn">~\miniconda3\lib\site-packages\ipykernel\kernelbase.py</span> in <span class="ni">raw_input</span><span class="nt">(self, prompt)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1070</span>         <span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1071</span><span class="s2">         if not self._allow_stdin:</span>
-<span class="ne">-&gt; </span><span class="mi">1072</span><span class="s2">             raise StdinNotImplementedError(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1073</span><span class="s2">                 &quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1074</span><span class="s2">             )</span>
+<span class="g g-Whitespace">   </span><span class="mi">1172</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1173</span><span class="s2">         if not self._allow_stdin:</span>
+<span class="ne">-&gt; </span><span class="mi">1174</span><span class="s2">             raise StdinNotImplementedError(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1175</span><span class="s2">                 &quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1176</span><span class="s2">             )</span>
 
 <span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
 </pre></div>
@@ -1277,7 +1292,7 @@ Please add a new Phone number
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_8844</span>\<span class="mf">2738667397.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_14660</span>\<span class="mf">2738667397.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">notebook</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
 <span class="ne">KeyError</span>: 1
@@ -1296,13 +1311,12 @@ Please add a new Phone number
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">revised_notebook</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 
-<span class="c1">#len(first_names)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">first_names</span><span class="p">)):</span>
     <span class="n">revised_notebook</span><span class="p">[</span><span class="s2">&quot;Friend &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;First name&quot;</span> <span class="p">:</span> <span class="n">first_names</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> 
      <span class="s2">&quot;Last name&quot;</span> <span class="p">:</span> <span class="n">last_names</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> 
      <span class="s2">&quot;Age&quot;</span> <span class="p">:</span> <span class="n">ages</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> 
      <span class="s2">&quot;Phone number&quot;</span> <span class="p">:</span> <span class="n">phone_numbers</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]}</span>
-<span class="c1">#print(revised_notebook)</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">revised_notebook</span><span class="p">[</span><span class="s2">&quot;Friend 1&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -1327,14 +1341,14 @@ Please add a new Phone number
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The sum of the rows is:&quot;</span><span class="p">,</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">sum</span> <span class="p">,</span> <span class="n">matrix</span><span class="p">)))</span>
 
 <span class="c1">#Question: How would you sum up the columns?</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The sum of the columns is:&quot;</span><span class="p">,</span> <span class="p">[])</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The sum of the columns is:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">sum</span><span class="p">,</span><span class="nb">zip</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1, 2, 0.3, 4], [5, 6, 7, 0.1]]
 The sum of the rows is: [7.3, 18.1]
-The sum of the columns is: []
+The sum of the columns is: [6, 8, 7.3, 4.1]
 </pre></div>
 </div>
 </div>
