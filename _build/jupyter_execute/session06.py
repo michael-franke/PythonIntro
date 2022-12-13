@@ -4,6 +4,8 @@
 # ## Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)
 # 
 # The concepts introduced in previous sessions have additional functionalities worth introducing. In this session, we will therefore look at advanced (combined) uses of functions, loops, and file I/O, which allow you to code more efficiently. 
+# 
+# Let's start by looking at an example for a function that will accompany us throughout this session. LLet's figure out what this does:
 
 # In[1]:
 
@@ -24,6 +26,8 @@ unsorted_file = open("hitchhikers_guide_full.txt", "r")
 
 print(sort_text(unsorted_file)[1:500]) #prints part of the output, not the full book
 
+
+# Here is the same code again, but commented for its functionality:
 
 # In[2]:
 
@@ -117,7 +121,7 @@ count_word_occurence(unsorted_file)
 # 
 # Ranges are **widespread and versatile for iterating over collections of elements** (lists, tuples, sets, dictionaries).
 
-# In[19]:
+# In[8]:
 
 
 for i in range(len(sorted_file)): #iterate over full length of list
@@ -133,7 +137,7 @@ for i in range(len(sorted_file)): #iterate over full length of list
 # 
 # Note, though, that **file handles have *states***, that is, they **'remember where (in the file) they are'**. For this reason, you have to reset the state of the file handle if you want to loop over file handles multiple times, using ***file.seek(0)***.
 
-# In[8]:
+# In[9]:
 
 
 unsorted_file.seek(0)
@@ -169,7 +173,7 @@ print(type(sorted_file_v3))
 # 
 # For instance, you may want to ignore capitalization when sorting list elements alphabetically:
 
-# In[20]:
+# In[11]:
 
 
 #case-insensitive string comparison
@@ -182,7 +186,7 @@ print(sorted_file_v3[1:500])
 # 
 # By default, when applying the ***sorted()*** function, dictionaries are **sorted by their keys**. In fact, just feeding a dictionary straight to the *sorted()* function will simply return a sorted list of its keys.
 
-# In[22]:
+# In[12]:
 
 
 #initialize dictionary (see session04)
@@ -194,7 +198,7 @@ feature = ["Worried","Endlessly broad-minded","Two-headed","Paranoid"]
 notebook = {"First name" : first_names, "Last name" : last_names, "Life form" : lifeform, "Distinct feature" : feature}
 
 
-# In[23]:
+# In[13]:
 
 
 print(sorted(notebook)) #just returns sorted list of keys
@@ -202,7 +206,7 @@ print(sorted(notebook)) #just returns sorted list of keys
 
 # **Option for sorting dictionary and returning a list sorted by key**: Using the dictionary method *items()*, we receive a dictionary view object, a list of tuples containing all key-value pairs (see also the methods *values()* and *keys()*, session 04). Calling *sorted()* on this object will return a list sorted by the dictionary's keys.
 
-# In[24]:
+# In[14]:
 
 
 print(sorted(notebook.items()))
@@ -225,7 +229,7 @@ print(sorted(notebook.items()))
 #     
 # - Lambda functions can have **any number of arguments but only one expression**. That expression is **evaluated and returned**.
 
-# In[25]:
+# In[15]:
 
 
 #using a lambda function
@@ -234,7 +238,7 @@ print(sorted(notebook.items(), key = lambda x: x[1]))#sorts by value ==> here, a
 
 # - Alternatively, **the *operator* module** has convenience functions to fetch items from an operand, which can be any sequence or collection of elements:
 
-# In[18]:
+# In[16]:
 
 
 from operator import itemgetter
@@ -251,7 +255,7 @@ print(sorted(notebook.items(), key = itemgetter(1)))#sorts by value, same as the
 # - *While* loops can be used on data structures that are not iterable. 
 # - *While* loops may also be prefered if you do not know the number of required iterations beforehand.
 
-# In[9]:
+# In[17]:
 
 
 from random import randrange
@@ -286,7 +290,7 @@ print("Playback stopped.")
 # 
 # An extreme example:
 
-# In[26]:
+# In[18]:
 
 
 for i in range (2): #for i in range 0-1
@@ -299,7 +303,7 @@ for i in range (2): #for i in range 0-1
 
 # The same thing, but more efficiently:
 
-# In[27]:
+# In[19]:
 
 
 for i in range (2): #for i in range 0-1

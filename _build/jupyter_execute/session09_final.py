@@ -196,7 +196,42 @@ turtle.bye() #close Turtle window
 # 
 # For all trees, it holds that:
 # - nodes have a label, which we will store as instance variable
-# - nodes have children which we will model as a list of trees
-# 
+# - nodes have children which we will store as instance variable containing a list of (sub)trees (in which order matters!)
+# - leaves do not have children. We will model this as an empty list of children []
+# - every node can thus be thought of as root node of its (sub)tree
 # 
 # ![](https://www.dropbox.com/s/4a6s9i6etks8ryt/tree_example.png?raw=1)
+
+# In[8]:
+
+
+class Tree(object):
+    def __init__(self , name='root ', children=None):
+        self.name = name
+        self.children = []
+        self.parent = None
+        if children is not None:
+            for child in children:
+                self.add_child(child)
+                child.parent = self
+
+    def add_child(self , node):
+        assert isinstance(node , Tree)
+        self.children.append(node)
+
+
+# In[9]:
+
+
+#this creates a tree like the one shown above
+first_tree = Tree("A", children = [Tree("B"), Tree("C", children = [Tree("D", children = [Tree("F"), Tree("G"), Tree("H")]),Tree("E")])])
+
+
+# In[10]:
+
+
+#We can easily retrieve subtrees and add new new nodes at their ends:
+first_tree.children[1].children[1].add_child(Tree("I"))
+
+first_tree.children[1].children[1].children[0].name
+
