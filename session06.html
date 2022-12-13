@@ -614,6 +614,7 @@ title="Print to PDF"
   <section id="finishing-the-basics-more-on-functions-loops-dictionaries-and-files-december-13-2022">
 <h1>Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)<a class="headerlink" href="#finishing-the-basics-more-on-functions-loops-dictionaries-and-files-december-13-2022" title="Permalink to this headline">#</a></h1>
 <p>The concepts introduced in previous sessions have additional functionalities worth introducing. In this session, we will therefore look at advanced (combined) uses of functions, loops, and file I/O, which allow you to code more efficiently.</p>
+<p>Let’s start by looking at an example for a function that will accompany us throughout this session. LLet’s figure out what this does:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#an example</span>
@@ -641,6 +642,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>Here is the same code again, but commented for its functionality:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#an example</span>
@@ -749,12 +751,12 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_18984</span>\<span class="mf">1009156628.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_14444</span>\<span class="mf">1009156628.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">unsorted_file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#reset file handle.</span>
 <span class="g g-Whitespace">      </span><span class="mi">8</span> 
 <span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">count_word_occurence</span><span class="p">(</span><span class="n">unsorted_file</span><span class="p">)</span>
 
-<span class="nn">~\AppData\Local\Temp\ipykernel_18984\1009156628.py</span> in <span class="ni">count_word_occurence</span><span class="nt">(file)</span>
+<span class="nn">~\AppData\Local\Temp\ipykernel_14444\1009156628.py</span> in <span class="ni">count_word_occurence</span><span class="nt">(file)</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">count_word_occurence</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">sorted_file</span> <span class="o">=</span> <span class="n">sort_text</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="c1">#function call to user-defined function &quot;sort_text&quot;</span>
 <span class="ne">----&gt; </span><span class="mi">3</span>     <span class="n">word</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
@@ -1169,11 +1171,9 @@ I was traveling with a copy of the Hitch Hiker s Guide to Europe by
  &#39;stop&#39; -- stop playback 
  other/no input -- continue playback
 
-Now playing:  Yellow Submarine
-repeat
-Repeating song: Yellow Submarine
-continue
-Now playing:  Taxman
+Now playing:  Let It Be
+quit
+Now playing:  Eleanor Rigby
 stop
 Playback stopped.
 </pre></div>
