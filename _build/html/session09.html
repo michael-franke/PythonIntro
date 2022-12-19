@@ -378,12 +378,72 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recursion-in-logic-and-mathematics">
+   Recursion in logic and mathematics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recursion-vs-iteration-in-programming">
+   Recursion vs. iteration in programming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#in-class-exercise-fibonacci-numbers">
+   In-class exercise: Fibonacci numbers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-recursion-with-the-turtle-module">
+   Visualizing recursion with the
+   <em>
+    Turtle
+   </em>
+   module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#trees-tree-traversal">
+   Trees + tree traversal
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementing-a-tree-structure">
+     Implementing a tree structure
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#traversing-trees">
+     Traversing trees
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -395,6 +455,55 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recursion-in-logic-and-mathematics">
+   Recursion in logic and mathematics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recursion-vs-iteration-in-programming">
+   Recursion vs. iteration in programming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#in-class-exercise-fibonacci-numbers">
+   In-class exercise: Fibonacci numbers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-recursion-with-the-turtle-module">
+   Visualizing recursion with the
+   <em>
+    Turtle
+   </em>
+   module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#trees-tree-traversal">
+   Trees + tree traversal
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementing-a-tree-structure">
+     Implementing a tree structure
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#traversing-trees">
+     Traversing trees
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -404,7 +513,386 @@ title="Print to PDF"
                 
   <section id="recursion-and-trees-january-24-2023">
 <h1>Recursion and trees (January 24, 2023)<a class="headerlink" href="#recursion-and-trees-january-24-2023" title="Permalink to this headline">#</a></h1>
-<p>under construction…</p>
+<p>It is time to turn everything on its head and introduce recursion into the game. <strong>Recursion</strong> occurs when we <strong>define something in terms of itself or something else of its type</strong>. For instance, we may define a file directory as a location on the computer that contains files <em>and (possibly) other directories</em>.</p>
+<p>Recursion is <strong>useful for problems that can be represented as a series of subproblems of the same type</strong>. To stay with the previous example, the problem of searching for a file, for instance, can be formulated recursively as follows (in pseudocode):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    def search(directory):
+        if file in directory:
+            return(directory)
+        for subdirectory in directory:
+                if search(subdirectory) != None:
+                    return search(subdirectory)
+        return None
+</pre></div>
+</div>
+<p>Note that we are <strong>calling the function <em>search()</em></strong> within the body of the <em>search()</em> function, and are <strong>doing so on a smaller problem space</strong> (i.e., a subdirectory of our main directory).</p>
+<p>Successful recursion, that is, recursion that terminates at some point, requires that we define both a <strong>base case</strong> and a <strong>recursive case</strong>. In the example above, the base case is such that either (a) we find the <em>file</em> in the current directory or (b) there is no further subdirectory to search and the file does not exist. The recursive case is entered with a <em>for</em>-loop over all subdirectories, which calls on the search function again and returns the subdirectory in which the file is located.</p>
+<p><strong>Thus, keep the following in mind when defining recursive functions:</strong></p>
+<ul class="simple">
+<li><p>if the function calls itself on every input, we get infinite recursion</p></li>
+<li><p>in all useful recursive functions, each nested call differs in its arguments (e.g. execution on subproblems)</p></li>
+<li><p>for recursive functions to terminate, we need base cases!</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#another example by the same principle as the file search algorithm in pseudocode above</span>
+<span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">example</span><span class="p">):</span>
+    <span class="n">list_of_lists</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">example</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="nb">list</span><span class="p">]</span>
+    <span class="k">if</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">example</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">example</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">list_of_lists</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">search</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">search</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
+        
+<span class="nb">print</span><span class="p">(</span><span class="n">search</span><span class="p">([</span><span class="mi">2</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span><span class="mi">4</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 5]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="recursion-in-logic-and-mathematics">
+<h2>Recursion in logic and mathematics<a class="headerlink" href="#recursion-in-logic-and-mathematics" title="Permalink to this headline">#</a></h2>
+<p>Recursive definitions are very common in logic and mathematics. <strong>In particular, all inductive proofs are recursive</strong>:</p>
+<p>In induction, you prove that a theorem holds e.g. for <em>n = 0</em> (the base case), and that, under the assumption that the statement holds for any given case <em>n = k</em>, it also hold for the next case <em>n = k + 1</em> (recursive case). This proves that the theorem must hold for any natural number.</p>
+<p><strong>Many definitions in logic are recursive. We have already seen an example within this class</strong>. In a previous ression, <strong>regular languages</strong> were characterized as follows:</p>
+<p><strong>Given a finite alphabet Σ</strong> (e.g., a collection of characters),…</p>
+<ul class="simple">
+<li><p>the empty language Ø is a regular language. <strong>(base case)</strong></p></li>
+<li><p>for each a ∈ Σ, the singleton language {a} is a regular language. <strong>(base case)</strong></p></li>
+<li><p>If A is a regular language, A* (Kleene star, more below) is a regular language. That means the empty string language {ε} is also regular. <strong>(recursive case)</strong></p></li>
+<li><p>If A and B are regular languages, then A ∪ B (union)** and A • B (concatenation) are regular languages. <strong>(recursive case)</strong></p></li>
+<li><p>No other languages over Σ are regular.</p></li>
+</ul>
+</section>
+<section id="recursion-vs-iteration-in-programming">
+<h2>Recursion vs. iteration in programming<a class="headerlink" href="#recursion-vs-iteration-in-programming" title="Permalink to this headline">#</a></h2>
+<p>In principle, <strong>recursion and iteration are equally powerful (meaning that one can be used to emulate the other)</strong>. Some algorithms are <strong>easier to write</strong> iteratively, others are easier using recursion. In addition, recursive and iterative solutions to a problem can <strong>differ in efficiency</strong> (in terms of memory usage and completion time).</p>
+<p><strong>Iteration –&gt; Recursion</strong>: Note that all loops can be implemented using recursion! In the following, we replace a <em>for</em>-loop with a recursive function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span><span class="mi">4</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+
+<span class="c1">#iterative solution to print each element in list</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">example2</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+[2, 3, [1, 5], 4]
+[4, 2]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#recursive solution to print each element in list</span>
+<span class="k">def</span> <span class="nf">recursive_print</span><span class="p">(</span><span class="n">example2</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">example2</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">example2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">recursive_print</span><span class="p">(</span><span class="n">example2</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">recursive_print</span><span class="p">(</span><span class="n">example2</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+[2, 3, [1, 5], 4]
+[4, 2]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Recursion –&gt; Iteration</strong>: At the same time, every recursive function can be implemented using iteration! Our search function from above could be rewritten as follows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#another example by the same principle as the file search algorithm in pseudocode above</span>
+<span class="n">example3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span><span class="mi">4</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">example3</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">example3</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">j</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 5]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Recursive definitions are often easier to write for processing data structures which contain substructures of varying size (i.e. data that is not tabular in shape).</p>
+<p><strong>Examples</strong>:</p>
+<ul class="simple">
+<li><p>processing syntax trees for programming languages (in a compiler) and natural languages (in a parser)</p></li>
+<li><p>processing more general graph structures like networks</p></li>
+<li><p>sorting and searching in structures that are more complex than lists or dictionaries (e.g. 3-D models)</p></li>
+</ul>
+</section>
+<section id="in-class-exercise-fibonacci-numbers">
+<h2>In-class exercise: Fibonacci numbers<a class="headerlink" href="#in-class-exercise-fibonacci-numbers" title="Permalink to this headline">#</a></h2>
+<p>The following is the Fibonacci sequence, a sequence of numbers starting at <em>F<sub>0</sub> = 0</em> and <em>F<sub>1</sub> = 1</em>, in which each number is the sum of the previous two numbers.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...
+</pre></div>
+</div>
+<p>To determine the <em>n</em>-th Fibonacci number in the sequence, we can write a simple recursive program:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#in-class exercise</span>
+<span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">fib</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-recursion-with-the-turtle-module">
+<h2>Visualizing recursion with the <em>Turtle</em> module<a class="headerlink" href="#visualizing-recursion-with-the-turtle-module" title="Permalink to this headline">#</a></h2>
+<p>A useful <strong>tool to train your recursive thinking is to use a graphical interface</strong> on which you can draw recursive structures. Just googling for <em>recursive fractals</em> should give you some inspiration.</p>
+<p>In the following, we will <strong>draw a tree structure in which every branch splits up into two smaller branches (recursion) unless it has leaves at its end (base case)</strong>. We use the <em>Turtle</em> module (<a class="reference external" href="https://docs.python.org/3/library/turtle.html">https://docs.python.org/3/library/turtle.html</a>) to draw this figure, a module that provides a basic graphical interface in which we control the movements of a “turtle” (the cursor). The module has methods like <em>left(angle)</em>, <em>right(angle)</em>, <em>forward(length)</em>, <em>backward(length)</em> determining the movement of the turtle, and methods like <em>color(color_string)</em> or <em>pensize(int)</em> determining its visual properties.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">turtle</span> <span class="c1">#import turtle module, a graphical interface to draw shapes; opens in separate window</span>
+
+<span class="n">turtle</span><span class="o">.</span><span class="n">speed</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="c1">#set speed of animation</span>
+<span class="n">turtle</span><span class="o">.</span><span class="n">setheading</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span> <span class="c1">#set initial orientation of the turtle as looking straight up</span>
+
+<span class="k">def</span> <span class="nf">draw_branch</span><span class="p">(</span><span class="nb">len</span><span class="p">):</span> <span class="c1">#recursive function to draw a tree</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="s2">&quot;brown&quot;</span><span class="p">)</span> <span class="c1">#draw branches in brown</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+        <span class="n">draw_branch</span><span class="p">(</span><span class="nb">len</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span> <span class="c1">#recursive function call</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+        <span class="n">draw_branch</span><span class="p">(</span><span class="nb">len</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span> <span class="c1">#recursive function call</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="s2">&quot;green&quot;</span><span class="p">)</span> <span class="c1">#draw leaves in green</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">begin_fill</span><span class="p">()</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">end_fill</span><span class="p">()</span>
+        <span class="n">turtle</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="s2">&quot;brown&quot;</span><span class="p">)</span> <span class="c1">#reset color to brown</span>
+        
+<span class="n">draw_branch</span><span class="p">(</span><span class="mi">35</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">turtle</span><span class="o">.</span><span class="n">bye</span><span class="p">()</span> <span class="c1">#close Turtle window</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>The output looks like this:</strong></p>
+<p><img alt="" src="https://www.dropbox.com/s/rq7gdv0w4w1alhp/turtle_tree.png?raw=1" /></p>
+</section>
+<section id="trees-tree-traversal">
+<h2>Trees + tree traversal<a class="headerlink" href="#trees-tree-traversal" title="Permalink to this headline">#</a></h2>
+<p>Speaking of trees, trees are not only ubiquitous in linguistics, they are also one of the most important data structures in computer science.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Trees in linguistics</strong></p></th>
+<th class="head"><p><strong>Tree structures in computer science</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>syllable structure trees</p></td>
+<td><p>directory structure on file systems</p></td>
+</tr>
+<tr class="row-odd"><td><p>word structure trees</p></td>
+<td><p>“call trees” during program execution</p></td>
+</tr>
+<tr class="row-even"><td><p>phrase structure trees</p></td>
+<td><p>dependencies between software packages</p></td>
+</tr>
+<tr class="row-odd"><td><p>dependency trees</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>derivation trees</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>formula structure trees</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p>Trees are a useful way to maintain sorted records and <strong>allow for efficient data retrieval and insertion</strong>. We will see that they can be searched (“traversed”) and expanded quite easily.</p>
+<section id="implementing-a-tree-structure">
+<h3>Implementing a tree structure<a class="headerlink" href="#implementing-a-tree-structure" title="Permalink to this headline">#</a></h3>
+<p>The tree isn’t a built-in data type in Python, but we can easily define our own data type, the Tree, as a user-defined class. We would like our Tree to have <em>nodes</em> and <em>leaves</em>, such that nodes are branching points with labels and leaves are endpoints (i.e., nodes that do not have any children).</p>
+<p>For all trees, it holds that:</p>
+<ul class="simple">
+<li><p>nodes have a label, which we will store as instance variable</p></li>
+<li><p>nodes have children which we will store as instance variable containing a list of (sub)trees (in which order matters!)</p></li>
+<li><p>leaves do not have children. We will model this as an empty list of children []</p></li>
+<li><p>every node can thus be thought of as root node of its (sub)tree</p></li>
+</ul>
+<p><img alt="" src="https://www.dropbox.com/s/4a6s9i6etks8ryt/tree_example.png?raw=1" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Tree</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span> <span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;root &#39;</span><span class="p">,</span> <span class="n">children</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">children</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+                <span class="n">child</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">add_child</span><span class="p">(</span><span class="bp">self</span> <span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span> <span class="p">,</span> <span class="n">Tree</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#this creates a tree like the one shown above</span>
+<span class="n">first_tree</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">Tree</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="n">Tree</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">Tree</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">Tree</span><span class="p">(</span><span class="s2">&quot;F&quot;</span><span class="p">),</span> <span class="n">Tree</span><span class="p">(</span><span class="s2">&quot;G&quot;</span><span class="p">),</span> <span class="n">Tree</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">)]),</span><span class="n">Tree</span><span class="p">(</span><span class="s2">&quot;E&quot;</span><span class="p">)])])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#We can easily add new nodes to the tree:</span>
+<span class="n">first_tree</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="n">Tree</span><span class="p">(</span><span class="s2">&quot;I&quot;</span><span class="p">))</span>
+
+<span class="c1">#We can retrieve that node again like so:</span>
+<span class="n">first_tree</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;I&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="traversing-trees">
+<h3>Traversing trees<a class="headerlink" href="#traversing-trees" title="Permalink to this headline">#</a></h3>
+<p>Trees are useful data structures, in part, because they can be “traversed” in multiple ways. <strong>Tree traversal</strong> (also known as <strong>tree search</strong>) refers to the process of looking up elements in the tree by visiting (e.g. retrieving, updating, deleting) each node in a tree exactly once.</p>
+<p>We previously looked at data structures like lists or tuples, which must always be searched / traversed in linear order. Tree structures, in comparison, can be traversed in various ways, called <em>depth-first</em> or <em>breadth-first</em> orders. Various hybrid traveral schemes are also possible. Depending one one’s application, tree traversal can be substantially more efficient than linear searches. For linguistic applications, it can also be more representative of the underlying structural relations that we would like to process.</p>
+<p><strong>Depth-first</strong> traversal orders deepen the current subtree as much as possible before moving to the next sibling. <strong>Breadth-first</strong> traversal orders broaden the current level as much as possible before moving to deeper nodes.</p>
+<p>There are three common ways to traverse them in depth-first order: <strong>in-order</strong>, <strong>pre-order</strong> and <strong>post-order</strong>:</p>
+<ul class="simple">
+<li><p><strong>in-order traversal</strong>: left child first, parent, then other children</p></li>
+<li><p><strong>pre-order traversal</strong>: parent first, then children from left to right</p></li>
+<li><p><strong>post-order traversal</strong>: children from left to right, then parent</p></li>
+</ul>
+<p>All of them are easily implemented using recursion (<em>in-order</em> here, <em>pre-</em> and <em>post-order</em> in your homework).</p>
+<ol class="simple">
+<li><p><strong>In-order traversal</strong></p></li>
+</ol>
+<p><strong>Question: In which order do we visit the nodes in in-order traversal (left child first, parent, then other children)?</strong>
+(solution at the bottom)
+<img alt="" src="https://www.dropbox.com/s/4a6s9i6etks8ryt/tree_example.png?raw=1" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SearchTree</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span> <span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;root &#39;</span><span class="p">,</span> <span class="n">children</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">children</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+                <span class="n">child</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">add_child</span><span class="p">(</span><span class="bp">self</span> <span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span> <span class="p">,</span> <span class="n">SearchTree</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">inorder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;In -order traversal:</span>
+<span class="sd">        First recurse into left child , then visit the node itself ,</span>
+<span class="sd">        then recurse into other children in order.</span>
+<span class="sd">        :return: A list of tree nodes in in-order.&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">inorder</span> <span class="p">()</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">)):</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">inorder</span> <span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#this creates a tree like the one shown above, now using our new class of traversable trees</span>
+<span class="n">second_tree</span> <span class="o">=</span> <span class="n">SearchTree</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">SearchTree</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="n">SearchTree</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">SearchTree</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">SearchTree</span><span class="p">(</span><span class="s2">&quot;F&quot;</span><span class="p">),</span> <span class="n">SearchTree</span><span class="p">(</span><span class="s2">&quot;G&quot;</span><span class="p">),</span> <span class="n">SearchTree</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">)]),</span><span class="n">SearchTree</span><span class="p">(</span><span class="s2">&quot;E&quot;</span><span class="p">)])])</span>
+
+<span class="n">inorder_tree</span> <span class="o">=</span> <span class="n">second_tree</span><span class="o">.</span><span class="n">inorder</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inorder_tree</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>B
+A
+F
+D
+G
+H
+C
+E
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="simple">
+<li><p><strong>Pre-order traversal</strong></p></li>
+</ol>
+<p><strong>Question: In which order do we visit the nodes in pre-order traversal (parent first, then children from left to right)?</strong>
+(solution at the bottom)
+<img alt="" src="https://www.dropbox.com/s/4a6s9i6etks8ryt/tree_example.png?raw=1" /></p>
+<ol class="simple">
+<li><p><strong>Post-order traversal</strong></p></li>
+</ol>
+<p><strong>Question: In which order do we visit the nodes in post-order traversal (children from left to right, then parent)?</strong>
+(solution at the bottom)
+<img alt="" src="https://www.dropbox.com/s/4a6s9i6etks8ryt/tree_example.png?raw=1" /></p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p><strong>Solution to in-order traversal: B, A, F, D, G, H, C, E</strong></p>
+<p><strong>Solution to pre-order traversal: A, B, C, D, F, G, H, E</strong></p>
+<p><strong>Solution to post-order traversal: B, F, G, H, D, E, C, A</strong></p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

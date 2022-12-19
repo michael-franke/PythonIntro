@@ -5,7 +5,7 @@
 # 
 # The concepts introduced in previous sessions have additional functionalities worth introducing. In this session, we will therefore look at advanced (combined) uses of functions, loops, and file I/O, which allow you to code more efficiently. 
 # 
-# Let's start by looking at an example for a function that will accompany us throughout this session. LLet's figure out what this does:
+# Let's start by looking at an example for a function that will accompany us throughout this session. Let's figure out what this does:
 
 # In[1]:
 
@@ -13,10 +13,16 @@
 #an example
 import itertools
 
+#line1 ="Hello world"
+# ["Hello","world"]
+#line2= "A b c"
+#["A","b","c"]
+#[["Hello","world"],["A","b","c"]]
 def sort_text(file): #takes a plaintext file as input
-    words = list()
+    words = []
     lines = [line.strip().split() for line in file] 
-    print("For your reference, this is what lines looks like now: ", lines[1:10])   
+    print("For your reference, this is what lines looks like now: ", lines[1:10],"\n\n\n")   
+    #print(list(itertools.chain.from_iterable(lines)))
     for word in itertools.chain.from_iterable(lines): 
         words.append(word) 
     words.sort()
@@ -106,6 +112,7 @@ print(type(sorted_file))
 def count_word_occurence(file):
     sorted_file = sort_text(file) #function call to user-defined function "sort_text"
     word = input()
+    #a = sorted_file.count(word)
     return "The word '{}' occurs {} times in the text.".format(word,sorted_file.count(word)) 
     #note that we can use placeholders {} in the string, filled by the two objects named later
 
@@ -127,7 +134,8 @@ count_word_occurence(unsorted_file)
 for i in range(len(sorted_file)): #iterate over full length of list
     for j in range(17,20): #iterate over sequence of integers between 17 and 19
         if len(sorted_file[i])==j:
-            print("The string '{}' has {} letters".format(sorted_file[i], j)) 
+            print("The string '{}' has {} letters"
+                  .format(sorted_file[i], j)) 
 
 
 # **An issue for you to think of**: Try to understand the order of operations with nested loops. Why does the loop above not print output ordered by increasing string length, first printing all strings of length 17, then 18, 19,...? 
@@ -186,7 +194,7 @@ print(sorted_file_v3[1:500])
 # 
 # By default, when applying the ***sorted()*** function, dictionaries are **sorted by their keys**. In fact, just feeding a dictionary straight to the *sorted()* function will simply return a sorted list of its keys.
 
-# In[12]:
+# In[7]:
 
 
 #initialize dictionary (see session04)
@@ -229,7 +237,7 @@ print(sorted(notebook.items()))
 #     
 # - Lambda functions can have **any number of arguments but only one expression**. That expression is **evaluated and returned**.
 
-# In[15]:
+# In[9]:
 
 
 #using a lambda function
@@ -238,7 +246,7 @@ print(sorted(notebook.items(), key = lambda x: x[1]))#sorts by value ==> here, a
 
 # - Alternatively, **the *operator* module** has convenience functions to fetch items from an operand, which can be any sequence or collection of elements:
 
-# In[16]:
+# In[11]:
 
 
 from operator import itemgetter
