@@ -1,0 +1,5 @@
+subject_id;StimulIndex;trialnum;which_experiment;itemnr;condition;sentence_num;reading/responseTime;answer1;answer1AsPredicted
+17;5;1;modal;1;5;1;1739;
+17;5;1;modal;1;5;2;1968;
+17;5;1;1;5;3;4626;
+17;5;1;1;5;4;4577;True

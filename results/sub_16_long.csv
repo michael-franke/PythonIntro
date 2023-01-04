@@ -1,0 +1,5 @@
+subject_id;StimulIndex;trialnum;which_experiment;itemnr;condition;sentence_num;reading/responseTime;answer1;answer1AsPredicted
+16;4;1;1;4;1;400;
+16;4;1;1;4;2;319;
+16;4;1;1;4;3;1846;
+16;4;1;1;4;4;1595;True
