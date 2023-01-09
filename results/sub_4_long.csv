@@ -1,0 +1,5 @@
+subject_id;StimulIndex;trialnum;which_experiment;itemnr;condition;sentence_num;reading/responseTime;answer1;answer1AsPredicted
+4;4;1;modal;1;4;1;349;
+4;4;1;modal;1;4;2;188;
+4;4;1;modal;1;4;3;181;
+4;4;1;modal;1;4;4;1204;True
