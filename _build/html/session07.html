@@ -754,7 +754,8 @@ the imported module&#39;s name is: math
 <ul>
 <li><p>Google for packages that might provide the functionality you want.</p></li>
 <li><p>If you are using the configuration that was recommended at the outset of this course, try installing it via <em>conda</em> first:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  conda install the-package   (the-package is our dummy name, replace it by the package&#39;s real name)
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  conda install the-package   
+  (the-package is our dummy name, replace it by the package&#39;s name)
 </pre></div>
 </div>
 </li>
@@ -784,12 +785,12 @@ the imported module&#39;s name is: math
 </pre></div>
 </div>
 </li>
-<li><p>Classes provide methods, i.e. functions which take an instance of the class as their first argument, and calls to which are written instance.method(additional arguments)</p>
+<li><p>Classes provide methods, i.e. functions which take an instance of the class as their first argument, and calls to which are written as <em>instance.method(additional arguments)</em></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  my_text.words
 </pre></div>
 </div>
 </li>
-<li><p>You will learn how to create your own classes in a later session.</p></li>
+<li><p>You will learn how to create your own classes in the next session.</p></li>
 </ul>
 </section>
 </section>
@@ -804,17 +805,47 @@ the imported module&#39;s name is: math
 <span class="n">text_en</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="s2">&quot;Enjoy the Christmas break and have a happy new year!&quot;</span><span class="p">)</span>
 <span class="n">text_ar</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="s2">&quot;عيد ميلاد مجيد وكل عام وانتم بخير&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">text_en</span><span class="o">.</span><span class="n">words</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Language Detected: Name=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text_en</span><span class="o">.</span><span class="n">language</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Language Detected: Name=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text_ar</span><span class="o">.</span><span class="n">language</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Enjoy&#39;, &#39;the&#39;, &#39;Christmas&#39;, &#39;break&#39;, &#39;and&#39;, &#39;have&#39;, &#39;a&#39;, &#39;happy&#39;, &#39;new&#39;, &#39;year&#39;, &#39;!&#39;]
-
-Language Detected: Name=English
-
-Language Detected: Name=Arabic
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Language Detected: Name=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text_en</span><span class="o">.</span><span class="n">language</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Language Detected: Name=English
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">text_ar</span><span class="o">.</span><span class="n">words</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;عيد&#39;, &#39;ميلاد&#39;, &#39;مجيد&#39;, &#39;وكل&#39;, &#39;عام&#39;, &#39;وانتم&#39;, &#39;بخير&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Language Detected: Name=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text_ar</span><span class="o">.</span><span class="n">language</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Language Detected: Name=Arabic
 </pre></div>
 </div>
 </div>
@@ -894,7 +925,7 @@ Language Detected: Name=Arabic
 <section id="so-what-s-the-use-of-this-again">
 <h3>So what’s the use of this again?<a class="headerlink" href="#so-what-s-the-use-of-this-again" title="Permalink to this headline">#</a></h3>
 <p>Using just the set of operations defined above, we can significantly improve pattern detection for various types of text input.</p>
-<p><strong>Regular expressions can be used in Google</strong>: “(parties|concerts) in Tübingen on (Friday|Saturday)”.</p>
+<p><strong>Side note: regular expressions can be used in Google</strong>: e.g., <em>“(parties|concerts) in Tübingen on (Friday|Saturday)”</em>.</p>
 </section>
 <section id="the-re-module">
 <h3>The <em>re</em> module<a class="headerlink" href="#the-re-module" title="Permalink to this headline">#</a></h3>

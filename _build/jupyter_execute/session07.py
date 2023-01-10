@@ -137,7 +137,8 @@ if __name__ == "__main__": #input is read in only here, that is, when executing 
 # - Google for packages that might provide the functionality you want.
 # - If you are using the configuration that was recommended at the outset of this course, try installing it via *conda* first:
 # 
-#         conda install the-package   (the-package is our dummy name, replace it by the package's real name)
+#         conda install the-package   
+#         (the-package is our dummy name, replace it by the package's name)
 # - If it says *package not found*, access the Python Package Index (PyPI) via pip:
 #                         
 #        pip install the-package
@@ -159,11 +160,11 @@ if __name__ == "__main__": #input is read in only here, that is, when executing 
 # 
 #         my_text = Text(str)
 # 
-# - Classes provide methods, i.e. functions which take an instance of the class as their first argument, and calls to which are written instance.method(additional arguments)
+# - Classes provide methods, i.e. functions which take an instance of the class as their first argument, and calls to which are written as *instance.method(additional arguments)*
 # 
 #         my_text.words
 #         
-# - You will learn how to create your own classes in a later session.
+# - You will learn how to create your own classes in the next session.
 # 
 # #### Example: The *polyglot* package
 # 
@@ -178,11 +179,27 @@ from polyglot.text import Detector, Text, Word #imports the Text and Word classe
 text_en = Text("Enjoy the Christmas break and have a happy new year!")
 text_ar = Text("عيد ميلاد مجيد وكل عام وانتم بخير")
 print(text_en.words)
-print("\nLanguage Detected: Name={}".format(text_en.language.name))
-print("\nLanguage Detected: Name={}".format(text_ar.language.name))
 
 
 # In[7]:
+
+
+print("\nLanguage Detected: Name={}".format(text_en.language.name))
+
+
+# In[8]:
+
+
+print(text_ar.words)
+
+
+# In[9]:
+
+
+print("\nLanguage Detected: Name={}".format(text_ar.language.name))
+
+
+# In[10]:
 
 
 from polyglot.transliteration import Transliterator
@@ -244,7 +261,7 @@ for x in text_en.transliterate("ar"):
 # 
 # Using just the set of operations defined above, we can significantly improve pattern detection for various types of text input.
 # 
-# **Regular expressions can be used in Google**: "(parties|concerts) in Tübingen on (Friday|Saturday)".
+# **Side note: regular expressions can be used in Google**: e.g., *"(parties|concerts) in Tübingen on (Friday|Saturday)"*.
 # 
 # #### The *re* module
 # Using the **Python module *re***, we can find and extract text patterns by matching them against specified regular expressions. Note that the package's syntax is a bit differnt from the notation introduced above and introduces a few extra operators:
@@ -276,7 +293,7 @@ for x in text_en.transliterate("ar"):
 # - *regex.findall(str)*: matches the regex pattern **for its appearance anywhere in the string** and returns all matches.
 # - *regex.split(str)*: matches the regex pattern **for its appearance anywhere in the string** and splits the string into a list of substrings.
 
-# In[8]:
+# In[11]:
 
 
 import re
@@ -291,7 +308,7 @@ print(matcher.split(sentence)) #split string around all instances matching the r
 
 # The first two of these methods return a *match* object, which can be further processed using methods within the *Re* module (e.g., *start()* and *end()*, but check out the online documentation for more).
 
-# In[9]:
+# In[12]:
 
 
 match = matcher.search(sentence)
@@ -302,7 +319,7 @@ match.start(), match.end()
 
 # You can replace matching substrings using the *sub(replacement, string)*:
 
-# In[10]:
+# In[13]:
 
 
 matcher.sub(" cat", sentence)
