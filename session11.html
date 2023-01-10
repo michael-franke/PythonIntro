@@ -145,24 +145,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session08.html">
-   Applications (Part I): Processing corpus data using
-   <em>
-    NLTK
-   </em>
-   ,
-   <em>
-    numpy
-   </em>
-   , and
-   <em>
-    matplotlib
-   </em>
-   (January 10, 2023)
+   Classes (January 17, 2023)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session09.html">
-   Recursion, trees, and search (January 24, 2023)
+   Recursion and trees (January 24, 2023)
   </a>
  </li>
  <li class="toctree-l1">
@@ -389,12 +377,51 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-an-experiment">
+   Implementing an experiment
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#experimental-setup-using-pygame">
+     Experimental setup using
+     <em>
+      pygame
+     </em>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#descriptive-data-exploration">
+     Descriptive data exploration
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -406,6 +433,34 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-an-experiment">
+   Implementing an experiment
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#experimental-setup-using-pygame">
+     Experimental setup using
+     <em>
+      pygame
+     </em>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#descriptive-data-exploration">
+     Descriptive data exploration
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -413,9 +468,722 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="applications-part-ii-programming-in-experimental-research-february-07-2023">
+  <section class="tex2jax_ignore mathjax_ignore" id="applications-part-ii-programming-in-experimental-research-february-07-2023">
 <h1>Applications (Part II): Programming in experimental research (February 07, 2023)<a class="headerlink" href="#applications-part-ii-programming-in-experimental-research-february-07-2023" title="Permalink to this headline">#</a></h1>
-<p>under construction…</p>
+<p><strong>Experimental research in linguistics has grown in importance over the last few decades</strong>. Two key research areas that depend on the experimental validation of hypotheses regarding, among others, language processing, production, and acquisition, are <strong>psycho- and neurolinguistics</strong>. Yet, even researchers that are primarily concerned with formal aspects of language (e.g. in syntax, semantics, or language typology) have turned to experimental research to address their research questions.</p>
+<p>Linguistic experiments can be incredibly simple, for instance, when presenting participants with a sentence and asking for an <strong>acceptability judgment</strong>. Or they can be very complex, e.g., when simultaneously recording <strong>eye-tracking</strong> and <strong>EEG</strong> data while participants read sentence material.</p>
+<p>Regardless of experiment complexity, <strong>we can use Python to implement such experiments and to statistically analyze the recorded data</strong>. Today, we will look at a simple example of implementing a behavioral (button-press) experiment.</p>
+<p><strong>An example for a single experimental trial in a grammaticality judgment task:</strong></p>
+<p style="text-align: center; font-style: italic"> Please read the following sentence: </p>
+<p style="text-align: center"> Which man did Jane say that the parent who scolded him forgave the babysitter’s mistake?</p>
+<p style="text-align: center; font-weight: bold"> Is this sentence acceptable? </p>
+<div style="text-align: center">
+      <input type="radio" id="contactChoice1" name="contact" value="Yes" />
+      <label for="contactChoice1">Yes</label>
+      <input type="radio" id="contactChoice2" name="contact" value="No" />
+      <label for="contactChoice2">No</label>
+                                 </div><section id="implementing-an-experiment">
+<h2>Implementing an experiment<a class="headerlink" href="#implementing-an-experiment" title="Permalink to this headline">#</a></h2>
+<p>For today’s purpose, we will be concerned with experiments conducted by Lassiter (2016) and Yastushiro et al. (2022) on epistemic modal adjectives and adverbs like <em>possible/possibly</em> and <em>certain/certainly</em>.</p>
+<p><strong>Background</strong></p>
+<p>Epistemic modal expressions provide an estimation of the likelihood that the state of affairs expressed in the clause applies to the world, according to either the speaker or some other epistemic authority (Nuyts, 2016). As such, epistemic modality can arguably be “subjective” or “objective” (Lyons, 1977), in that “the former refers to the personal opinion of the speaker, whereas the latter refers to some factual chance that is of an interpersonal nature” (Yatsushiro et al., 2022).</p>
+<p>In English, it has been suggested that subjective and objective epistemic modality are (preferably) expressed by different linguistic forms. Specifically, epistemic modal adverbs like in (2) might be interpreted subjectively, whereas epistemic adjectives like (3) might be interpreted objectively (Hengeveld 1988; Nuyts 1992; 1993).</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    (2) Abdul certainly / probably / possibly is at school.
+
+    (3) It is certain / probable / possible that Abdul is at school.
+</pre></div>
+</div>
+<p>This distinction is further supported by distributional differences regarding their appearance under negation and in questions (for details, see Yatsushiro et al., 2022):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(4) a.  Abdul is *uncertainly at school.
+    b. It is not certain that Abdul is at school.
+
+(5) a. Is Abdul *certainly at school?
+    b. Is it certain that Abdul is at school?
+</pre></div>
+</div>
+<p><strong>The research question</strong></p>
+<p>“Do these two types of epistemic operators [really] have different interpretations? That is, given a certain situation that leads to a certain estimation of likelihood for a proposition, would speakers apply an epistemic adjective differently from its corresponding epistemic adverb?” (Yatsushiro et al., 2022)</p>
+<p><strong>Method</strong> (Lassiter, 2016; Yatsushiro et al., 2022 Experiment 2)</p>
+<p>Participants read a context scenario that provides a measureable likelihood for a certain event (6). In a subsequent critical sentence (6a-d), they are confronted with an epistemic modal adjective or adverb. They must provide a judgment of <strong>whether they agree with the assertion</strong>. The hypothesis is that participants “would be less strict in their use of subjective <em>possibly</em> and <em>certainly</em>, on the ground that a privately held certainty, or denial of possibility, may be felt to be less subject to public scrutiny and approbation if it turns out to be incorrect.” (Lassiter, 2016: 132)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    (6)  (Low likelihood of win)
+         Yesterday, Bill bought a single ticket in a raffle with 1000 total tickets. 
+         There were also 999 other people who bought one ticket each. 
+         The drawing was held last night, and the winner will be announced this evening.
+
+        a. It is possible that Bill won the raffle. 
+        b. Bill possibly won the raffle.       
+        c. It is certain that Bill did not win the raffle.     
+        d. Bill certainly did not win the raffle.
+
+    (7) (High likelihood of win)
+        999 tickets to a raffle were purchased by Jay, a wealthy local businessperson. 
+        1 ticket was purchased by a member of the community. 
+        The drawing was held last night, and the winner will be announced this evening.
+              
+        a. It is certain that Jay won the raffle.     
+        b. Jay certainly won the raffle.
+</pre></div>
+</div>
+<p>Thus, these are the predictions:</p>
+<ul class="simple">
+<li><p>in (6), <em>possibly</em> should be less assertable / dispreferred to <em>possible</em> (because although objectively possible, the  agent may privately assume / <strong>commit themselves to</strong> (Krifka, to appear) the fact that it is <em>not</em> likely that Bill would win the raffle)</p></li>
+<li><p>in (6), <em>certainly</em> should be more assertable / preferred over <em>certain</em> (because although not objectively certain, the  agent may privately assume / commit themselves to the fact that it is quite certain that Bill would not win the raffle)</p></li>
+<li><p>in (7), <em>certainly</em> should be more assertable / preferred over <em>certain</em> (reasoning analogous to the previous examples)</p></li>
+</ul>
+<section id="experimental-setup-using-pygame">
+<h3>Experimental setup using <em>pygame</em><a class="headerlink" href="#experimental-setup-using-pygame" title="Permalink to this headline">#</a></h3>
+<p><em>Pygame</em> is a Python package primarily designed for writing video games. Experiments, in many respects, are just like video games, thus the module has become popular for the implementation of (behavioural) experiments.</p>
+<p>Like in video games, we need to:</p>
+<ul class="simple">
+<li><p><strong>control frame-by-frame visual displays</strong>, including the appearance of images, text, and other elements.</p></li>
+<li><p>in some cases, this includes <strong>synchronized audiovisual signals</strong></p></li>
+<li><p><strong>record and save</strong> reaction times, button presses and other user-provided input</p></li>
+<li><p><strong>conditionally execute parts of the code</strong> based on button presses or other user input</p></li>
+</ul>
+<p><strong>Pygame offers a range of methods to do this.</strong> With respect to <strong>visual displays</strong>, the <em>display</em> module offers a range of methods that allow you to control the contents displayed on screen. Pygame has a single display Surface that is either contained in a window or runs full screen. You must first initialize this surface, e.g., as fullscreen display or window of specified dimensions:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>screen = pygame.display.set_mode((1280, 480), pg.SCALED)
+</pre></div>
+</div>
+<p>Then you can modify the contents of that surface, e.g., by changing its color or adding text / images at varying positions. Changes are not immediately visible on the real screen; you must use the “flipping” function <em>flip()</em> to update the actual display.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>bgColor = (0,0,80) # darkblue
+screen.fill(bgColor)
+pygame.display.flip() 
+</pre></div>
+</div>
+<p>With respect to <strong>recording (and reacting to) user input</strong>, Pygame continually records all user input as “events” in an event queue. Events can have different types, such as key presses, mouse clicks, or movements of a joystick. The <em>get()</em> method gets all events from the current queue and removes them from it. By calling this method repeatedly, on every single frame, until a specified event occurs, we can control the execution of the experiment.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> #function that waits for any key press
+    def waitForAnyKey():
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    return event.key  #returns key numbers
+                elif event.type == pygame.QUIT:
+                    pygame.quit()
+</pre></div>
+</div>
+<p><strong>Let’s look at an implementation of the experiment that is introduced above:</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># these are texts, that are used in different places during the experiment</span>
+
+<span class="c1">#########################Instruction texts######################################################</span>
+<span class="n">starting_instructions</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Dear participant,</span>
+
+<span class="s2">thank you for deciding to take part in out study. By participating, you confirm that you are an English native speaker and at least 18 years old.</span>
+
+<span class="s2">This study is about language comprehension in English. It consists of a single trial in which you will read a short story and will answer a question about it.</span>
+
+<span class="s2">This study should take no more than 2-3 minutes. Please take your time to read each sentence that appears on screen and press the space bar to proceed to the next one.</span>
+
+<span class="s2">The question at the end of the story can be answered by pressing the number keys 1 or 2, as will be indicated on the screen.</span>
+
+<span class="s2">Your data will be treated anonymously. You can abort the experiment at any time without negative consequences. To exit, press the Escape key.</span>
+
+<span class="s2">Department of Linguistics</span>
+<span class="s2">University of Tübingen 2022</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1">###############################################################################</span>
+<span class="n">leertasten_hinweis</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;To start, please press the space bar.&quot;&quot;&quot;</span>
+
+<span class="n">after_practice_instructions</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;The experiment will start now.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="c1">###############################################################################</span>
+<span class="n">end_trial</span> <span class="o">=</span> <span class="s2">&quot;Continue by pressing the space bar.&quot;</span>
+<span class="c1">###############################################################################</span>
+<span class="n">end_experiment</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Thank you for participating!</span>
+
+<span class="s2">We would like to cordially thank you for your participation. Your data has been saved anonymously.</span>
+<span class="s2">You can close this window now.</span>
+
+<span class="s2">Deptartment of Linguistics</span>
+<span class="s2">University of Tübingen 2022</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="c1">###############################################################################</span>
+<span class="n">preparing_data_string</span> <span class="o">=</span> <span class="s2">&quot;Preparing the data. Please wait...&quot;</span>
+<span class="c1">###############################################################################</span>
+<span class="n">press_any_key</span> <span class="o">=</span> <span class="s2">&quot;Press any key to continue.&quot;</span>
+<span class="c1">###############################################################################</span>
+<span class="n">enter_subnr_text</span> <span class="o">=</span> <span class="s2">&quot;Please enter a subject number and confirm with Enter:&quot;</span>    
+<span class="n">error_subnr_already_taken</span> <span class="o">=</span> <span class="s2">&quot;This number is already taken. Please choose a different one.&quot;</span>
+<span class="n">enter_age_text</span> <span class="o">=</span> <span class="s2">&quot;What is your age (in number of years)? Confirm with Enter.&quot;</span>
+<span class="n">enter_gender_text</span> <span class="o">=</span> <span class="s2">&quot;Please indicate your gender:&quot;</span>     
+<span class="n">dialect_text</span> <span class="o">=</span> <span class="s2">&quot;Do you speak any dialect?&quot;</span>        
+<span class="n">dialect_text_2</span> <span class="o">=</span> <span class="s2">&quot;Which one? Enter as text and confirm with Enter&quot;</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pygame</span>
+
+<span class="c1">#############################################################################</span>
+<span class="c1">############     Functions that regulate display of text on screen ##########</span>
+<span class="c1">############################################################################</span>
+<span class="n">CENTER</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">NEWLINECENTER</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">ERRORPOS</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">BOTTOM</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">OPTIONS</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">TOP</span> <span class="o">=</span> <span class="mi">6</span>
+
+<span class="c1">#we show different texts at different positions. This function simply makes that more clear.</span>
+<span class="k">def</span> <span class="nf">get_position</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text_surface</span><span class="p">,</span> <span class="n">where</span><span class="p">):</span>
+    <span class="n">text_width</span> <span class="o">=</span> <span class="n">text_surface</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span>
+    <span class="n">text_height</span> <span class="o">=</span> <span class="n">text_surface</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">screen</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">screen</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">where</span> <span class="o">==</span> <span class="n">CENTER</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">text_width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">text_height</span><span class="o">/</span><span class="mi">2</span>
+    <span class="k">elif</span> <span class="n">where</span> <span class="o">==</span> <span class="n">NEWLINECENTER</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">text_width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="mi">8</span><span class="o">*</span><span class="n">height</span>
+    <span class="k">elif</span> <span class="n">where</span> <span class="o">==</span> <span class="n">ERRORPOS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">text_width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mf">3.0</span><span class="o">/</span><span class="mi">8</span><span class="o">*</span><span class="n">height</span>
+    <span class="k">elif</span> <span class="n">where</span> <span class="o">==</span> <span class="n">BOTTOM</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">text_width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">-</span><span class="mf">1.5</span><span class="o">*</span><span class="n">text_height</span>
+    <span class="k">elif</span> <span class="n">where</span> <span class="o">==</span> <span class="n">OPTIONS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">text_width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mf">3.0</span><span class="o">/</span><span class="mi">4</span><span class="o">*</span><span class="n">height</span>
+    <span class="k">elif</span> <span class="n">where</span> <span class="o">==</span> <span class="n">TOP</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">text_width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">10</span><span class="o">*</span><span class="n">height</span>
+
+<span class="c1">#this shows all the one-line-texts</span>
+<span class="k">def</span> <span class="nf">showText</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">where</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">,</span> <span class="n">eraseAll</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span> 
+    <span class="k">if</span> <span class="n">eraseAll</span><span class="p">:</span> <span class="c1">#if specified to be true, clear the screen of all contents</span>
+        <span class="n">screen</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">bgColor</span><span class="p">)</span> 
+    <span class="n">font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">SysFont</span><span class="p">(</span><span class="s2">&quot;verdana&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="p">)</span> 
+    <span class="n">text_surface</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>
+    <span class="n">posx</span><span class="p">,</span> <span class="n">posy</span> <span class="o">=</span> <span class="n">get_position</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text_surface</span><span class="p">,</span> <span class="n">where</span><span class="p">)</span>
+    <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">text_surface</span><span class="p">,</span> <span class="p">(</span><span class="n">posx</span><span class="p">,</span> <span class="n">posy</span><span class="p">))</span> <span class="c1">#copies the text to positions x, y</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span> <span class="c1">#flips the contents to the designated screen</span>
+ 
+    
+    
+<span class="c1"># this function takes one line of text and displays it at the screen center</span>
+<span class="k">def</span> <span class="nf">showTextCenter</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">,</span> <span class="n">eraseAll</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span> 
+    <span class="n">showText</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">CENTER</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">,</span> <span class="n">eraseAll</span><span class="p">)</span>
+    
+
+<span class="c1"># to display a new line of text without erasing the first</span>
+<span class="k">def</span> <span class="nf">showTextNewLine</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">):</span>
+    <span class="n">showText</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">NEWLINECENTER</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>
+
+
+<span class="c1"># error messages</span>
+<span class="k">def</span> <span class="nf">showErrorText</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">):</span> 
+    <span class="n">showText</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">ERRORPOS</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">,</span> <span class="n">eraseAll</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    
+<span class="c1"># show answer options for multiple choice questions</span>
+<span class="k">def</span> <span class="nf">showOptions</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">):</span>  
+    <span class="n">showText</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">OPTIONS</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>  
+    
+
+<span class="c1">#displays a longer text. Splits the longer text up into several lines if it doesn&#39;t fit on to the screen.</span>
+<span class="k">def</span> <span class="nf">showInstructions</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">,</span> <span class="n">overwriteBg</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">startAtLine</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">continueText</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">continueText</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span> 
+        <span class="n">continueText</span> <span class="o">=</span> <span class="n">press_any_key</span>
+    <span class="k">if</span> <span class="n">overwriteBg</span><span class="p">:</span>
+        <span class="n">screen</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">bgColor</span><span class="p">)</span>
+    <span class="n">font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">SysFont</span><span class="p">(</span><span class="s2">&quot;verdana&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="p">)</span> 
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()]</span>  <span class="c1"># 2D array where each row is a list of words.</span>
+    <span class="n">space</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># The width of a space.</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">screen</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">screen</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">width</span><span class="o">//</span><span class="mi">10</span><span class="p">,</span> <span class="n">height</span><span class="o">//</span><span class="mi">10</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">pos</span>
+    <span class="n">y</span> <span class="o">+=</span> <span class="n">startAtLine</span><span class="o">*</span><span class="n">font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">textColor</span><span class="p">)</span><span class="o">.</span><span class="n">get_size</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">word_surface</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">textColor</span><span class="p">)</span>
+            <span class="n">word_width</span><span class="p">,</span> <span class="n">word_height</span> <span class="o">=</span> <span class="n">word_surface</span><span class="o">.</span><span class="n">get_size</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">+</span> <span class="n">word_width</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">width</span><span class="o">//</span><span class="mi">10</span><span class="p">)</span><span class="o">*</span><span class="mi">9</span><span class="p">:</span> <span class="c1">#if word does not fit onto current line anymore</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Reset the x position.</span>
+                <span class="n">y</span> <span class="o">+=</span> <span class="n">word_height</span>  <span class="c1"># Start on new row.</span>
+            <span class="n">screen</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">word_surface</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+            <span class="n">x</span> <span class="o">+=</span> <span class="n">word_width</span> <span class="o">+</span> <span class="n">space</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># after each line, reset the x position</span>
+        <span class="n">y</span> <span class="o">+=</span> <span class="n">word_height</span>  <span class="c1"># and start on new row.</span>
+            
+    <span class="n">showText</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">continueText</span><span class="p">,</span> <span class="n">BOTTOM</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    
+
+<span class="c1"># to enter the subject id or age of subjects</span>
+<span class="k">def</span> <span class="nf">enterNumber</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text1</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textcolor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">,</span> <span class="n">EnterKey</span><span class="p">,</span> <span class="n">EscapeKey</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_ESCAPE</span><span class="p">,</span> <span class="n">errortext</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>  
+    <span class="n">showTextCenter</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text1</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textcolor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>   
+    <span class="k">if</span> <span class="n">errortext</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">showErrorText</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">errortext</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textcolor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>   
+    <span class="n">nr</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">evt</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">evt</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">KEYDOWN</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">evt</span><span class="o">.</span><span class="n">unicode</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">():</span>
+                    <span class="n">nr</span> <span class="o">+=</span> <span class="n">evt</span><span class="o">.</span><span class="n">unicode</span>
+                <span class="k">elif</span> <span class="n">evt</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_BACKSPACE</span><span class="p">:</span>
+                    <span class="n">nr</span> <span class="o">=</span> <span class="n">nr</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">eraseText</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">OPTIONS</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>
+                    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span> 
+                <span class="k">elif</span> <span class="n">evt</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">EnterKey</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">nr</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">evt</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">EscapeKey</span><span class="p">:</span>
+                    <span class="k">return</span>
+            <span class="k">elif</span> <span class="n">evt</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
+                <span class="k">return</span>
+        <span class="n">showText</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">nr</span><span class="p">,</span> <span class="n">OPTIONS</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textcolor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>
+        
+
+
+<span class="c1"># to enter the gender of the subject</span>
+<span class="k">def</span> <span class="nf">enterGender</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textcolor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">):</span>   
+    <span class="n">showTextCenter</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textcolor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>        
+    <span class="n">choicetext</span> <span class="o">=</span> <span class="s1">&#39;a. </span><span class="si">%s</span><span class="s1">     b. </span><span class="si">%s</span><span class="s1">     c. </span><span class="si">%s</span><span class="s1">     d. </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="s1">&#39;male&#39;</span><span class="p">,</span><span class="s1">&#39;female&#39;</span><span class="p">,</span><span class="s1">&#39;non-binary&#39;</span><span class="p">,</span><span class="s1">&#39;prefer not to answer&#39;</span><span class="p">)</span>
+    <span class="n">showOptions</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">choicetext</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textcolor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">waitForAnyKey</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span> <span class="ow">or</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_ESCAPE</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_a</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;m&quot;</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_b</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;f&quot;</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_c</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;nb&quot;</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_d</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;na&quot;</span>
+            
+    
+
+<span class="c1"># does subject speak a dialect?</span>
+<span class="k">def</span> <span class="nf">enterDialect</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">text2</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textcolor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">):</span>
+    <span class="n">showTextCenter</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textcolor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>        
+    <span class="n">choicetext</span> <span class="o">=</span> <span class="s1">&#39;a. </span><span class="si">%s</span><span class="s1">     b. </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span><span class="s1">&#39;no&#39;</span><span class="p">)</span>
+    <span class="n">showOptions</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">choicetext</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textcolor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">waitForAnyKey</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span> <span class="ow">or</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_ESCAPE</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_a</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">enterDialectRegion</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text2</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textcolor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_b</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">]</span>
+        
+
+    
+<span class="c1"># if subject speaks a dialog, which one?          </span>
+<span class="k">def</span> <span class="nf">enterDialectRegion</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text2</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textcolor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">):</span>
+    <span class="n">showTextCenter</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">text2</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textcolor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>
+    <span class="n">dialect</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">evt</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">evt</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">KEYDOWN</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">evt</span><span class="o">.</span><span class="n">unicode</span><span class="o">.</span><span class="n">isalpha</span><span class="p">():</span>
+                    <span class="n">dialect</span> <span class="o">+=</span> <span class="n">evt</span><span class="o">.</span><span class="n">unicode</span>
+                <span class="k">elif</span> <span class="n">evt</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_BACKSPACE</span><span class="p">:</span>
+                    <span class="n">dialect</span> <span class="o">=</span> <span class="n">dialect</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+                <span class="k">elif</span> <span class="n">evt</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_RETURN</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">dialect</span>
+                <span class="k">elif</span> <span class="n">evt</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_ESCAPE</span><span class="p">:</span>
+                    <span class="k">return</span>
+            <span class="k">elif</span> <span class="n">evt</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
+                <span class="k">return</span>
+        <span class="n">showOptions</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">dialect</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textcolor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>
+
+
+<span class="c1">#wait for any key press</span>
+<span class="k">def</span> <span class="nf">waitForAnyKey</span><span class="p">():</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">KEYDOWN</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span>  <span class="c1">#returns key numbers</span>
+            <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
+                <span class="k">return</span>
+
+<span class="c1">#wait for specific key press</span>
+<span class="k">def</span> <span class="nf">waitForKey</span><span class="p">(</span><span class="n">which</span><span class="p">):</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">KEYDOWN</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">which</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
+                <span class="k">return</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pygame 2.1.2 (SDL 2.0.18, Python 3.9.12)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">@author: Juliane Schwab, Scientific Programming 2022/2023</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">pygame</span> <span class="kn">import</span> <span class="n">time</span> <span class="k">as</span> <span class="n">ptime</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1">#correspondence between columns in csv stimulus file and variables defined here</span>
+<span class="n">EXPTYPE</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ITEM</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">IS_PRACT</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">COND</span> <span class="o">=</span> <span class="mi">3</span> 
+<span class="n">S1</span> <span class="o">=</span> <span class="mi">4</span> 
+<span class="n">S2</span> <span class="o">=</span> <span class="mi">5</span> 
+<span class="n">S3</span> <span class="o">=</span> <span class="mi">6</span> 
+<span class="n">S4</span> <span class="o">=</span> <span class="mi">7</span> 
+<span class="n">ANSWER1</span> <span class="o">=</span> <span class="mi">8</span> 
+<span class="n">INDEX</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">LISTNUM</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">NUMSENTS</span> <span class="o">=</span> <span class="mi">6</span>
+
+<span class="n">CSV_ENCODING</span> <span class="o">=</span> <span class="s2">&quot;ISO-8859-1&quot;</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">#these are variables that may be changed depending on the experiment we use the code for.</span>
+<span class="c1">###############################################################################</span>
+
+<span class="c1"># amount of lists. If you have eg two lists, every even subject will use list 2, etc.</span>
+<span class="n">CONDITIONS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+             
+<span class="n">datafolder</span> <span class="o">=</span> <span class="s2">&quot;data/&quot;</span>
+<span class="n">csvfolder</span> <span class="o">=</span> <span class="s2">&quot;results/&quot;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">csvfolder</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">csvfolder</span><span class="p">)</span>
+
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">#settings for the look of the experiment</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="n">WaitForKey2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Enter&quot;</span><span class="p">,</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_RETURN</span><span class="p">]</span> 
+<span class="n">WaitForKey1</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Space&quot;</span><span class="p">,</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_SPACE</span><span class="p">]</span>     
+
+<span class="c1">#for yes/no questions</span>
+<span class="n">responses1</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;Yes&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_1</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_2</span><span class="p">]]</span>
+
+<span class="n">escape</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">K_ESCAPE</span>
+
+<span class="n">fontsize</span> <span class="o">=</span> <span class="mi">24</span> 
+<span class="n">instructions_fontsize</span> <span class="o">=</span> <span class="mi">20</span> 
+<span class="n">textColor</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">)</span> <span class="c1"># white</span>
+<span class="n">bgColor</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">80</span><span class="p">)</span> <span class="c1"># darkblue</span>
+<span class="n">bgColor2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">80</span><span class="p">)</span> <span class="c1"># darkblue</span>
+
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">################### functions working on the csv-files ########################</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="k">def</span> <span class="nf">find_sub_files</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">folder</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Figures out the location of the respective subject data files, and returns a catchable error if they already exist.</span>
+<span class="sd">    If the error occurs in the main loop, the subject can simply enter another number.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">outfile_long</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">sub_</span><span class="si">%s</span><span class="s2">_long.csv&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">sub</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">outfile_long</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span><span class="s2">&quot;There is already a file for that participant!&quot;</span><span class="p">)</span> 
+    <span class="k">return</span> <span class="n">outfile_long</span>
+
+
+<span class="k">def</span> <span class="nf">create_sub_files</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">folder</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    writes the header of the sub-file.</span>
+<span class="sd">     fields that are saved are:</span>
+<span class="sd">     subject_id, list, trial, experiment, item, condition, sen_num, rt, answer, fits_pred</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">outfile_long</span> <span class="o">=</span> <span class="n">find_sub_files</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">folder</span><span class="p">)</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;subject_id&quot;</span><span class="p">,</span>  <span class="s2">&quot;StimulIndex&quot;</span><span class="p">,</span> <span class="s2">&quot;trialnum&quot;</span><span class="p">,</span> <span class="s2">&quot;which_experiment&quot;</span><span class="p">,</span> <span class="s2">&quot;itemnr&quot;</span><span class="p">,</span> <span class="s2">&quot;condition&quot;</span><span class="p">,</span> <span class="s2">&quot;sentence_num&quot;</span><span class="p">,</span> <span class="s2">&quot;reading/responseTime&quot;</span><span class="p">,</span> <span class="s2">&quot;answer1&quot;</span><span class="p">,</span> <span class="s2">&quot;answer1AsPredicted&quot;</span><span class="p">]</span>
+    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">outfile_long</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">outfile_long</span>
+
+
+
+<span class="k">def</span> <span class="nf">append_to_CSVs</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">longfile</span><span class="p">,</span> <span class="n">sentence_num</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    We created the csv already, so with every new question, we simply add a row to that csv.</span>
+<span class="sd">    This function gets called called after every sentence of a trial.</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">longfile</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>              
+
+
+
+<span class="k">def</span> <span class="nf">appendto_subInfo_file</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">sub</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">comment</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;We also have one file &quot;subsToInfo.csv&quot;, in which we externally store the demographic  information</span>
+<span class="sd">       (age, gender, dialect)</span>
+<span class="sd">       together with the corresponding subject-number</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">filestring</span> <span class="o">=</span> <span class="n">folder</span><span class="o">+</span><span class="s2">&quot;subsToInfo.csv&quot;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filestring</span><span class="p">):</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;w&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filestring</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;w&quot;</span><span class="p">:</span>
+            <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s2">&quot;Subject_Number&quot;</span><span class="p">,</span> <span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="s2">&quot;Gender&quot;</span><span class="p">,</span> <span class="s2">&quot;Speaks_Dialect&quot;</span><span class="p">,</span> <span class="s2">&quot;What_Dialect&quot;</span><span class="p">,</span> <span class="s2">&quot;Does_Condition&quot;</span><span class="p">,</span> <span class="s2">&quot;Comments&quot;</span><span class="p">])</span>
+        <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">sub</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">comment</span><span class="p">])</span>
+            
+
+<span class="c1">###############################################################################</span>
+<span class="c1">############## functions to read and filter the data files ####################</span>
+<span class="c1">###############################################################################</span>
+
+<span class="k">def</span> <span class="nf">read_data</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Reads all experiment-data from the &quot;together.csv&quot;-file in the folder folder. If that is non-existent, it creates the file first, using the 4 subfiles &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">folder</span><span class="o">+</span><span class="s2">&quot;Stimuli.csv&quot;</span><span class="p">):</span>
+        <span class="n">exp1</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span><span class="n">folder</span><span class="o">+</span><span class="s2">&quot;Stimuli.csv&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;Filename must be &#39;Stimuli.csv&#39;!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">exp1</span>
+
+
+
+<span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Reads a file (csv), fields must be seperated by &#39;;&#39;, and seperates it linewise and by field.</span>
+<span class="sd">        Returns a list of lists: [[line1_entry1, line1_entry2, ...], [line2_entry1, line2_entry2, ...], ...] </span>
+<span class="sd">        Leaves out the first row, which contrains the header. Also leaves out empty rows.&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_name</span><span class="p">),</span> <span class="s2">&quot;File </span><span class="si">%s</span><span class="s2"> missing!&quot;</span> <span class="o">%</span><span class="k">file_name</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rt&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">CSV_ENCODING</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> 
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
+        <span class="n">datafields</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">reader</span> <span class="k">if</span> <span class="p">(</span><span class="n">line</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="s2">&quot;exp&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()))]</span>
+    <span class="k">return</span> <span class="n">datafields</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">###############################################################################</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="k">def</span> <span class="nf">enter_proband_info</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; In the beginning of the experiment, we ask for demographics (sub-nr, age, gender, dialect).</span>
+<span class="sd">        This function will get called right at the beginning of the main loop.&quot;&quot;&quot;</span>
+    <span class="n">sub</span> <span class="o">=</span> <span class="n">enterNumber</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">enter_subnr_text</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor2</span><span class="p">,</span> <span class="n">WaitForKey2</span><span class="p">)</span>
+        
+    <span class="n">dobreak</span> <span class="o">=</span> <span class="kc">False</span>    
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">dobreak</span><span class="p">:</span> <span class="c1">#this loop will ask the subject to enter a new sub-number as long as the entered one is already taken.</span>
+        <span class="n">dobreak</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="c1">#tries to generate a new sub file, unless one by that name already exists</span>
+        <span class="k">try</span><span class="p">:</span> 
+            <span class="n">_</span> <span class="o">=</span> <span class="n">find_sub_files</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">csvfolder</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">FileExistsError</span><span class="p">:</span>
+            <span class="n">dobreak</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">sub</span> <span class="o">=</span> <span class="n">enterNumber</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">enter_subnr_text</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor2</span><span class="p">,</span> <span class="n">WaitForKey2</span><span class="p">,</span> <span class="n">errortext</span><span class="o">=</span><span class="n">error_subnr_already_taken</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dobreak</span><span class="p">:</span>
+            <span class="k">break</span>
+    
+    <span class="n">age</span> <span class="o">=</span> <span class="n">enterNumber</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">enter_age_text</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor2</span><span class="p">,</span> <span class="n">WaitForKey2</span><span class="p">)</span>
+    <span class="n">gender</span> <span class="o">=</span> <span class="n">enterGender</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">enter_gender_text</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor2</span><span class="p">)</span>
+    <span class="n">dialect</span> <span class="o">=</span> <span class="n">enterDialect</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">dialect_text</span><span class="p">,</span> <span class="n">dialect_text_2</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor2</span><span class="p">)</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="n">dialect</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#IF the subject speaks a dialect</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="n">dialect</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#WHICH dialect they speak</span>
+    <span class="k">return</span> <span class="n">sub</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span>
+
+
+
+<span class="k">def</span> <span class="nf">run_all_trials_from_list</span><span class="p">(</span><span class="n">curr_list</span><span class="p">,</span> <span class="n">screen</span><span class="p">,</span> <span class="n">sub</span><span class="p">,</span> <span class="n">yourcond</span><span class="p">,</span> <span class="n">file_long</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function takes as input the entire list of trials for the subject, loops through this list, and executes</span>
+<span class="sd">    the trial-function for every single one.</span>
+<span class="sd">    This allows us to have more than one trial.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">curr_list</span><span class="p">:</span> 
+        <span class="n">ind</span> <span class="o">+=</span> <span class="mi">1</span>  
+        <span class="n">presentences</span> <span class="o">=</span> <span class="p">[</span><span class="n">S1</span><span class="p">,</span> <span class="n">S2</span><span class="p">,</span> <span class="n">S3</span><span class="p">,</span> <span class="n">S4</span><span class="p">]</span>
+        <span class="n">sentences</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">currsent</span> <span class="ow">in</span> <span class="n">presentences</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="n">currsent</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="n">sentences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">currsent</span><span class="p">)</span>
+            
+        <span class="n">trial</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">sentences</span><span class="p">,</span> <span class="n">screen</span><span class="p">,</span> <span class="n">sub</span><span class="p">,</span> <span class="n">yourcond</span><span class="p">,</span> <span class="n">file_long</span><span class="p">)</span> 
+
+
+<span class="k">def</span> <span class="nf">trial</span><span class="p">(</span><span class="n">trial</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">sentences</span><span class="p">,</span> <span class="n">screen</span><span class="p">,</span> <span class="n">sub</span><span class="p">,</span> <span class="n">yourcond</span><span class="p">,</span> <span class="n">file_long</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; function to run one trial</span>
+<span class="sd">    displays the context sentences and the critical sentence</span>
+<span class="sd">    registers which answer option was chosen and saves it along with their reaction time</span>
+<span class="sd">    parameters:</span>
+<span class="sd">        trial - trial number, for saving the data</span>
+<span class="sd">        line - one line from the data-file</span>
+<span class="sd">        file_long: the path of the csv-files in which to store the result</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">sentence_num</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">itemnr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="n">ITEM</span><span class="p">])</span>
+    <span class="n">condition</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="n">COND</span><span class="p">]</span> <span class="p">)</span>
+    <span class="n">sents</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
+    <span class="n">answer1</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="n">ANSWER1</span><span class="p">]</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="n">INDEX</span><span class="p">]</span>
+                   
+    <span class="c1"># going through the sentences and displaying one at a time   </span>
+    <span class="k">for</span> <span class="n">currsent</span> <span class="ow">in</span> <span class="n">sents</span><span class="p">:</span>
+        <span class="n">sentence_num</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="n">currsentence</span> <span class="o">=</span> <span class="n">currsent</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">CSV_ENCODING</span><span class="p">)</span>
+        
+        <span class="n">showTextCenter</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">currsentence</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span> 
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">ptime</span><span class="o">.</span><span class="n">get_ticks</span><span class="p">()</span> <span class="c1"># rounds to the 100ths of a second</span>
+        
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">currsent</span> <span class="o">==</span> <span class="n">sents</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span> <span class="c1">#If its the last sentence, </span>
+            <span class="c1">#you don&#39;t wait for the space bar input (in the else-loop), but for the reaction of  the user (after the else-loop)</span>
+            <span class="k">break</span>
+        
+        <span class="k">else</span><span class="p">:</span>                       
+            <span class="n">answered</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">answered</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">waitForAnyKey</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">escape</span> <span class="ow">or</span> <span class="n">key</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span> <span class="c1">#user either pressed escape-key or the X at the top right</span>
+                    <span class="n">endProgram</span><span class="p">()</span>
+                    <span class="k">return</span> 
+                <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">WaitForKey1</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="c1">#spacebar</span>
+                    <span class="n">answered</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">t2</span> <span class="o">=</span> <span class="n">ptime</span><span class="o">.</span><span class="n">get_ticks</span><span class="p">()</span> <span class="c1">#calculate the reading time of the sentence and save it in the long csv-file</span>
+                    <span class="n">rt</span> <span class="o">=</span> <span class="n">t2</span><span class="o">-</span><span class="n">t1</span>
+                    <span class="n">append_to_CSVs</span><span class="p">([</span><span class="n">sub</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">trial</span><span class="p">,</span> <span class="s2">&quot;modal&quot;</span><span class="p">,</span> <span class="n">itemnr</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">sentence_num</span><span class="p">,</span> <span class="n">rt</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">],</span> <span class="n">file_long</span><span class="p">,</span> <span class="n">sentence_num</span><span class="p">)</span>
+    
+
+    <span class="n">response1</span> <span class="o">=</span> <span class="n">janein</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span> 
+    <span class="n">fits1</span> <span class="o">=</span> <span class="n">response1</span> <span class="o">==</span> <span class="n">answer1</span> 
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">ptime</span><span class="o">.</span><span class="n">get_ticks</span><span class="p">()</span>
+    <span class="n">rt</span> <span class="o">=</span> <span class="n">t2</span><span class="o">-</span><span class="n">t1</span> <span class="c1"># calculate the reaction time</span>
+    
+    <span class="n">to_save</span> <span class="o">=</span> <span class="p">[</span><span class="n">sub</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">trial</span><span class="p">,</span> <span class="s2">&quot;modal&quot;</span><span class="p">,</span> <span class="n">itemnr</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">sentence_num</span><span class="p">,</span> <span class="n">rt</span><span class="p">,</span> <span class="n">fits1</span><span class="p">]</span>
+    
+    <span class="n">append_to_CSVs</span><span class="p">(</span><span class="n">to_save</span><span class="p">,</span> <span class="n">file_long</span><span class="p">,</span> <span class="n">sentence_num</span><span class="p">)</span>
+    
+    <span class="n">showTextCenter</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">end_trial</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">waitForKey</span><span class="p">(</span><span class="n">WaitForKey1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span> <span class="c1">#if the user presses the X, you end the program</span>
+        <span class="n">endProgram</span><span class="p">()</span>
+    
+    
+
+<span class="k">def</span> <span class="nf">janein</span><span class="p">(</span><span class="n">screen</span><span class="p">):</span> 
+    <span class="sd">&quot;&quot;&quot;function to display 2 choices, enter answer with one of two keys</span>
+<span class="sd">    returns which choice was made</span>
+<span class="sd">    parameter choices: given choices</span>
+<span class="sd">    parameter exp_type: to know from which list of distractors to choose a word (if there are only 2 choices given)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+  
+    <span class="n">choicetext</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">) </span><span class="si">%s</span><span class="s1">                   </span><span class="si">%s</span><span class="s1">) </span><span class="si">%s</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">responses1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">responses1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">responses1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">responses1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> 
+    <span class="n">showOptions</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">choicetext</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">waitForAnyKey</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="n">responses1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]):</span> <span class="c1">#yes</span>
+            <span class="k">return</span> <span class="n">responses1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="n">responses1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]):</span> <span class="c1">#no</span>
+            <span class="k">return</span> <span class="n">responses1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="n">escape</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">endProgram</span><span class="p">()</span> 
+            <span class="k">return</span>
+
+
+<span class="c1">###############################################################################</span>
+<span class="c1">###############################################################################</span>
+<span class="c1">###############################################################################</span>
+
+
+<span class="k">def</span> <span class="nf">endProgram</span><span class="p">():</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1">#initiating the experiment....</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+    
+    <span class="n">modes</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">list_modes</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pygame</span><span class="o">.</span><span class="n">FULLSCREEN</span><span class="p">)</span>
+    <span class="n">screen</span><span class="o">=</span><span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="n">modes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pygame</span><span class="o">.</span><span class="n">FULLSCREEN</span><span class="p">)</span>
+    
+    
+    <span class="c1">#showing the starting instructions.....</span>
+    <span class="k">if</span> <span class="n">starting_instructions</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">showInstructions</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">starting_instructions</span><span class="p">,</span> <span class="n">instructions_fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor2</span><span class="p">)</span>
+        <span class="n">waitForAnyKey</span><span class="p">();</span>
+                     
+    
+    <span class="c1">#collect demographic data by calling the enter_proband_info function</span>
+    <span class="n">sub</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">dialect1</span><span class="p">,</span> <span class="n">dialect2</span> <span class="o">=</span> <span class="n">enter_proband_info</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">)</span>
+     
+    
+    <span class="c1"># read in the data file and assign an experimental condition to the subject based on their sub nr.</span>
+    <span class="n">exp_list</span> <span class="o">=</span> <span class="n">read_data</span><span class="p">(</span><span class="n">datafolder</span><span class="p">)</span>
+    <span class="n">yourcond</span> <span class="o">=</span> <span class="n">CONDITIONS</span><span class="p">[(</span><span class="n">sub</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">CONDITIONS</span><span class="p">)]</span>
+    <span class="n">exp_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">exp_list</span> <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="n">LISTNUM</span><span class="p">]</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">yourcond</span><span class="p">)]</span> <span class="c1">#only keep the trial that will be shown to the participant</span>
+
+    
+    <span class="c1">#prepare the CSVs to save the results into</span>
+    <span class="n">file_long</span> <span class="o">=</span> <span class="n">create_sub_files</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">csvfolder</span><span class="p">)</span>
+     
+        
+    <span class="c1">#now for the real experiment...</span>
+    <span class="n">showInstructions</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">after_practice_instructions</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>
+    <span class="n">waitForAnyKey</span><span class="p">()</span>
+    
+    <span class="n">run_all_trials_from_list</span><span class="p">(</span><span class="n">exp_list</span><span class="p">,</span> <span class="n">screen</span><span class="p">,</span> <span class="n">sub</span><span class="p">,</span> <span class="n">yourcond</span><span class="p">,</span> <span class="n">file_long</span><span class="p">)</span>
+    
+    
+    <span class="c1">#show the finishing instructions and we&#39;re done!</span>
+    <span class="n">showInstructions</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">end_experiment</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">,</span> <span class="n">textColor</span><span class="p">,</span> <span class="n">bgColor</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">waitForAnyKey</span><span class="p">()</span>
+    
+    <span class="n">endProgram</span><span class="p">()</span>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>    
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">An</span> <span class="n">exception</span> <span class="n">has</span> <span class="n">occurred</span><span class="p">,</span> <span class="n">use</span> <span class="o">%</span><span class="k">tb</span> to see the full traceback.
+
+<span class="ne">SystemExit</span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\julia\miniconda3\lib\site-packages\IPython\core\interactiveshell.py:3465: UserWarning: To exit: use &#39;exit&#39;, &#39;quit&#39;, or Ctrl-D.
+  warn(&quot;To exit: use &#39;exit&#39;, &#39;quit&#39;, or Ctrl-D.&quot;, stacklevel=1)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Here is what our stimulus file looked like:</strong>
+<img alt="" src="https://www.dropbox.com/s/wy4qcj32crpn3xk/stimuli.png?raw=1" /></p>
+<p><strong>And here’s what the recorded results file looks like:</strong>
+<img alt="" src="https://www.dropbox.com/s/xcvs0q4nialu53v/result.png?raw=1" /></p>
+</section>
+<section id="descriptive-data-exploration">
+<h3>Descriptive data exploration<a class="headerlink" href="#descriptive-data-exploration" title="Permalink to this headline">#</a></h3>
+<p>to be added…</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
