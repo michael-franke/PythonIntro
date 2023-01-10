@@ -5,10 +5,14 @@ Created on Sun Jan  8 11:58:43 2023
 @author: Juliane
 """
 
+
+
+
 a = [1, "Arthur", True, [False], 2.75, "boxes"];
 
-b =  sorted(a, key = lambda x: str(x).lower()); 
+b =  sorted(a, key = lambda x: str(x)); 
 
+b = [1, 2.75, "Arthur", True, [False],"boxes"]
 #always include lower!
 #note what happens with the list! (is treated as string starting with special character)
 
@@ -19,6 +23,28 @@ b =  sorted(a, key = lambda x: str(x).lower());
 #lambda
 #key
 #lower
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #Qs:
