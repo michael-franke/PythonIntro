@@ -3,7 +3,7 @@
 
 # ## For efficiency's sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023) 
 # 
-# Efficiency is key. Therefore, in this session, you will learn more about advanced aspects of efficient programming. We have already discussed how to improve code efficiency and maintainability in small programs. Sooner or later, however, additional questions may emerge: How should you **distribute code over a main program and importable modules**? Where can time and effort be saved by **relying on already available modules and **packages**? Can **repeating patterns** in the task at hand be detected and exploited for further automization? 
+# Efficiency is key. Therefore, in this session, you will learn more about advanced aspects of efficient programming. We have already discussed how to improve code efficiency and maintainability in small programs. Sooner or later, however, additional questions may emerge: How should you **distribute code over a main program and importable modules**? Where can time and effort be saved by **relying on already available modules and packages**? Can **repeating patterns** in the task at hand be detected and exploited for further automization? 
 # 
 
 # ### Structured programs
@@ -20,7 +20,7 @@
 # 
 # #### Introducing the *main* block
 # 
-# Upon importing a module, **all statements in the imported module are executed**. This may be fine if the module is explicitly design with a singular intended function as module imported to other programs. But **sometimes you may want to be able to use a script as both a module and an executable standalone program in and of itself**. This is where the *main* block comes in handy.
+# Upon importing a module, **all statements in the imported module are executed**. This may be fine if the module is explicitly designed with the singular function to be imported by other .py files. But **sometimes you may want to be able to use a script as both a module and an executable standalone program in and of itself**. This is where the *main* block comes in handy.
 # 
 # Why would you want this functionality?
 # - Your code's **main function may be for use as module**, but you still want to include a script mode where it runs some **unit tests or a demo**.
