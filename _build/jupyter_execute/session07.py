@@ -184,7 +184,8 @@ print(text_en.words)
 # In[7]:
 
 
-print("\nLanguage Detected: Name={}".format(text_en.language.name))
+print("\nLanguage Detected: Name={}".
+      format(text_en.language.name))
 
 
 # In[8]:
