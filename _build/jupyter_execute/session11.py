@@ -714,7 +714,3 @@ if __name__ == '__main__':
 # **And here's what the recorded results file looks like:**
 # ![](https://www.dropbox.com/s/xcvs0q4nialu53v/result.png?raw=1)
 # 
-
-# ### Descriptive data exploration
-# 
-# to be added...

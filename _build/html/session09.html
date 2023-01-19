@@ -401,6 +401,16 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#defining-recursion">
+   Defining recursion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recursive-functions">
+   Recursive functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#recursion-in-logic-and-mathematics">
    Recursion in logic and mathematics
   </a>
@@ -461,6 +471,16 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#defining-recursion">
+   Defining recursion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recursive-functions">
+   Recursive functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#recursion-in-logic-and-mathematics">
    Recursion in logic and mathematics
   </a>
@@ -513,6 +533,8 @@ title="Print to PDF"
                 
   <section id="recursion-and-trees-january-24-2023">
 <h1>Recursion and trees (January 24, 2023)<a class="headerlink" href="#recursion-and-trees-january-24-2023" title="Permalink to this headline">#</a></h1>
+<section id="defining-recursion">
+<h2>Defining recursion<a class="headerlink" href="#defining-recursion" title="Permalink to this headline">#</a></h2>
 <p>It is time to turn everything on its head and introduce recursion into the game. <strong>Recursion</strong> occurs when we <strong>define something in terms of itself or something else of its type</strong>. For instance, we may define a file directory as a location on the computer that contains files <em>and (possibly) other directories</em>.</p>
 <p>Recursion is <strong>useful for problems that can be represented as a series of subproblems of the same type</strong>. To stay with the previous example, the problem of searching for a file, for instance, can be formulated recursively as follows (in pseudocode):</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    def search(directory):
@@ -525,26 +547,31 @@ title="Print to PDF"
 </pre></div>
 </div>
 <p>Note that we are <strong>calling the function <em>search()</em></strong> within the body of the <em>search()</em> function, and are <strong>doing so on a smaller problem space</strong> (i.e., a subdirectory of our main directory).</p>
-<p>Successful recursion, that is, recursion that terminates at some point, requires that we define both a <strong>base case</strong> and a <strong>recursive case</strong>. In the example above, the base case is such that either (a) we find the <em>file</em> in the current directory or (b) there is no further subdirectory to search and the file does not exist. The recursive case is entered with a <em>for</em>-loop over all subdirectories, which calls on the search function again and returns the subdirectory in which the file is located.</p>
+</section>
+<section id="recursive-functions">
+<h2>Recursive functions<a class="headerlink" href="#recursive-functions" title="Permalink to this headline">#</a></h2>
+<p><strong>Successful recursion is recursion that terminates at some point</strong>. It requires that we define both a <strong>base case</strong> and a <strong>recursive case</strong>. In the example above, the base case is such that either (a) we find the <em>file</em> in the current directory or (b) there is no further subdirectory to search and the file does not exist. If either (a) or (b) are the case, the function call terminates. The recursive case is entered with a <em>for</em>-loop over all subdirectories, which calls on the <em>search</em> function again and returns the subdirectory in which the file is located.</p>
 <p><strong>Thus, keep the following in mind when defining recursive functions:</strong></p>
 <ul class="simple">
 <li><p>if the function calls itself on every input, we get infinite recursion</p></li>
-<li><p>in all useful recursive functions, each nested call differs in its arguments (e.g. execution on subproblems)</p></li>
+<li><p>in all useful recursive functions, each nested call differs in its arguments (e.g., by execution on subproblems)</p></li>
 <li><p>for recursive functions to terminate, we need base cases!</p></li>
 </ul>
+<p>The following provides another example of a recursive function, this time in real Python code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#another example by the same principle as the file search algorithm in pseudocode above</span>
-<span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">example</span><span class="p">):</span>
+<span class="c1">#function that searches for the first sublist containing a specified element</span>
+<span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">example</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
     <span class="n">list_of_lists</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">example</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="nb">list</span><span class="p">]</span>
-    <span class="k">if</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">example</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">example</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">example</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">list_of_lists</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">search</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">search</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">search</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">num</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">search</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">num</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">None</span>
         
-<span class="nb">print</span><span class="p">(</span><span class="n">search</span><span class="p">([</span><span class="mi">2</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span><span class="mi">4</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">search</span><span class="p">([</span><span class="mi">2</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span><span class="mi">4</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]],</span> <span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -554,6 +581,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+</section>
 <section id="recursion-in-logic-and-mathematics">
 <h2>Recursion in logic and mathematics<a class="headerlink" href="#recursion-in-logic-and-mathematics" title="Permalink to this headline">#</a></h2>
 <p>Recursive definitions are very common in logic and mathematics. <strong>In particular, all inductive proofs are recursive</strong>:</p>
@@ -570,7 +598,7 @@ title="Print to PDF"
 </section>
 <section id="recursion-vs-iteration-in-programming">
 <h2>Recursion vs. iteration in programming<a class="headerlink" href="#recursion-vs-iteration-in-programming" title="Permalink to this headline">#</a></h2>
-<p>In principle, <strong>recursion and iteration are equally powerful (meaning that one can be used to emulate the other)</strong>. Some algorithms are <strong>easier to write</strong> iteratively, others are easier using recursion. In addition, recursive and iterative solutions to a problem can <strong>differ in efficiency</strong> (in terms of memory usage and completion time).</p>
+<p>In principle, <strong>recursion and iteration are equally powerful (meaning that one can be used to emulate the other)</strong>. Some algorithms are <strong>easier to write</strong> iteratively, others are easier to write using recursion. In addition, recursive and iterative solutions to a problem can <strong>differ in efficiency</strong> (in terms of memory usage and completion time).</p>
 <p><strong>Iteration –&gt; Recursion</strong>: Note that all loops can be implemented using recursion! In the following, we replace a <em>for</em>-loop with a recursive function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -613,25 +641,30 @@ title="Print to PDF"
 <p><strong>Recursion –&gt; Iteration</strong>: At the same time, every recursive function can be implemented using iteration! Our search function from above could be rewritten as follows.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#another example by the same principle as the file search algorithm in pseudocode above</span>
-<span class="n">example3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span><span class="mi">4</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#iterative solution to searching a sublist with a specified element</span>
+<span class="k">def</span> <span class="nf">iterative_search</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ex</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">num</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">num</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="k">break</span>
+                <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">j</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">num</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+                            <span class="k">break</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">example3</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">example3</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
-         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">j</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">iterative_search</span><span class="p">([</span><span class="mi">2</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span><span class="mi">4</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]],</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 5]
+None
 </pre></div>
 </div>
 </div>
@@ -641,7 +674,7 @@ title="Print to PDF"
 <ul class="simple">
 <li><p>processing syntax trees for programming languages (in a compiler) and natural languages (in a parser)</p></li>
 <li><p>processing more general graph structures like networks</p></li>
-<li><p>sorting and searching in structures that are more complex than lists or dictionaries (e.g. 3-D models)</p></li>
+<li><p>sorting and searching in structures that are more complex than lists or dictionaries (e.g., 3-D models)</p></li>
 </ul>
 </section>
 <section id="in-class-exercise-fibonacci-numbers">
@@ -745,7 +778,7 @@ title="Print to PDF"
 <section id="implementing-a-tree-structure">
 <h3>Implementing a tree structure<a class="headerlink" href="#implementing-a-tree-structure" title="Permalink to this headline">#</a></h3>
 <p>The tree isn’t a built-in data type in Python, but we can easily define our own data type, the Tree, as a user-defined class. We would like our Tree to have <em>nodes</em> and <em>leaves</em>, such that nodes are branching points with labels and leaves are endpoints (i.e., nodes that do not have any children).</p>
-<p>For all trees, it holds that:</p>
+<p><strong>For all trees, it holds that:</strong></p>
 <ul class="simple">
 <li><p>nodes have a label, which we will store as instance variable</p></li>
 <li><p>nodes have children which we will store as instance variable containing a list of (sub)trees (in which order matters!)</p></li>
@@ -799,10 +832,10 @@ title="Print to PDF"
 </section>
 <section id="traversing-trees">
 <h3>Traversing trees<a class="headerlink" href="#traversing-trees" title="Permalink to this headline">#</a></h3>
-<p>Trees are useful data structures, in part, because they can be “traversed” in multiple ways. <strong>Tree traversal</strong> (also known as <strong>tree search</strong>) refers to the process of looking up elements in the tree by visiting (e.g. retrieving, updating, deleting) each node in a tree exactly once.</p>
-<p>We previously looked at data structures like lists or tuples, which must always be searched / traversed in linear order. Tree structures, in comparison, can be traversed in various ways, called <em>depth-first</em> or <em>breadth-first</em> orders. Various hybrid traveral schemes are also possible. Depending one one’s application, tree traversal can be substantially more efficient than linear searches. For linguistic applications, it can also be more representative of the underlying structural relations that we would like to process.</p>
+<p>Trees are useful data structures, in part, because they can be “traversed” in multiple ways. <strong>Tree traversal</strong> (also known as <strong>tree search</strong>) refers to the process of looking up elements in a tree by visiting (e.g. retrieving, updating, deleting) each node in a tree exactly once.</p>
+<p>We previously looked at data structures like lists or tuples, which must always be searched / traversed in linear order. Tree structures, in comparison, can be traversed in various ways, called <em>depth-first</em> or <em>breadth-first</em> orders. Various hybrid traversal schemes are also possible. Depending one one’s application, tree traversal can be substantially more efficient than linear searches. For linguistic applications, it can also be more representative of the underlying structural relations that we would like to process.</p>
 <p><strong>Depth-first</strong> traversal orders deepen the current subtree as much as possible before moving to the next sibling. <strong>Breadth-first</strong> traversal orders broaden the current level as much as possible before moving to deeper nodes.</p>
-<p>There are three common ways to traverse them in depth-first order: <strong>in-order</strong>, <strong>pre-order</strong> and <strong>post-order</strong>:</p>
+<p>There are three common ways to traverse trees in depth-first order: <strong>in-order</strong>, <strong>pre-order</strong> and <strong>post-order</strong>:</p>
 <ul class="simple">
 <li><p><strong>in-order traversal</strong>: left child first, parent, then other children</p></li>
 <li><p><strong>pre-order traversal</strong>: parent first, then children from left to right</p></li>

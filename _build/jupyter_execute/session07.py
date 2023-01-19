@@ -181,26 +181,26 @@ text_ar = Text("عيد ميلاد مجيد وكل عام وانتم بخير")
 print(text_en.words)
 
 
-# In[7]:
+# In[27]:
 
 
 print("\nLanguage Detected: Name={}".
       format(text_en.language.name))
 
 
-# In[8]:
+# In[6]:
 
 
 print(text_ar.words)
 
 
-# In[9]:
+# In[7]:
 
 
 print("\nLanguage Detected: Name={}".format(text_ar.language.name))
 
 
-# In[10]:
+# In[8]:
 
 
 from polyglot.transliteration import Transliterator
@@ -294,7 +294,7 @@ for x in text_en.transliterate("ar"):
 # - *regex.findall(str)*: matches the regex pattern **for its appearance anywhere in the string** and returns all matches.
 # - *regex.split(str)*: matches the regex pattern **for its appearance anywhere in the string** and splits the string into a list of substrings.
 
-# In[11]:
+# In[9]:
 
 
 import re
@@ -309,7 +309,7 @@ print(matcher.split(sentence)) #split string around all instances matching the r
 
 # The first two of these methods return a *match* object, which can be further processed using methods within the *Re* module (e.g., *start()* and *end()*, but check out the online documentation for more).
 
-# In[12]:
+# In[10]:
 
 
 match = matcher.search(sentence)
@@ -320,7 +320,7 @@ match.start(), match.end()
 
 # You can replace matching substrings using the *sub(replacement, string)*:
 
-# In[13]:
+# In[11]:
 
 
 matcher.sub(" cat", sentence)

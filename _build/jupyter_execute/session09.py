@@ -3,6 +3,7 @@
 
 # ## Recursion and trees (January 24, 2023)
 # 
+# ### Defining recursion
 # It is time to turn everything on its head and introduce recursion into the game. **Recursion** occurs when we **define something in terms of itself or something else of its type**. For instance, we may define a file directory as a location on the computer that contains files *and (possibly) other directories*. 
 # 
 # Recursion is **useful for problems that can be represented as a series of subproblems of the same type**. To stay with the previous example, the problem of searching for a file, for instance, can be formulated recursively as follows (in pseudocode):
@@ -17,27 +18,32 @@
 # 
 # Note that we are **calling the function *search()*** within the body of the *search()* function, and are **doing so on a smaller problem space** (i.e., a subdirectory of our main directory). 
 # 
-# Successful recursion, that is, recursion that terminates at some point, requires that we define both a **base case** and a **recursive case**. In the example above, the base case is such that either (a) we find the *file* in the current directory or (b) there is no further subdirectory to search and the file does not exist. The recursive case is entered with a *for*-loop over all subdirectories, which calls on the search function again and returns the subdirectory in which the file is located.
+# ### Recursive functions 
+# 
+# **Successful recursion is recursion that terminates at some point**. It requires that we define both a **base case** and a **recursive case**. In the example above, the base case is such that either (a) we find the *file* in the current directory or (b) there is no further subdirectory to search and the file does not exist. If either (a) or (b) are the case, the function call terminates. The recursive case is entered with a *for*-loop over all subdirectories, which calls on the *search* function again and returns the subdirectory in which the file is located.
 # 
 # **Thus, keep the following in mind when defining recursive functions:**
 # - if the function calls itself on every input, we get infinite recursion
-# - in all useful recursive functions, each nested call differs in its arguments (e.g. execution on subproblems)
+# - in all useful recursive functions, each nested call differs in its arguments (e.g., by execution on subproblems)
 # - for recursive functions to terminate, we need base cases!
+
+# The following provides another example of a recursive function, this time in real Python code:
 
 # In[1]:
 
 
 #another example by the same principle as the file search algorithm in pseudocode above
-def search(example):
+#function that searches for the first sublist containing a specified element
+def search(example, num):
     list_of_lists = [x for x in example if type(x)==list]
-    if 1 in example:
+    if num in example:
         return example
     for i in list_of_lists:
-        if search(i) != None:
-            return search(i)
+        if search(i,num) != None:
+            return search(i,num)
     return None
         
-print(search([2,[2,3,[1,5],4],[4,2]]))
+print(search([2,[2,3,[1,5],4],[4,2]], 1))
 
 
 # ### Recursion in logic and mathematics
@@ -58,7 +64,7 @@ print(search([2,[2,3,[1,5],4],[4,2]]))
 
 # ### Recursion vs. iteration in programming
 # 
-# In principle, **recursion and iteration are equally powerful (meaning that one can be used to emulate the other)**. Some algorithms are **easier to write** iteratively, others are easier using recursion. In addition, recursive and iterative solutions to a problem can **differ in efficiency** (in terms of memory usage and completion time).
+# In principle, **recursion and iteration are equally powerful (meaning that one can be used to emulate the other)**. Some algorithms are **easier to write** iteratively, others are easier to write using recursion. In addition, recursive and iterative solutions to a problem can **differ in efficiency** (in terms of memory usage and completion time).
 # 
 # **Iteration --> Recursion**: Note that all loops can be implemented using recursion! In the following, we replace a *for*-loop with a recursive function.
 
@@ -89,20 +95,24 @@ recursive_print(example2,0)
 # In[4]:
 
 
-#another example by the same principle as the file search algorithm in pseudocode above
-example3 = [2,[2,3,[1,5],4],[4,2]]
+#iterative solution to searching a sublist with a specified element
+def iterative_search(ex, num):
+    for i in ex:
+        if i == num:
+            print(ex)
+            break
+        elif type(i) == list:
+             for j in i:
+                if j == num:
+                    print(i)
+                    break
+                elif type(j) == list:
+                    for k in j:
+                        if k == num:
+                            print(j)
+                            break
 
-for i in example3:
-    if i == 1:
-        print(example3)
-    elif type(i) == list:
-         for j in i:
-            if j == 1:
-                print(i)
-            elif type(j) == list:
-                for k in j:
-                    if k == 1:
-                        print(j) 
+print(iterative_search([2,[2,3,[1,5],4],[4,2]],1))
 
 
 # Recursive definitions are often easier to write for processing data structures which contain substructures of varying size (i.e. data that is not tabular in shape). 
@@ -110,7 +120,7 @@ for i in example3:
 # **Examples**:
 # - processing syntax trees for programming languages (in a compiler) and natural languages (in a parser)
 # - processing more general graph structures like networks
-# - sorting and searching in structures that are more complex than lists or dictionaries (e.g. 3-D models)
+# - sorting and searching in structures that are more complex than lists or dictionaries (e.g., 3-D models)
 
 # ### In-class exercise: Fibonacci numbers
 # 
@@ -194,7 +204,7 @@ turtle.bye() #close Turtle window
 # 
 # The tree isn't a built-in data type in Python, but we can easily define our own data type, the Tree, as a user-defined class. We would like our Tree to have *nodes* and *leaves*, such that nodes are branching points with labels and leaves are endpoints (i.e., nodes that do not have any children). 
 # 
-# For all trees, it holds that:
+# **For all trees, it holds that:**
 # - nodes have a label, which we will store as instance variable
 # - nodes have children which we will store as instance variable containing a list of (sub)trees (in which order matters!)
 # - leaves do not have children. We will model this as an empty list of children []
@@ -239,13 +249,13 @@ first_tree.children[1].children[1].children[0].name
 
 # #### Traversing trees
 # 
-# Trees are useful data structures, in part, because they can be "traversed" in multiple ways. **Tree traversal** (also known as **tree search**) refers to the process of looking up elements in the tree by visiting (e.g. retrieving, updating, deleting) each node in a tree exactly once.
+# Trees are useful data structures, in part, because they can be "traversed" in multiple ways. **Tree traversal** (also known as **tree search**) refers to the process of looking up elements in a tree by visiting (e.g. retrieving, updating, deleting) each node in a tree exactly once.
 # 
-# We previously looked at data structures like lists or tuples, which must always be searched / traversed in linear order. Tree structures, in comparison, can be traversed in various ways, called *depth-first* or *breadth-first* orders. Various hybrid traveral schemes are also possible. Depending one one's application, tree traversal can be substantially more efficient than linear searches. For linguistic applications, it can also be more representative of the underlying structural relations that we would like to process.
+# We previously looked at data structures like lists or tuples, which must always be searched / traversed in linear order. Tree structures, in comparison, can be traversed in various ways, called *depth-first* or *breadth-first* orders. Various hybrid traversal schemes are also possible. Depending one one's application, tree traversal can be substantially more efficient than linear searches. For linguistic applications, it can also be more representative of the underlying structural relations that we would like to process.
 # 
 # **Depth-first** traversal orders deepen the current subtree as much as possible before moving to the next sibling. **Breadth-first** traversal orders broaden the current level as much as possible before moving to deeper nodes.
 # 
-# There are three common ways to traverse them in depth-first order: **in-order**, **pre-order** and **post-order**:
+# There are three common ways to traverse trees in depth-first order: **in-order**, **pre-order** and **post-order**:
 # - **in-order traversal**: left child first, parent, then other children
 # - **pre-order traversal**: parent first, then children from left to right
 # - **post-order traversal**: children from left to right, then parent
