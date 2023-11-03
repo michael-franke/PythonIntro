@@ -1,0 +1,224 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jupyter_core/utils/__init__.py", line 173, in wrapped
+    return loop.run_until_complete(inner)
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import pygame
+
+#############################################################################
+############     Functions that regulate display of text on screen ##########
+############################################################################
+CENTER = 0
+NEWLINECENTER = 1
+ERRORPOS = 2
+BOTTOM = 3
+OPTIONS = 5
+TOP = 6
+
+#we show different texts at different positions. This function simply makes that more clear.
+def get_position(screen, text_surface, where):
+    text_width = text_surface.get_width()
+    text_height = text_surface.get_height()
+    width = screen.get_width()
+    height = screen.get_height()
+    if where == CENTER:
+        return width/2-text_width/2, height/2-text_height/2
+    elif where == NEWLINECENTER:
+        return width/2-text_width/2, 5.0/8*height
+    elif where == ERRORPOS:
+        return width/2-text_width/2, 3.0/8*height
+    elif where == BOTTOM:
+        return width/2-text_width/2, height-1.5*text_height
+    elif where == OPTIONS:
+        return width/2-text_width/2, 3.0/4*height
+    elif where == TOP:
+        return width/2-text_width/2, 1.0/10*height
+
+#this shows all the one-line-texts
+def showText(screen, text, where, fontsize, textColor, bgColor, eraseAll=False): 
+    if eraseAll: #if specified to be true, clear the screen of all contents
+        screen.fill(bgColor) 
+    font = pygame.font.SysFont("verdana",fontsize) 
+    text_surface = font.render(text, True, textColor, bgColor)
+    posx, posy = get_position(screen, text_surface, where)
+    screen.blit(text_surface, (posx, posy)) #copies the text to positions x, y
+    pygame.display.flip() #flips the contents to the designated screen
+ 
+    
+    
+# this function takes one line of text and displays it at the screen center
+def showTextCenter(screen, text, fontsize, textColor, bgColor, eraseAll = True): 
+    showText(screen, text, CENTER, fontsize, textColor, bgColor, eraseAll)
+    
+
+# to display a new line of text without erasing the first
+def showTextNewLine(screen, text, fontsize, textColor, bgColor):
+    showText(screen, text, NEWLINECENTER, fontsize, textColor, bgColor)
+
+
+# error messages
+def showErrorText(screen, text, fontsize, textColor, bgColor): 
+    showText(screen, text, ERRORPOS, fontsize, textColor, bgColor, eraseAll = True)
+    
+# show answer options for multiple choice questions
+def showOptions(screen, options, fontsize, textColor, bgColor):  
+    showText(screen, options, OPTIONS, fontsize, textColor, bgColor)  
+    
+
+#displays a longer text. Splits the longer text up into several lines if it doesn't fit on to the screen.
+def showInstructions(screen, text, fontsize, textColor, bgColor, overwriteBg = True, startAtLine = 0, continueText=""):
+    if continueText == "": 
+        continueText = press_any_key
+    if overwriteBg:
+        screen.fill(bgColor)
+    font = pygame.font.SysFont("verdana",fontsize) 
+    words = [word.split(' ') for word in text.splitlines()]  # 2D array where each row is a list of words.
+    space = font.size(' ')[0]  # The width of a space.
+    width = screen.get_width()
+    height = screen.get_height()
+    pos = width//10, height//10
+    x, y = pos
+    y += startAtLine*font.render(" ", 0, textColor).get_size()[1]
+    for line in words:
+        for word in line:
+            word_surface = font.render(word, 0, textColor)
+            word_width, word_height = word_surface.get_size()
+            if x + word_width >= (width//10)*9: #if word does not fit onto current line anymore
+                x = pos[0]  # Reset the x position.
+                y += word_height  # Start on new row.
+            screen.blit(word_surface, (x, y))
+            x += word_width + space
+        x = pos[0]  # after each line, reset the x position
+        y += word_height  # and start on new row.
+            
+    showText(screen, continueText, BOTTOM, fontsize, textColor, bgColor)
+    pygame.display.flip()
+    
+
+# to enter the subject id or age of subjects
+def enterNumber(screen, text1, fontsize, textcolor, bgColor, EnterKey, EscapeKey=pygame.K_ESCAPE, errortext=""):  
+    showTextCenter(screen, text1, fontsize, textcolor, bgColor)   
+    if errortext != "":
+            showErrorText(screen, errortext, fontsize, textcolor, bgColor)   
+    nr = ""
+    while True:
+        for evt in pygame.event.get():
+            if evt.type == pygame.KEYDOWN:
+                if evt.unicode.isnumeric():
+                    nr += evt.unicode
+                elif evt.key == pygame.K_BACKSPACE:
+                    nr = nr[:-1]
+                    eraseText(screen, fontsize, OPTIONS, bgColor)
+                    pygame.display.flip() 
+                elif evt.key == EnterKey[1]:
+                    if len(nr) > 0:
+                        return int(nr)
+                elif evt.key == EscapeKey:
+                    return
+            elif evt.type == pygame.QUIT:
+                return
+        showText(screen, nr, OPTIONS, fontsize, textcolor, bgColor)
+        
+
+
+# to enter the gender of the subject
+def enterGender(screen, text, fontsize, textcolor, bgColor):   
+    showTextCenter(screen, text, fontsize, textcolor, bgColor)        
+    choicetext = 'a. %s     b. %s     c. %s     d. %s' %('male','female','non-binary','prefer not to answer')
+    showOptions(screen, choicetext, fontsize, textcolor, bgColor)
+    while True:
+        key = waitForAnyKey()
+        if key == pygame.QUIT or key == pygame.K_ESCAPE:
+            return
+        if key == pygame.K_a:
+            return "m"
+        elif key == pygame.K_b:
+            return "f"
+        elif key == pygame.K_c:
+            return "nb"
+        elif key == pygame.K_d:
+            return "na"
+            
+    
+
+# does subject speak a dialect?
+def enterDialect(screen, text, text2, fontsize, textcolor, bgColor):
+    showTextCenter(screen, text, fontsize, textcolor, bgColor)        
+    choicetext = 'a. %s     b. %s' %('yes','no')
+    showOptions(screen, choicetext, fontsize, textcolor, bgColor)
+    while True:
+        key = waitForAnyKey()
+        if key == pygame.QUIT or key == pygame.K_ESCAPE:
+            return
+        elif key == pygame.K_a:
+            return [1, enterDialectRegion(screen, text2, fontsize, textcolor, bgColor)]
+        if key == pygame.K_b:
+            return [0, '']
+        
+
+    
+# if subject speaks a dialog, which one?          
+def enterDialectRegion(screen, text2, fontsize, textcolor, bgColor):
+    showTextCenter(screen, text2, fontsize, textcolor, bgColor)
+    dialect = ""
+    while True:
+        for evt in pygame.event.get():
+            if evt.type == pygame.KEYDOWN:
+                if evt.unicode.isalpha():
+                    dialect += evt.unicode
+                elif evt.key == pygame.K_BACKSPACE:
+                    dialect = dialect[:-1]
+                    pygame.display.flip()
+                elif evt.key == pygame.K_RETURN:
+                    return dialect
+                elif evt.key == pygame.K_ESCAPE:
+                    return
+            elif evt.type == pygame.QUIT:
+                return
+        showOptions(screen, dialect, fontsize, textcolor, bgColor)
+
+
+#wait for any key press
+def waitForAnyKey():
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                return event.key  #returns key numbers
+            elif event.type == pygame.QUIT:
+                return
+
+#wait for specific key press
+def waitForKey(which):
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == which:
+                    return True
+            elif event.type == pygame.QUIT:
+                return  
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[2], line 1[0m
+[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mpygame[39;00m
+[1;32m      3[0m [38;5;66;03m#############################################################################[39;00m
+[1;32m      4[0m [38;5;66;03m############     Functions that regulate display of text on screen ##########[39;00m
+[1;32m      5[0m [38;5;66;03m############################################################################[39;00m
+[1;32m      6[0m CENTER [38;5;241m=[39m [38;5;241m0[39m
+
+[0;31mModuleNotFoundError[0m: No module named 'pygame'
+

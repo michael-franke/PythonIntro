@@ -1,48 +1,60 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022) &#8212; Scientific programming in Python</title>
-    
+    <title>More on functions, loops, dictionaries, and files &#8212; Introduction to scientific programming in Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -50,56 +62,97 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'session06';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="For efficiency’s sake: structured programs, packages, regular expressions (December 20, 2022 / January 10, 2023)" href="session07.html" />
-    <link rel="prev" title="Modules, file I/O (input/output) (December 06, 2022)" href="session05.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+    <link rel="next" title="For efficiency’s sake: structured programs, packages, regular expressions" href="session07.html" />
+    <link rel="prev" title="Modules, file I/O (input/output)" href="session05.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-    <div class="container-fluid" id="banner"></div>
-
     
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
-      
-      
-      
-      <h1 class="site-logo" id="site-title">Scientific programming in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Introduction to scientific programming in Python</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -108,511 +161,298 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="session01.html">
-   Introduction (October 18 and 25, 2022)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="session02.html">
-   Data types and statements (October 25 and November 08, 2022)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="session03.html">
-   Functions and conditional execution (November 15 and 22, 2022)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="session04.html">
-   Advanced data types: lists, tuples, sets, dictionaries (November 22 and 29, 2022)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="session05.html">
-   Modules, file I/O (input/output) (December 06, 2022)
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="session07.html">
-   For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="session08.html">
-   Classes (January 17, 2023)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="session09.html">
-   Recursion and trees (January 24, 2023)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="session10.html">
-   Applications (Part I): Processing corpus data using
-   <em>
-    NLTK
-   </em>
-   ,
-   <em>
-    numpy
-   </em>
-   , and
-   <em>
-    matplotlib
-   </em>
-   (January 31, 2023)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="session11.html">
-   Applications (Part II): Programming in experimental research (February 07, 2023)
-  </a>
- </li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Foundations</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="session01.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session02.html">Data types and statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session03.html">Functions and conditional execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session04.html">Advanced data types: lists, tuples, sets, dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session05.html">Modules, file I/O (input/output)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">More on functions, loops, dictionaries, and files</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extended basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="session07.html">For efficiency’s sake: structured programs, packages, regular expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session08.html">Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="session09.html">Recursion and trees</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="session10.html">Processing corpus data using <em>NLTK</em>, <em>numpy</em>, and <em>matplotlib</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="session11.html">Programming in experimental research</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
 
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
 
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/julianeschwab/ScientificProgramming/master?urlpath=tree/docs/session06.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/michael-franke/PythonIntro/blob/master/docs/session06.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
-    <img src="_static/images/logo_binder.svg">
+    <img src="_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Binder</span>
+<span class="btn__text-container">Colab</span>
 </a>
-
-      </li>
+</li>
+      
+      
+      
       
       <li>
-        
 <button onclick="initThebeSBT()"
-  class="headerbtn headerbtn-launch-thebe"
-  data-toggle="tooltip"
-data-placement="left"
-title="Launch Thebe"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-play"></i>
   </span>
-<span class="headerbtn__text-container">Live Code</span>
+<span class="btn__text-container">Live Code</span>
 </button>
-
-      </li>
+</li>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/michael-franke/PythonIntro" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/michael-franke/PythonIntro/issues/new?title=Issue%20on%20page%20%2Fsession06.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/session06.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/julianeschwab/ScientificProgramming"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/julianeschwab/ScientificProgramming/issues/new?title=Issue%20on%20page%20%2Fsession06.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/session06.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#handling-functions-more-efficiently">
-   Handling functions more efficiently
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#more-on-loops">
-   More on loops
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recap-on-ranges">
-     <strong>
-      Recap on
-      <em>
-       ranges
-      </em>
-     </strong>
-     :
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#file-handles-are-iterables">
-     <strong>
-      File handles are iterables
-     </strong>
-     :
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sorting-reverse-sorting-sorting-by-key">
-   Sorting, reverse sorting, sorting by key
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sort-and-sorted">
-     -
-     <em>
-      sort()
-     </em>
-     and
-     <em>
-      sorted()
-     </em>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sorting-order">
-     - Sorting order
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sorting-dictionaries-by-key-or-value">
-     - Sorting dictionaries by key or value
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#while-loops-or-anything-you-can-do-for-can-do-better">
-   <strong>
-    <em>
-     While
-    </em>
-    loops, or “Anything you can do,
-    <em>
-     for
-    </em>
-    can do better”?
-   </strong>
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#notes-on-code-efficiency-and-maintainability">
-   Notes on code efficiency and maintainability
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#optimization">
-     Optimization
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#maintainability">
-     Maintainability
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#handling-functions-more-efficiently">
-   Handling functions more efficiently
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#more-on-loops">
-   More on loops
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recap-on-ranges">
-     <strong>
-      Recap on
-      <em>
-       ranges
-      </em>
-     </strong>
-     :
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#file-handles-are-iterables">
-     <strong>
-      File handles are iterables
-     </strong>
-     :
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sorting-reverse-sorting-sorting-by-key">
-   Sorting, reverse sorting, sorting by key
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sort-and-sorted">
-     -
-     <em>
-      sort()
-     </em>
-     and
-     <em>
-      sorted()
-     </em>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sorting-order">
-     - Sorting order
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sorting-dictionaries-by-key-or-value">
-     - Sorting dictionaries by key or value
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#while-loops-or-anything-you-can-do-for-can-do-better">
-   <strong>
-    <em>
-     While
-    </em>
-    loops, or “Anything you can do,
-    <em>
-     for
-    </em>
-    can do better”?
-   </strong>
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#notes-on-code-efficiency-and-maintainability">
-   Notes on code efficiency and maintainability
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#optimization">
-     Optimization
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#maintainability">
-     Maintainability
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>More on functions, loops, dictionaries, and files</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-functions-more-efficiently">Handling functions more efficiently</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-on-loops">More on loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-on-ranges"><strong>Recap on <em>ranges</em></strong>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-handles-are-iterables"><strong>File handles are iterables</strong>:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-reverse-sorting-sorting-by-key">Sorting, reverse sorting, sorting by key</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sort-and-sorted">- <em>sort()</em> and <em>sorted()</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-order">- Sorting order</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-dictionaries-by-key-or-value">- Sorting dictionaries by key or value</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loops-or-anything-you-can-do-for-can-do-better"><strong><em>While</em> loops, or “Anything you can do, <em>for</em> can do better”?</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes-on-code-efficiency-and-maintainability">Notes on code efficiency and maintainability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization">Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maintainability">Maintainability</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
-  <section id="finishing-the-basics-more-on-functions-loops-dictionaries-and-files-december-13-2022">
-<h1>Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)<a class="headerlink" href="#finishing-the-basics-more-on-functions-loops-dictionaries-and-files-december-13-2022" title="Permalink to this headline">#</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="more-on-functions-loops-dictionaries-and-files">
+<h1>More on functions, loops, dictionaries, and files<a class="headerlink" href="#more-on-functions-loops-dictionaries-and-files" title="Permalink to this heading">#</a></h1>
 <p>The concepts introduced in previous sessions have additional functionalities worth introducing. In this session, we will therefore look at advanced (combined) uses of functions, loops, and file I/O, which allow you to code more efficiently.</p>
 <p>Let’s start by looking at an example for a function that will accompany us throughout this session. Let’s figure out what this does:</p>
 <div class="cell docutils container">
@@ -678,7 +518,7 @@ title="Print to PDF"
 </div>
 </div>
 <section id="handling-functions-more-efficiently">
-<h2>Handling functions more efficiently<a class="headerlink" href="#handling-functions-more-efficiently" title="Permalink to this headline">#</a></h2>
+<h2>Handling functions more efficiently<a class="headerlink" href="#handling-functions-more-efficiently" title="Permalink to this heading">#</a></h2>
 <p><strong>Recap</strong>:</p>
 <p>Functions are <strong>reusable blocks of code that perform an action, like computing a value, on the basis of potentially changing parameters</strong>. Functions are defined by a <strong>def statement</strong>, which specifies the name and arguments of the function. The indented code inside of the function block is the <strong>body of the function</strong>. Functions are executed by calling them; <strong>function calls</strong> use the function’s name followed by parentheses, possibly containing a number of arguments within the parentheses.</p>
 <p><strong>Function calls are expressions, therefore they evaluate to objects</strong> (see session 02). This means you can directly operate on them:</p>
@@ -763,24 +603,28 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_3460</span>\<span class="mf">3512021977.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">10</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="c1">#note that we can use placeholders {} in the string, filled by the two objects named later</span>
 <span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">unsorted_file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#reset file handle.</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> 
 <span class="ne">---&gt; </span><span class="mi">10</span> <span class="n">count_word_occurence</span><span class="p">(</span><span class="n">unsorted_file</span><span class="p">)</span>
 
-<span class="nn">~\AppData\Local\Temp\ipykernel_3460\3512021977.py</span> in <span class="ni">count_word_occurence</span><span class="nt">(file)</span>
+<span class="nn">Cell In[7], line 3,</span> in <span class="ni">count_word_occurence</span><span class="nt">(file)</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">count_word_occurence</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">sorted_file</span> <span class="o">=</span> <span class="n">sort_text</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="c1">#function call to user-defined function &quot;sort_text&quot;</span>
 <span class="ne">----&gt; </span><span class="mi">3</span>     <span class="n">word</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="c1">#a = sorted_file.count(word)</span>
 <span class="nn">      5     return &quot;The word &#39;{}&#39; occurs {} times</span> in <span class="ni">the text.&quot;.format(word,sorted_file.count</span><span class="nt">(word))</span>
 
-<span class="nn">~\miniconda3\lib\site-packages\ipykernel\kernelbase.py</span> in <span class="ni">raw_input</span><span class="nt">(self, prompt)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1070</span>         <span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1071</span><span class="s2">         if not self._allow_stdin:</span>
-<span class="ne">-&gt; </span><span class="mi">1072</span><span class="s2">             raise StdinNotImplementedError(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1073</span><span class="s2">                 &quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1074</span><span class="s2">             )</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/ipykernel/kernelbase.py:1250,</span> in <span class="ni">Kernel.raw_input</span><span class="nt">(self, prompt)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1248</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allow_stdin</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1249</span>     <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1250</span>     <span class="k">raise</span> <span class="n">StdinNotImplementedError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1251</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_request</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1252</span>     <span class="nb">str</span><span class="p">(</span><span class="n">prompt</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1253</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_parent_ident</span><span class="p">[</span><span class="s2">&quot;shell&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">   </span><span class="mi">1254</span>     <span class="bp">self</span><span class="o">.</span><span class="n">get_parent</span><span class="p">(</span><span class="s2">&quot;shell&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1255</span>     <span class="n">password</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1256</span> <span class="p">)</span>
 
 <span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
 </pre></div>
@@ -789,9 +633,9 @@ title="Print to PDF"
 </div>
 </section>
 <section id="more-on-loops">
-<h2>More on loops<a class="headerlink" href="#more-on-loops" title="Permalink to this headline">#</a></h2>
+<h2>More on loops<a class="headerlink" href="#more-on-loops" title="Permalink to this heading">#</a></h2>
 <section id="recap-on-ranges">
-<h3><strong>Recap on <em>ranges</em></strong>:<a class="headerlink" href="#recap-on-ranges" title="Permalink to this headline">#</a></h3>
+<h3><strong>Recap on <em>ranges</em></strong>:<a class="headerlink" href="#recap-on-ranges" title="Permalink to this heading">#</a></h3>
 <p>One of the most basic iterables is the range. The <em>range</em> function generates iterable sequences of numbers based on upto 3 input parameters: <em>range(i,n,k)</em> produces integers in the range from <em>i</em> to <em>n</em>-1, but only produces every <em>k</em>th integer in that sequence.</p>
 <p>Ranges are <strong>widespread and versatile for iterating over collections of elements</strong> (lists, tuples, sets, dictionaries).</p>
 <div class="cell docutils container">
@@ -908,7 +752,7 @@ The string &#39;well-disposedness&#39; has 17 letters
 <p><strong>An issue for you to think of</strong>: Try to understand the order of operations with nested loops. Why does the loop above not print output ordered by increasing string length, first printing all strings of length 17, then 18, 19,…?</p>
 </section>
 <section id="file-handles-are-iterables">
-<h3><strong>File handles are iterables</strong>:<a class="headerlink" href="#file-handles-are-iterables" title="Permalink to this headline">#</a></h3>
+<h3><strong>File handles are iterables</strong>:<a class="headerlink" href="#file-handles-are-iterables" title="Permalink to this heading">#</a></h3>
 <p>As you can see from the first code block in this session, loops can iterate over lines in a file.</p>
 <p>Note, though, that <strong>file handles have <em>states</em></strong>, that is, they <strong>‘remember where (in the file) they are’</strong>. For this reason, you have to reset the state of the file handle if you want to loop over file handles multiple times, using <em><strong>file.seek(0)</strong></em>.</p>
 <div class="cell docutils container">
@@ -1018,10 +862,10 @@ I was traveling with a copy of the Hitch Hiker s Guide to Europe by
 </section>
 </section>
 <section id="sorting-reverse-sorting-sorting-by-key">
-<h2>Sorting, reverse sorting, sorting by key<a class="headerlink" href="#sorting-reverse-sorting-sorting-by-key" title="Permalink to this headline">#</a></h2>
+<h2>Sorting, reverse sorting, sorting by key<a class="headerlink" href="#sorting-reverse-sorting-sorting-by-key" title="Permalink to this heading">#</a></h2>
 <p>Sorting elemens in a sequence or collection of objects is essential to many use-cases of programming. Luckily, the functionality of sorting functions in Python is much more versatile than we have seen thus far:</p>
 <section id="sort-and-sorted">
-<h3>- <em>sort()</em> and <em>sorted()</em><a class="headerlink" href="#sort-and-sorted" title="Permalink to this headline">#</a></h3>
+<h3>- <em>sort()</em> and <em>sorted()</em><a class="headerlink" href="#sort-and-sorted" title="Permalink to this heading">#</a></h3>
 <p>As seen above, <em>sort()</em> modifies the original sequence it was passed. <strong>To sort sequences or collections without disturbing the original sequence</strong> of the object, use the <em><strong>sorted()</strong></em> function. <em>Sorted()</em> returns an ordered copy of the sequence passed as its argument:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1038,7 +882,7 @@ I was traveling with a copy of the Hitch Hiker s Guide to Europe by
 </div>
 </section>
 <section id="sorting-order">
-<h3>- Sorting order<a class="headerlink" href="#sorting-order" title="Permalink to this headline">#</a></h3>
+<h3>- Sorting order<a class="headerlink" href="#sorting-order" title="Permalink to this heading">#</a></h3>
 <p>The keyword <em><strong>reverse = True</strong></em> can be passed to both <em>sort()</em> and <em>sorted()</em> to reverse the sorting order from the <strong>default sorting order</strong>, which is <strong>ascending</strong> (numerically or alphabetically).</p>
 <p>Both <em>sort()</em> and <em>sorted()</em> can also be passed a <strong><em>key</em> parameter</strong>, which can be used to specify alternative sorting orders. The key parameter <strong>should be a function that takes a single argument</strong> (the respective element of the to-be-sorted sequence) <strong>and returns a key</strong> (the value the function returns for the passed element) <strong>to use for sorting purposes</strong>.</p>
 <p>For instance, you may want to ignore capitalization when sorting list elements alphabetically:</p>
@@ -1058,7 +902,7 @@ I was traveling with a copy of the Hitch Hiker s Guide to Europe by
 </div>
 </section>
 <section id="sorting-dictionaries-by-key-or-value">
-<h3>- Sorting dictionaries by key or value<a class="headerlink" href="#sorting-dictionaries-by-key-or-value" title="Permalink to this headline">#</a></h3>
+<h3>- Sorting dictionaries by key or value<a class="headerlink" href="#sorting-dictionaries-by-key-or-value" title="Permalink to this heading">#</a></h3>
 <p><strong>Dictionaries</strong> are mappings between keys and values. As such, they are <strong>not intrinsically ordered</strong>. However, sometimes we may want to <strong>sort dictionaries into a sequence of ordered elements</strong>, e.g., when trying to read out the mapping between students’ names and grades by order of their first/last name (A-Z) or grade (1-6 in the German system).</p>
 <p>By default, when applying the <em><strong>sorted()</strong></em> function, dictionaries are <strong>sorted by their keys</strong>. In fact, just feeding a dictionary straight to the <em>sorted()</em> function will simply return a sorted list of its keys.</p>
 <div class="cell docutils container">
@@ -1149,7 +993,7 @@ I was traveling with a copy of the Hitch Hiker s Guide to Europe by
 </section>
 </section>
 <section id="while-loops-or-anything-you-can-do-for-can-do-better">
-<h2><strong><em>While</em> loops, or “Anything you can do, <em>for</em> can do better”?</strong><a class="headerlink" href="#while-loops-or-anything-you-can-do-for-can-do-better" title="Permalink to this headline">#</a></h2>
+<h2><strong><em>While</em> loops, or “Anything you can do, <em>for</em> can do better”?</strong><a class="headerlink" href="#while-loops-or-anything-you-can-do-for-can-do-better" title="Permalink to this heading">#</a></h2>
 <p>We saw in an earlier session that <em>for</em> loops and <em>while</em> loops can be used to achieve the same outcome. So how should you decide which loop to choose in the first place?</p>
 <ul class="simple">
 <li><p><em>While</em> loops continue until a condition is False. <em>For</em> loops iterate over collections, iterable objects or generator functions.</p></li>
@@ -1195,9 +1039,9 @@ Playback stopped.
 </div>
 </section>
 <section id="notes-on-code-efficiency-and-maintainability">
-<h2>Notes on code efficiency and maintainability<a class="headerlink" href="#notes-on-code-efficiency-and-maintainability" title="Permalink to this headline">#</a></h2>
+<h2>Notes on code efficiency and maintainability<a class="headerlink" href="#notes-on-code-efficiency-and-maintainability" title="Permalink to this heading">#</a></h2>
 <section id="optimization">
-<h3>Optimization<a class="headerlink" href="#optimization" title="Permalink to this headline">#</a></h3>
+<h3>Optimization<a class="headerlink" href="#optimization" title="Permalink to this heading">#</a></h3>
 <p>For every <strong>computable problem or task</strong>, there are infinitely many programs which solve it; they will differ in <strong>memory</strong> and <strong>time usage</strong>. You may not care much about this for now, while working on toy examples with little computational demands. But if you <strong>get used to writing reasonably efficient code</strong> now, you will have a much easier time later!</p>
 <p><strong>What does it mean for code to be efficient?</strong> Some principles:</p>
 <ul class="simple">
@@ -1243,7 +1087,7 @@ ULTIMATE
 </div>
 </section>
 <section id="maintainability">
-<h3>Maintainability<a class="headerlink" href="#maintainability" title="Permalink to this headline">#</a></h3>
+<h3>Maintainability<a class="headerlink" href="#maintainability" title="Permalink to this heading">#</a></h3>
 <p>While <strong>code efficiency</strong> is about reducing <strong>computational complexity</strong>, <strong>code maintainability</strong> is about reducing <strong>complexity for (human) programmers</strong>.</p>
 <p><strong>Principles for code maintainability</strong> include:</p>
 <ul class="simple">
@@ -1260,7 +1104,7 @@ ULTIMATE
     {
         requestKernel: true,
         binderOptions: {
-            repo: "julianeschwab/ScientificProgramming",
+            repo: "michael-franke/PythonIntro",
             ref: "master",
         },
         codeMirrorConfig: {
@@ -1268,7 +1112,7 @@ ULTIMATE
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -1276,50 +1120,118 @@ ULTIMATE
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="session05.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Modules, file I/O (input/output) (December 06, 2022)</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="session07.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023)</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Juliane Schwab<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
 
-
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="session05.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Modules, file I/O (input/output)</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="session07.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">For efficiency’s sake: structured programs, packages, regular expressions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-functions-more-efficiently">Handling functions more efficiently</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-on-loops">More on loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-on-ranges"><strong>Recap on <em>ranges</em></strong>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-handles-are-iterables"><strong>File handles are iterables</strong>:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-reverse-sorting-sorting-by-key">Sorting, reverse sorting, sorting by key</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sort-and-sorted">- <em>sort()</em> and <em>sorted()</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-order">- Sorting order</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-dictionaries-by-key-or-value">- Sorting dictionaries by key or value</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loops-or-anything-you-can-do-for-can-do-better"><strong><em>While</em> loops, or “Anything you can do, <em>for</em> can do better”?</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes-on-code-efficiency-and-maintainability">Notes on code efficiency and maintainability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization">Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maintainability">Maintainability</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Juliane Schwab, Michael Franke & Todd Snider
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

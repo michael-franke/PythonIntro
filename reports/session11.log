@@ -1,364 +1,226 @@
 Traceback (most recent call last):
-  File "C:\Users\julia\miniconda3\lib\site-packages\jupyter_cache\executors\utils.py", line 51, in single_nb_execution
+  File "/opt/homebrew/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
     executenb(
-  File "C:\Users\julia\miniconda3\lib\site-packages\nbclient\client.py", line 1204, in execute
+  File "/opt/homebrew/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "C:\Users\julia\miniconda3\lib\site-packages\nbclient\util.py", line 84, in wrapped
+  File "/opt/homebrew/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "C:\Users\julia\miniconda3\lib\site-packages\nbclient\util.py", line 62, in just_run
+  File "/opt/homebrew/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
     return loop.run_until_complete(coro)
-  File "C:\Users\julia\miniconda3\lib\asyncio\base_events.py", line 647, in run_until_complete
+  File "/opt/homebrew/Cellar/python@3.10/3.10.12_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
     return future.result()
-  File "C:\Users\julia\miniconda3\lib\site-packages\nbclient\client.py", line 663, in async_execute
+  File "/opt/homebrew/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
     await self.async_execute_cell(
-  File "C:\Users\julia\miniconda3\lib\site-packages\nbclient\client.py", line 965, in async_execute_cell
+  File "/opt/homebrew/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "C:\Users\julia\miniconda3\lib\site-packages\nbclient\client.py", line 862, in _check_raise_for_error
+  File "/opt/homebrew/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# -*- coding: utf-8 -*-
-"""
-@author: Juliane Schwab, Scientific Programming 2022/2023
-"""
-
 import pygame
-import random
-from pygame import time as ptime
-import os
-import csv
-import numpy as np
-import sys
-import threading
-import time
 
-#correspondence between columns in csv stimulus file and variables defined here
-EXPTYPE = 0
-ITEM = 1
-IS_PRACT = 2
-COND = 3 
-S1 = 4 
-S2 = 5 
-S3 = 6 
-S4 = 7 
-ANSWER1 = 8 
-INDEX = 9
-LISTNUM = 10
+#############################################################################
+############     Functions that regulate display of text on screen ##########
+############################################################################
+CENTER = 0
+NEWLINECENTER = 1
+ERRORPOS = 2
+BOTTOM = 3
+OPTIONS = 5
+TOP = 6
 
-NUMSENTS = 6
+#we show different texts at different positions. This function simply makes that more clear.
+def get_position(screen, text_surface, where):
+    text_width = text_surface.get_width()
+    text_height = text_surface.get_height()
+    width = screen.get_width()
+    height = screen.get_height()
+    if where == CENTER:
+        return width/2-text_width/2, height/2-text_height/2
+    elif where == NEWLINECENTER:
+        return width/2-text_width/2, 5.0/8*height
+    elif where == ERRORPOS:
+        return width/2-text_width/2, 3.0/8*height
+    elif where == BOTTOM:
+        return width/2-text_width/2, height-1.5*text_height
+    elif where == OPTIONS:
+        return width/2-text_width/2, 3.0/4*height
+    elif where == TOP:
+        return width/2-text_width/2, 1.0/10*height
 
-CSV_ENCODING = "ISO-8859-1"
-
-
-###############################################################################
-#these are variables that may be changed depending on the experiment we use the code for.
-###############################################################################
-
-# amount of lists. If you have eg two lists, every even subject will use list 2, etc.
-CONDITIONS = [1, 2, 3, 4, 5, 6]
-             
-datafolder = "data/"
-csvfolder = "results/"
-if not os.path.exists(csvfolder):
-    os.mkdir(csvfolder)
-
-
-
-###############################################################################
-#settings for the look of the experiment
-###############################################################################
-
-
-WaitForKey2 = ["Enter", pygame.K_RETURN] 
-WaitForKey1 = ["Space", pygame.K_SPACE]     
-
-#for yes/no questions
-responses1 = [["Yes", "1", pygame.K_1], ["No", "2", pygame.K_2]]
-
-escape = pygame.K_ESCAPE
-
-fontsize = 24 
-instructions_fontsize = 20 
-textColor = (255,255,255) # white
-bgColor = (0,0,80) # darkblue
-bgColor2 = (0,0,80) # darkblue
-
-
-
-###############################################################################
-################### functions working on the csv-files ########################
-###############################################################################
-
-
-def find_sub_files(sub, folder):
-    """
-    Figures out the location of the respective subject data files, and returns a catchable error if they already exist.
-    If the error occurs in the main loop, the subject can simply enter another number.
-    """
-    outfile_long = "%ssub_%s_long.csv" %(folder, sub)
-    if os.path.isfile(outfile_long):
-        raise FileExistsError("There is already a file for that participant!") 
-    return outfile_long
-
-
-def create_sub_files(sub, folder):
-    """
-    writes the header of the sub-file.
-     fields that are saved are:
-     subject_id, list, trial, experiment, item, condition, sen_num, rt, answer, fits_pred
-    """
-
-    outfile_long = find_sub_files(sub, folder)
-    header = ["subject_id",  "StimulIndex", "trialnum", "which_experiment", "itemnr", "condition", "sentence_num", "reading/responseTime", "answer1", "answer1AsPredicted"]
+#this shows all the one-line-texts
+def showText(screen, text, where, fontsize, textColor, bgColor, eraseAll=False): 
+    if eraseAll: #if specified to be true, clear the screen of all contents
+        screen.fill(bgColor) 
+    font = pygame.font.SysFont("verdana",fontsize) 
+    text_surface = font.render(text, True, textColor, bgColor)
+    posx, posy = get_position(screen, text_surface, where)
+    screen.blit(text_surface, (posx, posy)) #copies the text to positions x, y
+    pygame.display.flip() #flips the contents to the designated screen
+ 
     
-    with open(str(outfile_long[0]), "w", newline="") as file:
-            csv.writer(file, delimiter=';').writerow(header)
     
-    return outfile_long
+# this function takes one line of text and displays it at the screen center
+def showTextCenter(screen, text, fontsize, textColor, bgColor, eraseAll = True): 
+    showText(screen, text, CENTER, fontsize, textColor, bgColor, eraseAll)
+    
+
+# to display a new line of text without erasing the first
+def showTextNewLine(screen, text, fontsize, textColor, bgColor):
+    showText(screen, text, NEWLINECENTER, fontsize, textColor, bgColor)
 
 
+# error messages
+def showErrorText(screen, text, fontsize, textColor, bgColor): 
+    showText(screen, text, ERRORPOS, fontsize, textColor, bgColor, eraseAll = True)
+    
+# show answer options for multiple choice questions
+def showOptions(screen, options, fontsize, textColor, bgColor):  
+    showText(screen, options, OPTIONS, fontsize, textColor, bgColor)  
+    
 
-def append_to_CSVs(fields, longfile, sentence_num):
-    """
-    We created the csv already, so with every new question, we simply add a row to that csv.
-    This function gets called called after every sentence of a trial.
-    """ 
-    with open(str(longfile[0]), 'a', newline='') as f:
-        csv.writer(f, delimiter=';').writerow(fields)              
-
-
-
-def appendto_subInfo_file(folder, sub, age, gender, d1, d2, condition, comment):
-    """We also have one file "subsToInfo.csv", in which we externally store the demographic  information
-       (age, gender, dialect)
-       together with the corresponding subject-number
-    """
-    filestring = folder+"subsToInfo.csv"
-    if os.path.isfile(filestring):
-        mode = "a"
-    else:
-        mode = "w"
-    with open(filestring, mode, newline='') as f:
-        if mode == "w":
-            csv.writer(f, delimiter=";").writerow(["Subject_Number", "Age", "Gender", "Speaks_Dialect", "What_Dialect", "Does_Condition", "Comments"])
-        csv.writer(f, delimiter=';').writerow([sub, age, gender, d1, d2, condition, comment])
+#displays a longer text. Splits the longer text up into several lines if it doesn't fit on to the screen.
+def showInstructions(screen, text, fontsize, textColor, bgColor, overwriteBg = True, startAtLine = 0, continueText=""):
+    if continueText == "": 
+        continueText = press_any_key
+    if overwriteBg:
+        screen.fill(bgColor)
+    font = pygame.font.SysFont("verdana",fontsize) 
+    words = [word.split(' ') for word in text.splitlines()]  # 2D array where each row is a list of words.
+    space = font.size(' ')[0]  # The width of a space.
+    width = screen.get_width()
+    height = screen.get_height()
+    pos = width//10, height//10
+    x, y = pos
+    y += startAtLine*font.render(" ", 0, textColor).get_size()[1]
+    for line in words:
+        for word in line:
+            word_surface = font.render(word, 0, textColor)
+            word_width, word_height = word_surface.get_size()
+            if x + word_width >= (width//10)*9: #if word does not fit onto current line anymore
+                x = pos[0]  # Reset the x position.
+                y += word_height  # Start on new row.
+            screen.blit(word_surface, (x, y))
+            x += word_width + space
+        x = pos[0]  # after each line, reset the x position
+        y += word_height  # and start on new row.
             
+    showText(screen, continueText, BOTTOM, fontsize, textColor, bgColor)
+    pygame.display.flip()
+    
 
-###############################################################################
-############## functions to read and filter the data files ####################
-###############################################################################
-
-def read_data(folder):
-    """ Reads all experiment-data from the "together.csv"-file in the folder folder. If that is non-existent, it creates the file first, using the 4 subfiles """
-    if os.path.isfile(folder+"Stimuli.csv"):
-        exp1 = read_file(folder+"Stimuli.csv")
-    else:
-        raise FileNotFoundError("Filename must be 'Stimuli.csv'!")
-    return exp1
-
-
-
-def read_file(file_name):
-    """ Reads a file (csv), fields must be seperated by ';', and seperates it linewise and by field.
-        Returns a list of lists: [[line1_entry1, line1_entry2, ...], [line2_entry1, line2_entry2, ...], ...] 
-        Leaves out the first row, which contrains the header. Also leaves out empty rows."""
-    assert os.path.exists(file_name), "File %s missing!" %file_name
-    with open(file_name, mode='rt', encoding=CSV_ENCODING) as f: 
-        reader = csv.reader(f, delimiter=';', quotechar='|')
-        datafields = [line for line in reader if (line != "" and not ("exp" in line[0].lower()))]
-    return datafields
-
-
-###############################################################################
-###############################################################################
-###############################################################################
-
-
-def enter_proband_info(screen, fontsize):
-    """ In the beginning of the experiment, we ask for demographics (sub-nr, age, gender, dialect).
-        This function will get called right at the beginning of the main loop."""
-    sub = enterNumber(screen, enter_subnr_text, fontsize, textColor, bgColor2, WaitForKey2)
+# to enter the subject id or age of subjects
+def enterNumber(screen, text1, fontsize, textcolor, bgColor, EnterKey, EscapeKey=pygame.K_ESCAPE, errortext=""):  
+    showTextCenter(screen, text1, fontsize, textcolor, bgColor)   
+    if errortext != "":
+            showErrorText(screen, errortext, fontsize, textcolor, bgColor)   
+    nr = ""
+    while True:
+        for evt in pygame.event.get():
+            if evt.type == pygame.KEYDOWN:
+                if evt.unicode.isnumeric():
+                    nr += evt.unicode
+                elif evt.key == pygame.K_BACKSPACE:
+                    nr = nr[:-1]
+                    eraseText(screen, fontsize, OPTIONS, bgColor)
+                    pygame.display.flip() 
+                elif evt.key == EnterKey[1]:
+                    if len(nr) > 0:
+                        return int(nr)
+                elif evt.key == EscapeKey:
+                    return
+            elif evt.type == pygame.QUIT:
+                return
+        showText(screen, nr, OPTIONS, fontsize, textcolor, bgColor)
         
-    dobreak = False    
-    while not dobreak: #this loop will ask the subject to enter a new sub-number as long as the entered one is already taken.
-        dobreak = True
-        #tries to generate a new sub file, unless one by that name already exists
-        try: 
-            _ = find_sub_files(sub, csvfolder)
-        except FileExistsError:
-            dobreak = False
-            sub = enterNumber(screen, enter_subnr_text, fontsize, textColor, bgColor2, WaitForKey2, errortext=error_subnr_already_taken)
-        if dobreak:
-            break
-    
-    age = enterNumber(screen, enter_age_text, fontsize, textColor, bgColor2, WaitForKey2)
-    gender = enterGender(screen, enter_gender_text, fontsize, textColor, bgColor2)
-    dialect = enterDialect(screen, dialect_text, dialect_text_2, fontsize, textColor, bgColor2)
-    d1 = dialect[0] #IF the subject speaks a dialect
-    d2 = dialect[1] #WHICH dialect they speak
-    return sub, age, gender, d1, d2
 
 
-
-def run_all_trials_from_list(curr_list, screen, sub, yourcond, file_long):
-    """
-    This function takes as input the entire list of trials for the subject, loops through this list, and executes
-    the trial-function for every single one.
-    This allows us to have more than one trial.
-    """
-    ind = 0
-    for line in curr_list: 
-        ind += 1  
-        presentences = [S1, S2, S3, S4]
-        sentences = []
-        for currsent in presentences:
-            if line[currsent] != "":
-                sentences.append(currsent)
-            
-        trial(ind, line, sentences, screen, sub, yourcond, file_long) 
-
-
-def trial(trial, line, sentences, screen, sub, yourcond, file_long):
-    """ function to run one trial
-    displays the context sentences and the critical sentence
-    registers which answer option was chosen and saves it along with their reaction time
-    parameters:
-        trial - trial number, for saving the data
-        line - one line from the data-file
-        file_long: the path of the csv-files in which to store the result
-    """
-    
-    sentence_num = 0
-    itemnr = int(line[ITEM])
-    condition = int(line[COND] )
-    sents = [line[i] for i in sentences]
-    answer1 = line[ANSWER1]
-    index = line[INDEX]
-                   
-    # going through the sentences and displaying one at a time   
-    for currsent in sents:
-        sentence_num += 1
-        
-        currsentence = currsent.encode(CSV_ENCODING)
-        
-        showTextCenter(screen, currsentence, fontsize, textColor, bgColor) 
-        t1 = ptime.get_ticks() # rounds to the 100ths of a second
-        
-        
-        if (currsent == sents[-1]): #If its the last sentence, 
-            #you don't wait for the space bar input (in the else-loop), but for the reaction of  the user (after the else-loop)
-            break
-        
-        else:                       
-            answered = False
-            while not answered:
-                key = waitForAnyKey()
-                if key == escape or key == None: #user either pressed escape-key or the X at the top right
-                    endProgram()
-                    return 
-                elif key == WaitForKey1[1]: #spacebar
-                    answered = True
-                    t2 = ptime.get_ticks() #calculate the reading time of the sentence and save it in the long csv-file
-                    rt = t2-t1
-                    append_to_CSVs([sub, index, trial, "modal", itemnr, condition, sentence_num, rt, ""], file_long, sentence_num)
-    
-
-    response1 = janein(screen) 
-    fits1 = response1 == answer1 
-    t2 = ptime.get_ticks()
-    rt = t2-t1 # calculate the reaction time
-    
-    to_save = [sub, index, trial, "modal", itemnr, condition, sentence_num, rt, fits1]
-    
-    append_to_CSVs(to_save, file_long, sentence_num)
-    
-    showTextCenter(screen, end_trial, fontsize, textColor, bgColor)
-    if waitForKey(WaitForKey1[1]) == None: #if the user presses the X, you end the program
-        endProgram()
-    
-    
-
-def janein(screen): 
-    """function to display 2 choices, enter answer with one of two keys
-    returns which choice was made
-    parameter choices: given choices
-    parameter exp_type: to know from which list of distractors to choose a word (if there are only 2 choices given)
-    """
-  
-    choicetext = '%s) %s                   %s) %s'%(responses1[0][1],responses1[0][0],responses1[1][1],responses1[1][0]) 
-    showOptions(screen, choicetext, fontsize, textColor, bgColor)
+# to enter the gender of the subject
+def enterGender(screen, text, fontsize, textcolor, bgColor):   
+    showTextCenter(screen, text, fontsize, textcolor, bgColor)        
+    choicetext = 'a. %s     b. %s     c. %s     d. %s' %('male','female','non-binary','prefer not to answer')
+    showOptions(screen, choicetext, fontsize, textcolor, bgColor)
     while True:
         key = waitForAnyKey()
-        if (key == responses1[0][2]): #yes
-            return responses1[0][0]
-        elif (key == responses1[1][2]): #no
-            return responses1[1][0]
-        elif (key == escape) or (key == None):
-            endProgram() 
+        if key == pygame.QUIT or key == pygame.K_ESCAPE:
             return
-
-
-###############################################################################
-###############################################################################
-###############################################################################
-
-
-def endProgram():
-    pygame.quit()
-    sys.exit()
-
-
-def main():
-    #initiating the experiment....
-    pygame.init()
+        if key == pygame.K_a:
+            return "m"
+        elif key == pygame.K_b:
+            return "f"
+        elif key == pygame.K_c:
+            return "nb"
+        elif key == pygame.K_d:
+            return "na"
+            
     
-    modes = pygame.display.list_modes(0, pygame.FULLSCREEN)
-    screen=pygame.display.set_mode(modes[0], pygame.FULLSCREEN)
-    
-    
-    #showing the starting instructions.....
-    if starting_instructions != "":
-        showInstructions(screen, starting_instructions, instructions_fontsize, textColor, bgColor2)
-        waitForAnyKey();
-                     
-    
-    #collect demographic data by calling the enter_proband_info function
-    sub, age, gender, dialect1, dialect2 = enter_proband_info(screen, fontsize)
-     
-    
-    # read in the data file and assign an experimental condition to the subject based on their sub nr.
-    exp_list = read_data(datafolder)
-    yourcond = CONDITIONS[(sub-1) % len(CONDITIONS)]
-    exp_list = [line for line in exp_list if line[LISTNUM] == str(yourcond)] #only keep the trial that will be shown to the participant
 
-    
-    #prepare the CSVs to save the results into
-    file_long = create_sub_files(sub, csvfolder)
-     
+# does subject speak a dialect?
+def enterDialect(screen, text, text2, fontsize, textcolor, bgColor):
+    showTextCenter(screen, text, fontsize, textcolor, bgColor)        
+    choicetext = 'a. %s     b. %s' %('yes','no')
+    showOptions(screen, choicetext, fontsize, textcolor, bgColor)
+    while True:
+        key = waitForAnyKey()
+        if key == pygame.QUIT or key == pygame.K_ESCAPE:
+            return
+        elif key == pygame.K_a:
+            return [1, enterDialectRegion(screen, text2, fontsize, textcolor, bgColor)]
+        if key == pygame.K_b:
+            return [0, '']
         
-    #now for the real experiment...
-    showInstructions(screen, after_practice_instructions, fontsize, textColor, bgColor)
-    waitForAnyKey()
+
     
-    run_all_trials_from_list(exp_list, screen, sub, yourcond, file_long)
-    
-    
-    #show the finishing instructions and we're done!
-    showInstructions(screen, end_experiment, fontsize, textColor, bgColor)
-    time.sleep(0.5)
-    waitForAnyKey()
-    
-    endProgram()
+# if subject speaks a dialog, which one?          
+def enterDialectRegion(screen, text2, fontsize, textcolor, bgColor):
+    showTextCenter(screen, text2, fontsize, textcolor, bgColor)
+    dialect = ""
+    while True:
+        for evt in pygame.event.get():
+            if evt.type == pygame.KEYDOWN:
+                if evt.unicode.isalpha():
+                    dialect += evt.unicode
+                elif evt.key == pygame.K_BACKSPACE:
+                    dialect = dialect[:-1]
+                    pygame.display.flip()
+                elif evt.key == pygame.K_RETURN:
+                    return dialect
+                elif evt.key == pygame.K_ESCAPE:
+                    return
+            elif evt.type == pygame.QUIT:
+                return
+        showOptions(screen, dialect, fontsize, textcolor, bgColor)
 
 
+#wait for any key press
+def waitForAnyKey():
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                return event.key  #returns key numbers
+            elif event.type == pygame.QUIT:
+                return
 
-if __name__ == '__main__':    
-    main()
+#wait for specific key press
+def waitForKey(which):
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == which:
+                    return True
+            elif event.type == pygame.QUIT:
+                return  
 ------------------
 
-An exception has occurred, use %tb to see the full traceback.
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn [2], line 1[0m
+[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mpygame[39;00m
+[1;32m      3[0m [38;5;66;03m#############################################################################[39;00m
+[1;32m      4[0m [38;5;66;03m############     Functions that regulate display of text on screen ##########[39;00m
+[1;32m      5[0m [38;5;66;03m############################################################################[39;00m
+[1;32m      6[0m CENTER [38;5;241m=[39m [38;5;241m0[39m
 
-[1;31mSystemExit[0m
-
-SystemExit: 
+[0;31mModuleNotFoundError[0m: No module named 'pygame'
+ModuleNotFoundError: No module named 'pygame'
 
