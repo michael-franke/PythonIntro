@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## Applications (Part I): Processing corpus data using *NLTK*, *numpy*, and *matplotlib* (January 31, 2023)
+# ## Processing corpus data using *NLTK*, *numpy*, and *matplotlib* 
 # At this point, we are ready to take our learned tools to look at some instances of real-world research applications for programming. In today's session, we will use several Python packages, specifically the Natural Language Toolkit (NLTK), NumPy, and MatPlotLib, to analyze large natural language corpora for the frequency of epistemic modal adverbs, English-German comparisons in word length, and a comparison of relative clause structures in English.
 # 
 # ### Laying the ground work: used packages
@@ -233,7 +233,7 @@ ax.legend();
 # In[11]:
 
 
-fig, axs = plt.subplots(1,2,figsize=(15, 7))
+fig, axs = plt.subplots(1,2,figsize=(15, 7)) #"1,2" stands for the number of rows (1) and columns (2)
 
 axs[0].scatter(x, word_len_en, color='blue',s=1, alpha=0.2, label = 'English')
 axs[1].scatter(np.arange(len(ger.words())), word_len_ger, color='red',s = 1, alpha = 0.2, label = 'German')
@@ -258,6 +258,7 @@ axs[1].set_title('German');
 fig, axs = plt.subplots(1,2,figsize=(15, 7))
 x = np.arange(len(en.words()))
 
+#note the use of sorted()!
 axs[0].scatter(x, sorted(word_len_en), color='blue',s=1, alpha=0.2, label = 'English')
 axs[1].scatter(np.arange(len(ger.words())), sorted(word_len_ger), color='red',s = 1, alpha = 0.2, label = 'German')
 axs[0].set_yticks([0, 10, 20, 30, 40]);

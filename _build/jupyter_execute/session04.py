@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## Advanced data types: lists, tuples, sets, dictionaries (November 22 and 29, 2022)
+# ## Advanced data types: lists, tuples, sets, dictionaries 
 # 
 # So far, we have dealt with data types that encode a single value -- a number, a string, or a Boolean value. In this session, we will learn about **data types that can contain multiple values**, which is essential when you are handling large amounts of data. At the end of this session, you should know the distinctions between four such data types, namely *lists*, *tuples*, *dictionaries*, and *sets*, and you should be able to write simple programs in which you create and modify these data types.
 
@@ -461,6 +461,7 @@ print("The sum of the rows is:",list(map(sum , matrix)))
 
 #Question: How would you sum up the columns?
 print("The sum of the columns is:", list(map(sum,zip(matrix[0],matrix[1]))) )
+
 
 
 # In[ ]:

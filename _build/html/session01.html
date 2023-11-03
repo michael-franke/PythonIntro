@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Introduction (October 18 and 25, 2022) &#8212; Scientific programming in Python</title>
+    <title>Introduction &#8212; Introduction to scientific programming in Python</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Data types and statements (October 25 and November 08, 2022)" href="session02.html" />
+    <link rel="next" title="Data types and statements" href="session02.html" />
     <link rel="prev" title="Scientific Programming in Python" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -92,7 +92,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <h1 class="site-logo" id="site-title">Scientific programming in Python</h1>
+      <h1 class="site-logo" id="site-title">Introduction to scientific programming in Python</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -108,40 +108,90 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Introduction (October 18 and 25, 2022)
+   Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session02.html">
-   Data types and statements (October 25 and November 08, 2022)
+   Data types and statements
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session03.html">
-   Functions and conditional execution (November 15 and 22, 2022)
+   Functions and conditional execution
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session04.html">
-   Advanced data types: lists, tuples, sets, dictionaries (November 22 and 29, 2022)
+   Advanced data types: lists, tuples, sets, dictionaries
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session05.html">
-   Modules, file I/O (input/output) (December 06, 2022)
+   Modules, file I/O (input/output)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session06.html">
-   Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)
+   More on functions, loops, dictionaries, and files
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Extended basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="session07.html">
+   For efficiency’s sake: structured programs, packages, regular expressions
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="session07.html">
-   For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022)
+  <a class="reference internal" href="session08.html">
+   Classes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session09.html">
+   Recursion and trees
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Applications
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="session10.html">
+   Processing corpus data using
+   <em>
+    NLTK
+   </em>
+   ,
+   <em>
+    numpy
+   </em>
+   , and
+   <em>
+    matplotlib
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="session11.html">
+   Programming in experimental research
   </a>
  </li>
 </ul>
@@ -203,7 +253,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/julianeschwab/ScientificProgramming/master?urlpath=tree/docs/session01.ipynb"
+        <a href="https://mybinder.org/v2/gh/michael-franke/PythonIntro/master?urlpath=tree/docs/session01.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -216,6 +266,24 @@ title="Launch on Binder"
     <img src="_static/images/logo_binder.svg">
   </span>
 <span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/michael-franke/PythonIntro/blob/master/docs/session01.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
 </a>
 
       </li>
@@ -264,7 +332,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/julianeschwab/ScientificProgramming"
+        <a href="https://github.com/michael-franke/PythonIntro"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -281,7 +349,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/julianeschwab/ScientificProgramming/issues/new?title=Issue%20on%20page%20%2Fsession01.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/michael-franke/PythonIntro/issues/new?title=Issue%20on%20page%20%2Fsession01.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -421,7 +489,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Introduction (October 18 and 25, 2022)</h1>
+                <h1>Introduction</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -485,8 +553,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction-october-18-and-25-2022">
-<h1>Introduction (October 18 and 25, 2022)<a class="headerlink" href="#introduction-october-18-and-25-2022" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
 <p>In this course, you will learn the basics of programming. Our language of choice will be <strong>Python</strong>, a <em>high-level, dynamically-typed</em> programming language. You will learn what that means later on. No prior knowledge in programming is required. At the end of this course, you should have acquired general-purpose knowledge relevant for <em>any</em> higher-level programming language, you should have learned how to write and interpret basic programs in Python, and you should be able to break down complex (data analysis) problems into algorithms aimed to solve the task at hand.</p>
 <section id="why-programming">
 <h2>Why programming?<a class="headerlink" href="#why-programming" title="Permalink to this headline">#</a></h2>
@@ -690,9 +758,8 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_8796</span>\<span class="mf">4248215586.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">c</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 
 <span class="ne">TypeError</span>: unsupported operand type(s) for +: &#39;int&#39; and &#39;NoneType&#39;
@@ -751,7 +818,7 @@ title="Print to PDF"
     {
         requestKernel: true,
         binderOptions: {
-            repo: "julianeschwab/ScientificProgramming",
+            repo: "michael-franke/PythonIntro",
             ref: "master",
         },
         codeMirrorConfig: {
@@ -784,7 +851,7 @@ title="Print to PDF"
     <a class='right-next' id="next-link" href="session02.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data types and statements (October 25 and November 08, 2022)</p>
+        <p class="prev-next-title">Data types and statements</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -795,7 +862,7 @@ title="Print to PDF"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Juliane Schwab<br/>
+    By Juliane Schwab, Michael Franke & Todd Snider<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

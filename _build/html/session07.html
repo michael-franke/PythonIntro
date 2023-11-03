@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>For efficiency’s sake: structured programs, packages, regular expressions (December 20, 2022 / January 10, 2023) &#8212; Scientific programming in Python</title>
+    <title>For efficiency’s sake: structured programs, packages, regular expressions &#8212; Introduction to scientific programming in Python</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Classes (January 17, 2023)" href="session08.html" />
-    <link rel="prev" title="Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)" href="session06.html" />
+    <link rel="next" title="Classes" href="session08.html" />
+    <link rel="prev" title="More on functions, loops, dictionaries, and files" href="session06.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -92,7 +92,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <h1 class="site-logo" id="site-title">Scientific programming in Python</h1>
+      <h1 class="site-logo" id="site-title">Introduction to scientific programming in Python</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -108,55 +108,74 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="session01.html">
-   Introduction (October 18 and 25, 2022)
+   Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session02.html">
-   Data types and statements (October 25 and November 08, 2022)
+   Data types and statements
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session03.html">
-   Functions and conditional execution (November 15 and 22, 2022)
+   Functions and conditional execution
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session04.html">
-   Advanced data types: lists, tuples, sets, dictionaries (November 22 and 29, 2022)
+   Advanced data types: lists, tuples, sets, dictionaries
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session05.html">
-   Modules, file I/O (input/output) (December 06, 2022)
+   Modules, file I/O (input/output)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session06.html">
-   Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)
+   More on functions, loops, dictionaries, and files
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Extended basics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023)
+   For efficiency’s sake: structured programs, packages, regular expressions
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session08.html">
-   Classes (January 17, 2023)
+   Classes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session09.html">
-   Recursion and trees (January 24, 2023)
+   Recursion and trees
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Applications
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="session10.html">
-   Applications (Part I): Processing corpus data using
+   Processing corpus data using
    <em>
     NLTK
    </em>
@@ -168,12 +187,11 @@ const thebe_selector_output = ".output, .cell_output"
    <em>
     matplotlib
    </em>
-   (January 31, 2023)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session11.html">
-   Applications (Part II): Programming in experimental research (February 07, 2023)
+   Programming in experimental research
   </a>
  </li>
 </ul>
@@ -235,7 +253,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/julianeschwab/ScientificProgramming/master?urlpath=tree/docs/session07.ipynb"
+        <a href="https://mybinder.org/v2/gh/michael-franke/PythonIntro/master?urlpath=tree/docs/session07.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -248,6 +266,24 @@ title="Launch on Binder"
     <img src="_static/images/logo_binder.svg">
   </span>
 <span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/michael-franke/PythonIntro/blob/master/docs/session07.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
 </a>
 
       </li>
@@ -296,7 +332,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/julianeschwab/ScientificProgramming"
+        <a href="https://github.com/michael-franke/PythonIntro"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -313,7 +349,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/julianeschwab/ScientificProgramming/issues/new?title=Issue%20on%20page%20%2Fsession07.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/michael-franke/PythonIntro/issues/new?title=Issue%20on%20page%20%2Fsession07.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -494,7 +530,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023)</h1>
+                <h1>For efficiency’s sake: structured programs, packages, regular expressions</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -599,8 +635,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="for-efficiency-s-sake-structured-programs-packages-regular-expressions-december-20-2022-january-10-2023">
-<h1>For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023)<a class="headerlink" href="#for-efficiency-s-sake-structured-programs-packages-regular-expressions-december-20-2022-january-10-2023" title="Permalink to this headline">#</a></h1>
+  <section id="for-efficiency-s-sake-structured-programs-packages-regular-expressions">
+<h1>For efficiency’s sake: structured programs, packages, regular expressions<a class="headerlink" href="#for-efficiency-s-sake-structured-programs-packages-regular-expressions" title="Permalink to this headline">#</a></h1>
 <p>Efficiency is key. Therefore, in this session, you will learn more about advanced aspects of efficient programming. We have already discussed how to improve code efficiency and maintainability in small programs. Sooner or later, however, additional questions may emerge: How should you <strong>distribute code over a main program and importable modules</strong>? Where can time and effort be saved by <strong>relying on already available modules and packages</strong>? Can <strong>repeating patterns</strong> in the task at hand be detected and exploited for further automization?</p>
 <section id="structured-programs">
 <h2>Structured programs<a class="headerlink" href="#structured-programs" title="Permalink to this headline">#</a></h2>
@@ -811,12 +847,10 @@ the imported module&#39;s name is: math
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_11812</span>\<span class="mf">686467937.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">polyglot</span> <span class="c1">#import the polyglot package</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">polyglot.text</span> <span class="kn">import</span> <span class="n">Detector</span><span class="p">,</span> <span class="n">Text</span><span class="p">,</span> <span class="n">Word</span> <span class="c1">#imports the Text and Word classes</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> 
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">text_en</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="s2">&quot;Enjoy the Christmas break and have a happy new year!&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">text_ar</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="s2">&quot;عيد ميلاد مجيد وكل عام وانتم بخير&quot;</span><span class="p">)</span>
 
 <span class="ne">ModuleNotFoundError</span>: No module named &#39;polyglot&#39;
 </pre></div>
@@ -929,7 +963,7 @@ the imported module&#39;s name is: math
 <li><p>one (or possibly several) final states Z<sub>end</sub> ⊆ Z</p></li>
 <li><p>a transition function to move from Z<sub>i</sub> to Z<sub>j</sub> depending on an input symbol from the alphabet Σ. δ : Z × Σ → Z</p></li>
 </ul>
-<p>Determinisitic FSA need to specify exactly one possible transition per input symbol on each state. Nondeterministic FSA can have multiple transition options for an input symbol (e.g., for a on Z<sub>1</sub> below).</p>
+<p>Determinisitic FSA need to specify exactly one possible transition per input symbol on each state. Nondeterministic FSA can have multiple transition options for an input symbol (e.g., for <em>a</em> on Z<sub>1</sub> below).</p>
 <img src="https://www.dropbox.com/s/sbye5rzzqoxa0lw/automata_regex.png?raw=1" width="500" height="500" />
 </section>
 <section id="so-what-s-the-use-of-this-again">
@@ -1061,7 +1095,7 @@ the imported module&#39;s name is: math
     {
         requestKernel: true,
         binderOptions: {
-            repo: "julianeschwab/ScientificProgramming",
+            repo: "michael-franke/PythonIntro",
             ref: "master",
         },
         codeMirrorConfig: {
@@ -1088,13 +1122,13 @@ the imported module&#39;s name is: math
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)</p>
+            <p class="prev-next-title">More on functions, loops, dictionaries, and files</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="session08.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Classes (January 17, 2023)</p>
+        <p class="prev-next-title">Classes</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -1105,7 +1139,7 @@ the imported module&#39;s name is: math
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Juliane Schwab<br/>
+    By Juliane Schwab, Michael Franke & Todd Snider<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

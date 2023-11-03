@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)
+# ## More on functions, loops, dictionaries, and files 
 # 
 # The concepts introduced in previous sessions have additional functionalities worth introducing. In this session, we will therefore look at advanced (combined) uses of functions, loops, and file I/O, which allow you to code more efficiently. 
 # 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Applications (Part II): Programming in experimental research (February 07, 2023)
+# # Programming in experimental research 
 # 
 # **Experimental research in linguistics has grown in importance over the last few decades**. Two key research areas that depend on the experimental validation of hypotheses regarding, among others, language processing, production, and acquisition, are **psycho- and neurolinguistics**. Yet, even researchers that are primarily concerned with formal aspects of language (e.g. in syntax, semantics, or language typology) have turned to experimental research to address their research questions.
 # 
@@ -365,7 +365,7 @@ def waitForKey(which):
                 return  
 
 
-# In[3]:
+# In[ ]:
 
 
 # -*- coding: utf-8 -*-

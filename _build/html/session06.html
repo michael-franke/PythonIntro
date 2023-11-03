@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022) &#8212; Scientific programming in Python</title>
+    <title>More on functions, loops, dictionaries, and files &#8212; Introduction to scientific programming in Python</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="For efficiency’s sake: structured programs, packages, regular expressions (December 20, 2022 / January 10, 2023)" href="session07.html" />
-    <link rel="prev" title="Modules, file I/O (input/output) (December 06, 2022)" href="session05.html" />
+    <link rel="next" title="For efficiency’s sake: structured programs, packages, regular expressions" href="session07.html" />
+    <link rel="prev" title="Modules, file I/O (input/output)" href="session05.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -92,7 +92,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <h1 class="site-logo" id="site-title">Scientific programming in Python</h1>
+      <h1 class="site-logo" id="site-title">Introduction to scientific programming in Python</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -108,55 +108,74 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="session01.html">
-   Introduction (October 18 and 25, 2022)
+   Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session02.html">
-   Data types and statements (October 25 and November 08, 2022)
+   Data types and statements
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session03.html">
-   Functions and conditional execution (November 15 and 22, 2022)
+   Functions and conditional execution
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session04.html">
-   Advanced data types: lists, tuples, sets, dictionaries (November 22 and 29, 2022)
+   Advanced data types: lists, tuples, sets, dictionaries
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session05.html">
-   Modules, file I/O (input/output) (December 06, 2022)
+   Modules, file I/O (input/output)
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)
+   More on functions, loops, dictionaries, and files
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Extended basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="session07.html">
-   For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023)
+   For efficiency’s sake: structured programs, packages, regular expressions
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session08.html">
-   Classes (January 17, 2023)
+   Classes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session09.html">
-   Recursion and trees (January 24, 2023)
+   Recursion and trees
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Applications
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="session10.html">
-   Applications (Part I): Processing corpus data using
+   Processing corpus data using
    <em>
     NLTK
    </em>
@@ -168,12 +187,11 @@ const thebe_selector_output = ".output, .cell_output"
    <em>
     matplotlib
    </em>
-   (January 31, 2023)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session11.html">
-   Applications (Part II): Programming in experimental research (February 07, 2023)
+   Programming in experimental research
   </a>
  </li>
 </ul>
@@ -235,7 +253,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/julianeschwab/ScientificProgramming/master?urlpath=tree/docs/session06.ipynb"
+        <a href="https://mybinder.org/v2/gh/michael-franke/PythonIntro/master?urlpath=tree/docs/session06.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -248,6 +266,24 @@ title="Launch on Binder"
     <img src="_static/images/logo_binder.svg">
   </span>
 <span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/michael-franke/PythonIntro/blob/master/docs/session06.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
 </a>
 
       </li>
@@ -296,7 +332,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/julianeschwab/ScientificProgramming"
+        <a href="https://github.com/michael-franke/PythonIntro"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -313,7 +349,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/julianeschwab/ScientificProgramming/issues/new?title=Issue%20on%20page%20%2Fsession06.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/michael-franke/PythonIntro/issues/new?title=Issue%20on%20page%20%2Fsession06.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -500,7 +536,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)</h1>
+                <h1>More on functions, loops, dictionaries, and files</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -611,8 +647,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="finishing-the-basics-more-on-functions-loops-dictionaries-and-files-december-13-2022">
-<h1>Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)<a class="headerlink" href="#finishing-the-basics-more-on-functions-loops-dictionaries-and-files-december-13-2022" title="Permalink to this headline">#</a></h1>
+  <section id="more-on-functions-loops-dictionaries-and-files">
+<h1>More on functions, loops, dictionaries, and files<a class="headerlink" href="#more-on-functions-loops-dictionaries-and-files" title="Permalink to this headline">#</a></h1>
 <p>The concepts introduced in previous sessions have additional functionalities worth introducing. In this session, we will therefore look at advanced (combined) uses of functions, loops, and file I/O, which allow you to code more efficiently.</p>
 <p>Let’s start by looking at an example for a function that will accompany us throughout this session. Let’s figure out what this does:</p>
 <div class="cell docutils container">
@@ -763,24 +799,35 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_3460</span>\<span class="mf">3512021977.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">10</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="c1">#note that we can use placeholders {} in the string, filled by the two objects named later</span>
 <span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">unsorted_file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#reset file handle.</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> 
 <span class="ne">---&gt; </span><span class="mi">10</span> <span class="n">count_word_occurence</span><span class="p">(</span><span class="n">unsorted_file</span><span class="p">)</span>
 
-<span class="nn">~\AppData\Local\Temp\ipykernel_3460\3512021977.py</span> in <span class="ni">count_word_occurence</span><span class="nt">(file)</span>
+<span class="nn">Cell In [7], line 3,</span> in <span class="ni">count_word_occurence</span><span class="nt">(file)</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">count_word_occurence</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">sorted_file</span> <span class="o">=</span> <span class="n">sort_text</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="c1">#function call to user-defined function &quot;sort_text&quot;</span>
 <span class="ne">----&gt; </span><span class="mi">3</span>     <span class="n">word</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="c1">#a = sorted_file.count(word)</span>
 <span class="nn">      5     return &quot;The word &#39;{}&#39; occurs {} times</span> in <span class="ni">the text.&quot;.format(word,sorted_file.count</span><span class="nt">(word))</span>
 
-<span class="nn">~\miniconda3\lib\site-packages\ipykernel\kernelbase.py</span> in <span class="ni">raw_input</span><span class="nt">(self, prompt)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1070</span>         <span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1071</span><span class="s2">         if not self._allow_stdin:</span>
-<span class="ne">-&gt; </span><span class="mi">1072</span><span class="s2">             raise StdinNotImplementedError(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1073</span><span class="s2">                 &quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1074</span><span class="s2">             )</span>
+<span class="nn">File /opt/homebrew/lib/python3.10/site-packages/ipykernel/kernelbase.py:1174,</span> in <span class="ni">Kernel.raw_input</span><span class="nt">(self, prompt)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1167</span> <span class="sd">&quot;&quot;&quot;Forward raw_input to frontends</span>
+<span class="g g-Whitespace">   </span><span class="mi">1168</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1169</span><span class="sd"> Raises</span>
+<span class="g g-Whitespace">   </span><span class="mi">1170</span><span class="sd"> ------</span>
+<span class="g g-Whitespace">   </span><span class="mi">1171</span><span class="sd"> StdinNotImplementedError if active frontend doesn&#39;t support stdin.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1172</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1173</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allow_stdin</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1174</span>     <span class="k">raise</span> <span class="n">StdinNotImplementedError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1175</span>         <span class="s2">&quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1176</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1177</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_request</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1178</span>     <span class="nb">str</span><span class="p">(</span><span class="n">prompt</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1179</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_parent_ident</span><span class="p">[</span><span class="s2">&quot;shell&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">   </span><span class="mi">1180</span>     <span class="bp">self</span><span class="o">.</span><span class="n">get_parent</span><span class="p">(</span><span class="s2">&quot;shell&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1181</span>     <span class="n">password</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1182</span> <span class="p">)</span>
 
 <span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
 </pre></div>
@@ -1260,7 +1307,7 @@ ULTIMATE
     {
         requestKernel: true,
         binderOptions: {
-            repo: "julianeschwab/ScientificProgramming",
+            repo: "michael-franke/PythonIntro",
             ref: "master",
         },
         codeMirrorConfig: {
@@ -1287,13 +1334,13 @@ ULTIMATE
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Modules, file I/O (input/output) (December 06, 2022)</p>
+            <p class="prev-next-title">Modules, file I/O (input/output)</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="session07.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023)</p>
+        <p class="prev-next-title">For efficiency’s sake: structured programs, packages, regular expressions</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -1304,7 +1351,7 @@ ULTIMATE
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Juliane Schwab<br/>
+    By Juliane Schwab, Michael Franke & Todd Snider<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

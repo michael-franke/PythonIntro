@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## Recursion and trees (January 24, 2023)
+# ## Recursion and trees 
 # 
 # ### Defining recursion
 # It is time to turn everything on its head and introduce recursion into the game. **Recursion** occurs when we **define something in terms of itself or something else of its type**. For instance, we may define a file directory as a location on the computer that contains files *and (possibly) other directories*. 
@@ -174,7 +174,7 @@ def draw_branch(len): #recursive function to draw a tree
 draw_branch(35)
 
 
-# In[7]:
+# In[17]:
 
 
 turtle.bye() #close Turtle window
@@ -212,7 +212,7 @@ turtle.bye() #close Turtle window
 # 
 # ![](https://www.dropbox.com/s/4a6s9i6etks8ryt/tree_example.png?raw=1)
 
-# In[8]:
+# In[16]:
 
 
 class Tree(object):
@@ -230,14 +230,14 @@ class Tree(object):
         self.children.append(node)
 
 
-# In[9]:
+# In[17]:
 
 
 #this creates a tree like the one shown above
 first_tree = Tree("A", children = [Tree("B"), Tree("C", children = [Tree("D", children = [Tree("F"), Tree("G"), Tree("H")]),Tree("E")])])
 
 
-# In[10]:
+# In[18]:
 
 
 #We can easily add new nodes to the tree:
@@ -268,7 +268,7 @@ first_tree.children[1].children[1].children[0].name
 # (solution at the bottom)
 # ![](https://www.dropbox.com/s/4a6s9i6etks8ryt/tree_example.png?raw=1)
 
-# In[11]:
+# In[21]:
 
 
 class SearchTree(object):
@@ -299,7 +299,7 @@ class SearchTree(object):
         return result
 
 
-# In[12]:
+# In[22]:
 
 
 #this creates a tree like the one shown above, now using our new class of traversable trees

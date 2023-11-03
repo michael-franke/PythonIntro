@@ -3,16 +3,24 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: session01 
-- file: session02
-- file: session03
-- file: session04
-- file: session05
-- file: session06
-- file: session07
-- file: session08
-- file: session09
-- file: session10
-- file: session11
 
+parts:
+- caption: Foundations
+  chapters:
+  - file: session01
+  - file: session02
+  - file: session03
+  - file: session04
+  - file: session05
+  - file: session06
+
+- caption: Extended basics
+  chapters:
+  - file: session07
+  - file: session08
+  - file: session09
+
+- caption: Applications
+  chapters:
+  - file: session10
+  - file: session11

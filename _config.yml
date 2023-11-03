@@ -1,8 +1,8 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Scientific programming in Python
-author: Juliane Schwab
+title: Introduction to scientific programming in Python
+author: Juliane Schwab, Michael Franke & Todd Snider
 #logo: 
 
 # Force re-execution of notebooks on each build.
@@ -21,7 +21,7 @@ bibtex_bibfiles:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/julianeschwab/ScientificProgramming  # Online location of your book
+  url: https://github.com/michael-franke/PythonIntro # Online location of your book
   path_to_book: docs  # Optional path to your book, relative to the repository root
   branch: master  # Which branch of the repository should be used when creating links (optional)
 
@@ -32,4 +32,5 @@ html:
   use_repository_button: true
 
 launch_buttons:
-  thebe                  : true
+  thebe: true
+  colab_url: "https://colab.research.google.com"

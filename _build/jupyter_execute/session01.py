@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Introduction (October 18 and 25, 2022)
+# # Introduction
 # 
 # In this course, you will learn the basics of programming. Our language of choice will be **Python**, a *high-level, dynamically-typed* programming language. You will learn what that means later on. No prior knowledge in programming is required. At the end of this course, you should have acquired general-purpose knowledge relevant for *any* higher-level programming language, you should have learned how to write and interpret basic programs in Python, and you should be able to break down complex (data analysis) problems into algorithms aimed to solve the task at hand.  
 # 
@@ -57,7 +57,7 @@
 # In[1]:
 
 
-get_ipython().run_cell_magic('capture', '', '"""\nIF you are using dark chocolate,\n    THEN add 100g of sugar,\nELSE IF you are using milk chocolate,\n    THEN add 50g of sugar.\nWHILE your dough is chunky,\n    keep whisking.\n"""   ')
+get_ipython().run_cell_magic('capture', '', '"""\nIF you are using dark chocolate,\n    THEN add 100g of sugar,\nELSE IF you are using milk chocolate,\n    THEN add 50g of sugar.\nWHILE your dough is chunky,\n    keep whisking.\n"""   \n')
 
 
 # The above are examples of algorithms written in *pseudo-code*. These are not executable pieces of code, but a natural-language representation approximating the structure of a computer algorithm. 
@@ -67,7 +67,7 @@ get_ipython().run_cell_magic('capture', '', '"""\nIF you are using dark chocolat
 # In[2]:
 
 
-get_ipython().run_cell_magic('capture', '', '"""\nDEFINE a function that takes a finite list of numbers L:\n    set x to the first number in L;\n    set y to the first number in L;\n    \n    for each element i in L:\n        if that element is BIGGER THAN x:\n            x = i\n        if that element is SMALLER THAN y:\n            y = i\n    return x and y\n"""')
+get_ipython().run_cell_magic('capture', '', '"""\nDEFINE a function that takes a finite list of numbers L:\n    set x to the first number in L;\n    set y to the first number in L;\n    \n    for each element i in L:\n        if that element is BIGGER THAN x:\n            x = i\n        if that element is SMALLER THAN y:\n            y = i\n    return x and y\n"""\n')
 
 
 # ## Python

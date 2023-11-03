@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## Classes (January 17, 2023) 
+# ## Classes 
 # 
 # 
 # In previous sessions, we learned about various different data types (e.g., integers, strings, lists, tuples, dictionaries...) along with their methods (e.g., *str.split()*, *list.sort()*,...), **but what if we could define our own?**

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Applications (Part I): Processing corpus data using NLTK, numpy, and matplotlib (January 31, 2023) &#8212; Scientific programming in Python</title>
+    <title>Processing corpus data using NLTK, numpy, and matplotlib &#8212; Introduction to scientific programming in Python</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Applications (Part II): Programming in experimental research (February 07, 2023)" href="session11.html" />
-    <link rel="prev" title="Recursion and trees (January 24, 2023)" href="session09.html" />
+    <link rel="next" title="Programming in experimental research" href="session11.html" />
+    <link rel="prev" title="Recursion and trees" href="session09.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -92,7 +92,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <h1 class="site-logo" id="site-title">Scientific programming in Python</h1>
+      <h1 class="site-logo" id="site-title">Introduction to scientific programming in Python</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -108,55 +108,74 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Foundations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="session01.html">
-   Introduction (October 18 and 25, 2022)
+   Introduction
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session02.html">
-   Data types and statements (October 25 and November 08, 2022)
+   Data types and statements
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session03.html">
-   Functions and conditional execution (November 15 and 22, 2022)
+   Functions and conditional execution
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session04.html">
-   Advanced data types: lists, tuples, sets, dictionaries (November 22 and 29, 2022)
+   Advanced data types: lists, tuples, sets, dictionaries
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session05.html">
-   Modules, file I/O (input/output) (December 06, 2022)
+   Modules, file I/O (input/output)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session06.html">
-   Finishing the basics: more on functions, loops, dictionaries, and files (December 13, 2022)
+   More on functions, loops, dictionaries, and files
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Extended basics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="session07.html">
-   For efficiency’s sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023)
+   For efficiency’s sake: structured programs, packages, regular expressions
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session08.html">
-   Classes (January 17, 2023)
+   Classes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session09.html">
-   Recursion and trees (January 24, 2023)
+   Recursion and trees
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Applications
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Applications (Part I): Processing corpus data using
+   Processing corpus data using
    <em>
     NLTK
    </em>
@@ -168,12 +187,11 @@ const thebe_selector_output = ".output, .cell_output"
    <em>
     matplotlib
    </em>
-   (January 31, 2023)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="session11.html">
-   Applications (Part II): Programming in experimental research (February 07, 2023)
+   Programming in experimental research
   </a>
  </li>
 </ul>
@@ -235,7 +253,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/julianeschwab/ScientificProgramming/master?urlpath=tree/docs/session10.ipynb"
+        <a href="https://mybinder.org/v2/gh/michael-franke/PythonIntro/master?urlpath=tree/docs/session10.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -248,6 +266,24 @@ title="Launch on Binder"
     <img src="_static/images/logo_binder.svg">
   </span>
 <span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/michael-franke/PythonIntro/blob/master/docs/session10.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
 </a>
 
       </li>
@@ -296,7 +332,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/julianeschwab/ScientificProgramming"
+        <a href="https://github.com/michael-franke/PythonIntro"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -313,7 +349,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/julianeschwab/ScientificProgramming/issues/new?title=Issue%20on%20page%20%2Fsession10.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/michael-franke/PythonIntro/issues/new?title=Issue%20on%20page%20%2Fsession10.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -477,7 +513,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Applications (Part I): Processing corpus data using NLTK, numpy, and matplotlib (January 31, 2023)</h1>
+                <h1>Processing corpus data using NLTK, numpy, and matplotlib</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -565,8 +601,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="applications-part-i-processing-corpus-data-using-nltk-numpy-and-matplotlib-january-31-2023">
-<h1>Applications (Part I): Processing corpus data using <em>NLTK</em>, <em>numpy</em>, and <em>matplotlib</em> (January 31, 2023)<a class="headerlink" href="#applications-part-i-processing-corpus-data-using-nltk-numpy-and-matplotlib-january-31-2023" title="Permalink to this headline">#</a></h1>
+  <section id="processing-corpus-data-using-nltk-numpy-and-matplotlib">
+<h1>Processing corpus data using <em>NLTK</em>, <em>numpy</em>, and <em>matplotlib</em><a class="headerlink" href="#processing-corpus-data-using-nltk-numpy-and-matplotlib" title="Permalink to this headline">#</a></h1>
 <p>At this point, we are ready to take our learned tools to look at some instances of real-world research applications for programming. In today’s session, we will use several Python packages, specifically the Natural Language Toolkit (NLTK), NumPy, and MatPlotLib, to analyze large natural language corpora for the frequency of epistemic modal adverbs, English-German comparisons in word length, and a comparison of relative clause structures in English.</p>
 <section id="laying-the-ground-work-used-packages">
 <h2>Laying the ground work: used packages<a class="headerlink" href="#laying-the-ground-work-used-packages" title="Permalink to this headline">#</a></h2>
@@ -675,6 +711,18 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">nltk</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">europarl_raw</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1">#load any of the available language data</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;nltk&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <p>First, we should get an overview of the data we are dealing with. The <strong>Europarl corpus data comes as a set of plaintext documents</strong>. NLTK comes equipped with a <strong>corpus reader method</strong> that allow us to extract the following information: a <strong>list of its words</strong>, its <strong>sentences</strong> (as nested list of its sentences each being a list of words), or its <strong>chapters</strong> (as nested list of chapters each being a list of sentences as a list of words).</p>
 <div class="cell docutils container">
@@ -692,12 +740,8 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Resumption&#39;, &#39;of&#39;, &#39;the&#39;, &#39;session&#39;, &#39;I&#39;, &#39;declare&#39;, ...]
 [[&#39;Wiederaufnahme&#39;, &#39;der&#39;, &#39;Sitzungsperiode&#39;, &#39;Ich&#39;, &#39;erkläre&#39;, &#39;die&#39;, &#39;am&#39;, &#39;Freitag&#39;, &#39;,&#39;, &#39;dem&#39;, &#39;17.&#39;, &#39;Dezember&#39;, &#39;unterbrochene&#39;, &#39;Sitzungsperiode&#39;, &#39;des&#39;, &#39;Europäischen&#39;, &#39;Parlaments&#39;, &#39;für&#39;, &#39;wiederaufgenommen&#39;, &#39;,&#39;, &#39;wünsche&#39;, &#39;Ihnen&#39;, &#39;nochmals&#39;, &#39;alles&#39;, &#39;Gute&#39;, &#39;zum&#39;, &#39;Jahreswechsel&#39;, &#39;und&#39;, &#39;hoffe&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;Sie&#39;, &#39;schöne&#39;, &#39;Ferien&#39;, &#39;hatten&#39;, &#39;.&#39;], [&#39;Wie&#39;, &#39;Sie&#39;, &#39;feststellen&#39;, &#39;konnten&#39;, &#39;,&#39;, &#39;ist&#39;, &#39;der&#39;, &#39;gefürchtete&#39;, &#39;&quot;&#39;, &#39;Millenium-Bug&#39;, &#39;&quot;&#39;, &#39;nicht&#39;, &#39;eingetreten&#39;, &#39;.&#39;], ...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>556326
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>556226
+556326
+556226
 </pre></div>
 </div>
 </div>
@@ -728,9 +772,9 @@ title="Print to PDF"
  definitely: 18 
  certainly: 173 
  necessarily: 28 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> vielleicht: 153 
+
+
+ vielleicht: 153 
  wahrscheinlich: 48 
  definitiv: 3 
  sicherlich: 80 
@@ -788,13 +832,9 @@ title="Print to PDF"
 
 
 490 [&#39;Es&#39;, &#39;sollte&#39;, &#39;nicht&#39;, &#39;darum&#39;, &#39;gehen&#39;, &#39;,&#39;, &#39;auf&#39;, &#39;halbem&#39;, &#39;Wege&#39;, &#39;Änderungen&#39;, &#39;an&#39;, &#39;den&#39;, &#39;Prioritäten&#39;, &#39;und&#39;, &#39;Politiken&#39;, &#39;vorzunehmen&#39;, &#39;,&#39;, &#39;was&#39;, &#39;zwangsläufig&#39;, &#39;Verzögerungen&#39;, &#39;und&#39;, &#39;Nichtausschöpfung&#39;, &#39;der&#39;, &#39;Mittel&#39;, &#39;zur&#39;, &#39;Folge&#39;, &#39;hat&#39;, &#39;.&#39;]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1042 [&#39;Optimale&#39;, &#39;Effizienz&#39;, &#39;stellt&#39;, &#39;sich&#39;, &#39;aber&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;von&#39;, &#39;allein&#39;, &#39;ein&#39;, &#39;.&#39;]
+1042 [&#39;Optimale&#39;, &#39;Effizienz&#39;, &#39;stellt&#39;, &#39;sich&#39;, &#39;aber&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;von&#39;, &#39;allein&#39;, &#39;ein&#39;, &#39;.&#39;]
 2207 [&#39;Besonders&#39;, &#39;bemerkenswert&#39;, &#39;ist&#39;, &#39;aus&#39;, &#39;meiner&#39;, &#39;Sicht&#39;, &#39;das&#39;, &#39;Signal&#39;, &#39;,&#39;, &#39;das&#39;, &#39;von&#39;, &#39;diesem&#39;, &#39;Vorschlag&#39;, &#39;ausgeht&#39;, &#39;:&#39;, &#39;die&#39;, &#39;Kommission&#39;, &#39;sieht&#39;, &#39;die&#39;, &#39;Auswirkungen&#39;, &#39;der&#39;, &#39;Erweiterung&#39;, &#39;voraus&#39;, &#39;und&#39;, &#39;hat&#39;, &#39;erkannt&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;diese&#39;, &#39;zwangsläufig&#39;, &#39;,&#39;, &#39;ja&#39;, &#39;quasi&#39;, &#39;automatisch&#39;, &#39;,&#39;, &#39;eine&#39;, &#39;Reform&#39;, &#39;des&#39;, &#39;zentralisierten&#39;, &#39;Systems&#39;, &#39;mit&#39;, &#39;sich&#39;, &#39;bringt&#39;, &#39;.&#39;]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2604 [&#39;Man&#39;, &#39;muß&#39;, &#39;im&#39;, &#39;Falle&#39;, &#39;von&#39;, &#39;Gefälligkeitsflaggen&#39;, &#39;strenger&#39;, &#39;vorgehen&#39;, &#39;,&#39;, &#39;nicht&#39;, &#39;weil&#39;, &#39;es&#39;, &#39;sich&#39;, &#39;dabei&#39;, &#39;zwangsläufig&#39;, &#39;um&#39;, &#39;schlechte&#39;, &#39;Schiffe&#39;, &#39;handelt&#39;, &#39;,&#39;, &#39;sondern&#39;, &#39;weil&#39;, &#39;viele&#39;, &#39;schlechte&#39;, &#39;Schiffe&#39;, &#39;darunter&#39;, &#39;sind&#39;, &#39;;&#39;, &#39;Verbesserung&#39;, &#39;der&#39;, &#39;Information&#39;, &#39;über&#39;, &#39;alle&#39;, &#39;Schiffe&#39;, &#39;der&#39;, &#39;Welt&#39;, &#39;,&#39;, &#39;aber&#39;, &#39;das&#39;, &#39;ist&#39;, &#39;ja&#39;, &#39;bereits&#39;, &#39;vorgesehen&#39;, &#39;;&#39;, &#39;genaue&#39;, &#39;Festlegungen&#39;, &#39;und&#39;, &#39;strenger&#39;, &#39;Umgang&#39;, &#39;mit&#39;, &#39;den&#39;, &#39;Verantwortlichkeiten&#39;, &#39;.&#39;]
+2604 [&#39;Man&#39;, &#39;muß&#39;, &#39;im&#39;, &#39;Falle&#39;, &#39;von&#39;, &#39;Gefälligkeitsflaggen&#39;, &#39;strenger&#39;, &#39;vorgehen&#39;, &#39;,&#39;, &#39;nicht&#39;, &#39;weil&#39;, &#39;es&#39;, &#39;sich&#39;, &#39;dabei&#39;, &#39;zwangsläufig&#39;, &#39;um&#39;, &#39;schlechte&#39;, &#39;Schiffe&#39;, &#39;handelt&#39;, &#39;,&#39;, &#39;sondern&#39;, &#39;weil&#39;, &#39;viele&#39;, &#39;schlechte&#39;, &#39;Schiffe&#39;, &#39;darunter&#39;, &#39;sind&#39;, &#39;;&#39;, &#39;Verbesserung&#39;, &#39;der&#39;, &#39;Information&#39;, &#39;über&#39;, &#39;alle&#39;, &#39;Schiffe&#39;, &#39;der&#39;, &#39;Welt&#39;, &#39;,&#39;, &#39;aber&#39;, &#39;das&#39;, &#39;ist&#39;, &#39;ja&#39;, &#39;bereits&#39;, &#39;vorgesehen&#39;, &#39;;&#39;, &#39;genaue&#39;, &#39;Festlegungen&#39;, &#39;und&#39;, &#39;strenger&#39;, &#39;Umgang&#39;, &#39;mit&#39;, &#39;den&#39;, &#39;Verantwortlichkeiten&#39;, &#39;.&#39;]
 3192 [&#39;Diese&#39;, &#39;Vertrauenskrise&#39;, &#39;hatte&#39;, &#39;zwangsläufig&#39;, &#39;leider&#39;, &#39;auch&#39;, &#39;zur&#39;, &#39;Folge&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;das&#39;, &#39;Vertrauen&#39;, &#39;der&#39;, &#39;Verbraucher&#39;, &#39;in&#39;, &#39;Systeme&#39;, &#39;und&#39;, &#39;Institutionen&#39;, &#39;auf&#39;, &#39;nationaler&#39;, &#39;und&#39;, &#39;europäischer&#39;, &#39;Ebene&#39;, &#39;,&#39;, &#39;die&#39;, &#39;für&#39;, &#39;die&#39;, &#39;Überwachung&#39;, &#39;und&#39;, &#39;Gewährleistung&#39;, &#39;der&#39;, &#39;Lebensmittelsicherheit&#39;, &#39;auf&#39;, &#39;höchstem&#39;, &#39;Niveau&#39;, &#39;verantwortlich&#39;, &#39;sind&#39;, &#39;,&#39;, &#39;erschüttert&#39;, &#39;wurde&#39;, &#39;.&#39;]
 3784 [&#39;Andererseits&#39;, &#39;führen&#39;, &#39;die&#39;, &#39;Verpflichtung&#39;, &#39;zur&#39;, &#39;transnationalen&#39;, &#39;Zusammenarbeit&#39;, &#39;und&#39;, &#39;die&#39;, &#39;komplizierten&#39;, &#39;Anforderungen&#39;, &#39;an&#39;, &#39;die&#39;, &#39;Planung&#39;, &#39;und&#39;, &#39;Umsetzung&#39;, &#39;von&#39;, &#39;Entwicklungspartnerschaften&#39;, &#39;zwangsläufig&#39;, &#39;zu&#39;, &#39;Großprojekten&#39;, &#39;,&#39;, &#39;da&#39;, &#39;nur&#39;, &#39;sie&#39;, &#39;diesen&#39;, &#39;Bedingungen&#39;, &#39;entsprechen&#39;, &#39;können&#39;, &#39;.&#39;]
 4046 [&#39;Ich&#39;, &#39;möchte&#39;, &#39;Ihnen&#39;, &#39;dennoch&#39;, &#39;zwei&#39;, &#39;Beispiele&#39;, &#39;dafür&#39;, &#39;nennen&#39;, &#39;,&#39;, &#39;weshalb&#39;, &#39;die&#39;, &#39;jetzt&#39;, &#39;von&#39;, &#39;der&#39;, &#39;Kommission&#39;, &#39;geäußerten&#39;, &#39;guten&#39;, &#39;Absichten&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;auch&#39;, &#39;zu&#39;, &#39;einem&#39;, &#39;befriedigenden&#39;, &#39;Resultat&#39;, &#39;führen&#39;, &#39;.&#39;]
@@ -804,7 +844,9 @@ title="Print to PDF"
 6282 [&#39;Damit&#39;, &#39;möchte&#39;, &#39;ich&#39;, &#39;Ihnen&#39;, &#39;sagen&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;die&#39;, &#39;portugiesische&#39;, &#39;Präsidentschaft&#39;, &#39;-&#39;, &#39;und&#39;, &#39;auch&#39;, &#39;ich&#39;, &#39;selbst&#39;, &#39;und&#39;, &#39;der&#39;, &#39;Justizminister&#39;, &#39;,&#39;, &#39;die&#39;, &#39;wir&#39;, &#39;uns&#39;, &#39;mit&#39;, &#39;dem&#39;, &#39;Bereich&#39;, &#39;der&#39;, &#39;Justiz&#39;, &#39;und&#39;, &#39;der&#39;, &#39;inneren&#39;, &#39;Angelegenheiten&#39;, &#39;beschäftigen&#39;, &#39;-&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;wir&#39;, &#39;mit&#39;, &#39;diesem&#39;, &#39;Parlament&#39;, &#39;eine&#39;, &#39;neue&#39;, &#39;Zeit&#39;, &#39;einläuten&#39;, &#39;und&#39;, &#39;die&#39;, &#39;Beziehungen&#39;, &#39;zwischen&#39;, &#39;Rat&#39;, &#39;und&#39;, &#39;Parlament&#39;, &#39;fördern&#39;, &#39;wollen&#39;, &#39;,&#39;, &#39;wobei&#39;, &#39;dies&#39;, &#39;zwangsläufig&#39;, &#39;unter&#39;, &#39;dem&#39;, &#39;Eindruck&#39;, &#39;meiner&#39;, &#39;parlamentarischen&#39;, &#39;Erfahrung&#39;, &#39;im&#39;, &#39;Europäischen&#39;, &#39;Parlament&#39;, &#39;und&#39;, &#39;selbstverständlich&#39;, &#39;auch&#39;, &#39;von&#39;, &#39;der&#39;, &#39;parlamentarischen&#39;, &#39;Erfahrung&#39;, &#39;des&#39;, &#39;großen&#39;, &#39;nationalen&#39;, &#39;Abgeordneten&#39;, &#39;geschieht&#39;, &#39;,&#39;, &#39;der&#39;, &#39;bis&#39;, &#39;heute&#39;, &#39;Herr&#39;, &#39;Justizminister&#39;, &#39;und&#39;, &#39;mein&#39;, &#39;Kollege&#39;, &#39;gewesen&#39;, &#39;ist&#39;, &#39;.&#39;]
 6342 [&#39;Ich&#39;, &#39;glaube&#39;, &#39;,&#39;, &#39;in&#39;, &#39;diesem&#39;, &#39;Bereich&#39;, &#39;und&#39;, &#39;im&#39;, &#39;Bereich&#39;, &#39;des&#39;, &#39;Dialogs&#39;, &#39;,&#39;, &#39;den&#39;, &#39;Rat&#39;, &#39;und&#39;, &#39;Parlament&#39;, &#39;zwangsläufig&#39;, &#39;über&#39;, &#39;die&#39;, &#39;Entwicklung&#39;, &#39;von&#39;, &#39;EUROPOL&#39;, &#39;und&#39;, &#39;EUROJUST&#39;, &#39;führen&#39;, &#39;müssen&#39;, &#39;,&#39;, &#39;haben&#39;, &#39;wir&#39;, &#39;die&#39;, &#39;Möglichkeit&#39;, &#39;,&#39;, &#39;im&#39;, &#39;Zusammenhang&#39;, &#39;mit&#39;, &#39;EUROPOL&#39;, &#39;eine&#39;, &#39;institutionell&#39;, &#39;annehmbare&#39;, &#39;Lösung&#39;, &#39;für&#39;, &#39;die&#39;, &#39;Beziehungen&#39;, &#39;zwischen&#39;, &#39;Rat&#39;, &#39;und&#39;, &#39;Parlament&#39;, &#39;zu&#39;, &#39;finden&#39;, &#39;.&#39;]
 6777 [&#39;Wir&#39;, &#39;sollten&#39;, &#39;uns&#39;, &#39;alle&#39;, &#39;einer&#39;, &#39;Sache&#39;, &#39;bewußt&#39;, &#39;sein&#39;, &#39;:&#39;, &#39;Zwischen&#39;, &#39;Rat&#39;, &#39;und&#39;, &#39;Parlament&#39;, &#39;,&#39;, &#39;zwischen&#39;, &#39;den&#39;, &#39;Ratsmitgliedern&#39;, &#39;und&#39;, &#39;den&#39;, &#39;Mitgliedern&#39;, &#39;dieses&#39;, &#39;Parlaments&#39;, &#39;besteht&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;eine&#39;, &#39;Diskrepanz&#39;, &#39;in&#39;, &#39;bezug&#39;, &#39;auf&#39;, &#39;die&#39;, &#39;Vor-&#39;, &#39;oder&#39;, &#39;Nachteile&#39;, &#39;der&#39;, &#39;Transparenz&#39;, &#39;.&#39;]
-7648 [&#39;Unser&#39;, &#39;Kollege&#39;, &#39;Dominique&#39;, &#39;Souchet&#39;, &#39;hat&#39;, &#39;daher&#39;, &#39;fünf&#39;, &#39;Änderungsanträge&#39;, &#39;eingereicht&#39;, &#39;,&#39;, &#39;mit&#39;, &#39;denen&#39;, &#39;unterstrichen&#39;, &#39;werden&#39;, &#39;soll&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;die&#39;, &#39;Fangkapazitäten&#39;, &#39;angepaßt&#39;, &#39;und&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;systematisch&#39;, &#39;reduziert&#39;, &#39;werden&#39;, &#39;müssen&#39;, &#39;.&#39;]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7648 [&#39;Unser&#39;, &#39;Kollege&#39;, &#39;Dominique&#39;, &#39;Souchet&#39;, &#39;hat&#39;, &#39;daher&#39;, &#39;fünf&#39;, &#39;Änderungsanträge&#39;, &#39;eingereicht&#39;, &#39;,&#39;, &#39;mit&#39;, &#39;denen&#39;, &#39;unterstrichen&#39;, &#39;werden&#39;, &#39;soll&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;die&#39;, &#39;Fangkapazitäten&#39;, &#39;angepaßt&#39;, &#39;und&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;systematisch&#39;, &#39;reduziert&#39;, &#39;werden&#39;, &#39;müssen&#39;, &#39;.&#39;]
 7913 [&#39;Ein&#39;, &#39;Problem&#39;, &#39;besteht&#39;, &#39;darin&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;Käufer&#39;, &#39;und&#39;, &#39;Nutzer&#39;, &#39;von&#39;, &#39;Leuchten&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;identisch&#39;, &#39;sind&#39;, &#39;.&#39;]
 7939 [&#39;Hinzugefügt&#39;, &#39;sei&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;der&#39;, &#39;Industrie&#39;, &#39;bereits&#39;, &#39;seit&#39;, &#39;1992&#39;, &#39;klar&#39;, &#39;war&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;es&#39;, &#39;zwangsläufig&#39;, &#39;zu&#39;, &#39;Änderungen&#39;, &#39;kommen&#39;, &#39;wird&#39;, &#39;.&#39;]
 10873 [&#39;Ich&#39;, &#39;kann&#39;, &#39;aber&#39;, &#39;wohl&#39;, &#39;feststellen&#39;, &#39;,&#39;, &#39;daß&#39;, &#39;von&#39;, &#39;seiten&#39;, &#39;der&#39;, &#39;einzelnen&#39;, &#39;Länder&#39;, &#39;eine&#39;, &#39;Bereitschaft&#39;, &#39;besteht&#39;, &#39;,&#39;, &#39;die&#39;, &#39;Debatte&#39;, &#39;zu&#39;, &#39;eröffnen&#39;, &#39;,&#39;, &#39;was&#39;, &#39;nicht&#39;, &#39;zwangsläufig&#39;, &#39;-&#39;, &#39;und&#39;, &#39;bereits&#39;, &#39;jetzt&#39;, &#39;muß&#39;, &#39;das&#39;, &#39;ganz&#39;, &#39;klar&#39;, &#39;sein&#39;, &#39;-&#39;, &#39;eine&#39;, &#39;Bereitschaft&#39;, &#39;bedeutet&#39;, &#39;,&#39;, &#39;die&#39;, &#39;Debatte&#39;, &#39;in&#39;, &#39;einer&#39;, &#39;Weise&#39;, &#39;abzuschließen&#39;, &#39;,&#39;, &#39;die&#39;, &#39;sich&#39;, &#39;mit&#39;, &#39;der&#39;, &#39;Auffassung&#39;, &#39;dieses&#39;, &#39;Parlaments&#39;, &#39;zum&#39;, &#39;Zweck&#39;, &#39;einiger&#39;, &#39;notwendiger&#39;, &#39;Reformen&#39;, &#39;deckt&#39;, &#39;.&#39;]
@@ -935,7 +977,7 @@ b. <em>…was zwangsläufig Verzögerungen und Nichtausschöpfung der Mittel zur
 <p>To ensure that the <strong>y-axis is equally spaced</strong> for both subplots, we set the y-axis ticks manually using <em>set_yticks</em> (analogously, you can use <em>set_xticks</em>)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span> <span class="c1">#&quot;1,2&quot; stands for the number of rows (1) and columns (2)</span>
 
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">word_len_en</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;English&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ger</span><span class="o">.</span><span class="n">words</span><span class="p">())),</span> <span class="n">word_len_ger</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;German&#39;</span><span class="p">)</span>
@@ -962,6 +1004,7 @@ b. <em>…was zwangsläufig Verzögerungen und Nichtausschöpfung der Mittel zur
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">en</span><span class="o">.</span><span class="n">words</span><span class="p">()))</span>
 
+<span class="c1">#note the use of sorted()!</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">word_len_en</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;English&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ger</span><span class="o">.</span><span class="n">words</span><span class="p">())),</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">word_len_ger</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;German&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]);</span>
@@ -1204,69 +1247,6 @@ b. <em>…was zwangsläufig Verzögerungen und Nichtausschöpfung der Mittel zur
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_11696</span>\<span class="mf">2890514494.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1">#just doing this on the first 500 sentences as it takes quite some time to run on the full corpus</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">):</span>
-<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="k">if</span> <span class="n">rc_type</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">parsed_sents</span><span class="p">()[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="s2">&quot;RC_SBJ&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="n">sbj_extr_RC</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="k">elif</span> <span class="n">rc_type</span><span class="p">(</span><span class="n">treebank</span><span class="o">.</span><span class="n">parsed_sents</span><span class="p">()[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="s2">&quot;RC_OBJ&quot;</span><span class="p">:</span>
-
-<span class="nn">~\miniconda3\lib\site-packages\nltk\collections.py</span> in <span class="ni">__getitem__</span><span class="nt">(self, i)</span>
-<span class="g g-Whitespace">    </span><span class="mi">170</span>             <span class="c1"># Use iterate_from to extract it.</span>
-<span class="g g-Whitespace">    </span><span class="mi">171</span>             <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">172</span>                 <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iterate_from</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">173</span>             <span class="k">except</span> <span class="ne">StopIteration</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">174</span>                 <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;index out of range&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
-
-<span class="nn">~\miniconda3\lib\site-packages\nltk\corpus\reader\util.py</span> in <span class="ni">iterate_from</span><span class="nt">(self, start_tok)</span>
-<span class="g g-Whitespace">    </span><span class="mi">422</span> 
-<span class="g g-Whitespace">    </span><span class="mi">423</span>             <span class="c1"># Get everything we can from this piece.</span>
-<span class="ne">--&gt; </span><span class="mi">424</span>             <span class="k">yield from</span> <span class="n">piece</span><span class="o">.</span><span class="n">iterate_from</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">start_tok</span> <span class="o">-</span> <span class="n">offset</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">425</span> 
-<span class="g g-Whitespace">    </span><span class="mi">426</span>             <span class="c1"># Update the offset table.</span>
-
-<span class="nn">~\miniconda3\lib\site-packages\nltk\corpus\reader\util.py</span> in <span class="ni">iterate_from</span><span class="nt">(self, start_tok)</span>
-<span class="g g-Whitespace">    </span><span class="mi">304</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_current_toknum</span> <span class="o">=</span> <span class="n">toknum</span>
-<span class="g g-Whitespace">    </span><span class="mi">305</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_current_blocknum</span> <span class="o">=</span> <span class="n">block_index</span>
-<span class="ne">--&gt; </span><span class="mi">306</span>             <span class="n">tokens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_block</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_stream</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">307</span>             <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">AbstractLazySequence</span><span class="p">)),</span> <span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">308</span>                 <span class="s2">&quot;block reader </span><span class="si">%s</span><span class="s2">() should return list or tuple.&quot;</span>
-
-<span class="nn">~\miniconda3\lib\site-packages\nltk\corpus\reader\api.py</span> in <span class="ni">_read_parsed_sent_block</span><span class="nt">(self, stream)</span>
-<span class="g g-Whitespace">    </span><span class="mi">511</span> 
-<span class="g g-Whitespace">    </span><span class="mi">512</span>     <span class="k">def</span> <span class="nf">_read_parsed_sent_block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
-<span class="nn">--&gt; 513         return list(filter(None, [self._parse(t) for t</span> in <span class="ni">self._read_block</span><span class="nt">(stream)]))</span>
-<span class="g g-Whitespace">    </span><span class="mi">514</span> 
-<span class="g g-Whitespace">    </span><span class="mi">515</span>     <span class="c1"># } End of Block Readers</span>
-
-<span class="nn">~\miniconda3\lib\site-packages\nltk\corpus\reader\bracket_parse.py</span> in <span class="ni">_read_block</span><span class="nt">(self, stream)</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span>         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_blocks</span> <span class="o">==</span> <span class="s2">&quot;unindented_paren&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">67</span>             <span class="c1"># Tokens start with unindented left parens.</span>
-<span class="ne">---&gt; </span><span class="mi">68</span>             <span class="n">toks</span> <span class="o">=</span> <span class="n">read_regexp_block</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">start_re</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;^\(&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">69</span>             <span class="c1"># Strip any comments out of the tokens.</span>
-<span class="g g-Whitespace">     </span><span class="mi">70</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comment_char</span><span class="p">:</span>
-
-<span class="nn">~\miniconda3\lib\site-packages\nltk\corpus\reader\util.py</span> in <span class="ni">read_regexp_block</span><span class="nt">(stream, start_re, end_re)</span>
-<span class="g g-Whitespace">    </span><span class="mi">656</span>     <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">657</span>     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">658</span>         <span class="n">oldpos</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">659</span>         <span class="n">line</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">660</span>         <span class="c1"># End of file:</span>
-
-<span class="nn">~\miniconda3\lib\site-packages\nltk\data.py</span> in <span class="ni">tell</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1301</span>         <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rewind_checkpoint</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1302</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_char_seek_forward</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rewind_numchars</span><span class="p">,</span> <span class="n">est_bytes</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1303</span>         <span class="n">filepos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1304</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1305</span>         <span class="c1"># Sanity check</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1468,7 +1448,7 @@ Frequency of object-extracted RCs: 	 19
     {
         requestKernel: true,
         binderOptions: {
-            repo: "julianeschwab/ScientificProgramming",
+            repo: "michael-franke/PythonIntro",
             ref: "master",
         },
         codeMirrorConfig: {
@@ -1495,13 +1475,13 @@ Frequency of object-extracted RCs: 	 19
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Recursion and trees (January 24, 2023)</p>
+            <p class="prev-next-title">Recursion and trees</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="session11.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Applications (Part II): Programming in experimental research (February 07, 2023)</p>
+        <p class="prev-next-title">Programming in experimental research</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -1512,7 +1492,7 @@ Frequency of object-extracted RCs: 	 19
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Juliane Schwab<br/>
+    By Juliane Schwab, Michael Franke & Todd Snider<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

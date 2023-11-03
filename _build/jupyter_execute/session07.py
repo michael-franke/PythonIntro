@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## For efficiency's sake: structured programs, packages, regular expressions  (December 20, 2022 / January 10, 2023) 
+# ## For efficiency's sake: structured programs, packages, regular expressions 
 # 
 # Efficiency is key. Therefore, in this session, you will learn more about advanced aspects of efficient programming. We have already discussed how to improve code efficiency and maintainability in small programs. Sooner or later, however, additional questions may emerge: How should you **distribute code over a main program and importable modules**? Where can time and effort be saved by **relying on already available modules and packages**? Can **repeating patterns** in the task at hand be detected and exploited for further automization? 
 # 
@@ -251,7 +251,7 @@ for x in text_en.transliterate("ar"):
 # - one (or possibly several) final states Z<sub>end</sub> ⊆ Z
 # - a transition function to move from Z<sub>i</sub> to Z<sub>j</sub> depending on an input symbol from the alphabet Σ. δ : Z × Σ → Z 
 # 
-# Determinisitic FSA need to specify exactly one possible transition per input symbol on each state. Nondeterministic FSA can have multiple transition options for an input symbol (e.g., for a on Z<sub>1</sub> below).
+# Determinisitic FSA need to specify exactly one possible transition per input symbol on each state. Nondeterministic FSA can have multiple transition options for an input symbol (e.g., for *a* on Z<sub>1</sub> below).
 # 
 # <img src="https://www.dropbox.com/s/sbye5rzzqoxa0lw/automata_regex.png?raw=1" width="500" height="500" />
 # 
