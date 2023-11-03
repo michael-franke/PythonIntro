@@ -530,7 +530,7 @@ document.write(`
 </div>
 </div>
 <p><strong>Capitalization matters!</strong> Just as natural languages have rules on capitalization (e.g. requiring capitalization of nouns in German), Python will only recognize <em>True</em> and <em>False</em>, with capital T/F as boolean values.</p>
-<p>Here, <em>false</em> is assumed to refer to a variable named <em>false</em>. However, as we haven’t defined any such variable, Python returns a name error.</p>
+<p>Here, <em>false</em> is assumed to refer to a variable named <em>false</em>, not the Boolean value <em>False</em>, and it sets the value of that new variable to 1. So the variable <em>a</em> (whose value is <em>False</em>) does not have the same value as the variable <em>false</em>.</p>
 </section>
 <section id="numbers">
 <h3>Numbers<a class="headerlink" href="#numbers" title="Permalink to this heading">#</a></h3>
@@ -1216,9 +1216,6 @@ YOU?
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fu urba hfoe hs amta  anryw.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
