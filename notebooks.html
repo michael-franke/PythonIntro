@@ -234,7 +234,25 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/michael-franke/PythonIntro/blob/master/docs/notebooks.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/michael-franke/PythonIntro/main?urlpath=tree/notebooks.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/michael-franke/PythonIntro/blob/main/notebooks.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -479,7 +497,7 @@ For example, here’s some sample Matplotlib code:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;contextlib.ExitStack at 0x7f0078d240d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;contextlib.ExitStack at 0x7efdfc3e4340&gt;
 </pre></div>
 </div>
 </div>
@@ -521,7 +539,7 @@ with your book. For more information about this, see <a class="reference externa
         requestKernel: true,
         binderOptions: {
             repo: "michael-franke/PythonIntro",
-            ref: "master",
+            ref: "main",
         },
         codeMirrorConfig: {
             theme: "abcdef",
